@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+  color: #ffffff;
+  border-radius: 0 0 15px 15px;
+  border: 0.5px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.project {
+  width: 300px !important;
+}
+
+.route {
+  font-family: "Benzin", sans-serif;
+  font-weight: normal;
+  font-size: 20px;
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  cursor: pointer;
+}
+
+.leftContainer {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.user {
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0 5px;
+}

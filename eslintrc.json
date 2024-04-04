@@ -1,0 +1,51 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "@grncdr/react-hooks"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/triple-slash-reference": "off",
+    "no-restricted-imports": ["error", { "patterns": ["src/*", "**/../*"] }],
+    "react-hooks/exhaustive-deps": "off",
+    "@grncdr/react-hooks/rules-of-hooks": "error",
+    "@grncdr/react-hooks/exhaustive-deps": ["error", {
+      "staticHooks": {
+        "useActions": true,
+        "useNavigate": true,
+        "useAppNavigate": true,
+        "useAppDispatch": true,
+        "useSnackbar": true,
+        "useStateRef": [false, true],
+        "useAppExtDispatch": true
+      }
+    }],
+    "no-debugger": "off"
+  },
+  "ignorePatterns": [
+    "src/setupProxy.js",
+    "config-overrides.js"
+  ]
+}

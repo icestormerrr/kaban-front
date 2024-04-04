@@ -1,0 +1,26 @@
+.buttonGroup {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.startQuizButton {
+    width: 400px;
+}
+
+@media (max-width: 748px) {
+    .startQuizButton {
+        width: 80%;
+        max-width: none;
+    }
+}
+
+.clearResultsButton {
+    width: 20px;
+}
+
+.tmp {
+    margin: 10px auto;
+    width: 97%;
+    height: 87vh;
+}
