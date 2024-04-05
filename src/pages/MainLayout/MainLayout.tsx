@@ -3,20 +3,21 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import { Avatar } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { skipToken } from "@reduxjs/toolkit/query";
 
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useSavedState } from "../../hooks/useSavedState";
 
 import { useGetProjectsQuery, useLazyGetProjectDetailsQuery } from "src/store/projects/api";
 import { setProject } from "../../store/projects/slice";
-import { ACCESS_TOKEN_PERSIST_KEY } from "src/config";
+import { UserState } from "src/store/users/types";
+import { ACCESS_TOKEN_PERSIST_KEY, USER_PERSIST_KEY, PROJECT_ID_PERSIST_KEY } from "src/config";
 
 import GlassContainer from "src/components/container/glass-container/GlassContainer";
 import InputSelect from "src/components/input/InputSelect";
 import { ReactComponent as Logo } from "src/assets/logo.svg";
 
 import classes from "./MainLayout.module.scss";
-import { useAppSelector } from "src/hooks/useAppSelector";
 
 const MainLayout: FC = () => {
   const navigate = useNavigate();
@@ -24,12 +25,17 @@ const MainLayout: FC = () => {
   const { pathname } = useLocation();
   const { t } = useTranslation();
 
-  const { data: projects = [], isFetching: isProjectsFetching } = useGetProjectsQuery();
-  const [fetchProject] = useLazyGetProjectDetailsQuery();
-
-  const user = useAppSelector((state) => state.user);
-  const [selectedProjectId, setSelectedProjectId] = useSavedState<string | undefined>("projectId", undefined);
   const isAuth = localStorage.getItem(ACCESS_TOKEN_PERSIST_KEY);
+  const [user] = useSavedState<UserState>(USER_PERSIST_KEY, {} as UserState);
+  const [selectedProjectId, setSelectedProjectId] = useSavedState<string | undefined>(
+    PROJECT_ID_PERSIST_KEY,
+    undefined,
+  );
+
+  const { data: projects = [], isFetching: isProjectsFetching } = useGetProjectsQuery(
+    user._id ? { userId: user._id } : skipToken,
+  );
+  const [fetchProject] = useLazyGetProjectDetailsQuery();
 
   const handleHomeNavigate = () => {
     navigate("/");

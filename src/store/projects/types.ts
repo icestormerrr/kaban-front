@@ -6,3 +6,5 @@ export type Project = NApp.NamedEntity & {
   stages: NApp.NamedEntity[];
   users: string[];
 };
+
+export type ProjectFilter = { userId?: string };

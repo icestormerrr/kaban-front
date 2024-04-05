@@ -1,13 +1,11 @@
 import React, { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 import { useTranslation } from "react-i18next";
 import { Button } from "@mui/material";
 
 import { useLoginMutation } from "src/store/auth/api";
-import { setUser } from "src/store/users/slice";
-import { ACCESS_TOKEN_PERSIST_KEY } from "src/config";
+import { ACCESS_TOKEN_PERSIST_KEY, USER_PERSIST_KEY } from "src/config";
 
 import GlassContainer from "../../components/container/glass-container/GlassContainer";
 import InputString from "../../components/input/InputString";
@@ -17,7 +15,6 @@ import classes from "./Login.module.scss";
 const Login: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const [fetchLogin] = useLoginMutation();
   const [email, setEmail] = useState<string | null>(null);
@@ -28,7 +25,7 @@ const Login: FC = () => {
       fetchLogin({ email, password })
         .unwrap()
         .then((data) => {
-          dispatch(setUser(data.user));
+          localStorage.setItem(USER_PERSIST_KEY, JSON.stringify(data.user));
           localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, data.accessToken);
           navigate("/");
         })

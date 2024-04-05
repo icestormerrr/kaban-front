@@ -1,7 +1,7 @@
 /// <reference path="../types.d.ts" />
 import { createApi } from "@reduxjs/toolkit/query/react";
 
-import { Project } from "./types";
+import { Project, ProjectFilter } from "./types";
 import { baseQueryWithReauth } from "../../config";
 
 export const projectsApi = createApi({
@@ -9,9 +9,10 @@ export const projectsApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ["Project"],
   endpoints: (build) => ({
-    getProjects: build.query<NApp.NamedEntity[], void>({
-      query: () => ({
+    getProjects: build.query<NApp.NamedEntity[], ProjectFilter>({
+      query: (params) => ({
         url: "/projects",
+        params,
       }),
       providesTags: ["Project"],
     }),
@@ -30,10 +31,11 @@ export const projectsApi = createApi({
       }),
       invalidatesTags: ["Project"],
     }),
-    deleteProject: build.mutation<string, void>({
-      query: (id) => ({
-        url: `/projects/${id}`,
+    deleteProject: build.mutation<void, NApp.NamedEntity>({
+      query: (params) => ({
+        url: `/projects`,
         method: "DELETE",
+        params,
       }),
       invalidatesTags: ["Project"],
     }),

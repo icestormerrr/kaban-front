@@ -8,7 +8,6 @@ import projectsApi from "./projects/api";
 import { taskSlice } from "./tasks/slice";
 import tasksApi from "./tasks/api";
 
-import { userSlice } from "./users/slice";
 import usersApi from "./users/api";
 
 import authApi from "./auth/api";
@@ -20,7 +19,6 @@ export const rootReducer = combineReducers({
   [taskSlice.name]: taskSlice.reducer,
   [tasksApi.reducerPath]: tasksApi.reducer,
 
-  [userSlice.name]: userSlice.reducer,
   [usersApi.reducerPath]: usersApi.reducer,
 
   [authApi.reducerPath]: authApi.reducer,

@@ -17,17 +17,18 @@ export const usersApi = createApi({
       }),
       providesTags: ["User"],
     }),
-    getUser: build.query<UserResponse, { _id: string }>({
+    getUser: build.query<UserResponse, NApp.Entity>({
       query: (params) => ({
         url: `/users`,
         params,
       }),
       providesTags: ["User"],
     }),
-    deleteUser: build.mutation<string, void>({
-      query: (id) => ({
-        url: `/users/${id}`,
+    deleteUser: build.mutation<void, NApp.Entity>({
+      query: (params) => ({
+        url: `/users`,
         method: "DELETE",
+        params,
       }),
       invalidatesTags: ["User"],
     }),

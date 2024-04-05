@@ -10,6 +10,8 @@ import { Mutex } from "async-mutex";
   Конфиг констант
 */
 export const ACCESS_TOKEN_PERSIST_KEY = "accessToken";
+export const USER_PERSIST_KEY = "user";
+export const PROJECT_ID_PERSIST_KEY = "projectId";
 
 /*
   Конфиг локализации
@@ -70,10 +72,7 @@ export const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, Fetch
         const refreshResult = await baseQuery("/auth/refresh", api, extraOptions);
         if (refreshResult.data) {
           localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, (refreshResult.data as any).accessToken);
-          api.dispatch({
-            type: "user/setUser",
-            payload: (refreshResult.data as any).user,
-          });
+          localStorage.setItem(USER_PERSIST_KEY, JSON.stringify((refreshResult.data as any).user));
           // retry the initial query
           result = await baseQuery(args, api, extraOptions);
         } else {
