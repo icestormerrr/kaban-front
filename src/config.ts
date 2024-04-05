@@ -70,6 +70,10 @@ export const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, Fetch
         const refreshResult = await baseQuery("/auth/refresh", api, extraOptions);
         if (refreshResult.data) {
           localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, (refreshResult.data as any).accessToken);
+          api.dispatch({
+            type: "user/setUser",
+            payload: (refreshResult.data as any).user,
+          });
           // retry the initial query
           result = await baseQuery(args, api, extraOptions);
         } else {

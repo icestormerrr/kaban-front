@@ -3,20 +3,21 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 
 import { baseQueryWithReauth } from "../../config";
 
-import { User } from "./types";
+import { UserResponse, UserFilter } from "./types";
 
 export const usersApi = createApi({
   reducerPath: "userApi",
   baseQuery: baseQueryWithReauth,
   tagTypes: ["User"],
   endpoints: (build) => ({
-    getUsers: build.query<User[], void>({
-      query: () => ({
+    getUsers: build.query<UserResponse[], UserFilter>({
+      query: (params) => ({
         url: `/users`,
+        params,
       }),
       providesTags: ["User"],
     }),
-    getUser: build.query<User, { _id: string }>({
+    getUser: build.query<UserResponse, { _id: string }>({
       query: (params) => ({
         url: `/users`,
         params,

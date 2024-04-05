@@ -4,3 +4,7 @@ export type User = NApp.NamedEntity & {
 };
 
 export type UserState = Omit<User, "password">;
+
+export type UserResponse = UserState;
+
+export type UserFilter = { projectId?: string };

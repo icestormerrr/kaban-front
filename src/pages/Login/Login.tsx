@@ -1,5 +1,6 @@
 import React, { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import { useTranslation } from "react-i18next";
 import { Button } from "@mui/material";
@@ -16,6 +17,8 @@ import classes from "./Login.module.scss";
 const Login: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [fetchLogin] = useLoginMutation();
   const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
@@ -25,8 +28,8 @@ const Login: FC = () => {
       fetchLogin({ email, password })
         .unwrap()
         .then((data) => {
-          setUser(data.user);
-          localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY!, data.accessToken);
+          dispatch(setUser(data.user));
+          localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, data.accessToken);
           navigate("/");
         })
         .catch(console.error);
