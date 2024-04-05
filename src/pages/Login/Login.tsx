@@ -26,7 +26,7 @@ const Login: FC = () => {
         .unwrap()
         .then((data) => {
           setUser(data.user);
-          localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, data.accessToken);
+          localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY!, data.accessToken);
           navigate("/");
         })
         .catch(console.error);

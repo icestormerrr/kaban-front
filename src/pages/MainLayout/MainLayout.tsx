@@ -6,10 +6,10 @@ import { useTranslation } from "react-i18next";
 
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useSavedState } from "../../hooks/useSavedState";
-import { useAuth } from "src/hooks/useAuth";
 
 import { useGetProjectsQuery, useLazyGetProjectDetailsQuery } from "src/store/projects/api";
 import { setProject } from "../../store/projects/slice";
+import { ACCESS_TOKEN_PERSIST_KEY } from "src/config";
 
 import GlassContainer from "src/components/container/glass-container/GlassContainer";
 import InputSelect from "src/components/input/InputSelect";
@@ -22,7 +22,6 @@ const MainLayout: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
-  const isAuth = useAuth();
   const { t } = useTranslation();
 
   const { data: projects = [], isFetching: isProjectsFetching } = useGetProjectsQuery();
@@ -30,6 +29,7 @@ const MainLayout: FC = () => {
 
   const user = useAppSelector((state) => state.user);
   const [selectedProjectId, setSelectedProjectId] = useSavedState<string | undefined>("projectId", undefined);
+  const isAuth = localStorage.getItem(ACCESS_TOKEN_PERSIST_KEY);
 
   const handleHomeNavigate = () => {
     navigate("/");

@@ -9,7 +9,6 @@ import { Mutex } from "async-mutex";
 /*
   Конфиг констант
 */
-export const PUBLIC_URL = "http://localhost:4000";
 export const ACCESS_TOKEN_PERSIST_KEY = "accessToken";
 
 /*
@@ -43,7 +42,7 @@ export const darkTheme = createTheme({
  */
 const mutex = new Mutex();
 export const baseQuery = fetchBaseQuery({
-  baseUrl: PUBLIC_URL,
+  baseUrl: process.env.REACT_APP_PUBLIC_URL,
   credentials: "include",
   mode: "cors",
   prepareHeaders: (headers, { getState }) => {
@@ -54,25 +53,6 @@ export const baseQuery = fetchBaseQuery({
     return headers;
   },
 });
-
-// export const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
-//   args,
-//   api,
-//   extraOptions,
-// ) => {
-//   let result = await baseQuery(args, api, extraOptions);
-//   if (result.error && result.error.status === 401) {
-//     await mutex.waitForUnlock();
-//     const refreshResult = await baseQuery("/auth/refresh", api, extraOptions);
-//     if (refreshResult.data) {
-//       localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, (refreshResult.data as any).accessToken);
-//       result = await baseQuery(args, api, extraOptions);
-//     } else {
-//       localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, "");
-//     }
-//   }
-//   return result;
-// };
 
 export const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
   args,

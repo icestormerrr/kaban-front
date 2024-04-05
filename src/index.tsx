@@ -10,7 +10,6 @@ import App from "./App";
 import { darkTheme } from "./config";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
-
 root.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
