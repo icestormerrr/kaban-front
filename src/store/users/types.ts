@@ -7,4 +7,4 @@ export type UserState = Omit<User, "password">;
 
 export type UserResponse = UserState;
 
-export type UserFilter = { usersIds?: string };
+export type UserFilter = { usersIds?: string[] };

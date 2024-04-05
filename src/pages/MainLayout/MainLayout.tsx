@@ -84,7 +84,7 @@ const MainLayout: FC = () => {
             {t("Tasks")}
           </div>
         </div>
-        <Avatar>{user.name}</Avatar>
+        <Avatar>{user.name?.[0]}</Avatar>
       </GlassContainer>
       <Outlet />
     </>

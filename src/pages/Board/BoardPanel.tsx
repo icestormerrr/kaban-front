@@ -18,8 +18,7 @@ type Props = {
 export const BoardPanel: FC<Props> = ({ filter, onChange }) => {
   const { t } = useTranslation();
   const { name, epics, sprints, users } = useAppSelector((state) => state.project);
-  // TODO сделать фильтрацию на сервере по списку пользователей проекта, а не всех
-  // const { data: executors } = useGetUsersQuery();
+  const { data: executors } = useGetUsersQuery({ usersIds: users });
 
   return (
     <GlassContainer className={classes.panel}>
@@ -38,13 +37,13 @@ export const BoardPanel: FC<Props> = ({ filter, onChange }) => {
         className={classes.filter}
         onChange={(sprint) => onChange({ sprintId: sprint?._id })}
       />
-      {/* <InputSelect
+      <InputSelect
         label={t("Executor")}
         options={executors ?? []}
-        value={filter.executorId}
+        value={filter.executorId ?? null}
         className={classes.filter}
         onChange={(executor) => onChange({ executorId: executor?._id })}
-      /> */}
+      />
     </GlassContainer>
   );
 };

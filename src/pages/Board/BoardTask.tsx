@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from "react";
+import React, { FC, memo, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Avatar, Chip } from "@mui/material";
@@ -37,4 +37,4 @@ const BoardTask: FC<Task> = ({ _id, id, name, epicId, sprintId, executorId, stag
   );
 };
 
-export default BoardTask;
+export default memo(BoardTask);
