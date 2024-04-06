@@ -22,11 +22,16 @@ const ButtonMenu: FC<Props> = ({ label, children }) => {
       <Tooltip title={label}>
         <Button
           id="button-menu"
-          aria-controls={open ? "demo-customized-menu" : undefined}
+          aria-controls={open ? "button-menu" : undefined}
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
           variant="outlined"
-          sx={{ color: "#fff", fontWeight: "light", border: "1px solid rgba(255, 255, 255, 0.5)" }}
+          sx={{
+            color: "#fff",
+            fontWeight: "normal",
+            border: "1px solid rgba(255, 255, 255, 0.5)",
+            borderRadius: "10px",
+          }}
           disableElevation
           onClick={handleClick}
           endIcon={<KeyboardArrowDown />}
@@ -35,7 +40,7 @@ const ButtonMenu: FC<Props> = ({ label, children }) => {
         </Button>
       </Tooltip>
       <StyledMenu
-        id="demo-customized-menu"
+        id="button-menu"
         MenuListProps={{
           "aria-labelledby": "button-menu",
         }}
