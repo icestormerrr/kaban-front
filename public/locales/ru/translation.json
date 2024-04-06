@@ -12,5 +12,7 @@
     "Login": "Логин",
     "Password": "Пароль",
     "Tasks": "Задачи",
-    "Enter": "Войти"
+    "Enter": "Войти",
+    "Backlog": "Бэклог",
+    "Select a project to continue...": "Выберите проект, чтобы продолжить..."
 }

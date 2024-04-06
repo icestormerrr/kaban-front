@@ -4,14 +4,16 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Avatar } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { skipToken } from "@reduxjs/toolkit/query";
+import clsx from "clsx";
 
-import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { useSavedState } from "../../hooks/useSavedState";
+import { useAppDispatch } from "src/hooks/useAppDispatch";
+import { useSavedState } from "src/hooks/useSavedState";
 
-import { useGetProjectsQuery, useLazyGetProjectDetailsQuery } from "src/store/projects/api";
-import { setProject } from "../../store/projects/slice";
-import { UserState } from "src/store/users/types";
 import { ACCESS_TOKEN_PERSIST_KEY, USER_PERSIST_KEY, PROJECT_ID_PERSIST_KEY } from "src/config";
+import { useGetProjectsQuery, useLazyGetProjectDetailsQuery } from "src/store/projects/api";
+import { menuRoutes, menuRoteDisplayNameMap } from "src/store/routes";
+import { setProject } from "src/store/projects/slice";
+import { UserState } from "src/store/users/types";
 
 import GlassContainer from "src/components/container/glass-container/GlassContainer";
 import InputSelect from "src/components/input/InputSelect";
@@ -37,10 +39,6 @@ const MainLayout: FC = () => {
   );
   const [fetchProject] = useLazyGetProjectDetailsQuery();
 
-  const handleHomeNavigate = () => {
-    navigate("/");
-  };
-
   const handleProjectChange = (newOption: NApp.NamedEntity | null) => {
     setSelectedProjectId(newOption?._id);
   };
@@ -61,12 +59,12 @@ const MainLayout: FC = () => {
 
   return (
     <>
-      <GlassContainer className={classes.container}>
+      <GlassContainer className={classes.headerContainer}>
         <div className={classes.leftContainer}>
-          <Logo onClick={handleHomeNavigate} style={{ cursor: "pointer" }} />
+          <Logo onClick={() => navigate("/")} style={{ cursor: "pointer" }} />
           <InputSelect
             disableClearable
-            className={classes.project}
+            className={classes.projectSelect}
             value={selectedProjectId ?? null}
             options={projects}
             onChange={handleProjectChange}
@@ -74,19 +72,23 @@ const MainLayout: FC = () => {
             loadingText={t("Loading")}
             loading={isProjectsFetching}
           />
-          <div className={classes.route} style={{ color: pathname?.includes("board") ? "#4169e1" : "#fff" }}>
-            {t("Board")}
-          </div>
-          <div className={classes.route} style={{ color: pathname?.includes("project") ? "#4169e1" : "#fff" }}>
-            {t("Project")}
-          </div>
-          <div className={classes.route} style={{ color: pathname?.includes("tasks") ? "#4169e1" : "#fff" }}>
-            {t("Tasks")}
-          </div>
+          {menuRoutes.map((route) => (
+            <div
+              className={clsx({ [classes.route]: true, [classes.active]: pathname?.includes(route) })}
+              onClick={() => navigate(`/${route}`)}
+              key={route}
+            >
+              {t(menuRoteDisplayNameMap[route])}
+            </div>
+          ))}
         </div>
-        <Avatar>{user.name?.[0]}</Avatar>
+        <Avatar className={classes.user}>{user.name?.[0]}</Avatar>
       </GlassContainer>
-      <Outlet />
+      {selectedProjectId ? (
+        <Outlet />
+      ) : (
+        <GlassContainer className={classes.placeholderContainer}>{t("Select a project to continue...")}</GlassContainer>
+      )}
     </>
   );
 };

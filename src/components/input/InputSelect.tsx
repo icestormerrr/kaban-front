@@ -8,6 +8,7 @@ const autocompleteStyle = {
   width: "100%",
   "& .MuiInputBase-root": {
     padding: "0 0 0 5px",
+    borderRadius: "10px",
   },
   "& .MuiInputLabel-root": {
     fontSize: 14,

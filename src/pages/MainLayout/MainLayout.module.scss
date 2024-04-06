@@ -1,4 +1,4 @@
-.container {
+.headerContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,18 +10,13 @@
   background-color: rgba(0, 0, 0, 0.25);
 }
 
-.project {
-  width: 300px !important;
-}
-
-.route {
-  font-family: "Benzin", sans-serif;
-  font-weight: normal;
-  font-size: 20px;
+.placeholderContainer {
+  height: calc(100vh - 110px);
+  margin-top: 4px;
   display: flex;
-  align-content: center;
-  flex-wrap: wrap;
-  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 .leftContainer {
@@ -31,8 +26,25 @@
   gap: 30px;
 }
 
+.projectSelect {
+  width: 300px !important;
+}
+
+.route {
+  font-weight: light;
+  font-size: 21px;
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  cursor: pointer;
+  &.active {
+    font-weight: normal;
+    color: #5565ed;
+  }
+}
+
 .user {
-  font-size: 20px;
-  font-weight: 400;
-  margin: 0 5px;
+  background-color: #fff;
+  color: #000;
+  font-weight: normal;
 }
