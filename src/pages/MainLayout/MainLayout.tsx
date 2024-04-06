@@ -1,9 +1,8 @@
 import React, { FC, useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
-import { Avatar } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useTranslation } from "react-i18next";
-import { skipToken } from "@reduxjs/toolkit/query";
 import clsx from "clsx";
 
 import { useAppDispatch } from "src/hooks/useAppDispatch";
@@ -17,9 +16,11 @@ import { UserState } from "src/store/users/types";
 
 import GlassContainer from "src/components/container/glass-container/GlassContainer";
 import InputSelect from "src/components/input/InputSelect";
+import ProfileMenu from "./ProfileMenu";
 import { ReactComponent as Logo } from "src/assets/logo.svg";
 
 import classes from "./MainLayout.module.scss";
+import { useLogoutMutation } from "src/store/auth/api";
 
 const MainLayout: FC = () => {
   const navigate = useNavigate();
@@ -29,29 +30,43 @@ const MainLayout: FC = () => {
 
   const isAuth = localStorage.getItem(ACCESS_TOKEN_PERSIST_KEY);
   const [user] = useSavedState<UserState>(USER_PERSIST_KEY, {} as UserState);
-  const [selectedProjectId, setSelectedProjectId] = useSavedState<string | undefined>(
-    PROJECT_ID_PERSIST_KEY,
-    undefined,
-  );
+  const [projectId, setProjectId] = useSavedState<string | undefined>(PROJECT_ID_PERSIST_KEY, undefined);
 
-  const { data: projects = [], isFetching: isProjectsFetching } = useGetProjectsQuery(
-    user._id ? { userId: user._id } : skipToken,
-  );
-  const [fetchProject] = useLazyGetProjectDetailsQuery();
+  const { data: projects = [], isFetching: isProjectsFetching } = useGetProjectsQuery({ userId: user._id });
+  const [fetchProjectDetails, { isFetching: isProjectDetailsFetching }] = useLazyGetProjectDetailsQuery();
+  const [fetchLogout] = useLogoutMutation();
 
   const handleProjectChange = (newOption: NApp.NamedEntity | null) => {
-    setSelectedProjectId(newOption?._id);
+    setProjectId(newOption?._id);
+  };
+
+  const handleLogout = () => {
+    localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, "");
+    fetchLogout();
+    navigate("/login");
+  };
+
+  const handleHomeNavigate = () => {
+    navigate("/");
+  };
+
+  const handleSettingsNavigate = () => {
+    navigate("/");
+  };
+
+  const handleRouteNavigate = (route: string) => {
+    return () => navigate(`/${route}`);
   };
 
   useEffect(() => {
-    if (selectedProjectId) {
-      fetchProject({ _id: selectedProjectId })
+    if (projectId) {
+      fetchProjectDetails({ _id: projectId })
         .unwrap()
         .then((projectDetails) => dispatch(setProject(projectDetails)))
         .catch(console.error);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedProjectId]);
+  }, [projectId]);
 
   useEffect(() => {
     !isAuth && navigate("/login");
@@ -61,11 +76,11 @@ const MainLayout: FC = () => {
     <>
       <GlassContainer className={classes.headerContainer}>
         <div className={classes.leftContainer}>
-          <Logo onClick={() => navigate("/")} style={{ cursor: "pointer" }} />
+          <Logo onClick={handleHomeNavigate} style={{ cursor: "pointer" }} />
           <InputSelect
             disableClearable
             className={classes.projectSelect}
-            value={selectedProjectId ?? null}
+            value={projectId ?? null}
             options={projects}
             onChange={handleProjectChange}
             label={t("Project")}
@@ -75,18 +90,18 @@ const MainLayout: FC = () => {
           {menuRoutes.map((route) => (
             <div
               className={clsx({ [classes.route]: true, [classes.active]: pathname?.includes(route) })}
-              onClick={() => navigate(`/${route}`)}
+              onClick={handleRouteNavigate(route)}
               key={route}
             >
               {t(menuRoteDisplayNameMap[route])}
             </div>
           ))}
         </div>
-        <Avatar className={classes.avatar}>{user.name?.[0]}</Avatar>
+        <ProfileMenu label={user?.name?.[0]} onSettingsOpen={handleSettingsNavigate} onLogoutOpen={handleLogout} />
       </GlassContainer>
-      {selectedProjectId ? (
-        <Outlet />
-      ) : (
+      {isProjectDetailsFetching && <CircularProgress />}
+      {projectId && <Outlet />}
+      {!projectId && (
         <GlassContainer className={classes.placeholderContainer}>{t("Select a project to continue...")}</GlassContainer>
       )}
     </>
