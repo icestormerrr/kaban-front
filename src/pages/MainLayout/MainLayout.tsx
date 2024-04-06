@@ -111,11 +111,9 @@ const MainLayout: FC = () => {
           <ButtonMenu label={t("Create")}>
             <MenuItem onClick={handleTaskCreate} disableRipple>
               {t("Task")}
-              <EditIcon />
             </MenuItem>
             <MenuItem onClick={handleProjectCreate} disableRipple>
               {t("Project")}
-              <EditIcon />
             </MenuItem>
           </ButtonMenu>
         </div>
