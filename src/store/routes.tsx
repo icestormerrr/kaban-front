@@ -1,0 +1,36 @@
+import { Navigate, RouteObject } from "react-router-dom";
+
+import MainLayout from "../pages/MainLayout/MainLayout";
+import Home from "../pages/Home/Home";
+import Board from "../pages/Board/Board";
+import Task from "../pages/Task/Task";
+import Login from "../pages/Login/Login";
+
+export const menuRoutes: string[] = ["board", "project", "backlog"];
+
+export const menuRoteDisplayNameMap: Record<string, string> = {
+  board: "Board",
+  project: "Project",
+  backlog: "Backlog",
+};
+
+export const routesTree: RouteObject[] = [
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      {
+        path: "board",
+        element: <Board />,
+      },
+      {
+        path: "task/:_id",
+        element: <Task />,
+      },
+    ],
+  },
+  {
+    path: "*",
+    element: <Navigate to="/" />,
+  },
+];
