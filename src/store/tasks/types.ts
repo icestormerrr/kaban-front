@@ -1,4 +1,4 @@
-import { TaskStatus } from "../enums";
+import { TaskStatus } from "src/struct/enums";
 
 export type TaskState = NApp.Nullable<Task>;
 

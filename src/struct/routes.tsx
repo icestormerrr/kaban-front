@@ -30,6 +30,10 @@ export const routesTree: RouteObject[] = [
     ],
   },
   {
+    path: "/login",
+    element: <Login />,
+  },
+  {
     path: "*",
     element: <Navigate to="/" />,
   },

@@ -11,7 +11,7 @@ import { useSavedState } from "src/hooks/useSavedState";
 
 import { ACCESS_TOKEN_PERSIST_KEY, USER_PERSIST_KEY, PROJECT_ID_PERSIST_KEY } from "src/config";
 import { useGetProjectsQuery, useLazyGetProjectDetailsQuery } from "src/store/projects/api";
-import { menuRoutes, menuRoteDisplayNameMap } from "src/store/routes";
+import { menuRoutes, menuRoteDisplayNameMap } from "src/struct/routes";
 import { setProject } from "src/store/projects/slice";
 import { UserState } from "src/store/users/types";
 

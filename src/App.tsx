@@ -3,7 +3,7 @@ import { useRoutes } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 
-import { routesTree } from "./store/routes";
+import { routesTree } from "./struct/routes";
 
 import "./global-styles.scss";
 

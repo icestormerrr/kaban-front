@@ -6,10 +6,10 @@ import { Avatar, Chip } from "@mui/material";
 import { useGetUserQuery } from "src/store/users/api";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { Task } from "src/store/tasks/types";
+import { TaskStatusColorMap } from "src/struct/enums";
 
 import GlassContainer from "src/components/container/glass-container/GlassContainer";
 import classes from "./BoardTask.module.scss";
-import { TaskStatusColorMap } from "src/store/enums";
 
 const BoardTask: FC<Task> = ({ _id, id, name, epicId, sprintId, executorId, stageId, status }) => {
   const navigate = useNavigate();
