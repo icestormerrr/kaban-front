@@ -1,41 +1,46 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { useTranslation } from "react-i18next";
 import { Button, Grid } from "@mui/material";
-import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 
 import { useAppSelector } from "src/hooks/useAppSelector";
-import { useLazyGetTaskQuery, useUpdateTaskMutation } from "src/store/tasks/api";
+import { useSavedState } from "src/hooks/useSavedState";
+
+import { PROJECT_ID_PERSIST_KEY } from "src/config";
+import { useLazyGetTaskQuery, useUpdateTaskMutation, useAddTaskMutation } from "src/store/tasks/api";
+import { useGetUsersQuery } from "src/store/users/api";
 import { setTask, setTaskProperty } from "src/store/tasks/slice";
 import { TaskState } from "src/store/tasks/types";
+import { TaskStatus, TaskStatusOptions } from "src/struct/enums";
 
 import InputString from "src/components/input/InputString";
+import InputSelect from "src/components/input/InputSelect";
 import GlassContainer from "src/components/container/glass-container/GlassContainer";
 
 import classes from "./Task.module.scss";
-import InputSelect from "src/components/input/InputSelect";
 
 const Task: FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { _id } = useParams();
+  const mode = useMemo(() => (_id ? "edit" : "create"), [_id]);
 
-  const { epics, sprints, stages } = useAppSelector((state) => state.project);
+  const [projectId] = useSavedState<string | undefined>(PROJECT_ID_PERSIST_KEY, undefined);
   const task = useAppSelector((state) => state.task);
-  const { name, epicId, sprintId, stageId, status, executorId, description } = task;
+  const { epics, sprints, stages, users: usersIds } = useAppSelector((state) => state.project);
+  const { name, epicId, sprintId, stageId, status, executorId, authorId, description } = task;
 
-  const [fetchDetails] = useLazyGetTaskQuery();
+  const { data: users } = useGetUsersQuery({ usersIds });
+  const [fetchDetails, { isFetching: isTaskDetailsFetching }] = useLazyGetTaskQuery();
   const [fetchUpdate] = useUpdateTaskMutation();
-
-  const handleReturn = () => {
-    navigate("/board");
-  };
+  const [fetchCreate] = useAddTaskMutation();
 
   const handleSave = () => {
-    fetchUpdate(task as any);
+    mode === "edit" && fetchUpdate(task as any);
+    mode === "create" && fetchCreate({ ...task, projectId, _id: undefined } as any);
     navigate("/board");
   };
 
@@ -96,13 +101,48 @@ const Task: FC = () => {
             </Button>
           </Grid>
         </Grid>
-        <Grid container xs direction="column" justifyContent="flex-start" alignItems="flex-end">
-          <InputSelect
-            label={t("Stage")}
-            options={stages ?? []}
-            value={stageId}
-            onChange={(s) => handlePropertyChange("stageId")(s?._id ?? null)}
-          />
+        <Grid container xs={1}></Grid>
+        <Grid container xs>
+          <Grid item xs={12}>
+            <InputSelect
+              disableClearable
+              required
+              label={t("Stage")}
+              options={stages ?? []}
+              value={stageId}
+              onChange={(s) => handlePropertyChange("stageId")(s?._id ?? null)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <InputSelect
+              disableClearable
+              required
+              label={t("Status")}
+              options={TaskStatusOptions}
+              value={status}
+              onChange={(s) => handlePropertyChange("status")((s?._id as TaskStatus) ?? null)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <InputSelect
+              disableClearable
+              required
+              label={t("Executor")}
+              options={users ?? []}
+              value={executorId ?? null}
+              onChange={(e) => handlePropertyChange("executorId")(e?._id ?? null)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <InputSelect
+              disableClearable
+              required
+              label={t("Author")}
+              options={users ?? []}
+              value={authorId ?? null}
+              onChange={(a) => handlePropertyChange("authorId")(a?._id ?? null)}
+            />
+          </Grid>
         </Grid>
       </Grid>
     </GlassContainer>

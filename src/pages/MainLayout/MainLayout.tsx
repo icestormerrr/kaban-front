@@ -2,6 +2,7 @@ import React, { FC, useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import CircularProgress from "@mui/material/CircularProgress";
+import EditIcon from "@mui/icons-material/Edit";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 
@@ -17,10 +18,12 @@ import { UserState } from "src/store/users/types";
 import GlassContainer from "src/components/container/glass-container/GlassContainer";
 import InputSelect from "src/components/input/InputSelect";
 import ProfileMenu from "./ProfileMenu";
+import ButtonMenu from "src/components/menu/ButtonMenu";
 import { ReactComponent as Logo } from "src/assets/logo.svg";
 
 import classes from "./MainLayout.module.scss";
 import { useLogoutMutation } from "src/store/auth/api";
+import { MenuItem } from "@mui/material";
 
 const MainLayout: FC = () => {
   const navigate = useNavigate();
@@ -51,7 +54,15 @@ const MainLayout: FC = () => {
   };
 
   const handleSettingsNavigate = () => {
-    navigate("/");
+    navigate("/settings");
+  };
+
+  const handleTaskCreate = () => {
+    navigate("/task");
+  };
+
+  const handleProjectCreate = () => {
+    navigate("/project");
   };
 
   const handleRouteNavigate = (route: string) => {
@@ -96,9 +107,21 @@ const MainLayout: FC = () => {
               {t(menuRoteDisplayNameMap[route])}
             </div>
           ))}
+          <ButtonMenu label={t("Create")}>
+            <MenuItem onClick={handleTaskCreate} disableRipple>
+              {t("Task")}
+              <EditIcon />
+            </MenuItem>
+            <MenuItem disableRipple>
+              {t("Project")}
+              <EditIcon />
+            </MenuItem>
+          </ButtonMenu>
         </div>
+
         <ProfileMenu label={user?.name?.[0]} onSettingsOpen={handleSettingsNavigate} onLogoutOpen={handleLogout} />
       </GlassContainer>
+
       {isProjectDetailsFetching && <CircularProgress />}
       {projectId && <Outlet />}
       {!projectId && (

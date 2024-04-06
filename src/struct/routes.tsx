@@ -24,8 +24,14 @@ export const routesTree: RouteObject[] = [
         element: <Board />,
       },
       {
-        path: "task/:_id",
+        path: "task",
         element: <Task />,
+        children: [
+          {
+            path: ":_id",
+            element: <Task />,
+          },
+        ],
       },
     ],
   },

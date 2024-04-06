@@ -28,6 +28,7 @@ type Props = {
   disable?: boolean;
   loadingText?: string;
   loading?: boolean;
+  required?: boolean;
 };
 const InputSelect: FC<Props> = ({ value, onChange, options, label, ...restProps }) => {
   const [selectedOption, setSelectedOption] = useState<Option | null>({ _id: value || "", name: "" });

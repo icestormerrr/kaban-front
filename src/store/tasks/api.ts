@@ -17,7 +17,7 @@ export const tasksApi = createApi({
       }),
       providesTags: ["Task"],
     }),
-    getTask: build.query<Task, { _id: string }>({
+    getTask: build.query<Task, NApp.Entity>({
       query: (params) => ({
         url: `/tasks`,
         params,
@@ -40,10 +40,11 @@ export const tasksApi = createApi({
       }),
       invalidatesTags: ["Task"],
     }),
-    deleteTask: build.mutation<string, void>({
-      query: (id) => ({
-        url: `/tasks/${id}`,
+    deleteTask: build.mutation<void, NApp.Entity>({
+      query: (params) => ({
+        url: `/tasks`,
         method: "DELETE",
+        params,
       }),
       invalidatesTags: ["Task"],
     }),

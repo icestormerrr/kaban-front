@@ -1,3 +1,4 @@
+import { TaskStatus } from "src/struct/enums";
 import { TaskState } from "./types";
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
@@ -7,7 +8,7 @@ const initialState: TaskState = {
   id: "",
   name: "",
   description: "",
-  status: 0,
+  status: TaskStatus.NotImportant,
   epicId: "",
   sprintId: "",
   stageId: "",
