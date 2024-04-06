@@ -82,7 +82,7 @@ const MainLayout: FC = () => {
             </div>
           ))}
         </div>
-        <Avatar className={classes.user}>{user.name?.[0]}</Avatar>
+        <Avatar className={classes.avatar}>{user.name?.[0]}</Avatar>
       </GlassContainer>
       {selectedProjectId ? (
         <Outlet />

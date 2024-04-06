@@ -8,7 +8,13 @@ type Props = Omit<TextFieldProps, "value" | "onChange" | "error" | "helperText">
   validate?: (value: string | null) => string | null;
 };
 
-const InputString: FC<Props> = ({ value, onChange, validate, disabled, ...restProps }) => {
+const textFieldStyles = {
+  "& .MuiInputBase-root": {
+    borderRadius: "10px",
+  },
+};
+
+const InputString: FC<Props> = ({ value, onChange, validate, disabled, sx, ...restProps }) => {
   const [errorText, setErrorText] = useState<string | null>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,6 +35,7 @@ const InputString: FC<Props> = ({ value, onChange, validate, disabled, ...restPr
       error={!!errorText && !disabled}
       helperText={errorText}
       disabled={disabled}
+      sx={{ ...sx, ...textFieldStyles }}
       {...restProps}
     />
   );

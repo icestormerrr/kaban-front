@@ -16,11 +16,7 @@ type Props = {
 const BoardStage: FC<Props> = ({ stage, tasks }) => {
   return (
     <div className={classes.stage}>
-      <Chip
-        label={stage.name}
-        sx={{ width: "100%", mb: 2, minHeight: 40, fontSize: 20 }}
-        className={classes.stageTitle}
-      />
+      <div className={classes.stageTitle}>{stage.name.slice(0, 16)}</div>
       {tasks.map((task) => (
         <BoardTask {...task} key={task._id} />
       ))}

@@ -14,5 +14,8 @@
     "Tasks": "Задачи",
     "Enter": "Войти",
     "Backlog": "Бэклог",
-    "Select a project to continue...": "Выберите проект, чтобы продолжить..."
+    "Select a project to continue...": "Выберите проект, чтобы продолжить...",
+    "Welcome back, please, login to your account": "Добро пожаловать обратно, пожалуйста, войдите в свой аккаунт",
+    "Don’t have an account?": "Нет аккаунта?",
+    "Sing up": "Зарегистрируйтесь"
 }

@@ -3,14 +3,52 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  padding: 40px;
+  box-sizing: border-box;
 }
 
 .form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 20px;
-  max-width: 40%;
+  border-radius: 40px;
+
+  gap: 30px;
+  padding: 84px 64px 32px 64px;
+  max-width: 700px;
+  max-height: 615px;
+  height: 100%;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.1);
+}
+.logo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.title {
+  font-family: "Benzin", sans-serif;
+  font-weight: normal;
+  font-size: 48px;
+  text-align: center;
+}
+
+.description {
+  margin: 20px 0;
+  font-weight: 100;
+  font-size: 18px;
+  text-align: center;
+}
+
+.button {
+  background-color: #fff;
+  margin: 0 auto !important;
+  width: 330px;
+  height: 48px;
+}
+
+.link {
+  text-decoration: underline;
+  cursor: pointer;
 }
