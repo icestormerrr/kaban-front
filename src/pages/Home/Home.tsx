@@ -1,17 +1,12 @@
-import React, { FC, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
-
-import { Button } from "@mui/material";
+import React, { FC } from "react";
 
 import classes from "./Home.module.scss";
 import GlassContainer from "../../components/container/glass-container/GlassContainer";
 
 const Home: FC = () => {
-  const navigate = useNavigate();
-
   return (
-    <GlassContainer className={classes.tmp}>
-      <Button onClick={() => navigate("/board")}>Go to boards</Button>
+    <GlassContainer className={classes.container}>
+      <h3 className={classes.title}>Welcome to KaBan, have a nice work :3</h3>
     </GlassContainer>
   );
 };

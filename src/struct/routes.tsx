@@ -21,6 +21,10 @@ export const routesTree: RouteObject[] = [
     element: <MainLayout />,
     children: [
       {
+        index: true,
+        element: <Home />,
+      },
+      {
         path: "board",
         element: <Board />,
       },
