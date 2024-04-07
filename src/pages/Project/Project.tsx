@@ -27,10 +27,14 @@ const Project: FC = () => {
 
   const project = useAppSelector((state) => state.project);
   const { name, description, epics, sprints, stages, users, authorId } = project;
+  const handlePropertyChange = <K extends keyof ProjectState>(property: K) => {
+    return (value: ProjectState[K]) => dispatch(setProjectProperty({ property: property, value }));
+  };
 
+  // TODO: rewrite to server search, cause there may be a lot of users
   const { data: allUsers } = useGetUsersQuery({});
   const projectUsers = useMemo(() => allUsers?.filter((user) => users?.includes(user._id)), [allUsers, users]);
-  const usersAvailibleToAdd = useMemo(
+  const usersAvailableToAdd = useMemo(
     () => allUsers?.filter((user) => !projectUsers?.find((u) => u._id === user._id)),
     [allUsers, projectUsers],
   );
@@ -57,10 +61,6 @@ const Project: FC = () => {
         .catch(console.error);
     }
     navigate("/boards");
-  };
-
-  const handlePropertyChange = <K extends keyof ProjectState>(property: K) => {
-    return (value: ProjectState[K]) => dispatch(setProjectProperty({ property: property, value }));
   };
 
   const validateProject = () => {
@@ -138,7 +138,7 @@ const Project: FC = () => {
             <InputList
               type="select"
               list={projectUsers ?? []}
-              options={usersAvailibleToAdd}
+              options={usersAvailableToAdd}
               onListChange={(users) => handlePropertyChange("users")(users.map((user) => user._id))}
               label={t("Member")}
             />
