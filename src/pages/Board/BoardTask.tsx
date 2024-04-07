@@ -15,8 +15,8 @@ const BoardTask: FC<Task> = ({ _id, id, name, epicId, sprintId, executorId, stag
   const navigate = useNavigate();
 
   const { epics, sprints } = useAppSelector((state) => state.project);
-  const epicLabel = useMemo(() => epics.find((epic) => epic._id === epicId)?.name, [epicId, epics]);
-  const sprintLabel = useMemo(() => sprints.find((sprint) => sprint._id === sprintId)?.name, [sprintId, sprints]);
+  const epicLabel = useMemo(() => epics?.find((epic) => epic._id === epicId)?.name, [epicId, epics]);
+  const sprintLabel = useMemo(() => sprints?.find((sprint) => sprint._id === sprintId)?.name, [sprintId, sprints]);
 
   const { data: user } = useGetUserQuery({ _id: executorId });
 

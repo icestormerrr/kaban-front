@@ -18,7 +18,7 @@ type Props = {
 export const BoardPanel: FC<Props> = ({ filter, onChange }) => {
   const { t } = useTranslation();
   const { name, epics, sprints, users } = useAppSelector((state) => state.project);
-  const { data: executors } = useGetUsersQuery({ usersIds: users });
+  const { data: executors } = useGetUsersQuery({ usersIds: users! });
 
   return (
     <GlassContainer className={classes.panel}>

@@ -14,9 +14,7 @@ export const useSavedState = <T>(key: string, state: T) => {
   });
 
   useEffect(() => {
-    if (localState) {
-      localStorage.setItem(key, typeof localState === "string" ? localState : JSON.stringify(localState));
-    }
+    localStorage.setItem(key, typeof localState === "string" ? localState : JSON.stringify(localState));
   }, [key, localState]);
 
   return [localState, setLocalState] as const;

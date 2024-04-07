@@ -4,6 +4,7 @@ import MainLayout from "../pages/MainLayout/MainLayout";
 import Home from "../pages/Home/Home";
 import Board from "../pages/Board/Board";
 import Task from "../pages/Task/Task";
+import Project from "../pages/Project/Project";
 import Login from "../pages/Login/Login";
 
 export const menuRoutes: string[] = ["board", "project", "backlog"];
@@ -30,6 +31,16 @@ export const routesTree: RouteObject[] = [
           {
             path: ":_id",
             element: <Task />,
+          },
+        ],
+      },
+      {
+        path: "project",
+        element: <Project />,
+        children: [
+          {
+            path: ":_id",
+            element: <Project />,
           },
         ],
       },

@@ -21,7 +21,10 @@
     "Settings": "Настройки",
     "Author": "Автор",
     "Create": "Создать",
+    "Member": "Участник",
     "Select a project to continue...": "Выберите проект, чтобы продолжить...",
     "Welcome back, please, login to your account": "Добро пожаловать обратно, пожалуйста, войдите в свой аккаунт",
-    "Don’t have an account?": "Нет аккаунта?"
+    "Don’t have an account?": "Нет аккаунта?",
+    "Field is not filled": "Не заполнено поле",
+    "Add at least one": "Добавьте хотя бы один"
 }

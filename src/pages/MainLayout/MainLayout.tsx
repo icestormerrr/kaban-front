@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useCallback, useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import CircularProgress from "@mui/material/CircularProgress";
@@ -34,14 +34,14 @@ const MainLayout: FC = () => {
 
   const isAuth = localStorage.getItem(ACCESS_TOKEN_PERSIST_KEY);
   const [user] = useSavedState<UserState>(USER_PERSIST_KEY, {} as UserState);
-  const [projectId, setProjectId] = useSavedState<string | undefined>(PROJECT_ID_PERSIST_KEY, undefined);
+  const [projectId, setProjectId] = useSavedState<string | null>(PROJECT_ID_PERSIST_KEY, "");
 
   const { data: projects = [], isFetching: isProjectsFetching } = useGetProjectsQuery({ userId: user._id });
   const [fetchProjectDetails, { isFetching: isProjectDetailsFetching }] = useLazyGetProjectDetailsQuery();
   const [fetchLogout] = useLogoutMutation();
 
   const handleProjectChange = (newOption: NApp.NamedEntity | null) => {
-    setProjectId(newOption?._id);
+    setProjectId(newOption?._id ?? null);
   };
 
   const handleLogout = () => {
@@ -63,12 +63,19 @@ const MainLayout: FC = () => {
   };
 
   const handleProjectCreate = () => {
+    setProjectId("");
     navigate("/project");
   };
 
-  const handleRouteNavigate = (route: string) => {
-    return () => navigate(`/${route}`);
-  };
+  const handleRouteNavigate = useCallback(
+    (route: string) => {
+      if (route === "project") {
+        return () => navigate(`/${route}/${projectId}`);
+      }
+      return () => navigate(`/${route}`);
+    },
+    [navigate, projectId],
+  );
 
   useEffect(() => {
     if (projectId) {
@@ -92,13 +99,14 @@ const MainLayout: FC = () => {
           <InputSelect
             disableClearable
             className={classes.projectSelect}
-            value={projectId ?? null}
+            value={projectId}
             options={projects}
             onChange={handleProjectChange}
             label={t("Project")}
             loadingText={t("Loading")}
             loading={isProjectsFetching}
           />
+
           {menuRoutes.map((route) => (
             <div
               className={clsx({ [classes.route]: true, [classes.active]: pathname?.includes(route) })}
@@ -108,6 +116,7 @@ const MainLayout: FC = () => {
               {t(menuRoteDisplayNameMap[route])}
             </div>
           ))}
+
           <ButtonMenu label={t("Create")}>
             <MenuItem onClick={handleTaskCreate} disableRipple>
               {t("Task")}
@@ -133,12 +142,8 @@ const MainLayout: FC = () => {
           </MenuItem>
         </AvatarMenu>
       </GlassContainer>
-
       {isProjectDetailsFetching && <CircularProgress />}
-      {projectId && <Outlet />}
-      {!projectId && (
-        <GlassContainer className={classes.placeholderContainer}>{t("Select a project to continue...")}</GlassContainer>
-      )}
+      <Outlet />
     </>
   );
 };

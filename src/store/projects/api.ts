@@ -23,11 +23,19 @@ export const projectsApi = createApi({
       }),
       providesTags: ["Project"],
     }),
-    addProject: build.mutation<void, Project>({
+    addProject: build.mutation<Project, Project>({
       query: (newProject) => ({
         url: "/projects",
         method: "POST",
         body: newProject,
+      }),
+      invalidatesTags: ["Project"],
+    }),
+    updateProject: build.mutation<Project, Project>({
+      query: (updatedProject) => ({
+        url: "/projects",
+        method: "PUT",
+        body: updatedProject,
       }),
       invalidatesTags: ["Project"],
     }),
@@ -42,7 +50,12 @@ export const projectsApi = createApi({
   }),
 });
 
-export const { useGetProjectsQuery, useLazyGetProjectDetailsQuery, useAddProjectMutation, useDeleteProjectMutation } =
-  projectsApi;
+export const {
+  useGetProjectsQuery,
+  useLazyGetProjectDetailsQuery,
+  useAddProjectMutation,
+  useUpdateProjectMutation,
+  useDeleteProjectMutation,
+} = projectsApi;
 
 export default projectsApi;

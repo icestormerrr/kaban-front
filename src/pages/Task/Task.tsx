@@ -33,7 +33,7 @@ const Task: FC = () => {
   const { epics, sprints, stages, users: usersIds } = useAppSelector((state) => state.project);
   const { name, epicId, sprintId, stageId, status, executorId, authorId, description } = task;
 
-  const { data: users } = useGetUsersQuery({ usersIds });
+  const { data: users } = useGetUsersQuery({ usersIds: usersIds ?? [] });
   const [fetchDetails, { isFetching: isTaskDetailsFetching }] = useLazyGetTaskQuery();
   const [fetchUpdate] = useUpdateTaskMutation();
   const [fetchCreate] = useAddTaskMutation();

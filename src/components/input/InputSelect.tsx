@@ -2,7 +2,7 @@ import React, { FC, SyntheticEvent, useEffect, useState } from "react";
 
 import { Autocomplete, TextField } from "@mui/material";
 
-const autocompleteStyle = {
+const autocompleteStyleSmall = {
   maxWidth: 400,
   minWidth: 100,
   width: "100%",
@@ -16,12 +16,22 @@ const autocompleteStyle = {
   },
 };
 
+const autocompleteStyleLarge = {
+  maxWidth: 800,
+  minWidth: 100,
+  width: "100%",
+  "& .MuiInputBase-root": {
+    borderRadius: "10px",
+  },
+};
+
 type Option = NApp.NamedEntity & { [key: string]: any };
 
 type Props = {
   value: string | null;
   options: Option[];
   onChange: (newOption: Option | null) => void;
+  size?: "small" | "large";
   label?: string;
   className?: string;
   disableClearable?: boolean;
@@ -29,8 +39,10 @@ type Props = {
   loadingText?: string;
   loading?: boolean;
   required?: boolean;
+  fullWidth?: boolean;
 };
-const InputSelect: FC<Props> = ({ value, onChange, options, label, ...restProps }) => {
+
+const InputSelect: FC<Props> = ({ value, onChange, options, label, size = "small", ...restProps }) => {
   const [selectedOption, setSelectedOption] = useState<Option | null>({ _id: value || "", name: "" });
 
   const handleChange = (e: SyntheticEvent, newOption: Option | null) => {
@@ -49,7 +61,7 @@ const InputSelect: FC<Props> = ({ value, onChange, options, label, ...restProps 
   return (
     <Autocomplete
       {...restProps}
-      sx={autocompleteStyle}
+      sx={size === "small" ? autocompleteStyleSmall : autocompleteStyleLarge}
       value={selectedOption}
       onChange={handleChange}
       options={options}
