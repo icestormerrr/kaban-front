@@ -3,7 +3,7 @@ import { TaskState } from "./types";
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState: TaskState = {
+export const initialTaskState: TaskState = {
   _id: "",
   id: "",
   name: "",
@@ -19,7 +19,7 @@ const initialState: TaskState = {
 
 export const taskSlice = createSlice({
   name: "task",
-  initialState,
+  initialState: initialTaskState,
   reducers: {
     setTask: (state, action: PayloadAction<TaskState>) => {
       state._id = action.payload._id;

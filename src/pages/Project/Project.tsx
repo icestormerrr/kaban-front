@@ -53,12 +53,12 @@ const Project: FC = () => {
       fetchUpdate(project as any)
         .unwrap()
         .then((details) => dispatch(setProject(details)))
-        .catch(console.error);
+        .catch(() => alert("Ошибка сохранения"));
     } else {
       fetchCreate({ ...project, _id: undefined } as any)
         .unwrap()
         .then((details) => dispatch(setProject(details)))
-        .catch(console.error);
+        .catch(() => alert("Ошибка сохранения"));
     }
     navigate("/boards");
   };

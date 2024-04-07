@@ -24,7 +24,7 @@ export const tasksApi = createApi({
       }),
       providesTags: ["Task"],
     }),
-    addTask: build.mutation<void, Task>({
+    addTask: build.mutation<Task, Task>({
       query: (newTask) => ({
         url: "/tasks",
         method: "POST",
@@ -32,7 +32,7 @@ export const tasksApi = createApi({
       }),
       invalidatesTags: ["Task"],
     }),
-    updateTask: build.mutation<void, Task>({
+    updateTask: build.mutation<Task, Task>({
       query: (updatedTask) => ({
         url: "/tasks",
         method: "PUT",
