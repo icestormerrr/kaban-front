@@ -12,7 +12,7 @@ export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery,
   endpoints: (build) => ({
-    register: build.mutation<AuthResponse, User>({
+    register: build.mutation<AuthResponse, Pick<User, "email" | "password" | "name">>({
       query: (newUser) => ({
         url: "/auth/register",
         method: "POST",
