@@ -1,16 +1,14 @@
 import React, { FC, useEffect, useMemo } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 import { useTranslation } from "react-i18next";
 import { Button, Grid } from "@mui/material";
 
-import { useAppSelector } from "src/hooks/useAppSelector";
+import { useEditorStore } from "../../hooks/useEditorStore";
+import { useProjectId } from "../../hooks/useProjectId";
 
 import { useGetUsersQuery } from "src/store/users/api";
 import { useLazyGetProjectDetailsQuery, useUpdateProjectMutation, useAddProjectMutation } from "src/store/projects/api";
-import { initialProjectState, setProject, setProjectProperty } from "src/store/projects/slice";
-import { ProjectState } from "src/store/projects/types";
+import { ProjectState, initialProjectState } from "src/store/projects/types";
 
 import InputString from "src/components/input/InputString";
 import InputSelect from "src/components/input/InputSelect";
@@ -19,16 +17,19 @@ import GlassContainer from "src/components/container/glass-container/GlassContai
 
 import classes from "./Project.module.scss";
 
-const Project: FC = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+const Project: FC<NApp.EntityComponent> = ({ mode }) => {
   const { t } = useTranslation();
-  const { _id } = useParams();
+  const _id = useProjectId();
 
-  const project = useAppSelector((state) => state.project);
-  const { name, description, epics, sprints, stages, users, authorId } = project;
+  const {
+    entity: project,
+    setEntity: setProject,
+    setEntityProperty: setProjectProperty,
+  } = useEditorStore<ProjectState>(initialProjectState);
+
+  const { name, description, epics, sprints, stages, users, authorId } = useMemo(() => project, [project]);
   const handlePropertyChange = <K extends keyof ProjectState>(property: K) => {
-    return (value: ProjectState[K]) => dispatch(setProjectProperty({ property: property, value }));
+    return (value: ProjectState[K]) => setProjectProperty(property, value);
   };
 
   // TODO: rewrite to server search, cause there may be a lot of users
@@ -43,26 +44,6 @@ const Project: FC = () => {
   const [fetchUpdate] = useUpdateProjectMutation();
   const [fetchCreate] = useAddProjectMutation();
 
-  const handleSave = () => {
-    const errors = validateProject();
-    if (errors.length) {
-      alert(errors.join("\n"));
-      return;
-    }
-    if (_id) {
-      fetchUpdate(project as any)
-        .unwrap()
-        .then((details) => dispatch(setProject(details)))
-        .catch(() => alert("Ошибка сохранения"));
-    } else {
-      fetchCreate({ ...project, _id: undefined } as any)
-        .unwrap()
-        .then((details) => dispatch(setProject(details)))
-        .catch(() => alert("Ошибка сохранения"));
-    }
-    navigate("/boards");
-  };
-
   const validateProject = () => {
     const errors = [];
     if (!name) errors.push(`${t("Field is not filled")}: ${t("Name")}`);
@@ -71,20 +52,36 @@ const Project: FC = () => {
     if (!sprints?.length) errors.push(`${t("Add at least one")}: ${t("Sprint")}`);
     if (!stages?.length) errors.push(`${t("Add at least one")}: ${t("Stage")}`);
     if (!users?.length) errors.push(`${t("Add at least one")}: ${t("Member")}`);
-
     return errors;
   };
 
+  const handleSave = () => {
+    const errors = validateProject();
+    if (errors.length) {
+      alert(errors.join("\n"));
+      return;
+    }
+    if (mode === "edit") {
+      fetchUpdate(project as any)
+        .unwrap()
+        .then((details) => setProject(details))
+        .catch(() => alert(t("Saving error")));
+    } else {
+      fetchCreate({ ...project, _id: undefined } as any)
+        .unwrap()
+        .then((details) => setProject(details))
+        .catch(() => alert(t("Saving error")));
+    }
+  };
+
   useEffect(() => {
-    if (_id) {
+    if (_id && mode === "edit") {
       fetchDetails({ _id })
         .unwrap()
-        .then((details) => dispatch(setProject(details)))
+        .then((details) => setProject(details))
         .catch(console.error);
-    } else {
-      dispatch(setProject(initialProjectState));
     }
-  }, [_id, dispatch, fetchDetails]);
+  }, [_id, fetchDetails, mode, setProject]);
 
   return (
     <GlassContainer className={classes.container}>
@@ -146,7 +143,7 @@ const Project: FC = () => {
         </Grid>
         <Grid container xs={12}>
           <Button variant="contained" onClick={handleSave} sx={{ backgroundColor: "#fff" }}>
-            {t("Save")}
+            {mode === "edit" ? t("Save") : t("Create")}
           </Button>
         </Grid>
       </Grid>

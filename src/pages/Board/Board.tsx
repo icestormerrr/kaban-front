@@ -3,13 +3,13 @@ import { skipToken } from "@reduxjs/toolkit/query";
 
 import { useAppSelector } from "src/hooks/useAppSelector";
 import { Task, TasksFilter } from "src/store/tasks/types";
+import { useGetTasksQuery } from "src/store/tasks/api";
 
 import GlassContainer from "src/components/container/glass-container/GlassContainer";
 import { BoardPanel } from "./BoardPanel";
 import BoardStage from "./BoardStage";
 
 import classes from "./Board.module.scss";
-import { useGetTasksQuery } from "src/store/tasks/api";
 
 const Board: FC = () => {
   const { _id: projectId, stages } = useAppSelector((state) => state.project);

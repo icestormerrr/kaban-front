@@ -1,18 +1,16 @@
-import React, { FC, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import React, { FC, useEffect, useMemo } from "react";
+import { useParams } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 import { Button, Grid } from "@mui/material";
 
-import { useAppSelector } from "src/hooks/useAppSelector";
-import { useSavedState } from "src/hooks/useSavedState";
+import { useEditorStore } from "../../hooks/useEditorStore";
+import { useProjectId } from "../../hooks/useProjectId";
 
-import { PROJECT_ID_PERSIST_KEY } from "src/config";
 import { useLazyGetTaskQuery, useUpdateTaskMutation, useAddTaskMutation } from "src/store/tasks/api";
+import { useGetProjectDetailsQuery } from "../../store/projects/api";
 import { useGetUsersQuery } from "src/store/users/api";
-import { initialTaskState, setTask, setTaskProperty } from "src/store/tasks/slice";
-import { TaskState } from "src/store/tasks/types";
+import { TaskState, initialTaskState } from "src/store/tasks/types";
 import { TaskStatus, TaskStatusOptions } from "src/struct/enums";
 
 import InputString from "src/components/input/InputString";
@@ -21,25 +19,46 @@ import GlassContainer from "src/components/container/glass-container/GlassContai
 
 import classes from "./Task.module.scss";
 
-const Task: FC = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+const Task: FC<NApp.EntityComponent> = ({ mode }) => {
   const { t } = useTranslation();
   const { _id } = useParams();
+  const projectId = useProjectId();
 
-  const [projectId] = useSavedState<string | null>(PROJECT_ID_PERSIST_KEY, null);
-  const { epics, sprints, stages, users: usersIds } = useAppSelector((state) => state.project);
+  const {
+    entity: task,
+    setEntity: setTask,
+    setEntityProperty: setTaskProperty,
+  } = useEditorStore<TaskState>(initialTaskState);
 
-  const task = useAppSelector((state) => state.task);
-  const { name, epicId, sprintId, stageId, status, executorId, authorId, description } = task;
+  const { data: project, isFetching } = useGetProjectDetailsQuery({ _id: projectId });
+  const { data: users } = useGetUsersQuery({ usersIds: project?.users }, { skip: !project?.users });
+
+  const { name, epicId, sprintId, stageId, status, executorId, authorId, description } = useMemo(() => task, [task]);
   const handlePropertyChange = <K extends keyof TaskState>(property: K) => {
-    return (value: TaskState[K]) => dispatch(setTaskProperty({ property: property, value }));
+    return (value: TaskState[K]) => setTaskProperty(property, value);
   };
 
-  const { data: users } = useGetUsersQuery({ usersIds: usersIds! }, { skip: !usersIds });
   const [fetchDetails] = useLazyGetTaskQuery();
   const [fetchUpdate] = useUpdateTaskMutation();
   const [fetchCreate] = useAddTaskMutation();
+
+  const validateTask = () => {
+    const errors = [];
+    if (!name) errors.push(`${t("Field is not filled")}: ${t("Name")}`);
+    if (!description) errors.push(`${t("Field is not filled")}: ${t("Description")}`);
+    if (!epicId || !project?.epics?.find((e) => e._id === epicId))
+      errors.push(`${t("Field is not filled")}: ${t("Epic")}`);
+    if (!sprintId || !project?.sprints?.find((s) => s._id === sprintId))
+      errors.push(`${t("Field is not filled")}: ${t("Sprint")}`);
+    if (!stageId || !project?.stages?.find((s) => s._id === stageId))
+      errors.push(`${t("Field is not filled")}: ${t("Stage")}`);
+    if (!executorId || !users?.find((s) => s._id === executorId))
+      errors.push(`${t("Field is not filled")}: ${t("Executor")}`);
+    if (!authorId || !users?.find((s) => s._id === authorId))
+      errors.push(`${t("Field is not filled")}: ${t("Author")}`);
+    if (!status) errors.push(`${t("Field is not filled")}: ${t("Status")}`);
+    return errors;
+  };
 
   const handleSave = () => {
     const errors = validateTask();
@@ -47,43 +66,27 @@ const Task: FC = () => {
       alert(errors.join("\n"));
       return;
     }
-    if (_id) {
+    if (mode === "edit") {
       fetchUpdate(task as any)
         .unwrap()
-        .then((details) => dispatch(setTask(details)))
-        .catch(() => alert("Ошибка сохранения"));
+        .then((details) => setTask(details))
+        .catch(() => alert(t("Saving error")));
     } else {
       fetchCreate({ ...task, projectId, _id: undefined } as any)
         .unwrap()
-        .then((details) => dispatch(setTask(details)))
-        .catch(() => alert("Ошибка сохранения"));
+        .then((details) => setTask(details))
+        .catch(() => alert(t("Saving error")));
     }
-    navigate("/board");
-  };
-
-  const validateTask = () => {
-    const errors = [];
-    if (!name) errors.push(`${t("Field is not filled")}: ${t("Name")}`);
-    if (!description) errors.push(`${t("Field is not filled")}: ${t("Description")}`);
-    if (!epicId) errors.push(`${t("Field is not filled")}: ${t("Epic")}`);
-    if (!sprintId) errors.push(`${t("Field is not filled")}: ${t("Sprint")}`);
-    if (!stageId) errors.push(`${t("Field is not filled")}: ${t("Stage")}`);
-    if (!executorId) errors.push(`${t("Field is not filled")}: ${t("Executor")}`);
-    if (!authorId) errors.push(`${t("Field is not filled")}: ${t("Author")}`);
-    if (!status) errors.push(`${t("Field is not filled")}: ${t("Status")}`);
-    return errors;
   };
 
   useEffect(() => {
-    if (_id) {
+    if (_id && mode === "edit") {
       fetchDetails({ _id })
         .unwrap()
-        .then((details) => dispatch(setTask(details)))
-        .catch(console.error);
-    } else {
-      dispatch(setTask(initialTaskState));
+        .then((details) => setTask(details))
+        .catch(() => alert(t("Server error")));
     }
-  }, [_id, dispatch, fetchDetails]);
+  }, [_id, fetchDetails, mode, setTask, t]);
 
   return (
     <GlassContainer className={classes.container}>
@@ -110,7 +113,7 @@ const Task: FC = () => {
               disableClearable
               required
               label={t("Stage")}
-              options={stages ?? []}
+              options={project?.stages ?? []}
               value={stageId}
               onChange={(s) => handlePropertyChange("stageId")(s?._id ?? null)}
             />
@@ -148,7 +151,7 @@ const Task: FC = () => {
           <Grid item xs={12}>
             <InputSelect
               label={t("Epic")}
-              options={epics ?? []}
+              options={project?.epics ?? []}
               value={epicId}
               onChange={(e) => handlePropertyChange("epicId")(e?._id ?? null)}
             />
@@ -156,7 +159,7 @@ const Task: FC = () => {
           <Grid item xs={12}>
             <InputSelect
               label={t("Sprint")}
-              options={sprints ?? []}
+              options={project?.sprints ?? []}
               value={sprintId}
               onChange={(s) => handlePropertyChange("sprintId")(s?._id ?? null)}
             />
@@ -164,7 +167,7 @@ const Task: FC = () => {
         </Grid>
         <Grid item xs={12}>
           <Button variant="contained" onClick={handleSave} sx={{ backgroundColor: "#fff", mt: "32px" }}>
-            {t("Save")}
+            {mode === "edit" ? t("Save") : t("Create")}
           </Button>
         </Grid>
       </Grid>

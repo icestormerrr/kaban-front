@@ -1,7 +1,5 @@
 import React, { FC } from "react";
 
-import { Chip } from "@mui/material";
-
 import { Task } from "src/store/tasks/types";
 
 import BoardTask from "./BoardTask";

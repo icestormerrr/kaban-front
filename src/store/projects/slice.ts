@@ -1,17 +1,6 @@
-import { ProjectState } from "./types";
+import { initialProjectState, ProjectState } from "./types";
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export const initialProjectState: ProjectState = {
-  _id: "",
-  name: "",
-  description: "",
-  epics: [],
-  sprints: [],
-  stages: [],
-  users: [],
-  authorId: "",
-};
 
 export const projectSlice = createSlice({
   name: "project",

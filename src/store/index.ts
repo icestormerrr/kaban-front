@@ -5,18 +5,19 @@ import { configureStore, isRejectedWithValue, Middleware, MiddlewareAPI } from "
 import { projectSlice } from "./projects/slice";
 import projectsApi from "./projects/api";
 
-import { taskSlice } from "./tasks/slice";
 import tasksApi from "./tasks/api";
 
 import usersApi from "./users/api";
 
 import authApi from "./auth/api";
+import entitySlice from "./editor/slice";
 
 export const rootReducer = combineReducers({
+  [entitySlice.name]: entitySlice.reducer,
+
   [projectSlice.name]: projectSlice.reducer,
   [projectsApi.reducerPath]: projectsApi.reducer,
 
-  [taskSlice.name]: taskSlice.reducer,
   [tasksApi.reducerPath]: tasksApi.reducer,
 
   [usersApi.reducerPath]: usersApi.reducer,

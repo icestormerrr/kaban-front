@@ -17,7 +17,7 @@ const autocompleteStyleSmall = {
 };
 
 const autocompleteStyleLarge = {
-  maxWidth: 800,
+  maxWidth: 1000,
   minWidth: 100,
   width: "100%",
   "& .MuiInputBase-root": {

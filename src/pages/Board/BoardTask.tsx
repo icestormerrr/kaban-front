@@ -21,7 +21,7 @@ const BoardTask: FC<Task> = ({ _id, id, name, epicId, sprintId, executorId, stag
   const { data: user } = useGetUserQuery({ _id: executorId });
 
   const handleTaskClick = () => {
-    navigate(`/task/${_id}`);
+    navigate(`../task/${_id}`);
   };
   return (
     <GlassContainer className={classes.container} onClick={handleTaskClick}>

@@ -7,7 +7,7 @@ import Task from "../pages/Task/Task";
 import Project from "../pages/Project/Project";
 import Login from "../pages/Login/Login";
 
-export const menuRoutes: string[] = ["board", "project", "backlog"];
+export const menuRoutes: string[] = ["project", "board", "backlog"];
 
 export const menuRoteDisplayNameMap: Record<string, string> = {
   board: "Board",
@@ -25,26 +25,37 @@ export const routesTree: RouteObject[] = [
         element: <Home />,
       },
       {
-        path: "board",
-        element: <Board />,
-      },
-      {
-        path: "task",
-        element: <Task />,
-        children: [
-          {
-            path: ":_id",
-            element: <Task />,
-          },
-        ],
-      },
-      {
         path: "project",
-        element: <Project />,
         children: [
           {
+            index: true,
+            element: <Project mode="create" />,
+          },
+          {
             path: ":_id",
-            element: <Project />,
+            children: [
+              {
+                index: true,
+                element: <Project mode="edit" />,
+              },
+              {
+                path: "board",
+                element: <Board />,
+              },
+              {
+                path: "task",
+                children: [
+                  {
+                    index: true,
+                    element: <Task mode="create" />,
+                  },
+                  {
+                    path: ":_id",
+                    element: <Task mode="edit" />,
+                  },
+                ],
+              },
+            ],
           },
         ],
       },

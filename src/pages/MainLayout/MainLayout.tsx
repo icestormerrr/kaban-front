@@ -38,17 +38,28 @@ const MainLayout: FC = () => {
 
   const { data: projects = [], isFetching: isProjectsFetching } = useGetProjectsQuery({ userId: user._id });
   const [fetchProjectDetails, { isFetching: isProjectDetailsFetching }] = useLazyGetProjectDetailsQuery();
+
   const [fetchLogout] = useLogoutMutation();
-
-  const handleProjectChange = (newOption: NApp.NamedEntity | null) => {
-    setProjectId(newOption?._id ?? null);
-  };
-
   const handleLogout = () => {
     localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, "");
     fetchLogout();
     navigate("/login");
   };
+
+  const handleProjectChange = (newOption: NApp.NamedEntity | null) => {
+    setProjectId(newOption?._id ?? null);
+    navigate(`/project/${newOption?._id}`);
+  };
+
+  const handleRouteNavigate = useCallback(
+    (route: string) => {
+      if (route === "project") {
+        return () => navigate(`/project/${projectId}`);
+      }
+      return () => navigate(`/project/${projectId}/${route}`);
+    },
+    [navigate, projectId],
+  );
 
   const handleHomeNavigate = () => {
     navigate("/");
@@ -59,23 +70,13 @@ const MainLayout: FC = () => {
   };
 
   const handleTaskCreate = () => {
-    navigate("/task");
+    navigate(`/project/${projectId}/task`);
   };
 
   const handleProjectCreate = () => {
     setProjectId("");
     navigate("/project");
   };
-
-  const handleRouteNavigate = useCallback(
-    (route: string) => {
-      if (route === "project") {
-        return () => navigate(`/${route}/${projectId}`);
-      }
-      return () => navigate(`/${route}`);
-    },
-    [navigate, projectId],
-  );
 
   useEffect(() => {
     if (projectId) {
@@ -108,11 +109,7 @@ const MainLayout: FC = () => {
           />
 
           {menuRoutes.map((route) => (
-            <div
-              className={clsx({ [classes.route]: true, [classes.active]: pathname?.includes(route) })}
-              onClick={handleRouteNavigate(route)}
-              key={route}
-            >
+            <div className={classes.route} onClick={handleRouteNavigate(route)} key={route}>
               {t(menuRoteDisplayNameMap[route])}
             </div>
           ))}

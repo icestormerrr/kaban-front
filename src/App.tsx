@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 import { routesTree } from "./struct/routes";
 
-import "./global-styles.scss";
+import "./index.scss";
 
 const App: FC = () => {
   const routes = useRoutes(routesTree);
