@@ -112,10 +112,10 @@ const Project: FC<NApp.EntityComponent> = ({ mode }) => {
           </Grid>
         </Grid>
         <Grid container xs={12} spacing={1}>
-          <Grid item xs={6}>
+          <Grid item lg={3} xs={6}>
             <InputList type="input" list={epics ?? []} onListChange={handlePropertyChange("epics")} label={t("Epic")} />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item lg={3} xs={6}>
             <InputList
               type="input"
               list={sprints ?? []}
@@ -123,7 +123,7 @@ const Project: FC<NApp.EntityComponent> = ({ mode }) => {
               label={t("Sprint")}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item lg={3} xs={6}>
             <InputList
               type="input"
               list={stages ?? []}
@@ -131,7 +131,7 @@ const Project: FC<NApp.EntityComponent> = ({ mode }) => {
               label={t("Stage")}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item lg={3} xs={6}>
             <InputList
               type="select"
               list={projectUsers ?? []}
