@@ -25,6 +25,9 @@ const autocompleteStyleLarge = {
   },
 };
 
+const getOptionLabel = (option: Option) => option.name;
+const isOptionEqualToValue = (option: Option, selectedValue: Option) => option._id === selectedValue._id;
+
 type Option = NApp.NamedEntity & { [key: string]: any };
 
 type Props = {
@@ -49,10 +52,6 @@ const InputSelect: FC<Props> = ({ value, onChange, options, label, size = "small
     setSelectedOption(newOption);
     onChange(newOption);
   };
-
-  const getOptionLabel = (option: Option) => option.name;
-
-  const isOptionEqualToValue = (option: Option, selectedValue: Option) => option._id === selectedValue._id;
 
   useEffect(() => {
     setSelectedOption(options.find((option) => option._id === value) ?? null);

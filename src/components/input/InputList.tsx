@@ -25,7 +25,7 @@ const InputList: FC<Props> = ({ type, list, onListChange, options, label, varian
     setValue("");
   };
 
-  const handleSelectAdd = (newOption: NApp.NamedEntity | null) => {
+  const handleSelect = (newOption: NApp.NamedEntity | null) => {
     newOption && onListChange([...list, newOption]);
   };
 
@@ -63,7 +63,7 @@ const InputList: FC<Props> = ({ type, list, onListChange, options, label, varian
             label={label}
             options={options ?? []}
             value={null}
-            onChange={handleSelectAdd}
+            onChange={handleSelect}
             size="large"
           />
         )}

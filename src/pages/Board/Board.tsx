@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { skipToken } from "@reduxjs/toolkit/query";
 
 import { useAppSelector } from "src/hooks/useAppSelector";
@@ -23,6 +23,7 @@ const Board: FC = () => {
   const { data: tasks, isFetching: isTasksFetching } = useGetTasksQuery(projectId ? { projectId } : skipToken);
 
   const [filter, setFilter] = useState<TasksFilter>({});
+  // TODO: make it on server
   const filteredTasks = useMemo(
     () =>
       tasks?.filter((task) => {
@@ -35,9 +36,12 @@ const Board: FC = () => {
     [filter, tasks],
   );
 
-  const handleFilterChange = (newFilter: Partial<TasksFilter>) => {
-    setFilter({ ...filter, ...newFilter });
-  };
+  const handleFilterChange = useCallback(
+    (newFilter: Partial<TasksFilter>) => {
+      setFilter({ ...filter, ...newFilter });
+    },
+    [filter],
+  );
 
   return (
     <GlassContainer className={classes.container}>
