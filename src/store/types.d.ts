@@ -5,6 +5,7 @@ declare namespace NApp {
   export type Mode = "create" | "edit";
   export type EntityComponent = {
     mode: Mode;
+    storeKey: string;
   };
   export type NamedEntity = Entity & {
     name: string;

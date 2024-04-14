@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useMemo } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 import { Button, Grid } from "@mui/material";
@@ -19,8 +19,9 @@ import GlassContainer from "src/components/container/glass-container/GlassContai
 
 import classes from "./Task.module.scss";
 
-const Task: FC<NApp.EntityComponent> = ({ mode }) => {
+const Task: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { _id } = useParams();
   const projectId = useProjectId();
 
@@ -28,12 +29,12 @@ const Task: FC<NApp.EntityComponent> = ({ mode }) => {
     entity: task,
     setEntity: setTask,
     setEntityProperty: setTaskProperty,
-  } = useEditorStore<TaskState>(initialTaskState);
+  } = useEditorStore<TaskState>(storeKey, initialTaskState);
+  const { name, epicId, sprintId, stageId, status, executorId, authorId, description } = useMemo(() => task, [task]);
 
   const { data: project, isFetching } = useGetProjectDetailsQuery({ _id: projectId });
   const { data: users } = useGetUsersQuery({ usersIds: project?.users }, { skip: !project?.users });
 
-  const { name, epicId, sprintId, stageId, status, executorId, authorId, description } = useMemo(() => task, [task]);
   const handlePropertyChange = <K extends keyof TaskState>(property: K) => {
     return (value: TaskState[K]) => setTaskProperty(property, value);
   };
@@ -74,7 +75,7 @@ const Task: FC<NApp.EntityComponent> = ({ mode }) => {
     } else {
       fetchCreate({ ...task, projectId, _id: undefined } as any)
         .unwrap()
-        .then((details) => setTask(details))
+        .then((details) => navigate(`${details._id}`))
         .catch(() => alert(t("Saving error")));
     }
   };

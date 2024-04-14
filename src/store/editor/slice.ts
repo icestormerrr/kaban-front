@@ -1,25 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type EntityState<T = any> = {
-  entity: T;
-  editing: boolean;
-};
+type EntityState = Record<string, any>;
 
-const initialState: EntityState = {
-  entity: {},
-  editing: false,
-};
+const initialState: EntityState = {};
 
 const entitySlice = createSlice({
   name: "editor",
   initialState,
   reducers: {
-    setEntity: (state, action: PayloadAction<any>) => {
-      state.entity = action.payload;
+    setEntity: (state, action: PayloadAction<{ storeKey: string; entity: any }>) => {
+      const { storeKey, entity } = action.payload;
+      state[storeKey] = entity;
     },
-    setEntityProperty: (state, action: PayloadAction<{ property: any; value: any }>) => {
-      const { property, value } = action.payload;
-      state.entity[property] = value;
+    setEntityProperty: (state, action: PayloadAction<{ storeKey: string; property: any; value: any }>) => {
+      const { storeKey, property, value } = action.payload;
+      state[storeKey][property] = value;
     },
   },
 });

@@ -3,25 +3,25 @@ import { useAppSelector } from "./useAppSelector";
 import { setEntity, setEntityProperty } from "../store/editor/slice";
 import { useCallback, useEffect, useMemo } from "react";
 
-export const useEditorStore = <T>(initialState: T) => {
+export const useEditorStore = <T>(storeKey: string, initialState: T) => {
   const dispatch = useDispatch();
-  const entity = useAppSelector((state) => state.editor.entity as T);
+  const entity = useAppSelector((state) => state.editor[storeKey] as T);
   const setE = useCallback(
     (entity: T) => {
-      dispatch(setEntity(entity));
+      dispatch(setEntity({ storeKey, entity }));
     },
-    [dispatch],
+    [dispatch, storeKey],
   );
   const setP = useCallback(
     <K extends keyof T>(property: K, value: T[K]) => {
-      dispatch(setEntityProperty({ property, value }));
+      dispatch(setEntityProperty({ storeKey, property, value }));
     },
-    [dispatch],
+    [dispatch, storeKey],
   );
 
   useEffect(() => {
     setE(initialState);
-  }, [initialState, setE]);
+  }, []);
 
   return useMemo(
     () =>

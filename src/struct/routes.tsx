@@ -29,14 +29,14 @@ export const routesTree: RouteObject[] = [
         children: [
           {
             index: true,
-            element: <Project mode="create" />,
+            element: <Project mode="create" storeKey="project" />,
           },
           {
             path: ":_id",
             children: [
               {
                 index: true,
-                element: <Project mode="edit" />,
+                element: <Project mode="edit" storeKey="project" />,
               },
               {
                 path: "board",
@@ -47,11 +47,11 @@ export const routesTree: RouteObject[] = [
                 children: [
                   {
                     index: true,
-                    element: <Task mode="create" />,
+                    element: <Task mode="create" storeKey="task" />,
                   },
                   {
                     path: ":_id",
-                    element: <Task mode="edit" />,
+                    element: <Task mode="edit" storeKey="task" />,
                   },
                 ],
               },

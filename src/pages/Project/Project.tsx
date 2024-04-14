@@ -17,7 +17,7 @@ import GlassContainer from "src/components/container/glass-container/GlassContai
 
 import classes from "./Project.module.scss";
 
-const Project: FC<NApp.EntityComponent> = ({ mode }) => {
+const Project: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
   const _id = useProjectId();
 
@@ -25,7 +25,7 @@ const Project: FC<NApp.EntityComponent> = ({ mode }) => {
     entity: project,
     setEntity: setProject,
     setEntityProperty: setProjectProperty,
-  } = useEditorStore<ProjectState>(initialProjectState);
+  } = useEditorStore<ProjectState>(storeKey, initialProjectState);
 
   const { name, description, epics, sprints, stages, users, authorId } = useMemo(() => project, [project]);
   const handlePropertyChange = <K extends keyof ProjectState>(property: K) => {
