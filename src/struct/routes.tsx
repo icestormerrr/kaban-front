@@ -9,6 +9,9 @@ import Login from "../pages/Login/Login";
 
 export const menuRoutes: string[] = ["project", "board", "backlog"];
 
+export const projectStoreKey = "project";
+export const taskStoreKey = "task";
+
 export const menuRoteDisplayNameMap: Record<string, string> = {
   board: "Board",
   project: "Project",
@@ -29,14 +32,14 @@ export const routesTree: RouteObject[] = [
         children: [
           {
             index: true,
-            element: <Project mode="create" storeKey="project" />,
+            element: <Project mode="create" storeKey={projectStoreKey} />,
           },
           {
             path: ":_id",
             children: [
               {
                 index: true,
-                element: <Project mode="edit" storeKey="project" />,
+                element: <Project mode="edit" storeKey={projectStoreKey} />,
               },
               {
                 path: "board",
@@ -47,11 +50,11 @@ export const routesTree: RouteObject[] = [
                 children: [
                   {
                     index: true,
-                    element: <Task mode="create" storeKey="task" />,
+                    element: <Task mode="create" storeKey={taskStoreKey} />,
                   },
                   {
                     path: ":_id",
-                    element: <Task mode="edit" storeKey="task" />,
+                    element: <Task mode="edit" storeKey={taskStoreKey} />,
                   },
                 ],
               },

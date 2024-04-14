@@ -2,7 +2,8 @@ import React, { FC, useEffect, useMemo, useState } from "react";
 import { skipToken } from "@reduxjs/toolkit/query";
 
 import { useAppSelector } from "src/hooks/useAppSelector";
-import { Task, TasksFilter } from "src/store/tasks/types";
+import { useProjectId } from "../../hooks/useProjectId";
+import { TasksFilter } from "src/store/tasks/types";
 import { useGetTasksQuery } from "src/store/tasks/api";
 
 import GlassContainer from "src/components/container/glass-container/GlassContainer";
@@ -10,9 +11,15 @@ import { BoardPanel } from "./BoardPanel";
 import BoardStage from "./BoardStage";
 
 import classes from "./Board.module.scss";
+import { useEditorStore } from "../../hooks/useEditorStore";
+import { projectStoreKey } from "../../struct/routes";
+import { ProjectState } from "../../store/projects/types";
 
 const Board: FC = () => {
-  const { _id: projectId, stages } = useAppSelector((state) => state.project);
+  const projectId = useProjectId();
+
+  const { entity: project } = useEditorStore<ProjectState>(projectStoreKey);
+
   const { data: tasks, isFetching: isTasksFetching } = useGetTasksQuery(projectId ? { projectId } : skipToken);
 
   const [filter, setFilter] = useState<TasksFilter>({});
@@ -36,7 +43,7 @@ const Board: FC = () => {
     <GlassContainer className={classes.container}>
       <BoardPanel filter={filter} onChange={handleFilterChange} />
       <GlassContainer className={classes.stageContainer}>
-        {stages?.map((stage) => (
+        {project.stages?.map((stage) => (
           <BoardStage
             stage={stage}
             tasks={filteredTasks.filter((task) => task.stageId === stage._id)}

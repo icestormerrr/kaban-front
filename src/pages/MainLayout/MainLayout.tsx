@@ -4,19 +4,18 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import { ListItemIcon, MenuItem } from "@mui/material";
 import { Settings, Logout } from "@mui/icons-material";
-import EditIcon from "@mui/icons-material/Edit";
-import { useTranslation } from "react-i18next";
-import clsx from "clsx";
 
-import { useAppDispatch } from "src/hooks/useAppDispatch";
+import { useTranslation } from "react-i18next";
+
 import { useSavedState } from "src/hooks/useSavedState";
+import { useEditorStore } from "../../hooks/useEditorStore";
 
 import { ACCESS_TOKEN_PERSIST_KEY, USER_PERSIST_KEY, PROJECT_ID_PERSIST_KEY } from "src/config";
 import { useGetProjectsQuery, useLazyGetProjectDetailsQuery } from "src/store/projects/api";
 import { useLogoutMutation } from "src/store/auth/api";
-import { menuRoutes, menuRoteDisplayNameMap } from "src/struct/routes";
-import { setProject } from "src/store/projects/slice";
+import { menuRoutes, menuRoteDisplayNameMap, projectStoreKey } from "src/struct/routes";
 import { UserState } from "src/store/users/types";
+import { ProjectState } from "../../store/projects/types";
 
 import GlassContainer from "src/components/container/glass-container/GlassContainer";
 import InputSelect from "src/components/input/InputSelect";
@@ -28,9 +27,10 @@ import classes from "./MainLayout.module.scss";
 
 const MainLayout: FC = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const { t } = useTranslation();
+
+  const { setEntity: setProject } = useEditorStore<ProjectState>(projectStoreKey);
 
   const isAuth = localStorage.getItem(ACCESS_TOKEN_PERSIST_KEY);
   const [user] = useSavedState<UserState>(USER_PERSIST_KEY, {} as UserState);
@@ -82,7 +82,7 @@ const MainLayout: FC = () => {
     if (projectId) {
       fetchProjectDetails({ _id: projectId })
         .unwrap()
-        .then((projectDetails) => dispatch(setProject(projectDetails)))
+        .then((details) => setProject(details))
         .catch(console.error);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

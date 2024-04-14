@@ -1,9 +1,11 @@
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useGetUsersQuery } from "src/store/users/api";
+import { useEditorStore } from "../../hooks/useEditorStore";
 import { TasksFilter } from "src/store/tasks/types";
-import { useAppSelector } from "../../hooks/useAppSelector";
+import { ProjectState } from "../../store/projects/types";
+import { projectStoreKey } from "../../struct/routes";
 
 import GlassContainer from "../../components/container/glass-container/GlassContainer";
 import InputSelect from "../../components/input/InputSelect";
@@ -17,7 +19,10 @@ type Props = {
 
 export const BoardPanel: FC<Props> = ({ filter, onChange }) => {
   const { t } = useTranslation();
-  const { name, epics, sprints, users } = useAppSelector((state) => state.project);
+
+  const { entity: project } = useEditorStore<ProjectState>(projectStoreKey);
+  const { name, epics, sprints, users } = useMemo(() => project, [project]);
+
   const { data: executors } = useGetUsersQuery({ usersIds: users! });
 
   return (

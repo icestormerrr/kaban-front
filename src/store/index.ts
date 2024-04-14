@@ -2,26 +2,18 @@
 import { combineReducers } from "redux";
 import { configureStore, isRejectedWithValue, Middleware, MiddlewareAPI } from "@reduxjs/toolkit";
 
-import { projectSlice } from "./projects/slice";
 import projectsApi from "./projects/api";
-
 import tasksApi from "./tasks/api";
-
 import usersApi from "./users/api";
-
 import authApi from "./auth/api";
 import entitySlice from "./editor/slice";
 
 export const rootReducer = combineReducers({
   [entitySlice.name]: entitySlice.reducer,
 
-  [projectSlice.name]: projectSlice.reducer,
   [projectsApi.reducerPath]: projectsApi.reducer,
-
   [tasksApi.reducerPath]: tasksApi.reducer,
-
   [usersApi.reducerPath]: usersApi.reducer,
-
   [authApi.reducerPath]: authApi.reducer,
 });
 

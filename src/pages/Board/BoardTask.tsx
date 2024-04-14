@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { Avatar, Chip } from "@mui/material";
 
 import { useGetUserQuery } from "src/store/users/api";
-import { useAppSelector } from "../../hooks/useAppSelector";
+import { useEditorStore } from "../../hooks/useEditorStore";
+import { ProjectState } from "../../store/projects/types";
 import { Task } from "src/store/tasks/types";
 import { TaskStatusColorMap } from "src/struct/enums";
+import { projectStoreKey } from "../../struct/routes";
 
 import GlassContainer from "src/components/container/glass-container/GlassContainer";
 import classes from "./BoardTask.module.scss";
@@ -14,7 +16,8 @@ import classes from "./BoardTask.module.scss";
 const BoardTask: FC<Task> = ({ _id, id, name, epicId, sprintId, executorId, stageId, status }) => {
   const navigate = useNavigate();
 
-  const { epics, sprints } = useAppSelector((state) => state.project);
+  const { entity: project } = useEditorStore<ProjectState>(projectStoreKey);
+  const { epics, sprints, users } = useMemo(() => project, [project]);
   const epicLabel = useMemo(() => epics?.find((epic) => epic._id === epicId)?.name, [epicId, epics]);
   const sprintLabel = useMemo(() => sprints?.find((sprint) => sprint._id === sprintId)?.name, [sprintId, sprints]);
 
