@@ -5,8 +5,7 @@ import { Button, IconButton, InputAdornment } from "@mui/material";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
-import { ACCESS_TOKEN_PERSIST_KEY } from "../../../shared/const";
-
+import { ACCESS_TOKEN_PERSIST_KEY } from "src/shared/const";
 import { USER_PERSIST_KEY } from "src/entities/user";
 import { GlassContainer, InputString } from "src/shared/ui";
 import { useLoginMutation, useRegisterMutation } from "src/entities/user";
@@ -64,7 +63,7 @@ const LoginPage: FC = () => {
         </div>
         {mode === "register" && <InputString label={t("Name")} value={name} onChange={(newName) => setName(newName)} />}
         <InputString
-          label={t("LoginPage")}
+          label={t("Login")}
           value={email}
           onChange={(newLogin) => setEmail(newLogin)}
           InputProps={{
