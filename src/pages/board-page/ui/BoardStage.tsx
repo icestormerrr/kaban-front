@@ -1,10 +1,9 @@
 import React, { FC } from "react";
 
-import { Task } from "src/entities/task/model/types";
+import { Task } from "src/entities/task";
 
 import BoardTask from "./BoardTask";
-
-import classes from "./Board.module.scss";
+import classes from "./BoardPage.module.scss";
 
 type Props = {
   stage: NApp.NamedEntity;

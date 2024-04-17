@@ -1,14 +1,14 @@
 import { Navigate, RouteObject } from "react-router-dom";
 
-import { projectStoreKey } from "../../entities/project/const/const";
-import { taskStoreKey } from "../../entities/task/const/const";
+import { projectStoreKey } from "src/entities/project";
+import { taskStoreKey } from "src/entities/task";
 
-import MainLayout from "../../widgets/main-layout/ui/MainLayout";
-import Home from "../../pages/Home/ui/Home";
-import Task from "../../pages/Task/ui/Task";
-import Project from "../../pages/Project/ui/Project";
-import Login from "../../pages/login/ui/Login";
-import { Board } from "../../pages/Board";
+import { ProjectPage } from "src/pages/project-page";
+import { BoardPage } from "src/pages/board-page";
+import { TaskPage } from "src/pages/task-page";
+import { LoginPage } from "src/pages/login-page";
+import { HomePage } from "src/pages/home-page";
+import { MainLayout } from "src/widgets/main-layout";
 
 export const routesTree: RouteObject[] = [
   {
@@ -17,36 +17,36 @@ export const routesTree: RouteObject[] = [
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <HomePage />,
       },
       {
         path: "project",
         children: [
           {
             index: true,
-            element: <Project mode="create" storeKey={projectStoreKey} />,
+            element: <ProjectPage mode="create" storeKey={projectStoreKey} />,
           },
           {
             path: ":_id",
             children: [
               {
                 index: true,
-                element: <Project mode="edit" storeKey={projectStoreKey} />,
+                element: <ProjectPage mode="edit" storeKey={projectStoreKey} />,
               },
               {
                 path: "board",
-                element: <Board />,
+                element: <BoardPage />,
               },
               {
                 path: "task",
                 children: [
                   {
                     index: true,
-                    element: <Task mode="create" storeKey={taskStoreKey} />,
+                    element: <TaskPage mode="create" storeKey={taskStoreKey} />,
                   },
                   {
                     path: ":_id",
-                    element: <Task mode="edit" storeKey={taskStoreKey} />,
+                    element: <TaskPage mode="edit" storeKey={taskStoreKey} />,
                   },
                 ],
               },
@@ -58,7 +58,7 @@ export const routesTree: RouteObject[] = [
   },
   {
     path: "/login",
-    element: <Login />,
+    element: <LoginPage />,
   },
   {
     path: "*",

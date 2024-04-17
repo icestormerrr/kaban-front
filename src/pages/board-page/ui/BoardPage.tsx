@@ -1,19 +1,17 @@
 import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { skipToken } from "@reduxjs/toolkit/query";
 
-import { useProjectId } from "../../../entities/project/lib/hooks/useProjectId";
-import { TasksFilter } from "src/entities/task/model/types";
-import { useGetTasksQuery } from "src/entities/task/api/taskApi";
+import { useGetProjectDetailsQuery, useProjectId } from "src/entities/project";
+import { TasksFilter, useGetTasksQuery } from "src/entities/task";
+import { GlassContainer } from "src/shared/ui";
 
-import GlassContainer from "src/shared/ui/containers/glass-container/GlassContainer";
-import { BoardPanel } from "./BoardPanel";
+import BoardPanel from "./BoardPanel";
 import BoardStage from "./BoardStage";
+import classes from "./BoardPage.module.scss";
 
-import classes from "./Board.module.scss";
-
-import { useGetProjectDetailsQuery } from "../../../entities/project/api/projectApi";
-
-const Board: FC = () => {
+const BoardPage: FC = () => {
+  const navigate = useNavigate();
   const projectId = useProjectId();
 
   const { data: project } = useGetProjectDetailsQuery({ _id: projectId });
@@ -40,6 +38,10 @@ const Board: FC = () => {
     [filter],
   );
 
+  useEffect(() => {
+    if (!projectId) navigate("/home");
+  }, [projectId, navigate]);
+
   return (
     <GlassContainer className={classes.container}>
       <BoardPanel filter={filter} onChange={handleFilterChange} />
@@ -57,4 +59,4 @@ const Board: FC = () => {
   );
 };
 
-export default Board;
+export default BoardPage;

@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider as ReduxProvider } from "react-redux";
 import { ThemeProvider } from "@mui/material/styles";
 
-import { store } from "./app/store";
+import { store } from "./app/store/store";
 import App from "./app/App";
 import { darkTheme } from "./app/config/config";
 

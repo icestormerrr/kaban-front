@@ -10,14 +10,3 @@ export type Project = NApp.NamedEntity & {
 };
 
 export type ProjectFilter = { userId?: string };
-
-export const initialProjectState: ProjectState = {
-  _id: "",
-  name: "",
-  description: "",
-  epics: [],
-  sprints: [],
-  stages: [],
-  users: [],
-  authorId: "",
-};

@@ -1,23 +1,19 @@
-import { FC, useMemo } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
-import { useGetUsersQuery } from "src/entities/user/api/userApi";
-import { TasksFilter } from "src/entities/task/model/types";
+import { TasksFilter } from "src/entities/task";
+import { useGetProjectDetailsQuery, useProjectId } from "src/entities/project";
+import { useGetUsersQuery } from "src/entities/user";
+import { GlassContainer, InputSelect } from "src/shared/ui";
 
-import GlassContainer from "src/shared/ui/containers/glass-container/GlassContainer";
-import InputSelect from "../../../shared/ui/inputs/InputSelect";
-
-import classes from "./Board.module.scss";
-import { useGetProjectDetailsQuery } from "../../../entities/project/api/projectApi";
-import { useProjectId } from "../../../entities/project/lib/hooks/useProjectId";
-import { skipToken } from "@reduxjs/toolkit/query";
+import classes from "./BoardPage.module.scss";
 
 type Props = {
   filter: TasksFilter;
   onChange: (newFilter: Partial<TasksFilter>) => void;
 };
 
-export const BoardPanel: FC<Props> = ({ filter, onChange }) => {
+const BoardPanel: FC<Props> = ({ filter, onChange }) => {
   const { t } = useTranslation();
   const projectId = useProjectId();
 
@@ -51,3 +47,5 @@ export const BoardPanel: FC<Props> = ({ filter, onChange }) => {
     </GlassContainer>
   );
 };
+
+export default BoardPanel;

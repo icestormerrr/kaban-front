@@ -25,17 +25,3 @@ export type TasksFilter = {
   sprintId?: string;
   executorId?: string;
 };
-
-export const initialTaskState: TaskState = {
-  _id: "",
-  id: "",
-  name: "",
-  description: "",
-  status: TaskStatus.NotImportant,
-  epicId: "",
-  sprintId: "",
-  stageId: "",
-  executorId: "",
-  authorId: null,
-  comments: null,
-};

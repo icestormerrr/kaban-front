@@ -1,29 +1,20 @@
 import React, { FC, useCallback, useEffect } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
-
-import CircularProgress from "@mui/material/CircularProgress";
+import { Outlet, useNavigate } from "react-router-dom";
 import { ListItemIcon, MenuItem } from "@mui/material";
 import { Settings, Logout } from "@mui/icons-material";
-
 import { useTranslation } from "react-i18next";
 
-import { useSavedState } from "src/shared/lib/hooks/useSavedState";
+import { ACCESS_TOKEN_PERSIST_KEY } from "src/shared/const";
+import { useSavedState } from "src/shared/lib";
+import { USER_PERSIST_KEY, UserState } from "src/entities/user";
+import { PROJECT_ID_PERSIST_KEY, useGetProjectsQuery } from "src/entities/project";
+import { useLogoutMutation } from "src/entities/user/api/authApi";
+import { AvatarMenu, ButtonMenu, GlassContainer, InputSelect } from "src/shared/ui";
 
-import { ACCESS_TOKEN_PERSIST_KEY } from "src/app/config/config";
-import { useGetProjectsQuery, useLazyGetProjectDetailsQuery } from "src/entities/project/api/projectApi";
-import { useLogoutMutation } from "src/pages/login/api/authApi";
-import { UserState } from "src/entities/user/model/types";
-
-import GlassContainer from "src/shared/ui/containers/glass-container/GlassContainer";
-import InputSelect from "src/shared/ui/inputs/InputSelect";
-import ButtonMenu from "src/shared/ui/menus/ButtonMenu";
-import AvatarMenu from "src/shared/ui/menus/AvatarMenu";
+import { menuRoteDisplayNameMap, menuRoutes } from "../const/const";
 import { ReactComponent as Logo } from "src/widgets/main-layout/assets/logo.svg";
 
 import classes from "./MainLayout.module.scss";
-import { PROJECT_ID_PERSIST_KEY } from "../../../entities/project/const/const";
-import { USER_PERSIST_KEY } from "../../../entities/user/const/const";
-import { menuRoteDisplayNameMap, menuRoutes } from "../const/const";
 
 const MainLayout: FC = () => {
   const navigate = useNavigate();
@@ -38,6 +29,8 @@ const MainLayout: FC = () => {
   const [fetchLogout] = useLogoutMutation();
   const handleLogout = () => {
     localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, "");
+    localStorage.setItem(PROJECT_ID_PERSIST_KEY, "");
+    localStorage.setItem(USER_PERSIST_KEY, "");
     fetchLogout();
     navigate("/login");
   };

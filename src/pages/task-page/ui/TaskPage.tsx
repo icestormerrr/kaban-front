@@ -1,25 +1,25 @@
 import React, { FC, useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
 import { useTranslation } from "react-i18next";
 import { Button, Grid } from "@mui/material";
 
-import { useEditorStore } from "../../../shared/lib/hooks/useEditorStore";
-import { useProjectId } from "../../../entities/project/lib/hooks/useProjectId";
+import { useEditorStore } from "src/shared/lib";
+import { useGetUsersQuery } from "src/entities/user";
+import {
+  initialTaskState,
+  TaskState,
+  TaskStatus,
+  TaskStatusOptions,
+  useAddTaskMutation,
+  useLazyGetTaskQuery,
+  useUpdateTaskMutation,
+} from "src/entities/task";
+import { useGetProjectDetailsQuery, useProjectId } from "src/entities/project";
+import { GlassContainer, InputSelect, InputString } from "src/shared/ui";
 
-import { useLazyGetTaskQuery, useUpdateTaskMutation, useAddTaskMutation } from "src/entities/task/api/taskApi";
-import { useGetProjectDetailsQuery } from "../../../entities/project/api/projectApi";
-import { useGetUsersQuery } from "src/entities/user/api/userApi";
-import { TaskState, initialTaskState } from "src/entities/task/model/types";
-import { TaskStatus, TaskStatusOptions } from "src/entities/task/model/enums";
+import classes from "./TaskPage.module.scss";
 
-import InputString from "src/shared/ui/inputs/InputString";
-import InputSelect from "src/shared/ui/inputs/InputSelect";
-import GlassContainer from "src/shared/ui/containers/glass-container/GlassContainer";
-
-import classes from "./Task.module.scss";
-
-const Task: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
+const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { _id } = useParams();
@@ -88,6 +88,10 @@ const Task: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
         .catch(() => alert(t("Server error")));
     }
   }, [_id, fetchDetails, mode, setTask, t]);
+
+  useEffect(() => {
+    if (!projectId) navigate("./home");
+  }, [navigate, projectId]);
 
   return (
     <GlassContainer className={classes.container}>
@@ -176,4 +180,4 @@ const Task: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   );
 };
 
-export default Task;
+export default TaskPage;

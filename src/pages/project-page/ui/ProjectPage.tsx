@@ -1,23 +1,22 @@
 import React, { FC, useEffect, useMemo } from "react";
-
 import { useTranslation } from "react-i18next";
 import { Button, Grid } from "@mui/material";
 
-import { useEditorStore } from "../../../shared/lib/hooks/useEditorStore";
-import { useProjectId } from "../../../entities/project/lib/hooks/useProjectId";
+import { useEditorStore } from "src/shared/lib";
+import { useGetUsersQuery } from "src/entities/user";
+import {
+  initialProjectState,
+  ProjectState,
+  useAddProjectMutation,
+  useLazyGetProjectDetailsQuery,
+  useProjectId,
+  useUpdateProjectMutation,
+} from "../../../entities/project";
+import { GlassContainer, InputList, InputSelect, InputString } from "../../../shared/ui";
 
-import { useGetUsersQuery } from "src/entities/user/api/userApi";
-import { useLazyGetProjectDetailsQuery, useUpdateProjectMutation, useAddProjectMutation } from "src/entities/project/api/projectApi";
-import { ProjectState, initialProjectState } from "src/entities/project/model/types";
+import classes from "./ProjectPage.module.scss";
 
-import InputString from "src/shared/ui/inputs/InputString";
-import InputSelect from "src/shared/ui/inputs/InputSelect";
-import InputList from "src/shared/ui/inputs/InputList";
-import GlassContainer from "src/shared/ui/containers/glass-container/GlassContainer";
-
-import classes from "./Project.module.scss";
-
-const Project: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
+const ProjectPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
   const _id = useProjectId();
 
@@ -151,4 +150,4 @@ const Project: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   );
 };
 
-export default Project;
+export default ProjectPage;

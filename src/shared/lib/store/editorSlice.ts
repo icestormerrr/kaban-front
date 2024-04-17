@@ -4,7 +4,7 @@ type EntityState = Record<string, any>;
 
 const initialState: EntityState = {};
 
-const entitySlice = createSlice({
+const editorSlice = createSlice({
   name: "editor",
   initialState,
   reducers: {
@@ -19,5 +19,5 @@ const entitySlice = createSlice({
   },
 });
 
-export const { setEntity, setEntityProperty } = entitySlice.actions;
-export default entitySlice;
+export const { setEntity, setEntityProperty } = editorSlice.actions;
+export default editorSlice;

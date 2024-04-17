@@ -6,11 +6,7 @@ import I18NextHttpBackend from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
 import { Mutex } from "async-mutex";
 import { USER_PERSIST_KEY } from "../../entities/user/const/const";
-
-/*
-  Конфиг констант
-*/
-export const ACCESS_TOKEN_PERSIST_KEY = "accessToken";
+import { ACCESS_TOKEN_PERSIST_KEY } from "src/shared/const";
 
 /*
   Конфиг локализации

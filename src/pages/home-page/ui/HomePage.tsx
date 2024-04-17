@@ -1,9 +1,10 @@
 import React, { FC } from "react";
 
-import classes from "./Home.module.scss";
-import GlassContainer from "src/shared/ui/containers/glass-container/GlassContainer";
+import { GlassContainer } from "src/shared/ui";
 
-const Home: FC = () => {
+import classes from "./HomePage.module.scss";
+
+const HomePage: FC = () => {
   return (
     <GlassContainer className={classes.container}>
       <h3 className={classes.title}>Welcome to KaBan, have a nice work :3</h3>
@@ -11,4 +12,4 @@ const Home: FC = () => {
   );
 };
 
-export default Home;
+export default HomePage;

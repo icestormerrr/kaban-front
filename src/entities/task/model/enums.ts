@@ -25,8 +25,8 @@ export const TaskStatusOptions: NApp.NamedEntity[] = [
 ];
 
 export const TaskStatusColorMap = {
-  [TaskStatus.NotImportant]: "#4169E1",
-  [TaskStatus.Important]: "#00FF7F",
-  [TaskStatus.VeryImportant]: "#F69660",
+  [TaskStatus.NotImportant]: "#f4f5f9",
+  [TaskStatus.Important]: "#fef764",
+  [TaskStatus.VeryImportant]: "#f89c12",
   [TaskStatus.Blocker]: "#8B1212",
 };

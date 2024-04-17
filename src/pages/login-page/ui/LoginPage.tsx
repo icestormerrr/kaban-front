@@ -1,21 +1,20 @@
 import React, { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { useTranslation } from "react-i18next";
 import { Button, IconButton, InputAdornment } from "@mui/material";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-
-import { useLoginMutation, useRegisterMutation } from "src/pages/login/api/authApi";
-import { ACCESS_TOKEN_PERSIST_KEY } from "src/app/config/config";
-
-import GlassContainer from "src/shared/ui/containers/glass-container/GlassContainer";
-import InputString from "../../../shared/ui/inputs/InputString";
-import { ReactComponent as Logo } from "src/widgets/main-layout/assets/logo.svg";
-import classes from "./Login.module.scss";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { USER_PERSIST_KEY } from "../../../entities/user/const/const";
 
-const Login: FC = () => {
+import { ACCESS_TOKEN_PERSIST_KEY } from "../../../shared/const";
+
+import { USER_PERSIST_KEY } from "src/entities/user";
+import { GlassContainer, InputString } from "src/shared/ui";
+import { useLoginMutation, useRegisterMutation } from "src/entities/user";
+
+import { ReactComponent as Logo } from "src/widgets/main-layout/assets/logo.svg";
+import classes from "./LoginPage.module.scss";
+
+const LoginPage: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -65,7 +64,7 @@ const Login: FC = () => {
         </div>
         {mode === "register" && <InputString label={t("Name")} value={name} onChange={(newName) => setName(newName)} />}
         <InputString
-          label={t("Login")}
+          label={t("LoginPage")}
           value={email}
           onChange={(newLogin) => setEmail(newLogin)}
           InputProps={{
@@ -107,4 +106,4 @@ const Login: FC = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

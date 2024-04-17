@@ -1,17 +1,13 @@
 import React, { FC, memo, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { Avatar, Chip } from "@mui/material";
 
-import { useGetUserQuery } from "src/entities/user/api/userApi";
+import { Task, TaskStatusColorMap } from "src/entities/task";
+import { useGetProjectDetailsQuery, useProjectId } from "src/entities/project";
+import { useGetUserQuery } from "src/entities/user";
+import { GlassContainer } from "src/shared/ui";
 
-import { Task } from "src/entities/task/model/types";
-import { TaskStatusColorMap } from "src/entities/task/model/enums";
-
-import GlassContainer from "src/shared/ui/containers/glass-container/GlassContainer";
 import classes from "./BoardTask.module.scss";
-import { useGetProjectDetailsQuery } from "../../../entities/project/api/projectApi";
-import { useProjectId } from "../../../entities/project/lib/hooks/useProjectId";
 
 const BoardTask: FC<Task> = ({ _id, id, name, epicId, sprintId, executorId, stageId, status }) => {
   const navigate = useNavigate();
