@@ -1,6 +1,6 @@
 /// <reference path="../types/global.d.ts" />
 import { combineReducers } from "redux";
-import { configureStore, isRejectedWithValue, Middleware, MiddlewareAPI } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 
 import projectsApi from "src/entities/project/api/projectApi";
 import tasksApi from "src/entities/task/api/taskApi";
@@ -17,13 +17,6 @@ export const rootReducer = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
 });
 
-export const rtkQueryErrorLogger: Middleware = (api: MiddlewareAPI) => (next) => (action) => {
-  if (isRejectedWithValue(action)) {
-    alert("Произошла ошибка сервера!");
-  }
-  return next(action);
-};
-
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
@@ -33,8 +26,7 @@ export const store = configureStore({
       .concat(usersApi.middleware)
       .concat(projectsApi.middleware)
       .concat(tasksApi.middleware)
-      .concat(authApi.middleware)
-      .concat(rtkQueryErrorLogger),
+      .concat(authApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

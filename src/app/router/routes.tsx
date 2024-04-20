@@ -1,4 +1,5 @@
-import { Navigate, RouteObject } from "react-router-dom";
+import React, { FC } from "react";
+import { Navigate, RouteObject, useRoutes } from "react-router-dom";
 
 import { projectStoreKey } from "src/entities/project";
 import { taskStoreKey } from "src/entities/task";
@@ -65,3 +66,8 @@ export const routesTree: RouteObject[] = [
     element: <Navigate to="/" />,
   },
 ];
+
+export const RoutesComponent: FC = () => {
+  const routes = useRoutes(routesTree);
+  return <div className="app">{routes}</div>;
+};

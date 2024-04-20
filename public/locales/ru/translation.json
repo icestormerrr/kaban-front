@@ -30,5 +30,6 @@
     "Field is not filled": "Не заполнено поле",
     "Add at least one": "Добавьте хотя бы один",
     "Saving error": "Ошибка сохранения",
-    "Server error": "Ошибка сервера"
+    "Server error": "Ошибка сервера",
+    "Saved": "Сохранено"
 }

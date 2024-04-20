@@ -1,11 +1,14 @@
 import React, { FC, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button, Grid } from "@mui/material";
+import { enqueueSnackbar } from "notistack";
 
 import { useEditorStore } from "src/shared/lib";
 import { useGetUsersQuery } from "src/entities/user";
 import {
   initialProjectState,
+  Project,
   ProjectState,
   useAddProjectMutation,
   useLazyGetProjectDetailsQuery,
@@ -19,12 +22,13 @@ import classes from "./ProjectPage.module.scss";
 const ProjectPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
   const _id = useProjectId();
+  const navigate = useNavigate();
 
   const {
     entity: project,
     setEntity: setProject,
     setEntityProperty: setProjectProperty,
-  } = useEditorStore<ProjectState>(storeKey, initialProjectState);
+  } = useEditorStore<ProjectState>(storeKey);
 
   const { name, description, epics, sprints, stages, users, authorId } = useMemo(() => project, [project]);
   const handlePropertyChange = <K extends keyof ProjectState>(property: K) => {
@@ -57,20 +61,19 @@ const ProjectPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const handleSave = () => {
     const errors = validateProject();
     if (errors.length) {
-      alert(errors.join("\n"));
+      enqueueSnackbar(errors.join("\n"), { variant: "error" });
       return;
     }
-    if (mode === "edit") {
-      fetchUpdate(project as any)
-        .unwrap()
-        .then((details) => setProject(details))
-        .catch(() => alert(t("Saving error")));
-    } else {
-      fetchCreate({ ...project, _id: undefined } as any)
-        .unwrap()
-        .then((details) => setProject(details))
-        .catch(() => alert(t("Saving error")));
-    }
+    const queryMethod = mode === "edit" ? fetchUpdate : fetchCreate;
+    const queryArg = mode === "edit" ? project : { ...project, _id: undefined };
+    queryMethod(queryArg as Project)
+      .unwrap()
+      .then((details) => {
+        setProject(details);
+        mode === "create" && navigate(details._id);
+        enqueueSnackbar(t("Saved"), { variant: "success" });
+      })
+      .catch(() => enqueueSnackbar(t("Saving error"), { variant: "error" }));
   };
 
   useEffect(() => {
@@ -78,9 +81,11 @@ const ProjectPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
       fetchDetails({ _id })
         .unwrap()
         .then((details) => setProject(details))
-        .catch(console.error);
+        .catch(() => enqueueSnackbar(t("Server error"), { variant: "error" }));
+    } else {
+      setProject(initialProjectState);
     }
-  }, [_id, fetchDetails, mode, setProject]);
+  }, [_id, fetchDetails, mode, setProject, t]);
 
   return (
     <GlassContainer className={classes.container}>

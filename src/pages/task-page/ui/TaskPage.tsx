@@ -2,11 +2,13 @@ import React, { FC, useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button, Grid } from "@mui/material";
+import { enqueueSnackbar } from "notistack";
 
 import { useEditorStore } from "src/shared/lib";
 import { useGetUsersQuery } from "src/entities/user";
 import {
   initialTaskState,
+  Task,
   TaskState,
   TaskStatus,
   TaskStatusOptions,
@@ -25,11 +27,7 @@ const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const { _id } = useParams();
   const projectId = useProjectId();
 
-  const {
-    entity: task,
-    setEntity: setTask,
-    setEntityProperty: setTaskProperty,
-  } = useEditorStore<TaskState>(storeKey, initialTaskState);
+  const { entity: task, setEntity: setTask, setEntityProperty: setTaskProperty } = useEditorStore<TaskState>(storeKey);
   const { name, epicId, sprintId, stageId, status, executorId, authorId, description } = useMemo(() => task, [task]);
 
   const { data: project, isFetching } = useGetProjectDetailsQuery({ _id: projectId });
@@ -64,20 +62,19 @@ const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const handleSave = () => {
     const errors = validateTask();
     if (errors.length) {
-      alert(errors.join("\n"));
+      enqueueSnackbar(errors.join("\n"), { variant: "error" });
       return;
     }
-    if (mode === "edit") {
-      fetchUpdate(task as any)
-        .unwrap()
-        .then((details) => setTask(details))
-        .catch(() => alert(t("Saving error")));
-    } else {
-      fetchCreate({ ...task, projectId, _id: undefined } as any)
-        .unwrap()
-        .then((details) => navigate(`${details._id}`))
-        .catch(() => alert(t("Saving error")));
-    }
+    const queryMethod = mode === "edit" ? fetchUpdate : fetchCreate;
+    const queryArg = mode === "edit" ? { ...task, projectId } : { ...task, projectId, _id: undefined };
+    queryMethod(queryArg as Task)
+      .unwrap()
+      .then((details) => {
+        setTask(details);
+        mode === "create" && navigate(details._id);
+        enqueueSnackbar(t("Saved"), { variant: "success" });
+      })
+      .catch(() => enqueueSnackbar(t("Saving error"), { variant: "error" }));
   };
 
   useEffect(() => {
@@ -85,7 +82,9 @@ const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
       fetchDetails({ _id })
         .unwrap()
         .then((details) => setTask(details))
-        .catch(() => alert(t("Server error")));
+        .catch(() => enqueueSnackbar(t("Server error"), { variant: "error" }));
+    } else {
+      setTask(initialTaskState);
     }
   }, [_id, fetchDetails, mode, setTask, t]);
 
