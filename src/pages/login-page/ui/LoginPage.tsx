@@ -1,13 +1,13 @@
 import React, { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Button, IconButton, InputAdornment } from "@mui/material";
+import { IconButton, InputAdornment } from "@mui/material";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import { ACCESS_TOKEN_PERSIST_KEY } from "src/shared/const";
 import { USER_PERSIST_KEY } from "src/entities/user";
-import { GlassContainer, InputString } from "src/shared/ui";
+import { GlassButton, GlassContainer, InputString } from "src/shared/ui";
 import { useLoginMutation, useRegisterMutation } from "src/entities/user";
 
 import { ReactComponent as Logo } from "src/widgets/main-layout/assets/logo.svg";
@@ -89,9 +89,9 @@ const LoginPage: FC = () => {
             ),
           }}
         />
-        <Button variant="contained" onClick={handleSubmit} className={classes.button}>
+        <GlassButton variant="contained" onClick={handleSubmit} className={classes.button}>
           {mode === "login" ? t("Enter") : t("Sing up")}
-        </Button>
+        </GlassButton>
         {mode === "login" && (
           <div className={classes.description}>
             {t("Don’t have an account?")}{" "}

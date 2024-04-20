@@ -6,8 +6,8 @@ import { useGetProjectDetailsQuery, useProjectId } from "src/entities/project";
 import { TasksFilter, useGetTasksQuery } from "src/entities/task";
 import { GlassContainer } from "src/shared/ui";
 
-import BoardPanel from "./BoardPanel";
-import BoardStage from "./BoardStage";
+import BoardPanel from "../board-panel/BoardPanel";
+import BoardStage from "../board-stage/BoardStage";
 import classes from "./BoardPage.module.scss";
 
 const BoardPage: FC = () => {

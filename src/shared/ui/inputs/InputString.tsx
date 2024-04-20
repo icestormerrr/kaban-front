@@ -30,7 +30,7 @@ const InputString: FC<Props> = ({ value, onChange, validate, disabled, sx, ...re
 
   return (
     <TextField
-      value={value}
+      value={value ?? ""}
       onChange={handleChange}
       error={!!errorText && !disabled}
       helperText={errorText}

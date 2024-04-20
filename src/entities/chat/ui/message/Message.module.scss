@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.user {
+  font-family: "Benzin", sans-serif;
+  font-weight: normal;
+  font-size: 20px;
+}
+
+.date {
+  font-size: 15px;
+}
+
+.description {
+  font-size: 20px;
+  word-wrap: break-word;
+}

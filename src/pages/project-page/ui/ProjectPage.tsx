@@ -14,8 +14,8 @@ import {
   useLazyGetProjectDetailsQuery,
   useProjectId,
   useUpdateProjectMutation,
-} from "../../../entities/project";
-import { GlassContainer, InputList, InputSelect, InputString } from "../../../shared/ui";
+} from "src/entities/project";
+import { GlassButton, GlassContainer, InputList, InputSelect, InputString } from "src/shared/ui";
 
 import classes from "./ProjectPage.module.scss";
 
@@ -146,9 +146,9 @@ const ProjectPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
           </Grid>
         </Grid>
         <Grid container xs={12}>
-          <Button variant="contained" onClick={handleSave} sx={{ backgroundColor: "#fff" }}>
+          <GlassButton variant="contained" onClick={handleSave}>
             {mode === "edit" ? t("Save") : t("Create")}
-          </Button>
+          </GlassButton>
         </Grid>
       </Grid>
     </GlassContainer>

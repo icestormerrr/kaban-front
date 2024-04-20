@@ -13,5 +13,5 @@ export const initialTaskState: TaskState = {
   stageId: null,
   executorId: null,
   authorId: null,
-  comments: null,
+  messages: null,
 };

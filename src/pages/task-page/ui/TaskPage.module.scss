@@ -3,10 +3,12 @@
   margin: 10px;
 }
 
-.content {
-  flex: 1;
+.title {
+  font-family: "Benzin", sans-serif;
+  font-weight: normal;
+  font-size: 30px;
 }
 
-.info {
-  width: 30%;
+.commentsContainer {
+  max-height: 65vh;
 }

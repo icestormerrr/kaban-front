@@ -1,0 +1,21 @@
+.stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  height: fit-content;
+  min-width: 280px;
+  padding: 10px;
+  gap: 10px;
+
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 0.5px solid rgba(255, 255, 255, 0.3);
+}
+
+.stageTitle {
+  font-family: "Benzin", sans-serif !important;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+}

@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 
 import { Task } from "src/entities/task";
 
-import BoardTask from "./BoardTask";
-import classes from "./BoardPage.module.scss";
+import BoardTask from "../board-task/BoardTask";
+import classes from "./BoardStage.module.scss";
 
 type Props = {
   stage: NApp.NamedEntity;
@@ -21,4 +21,4 @@ const BoardStage: FC<Props> = ({ stage, tasks }) => {
   );
 };
 
-export default BoardStage;
+export default memo(BoardStage);

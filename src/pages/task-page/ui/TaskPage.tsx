@@ -1,11 +1,12 @@
-import React, { FC, useEffect, useMemo } from "react";
+import React, { FC, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Button, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
+import { v4 as uuid } from "uuid";
 
-import { useEditorStore } from "src/shared/lib";
-import { useGetUsersQuery } from "src/entities/user";
+import { useEditorStore, useSavedState } from "src/shared/lib";
+import { useGetUsersQuery, USER_PERSIST_KEY, UserState } from "src/entities/user";
 import {
   initialTaskState,
   Task,
@@ -16,8 +17,11 @@ import {
   useLazyGetTaskQuery,
   useUpdateTaskMutation,
 } from "src/entities/task";
+import { Chat } from "src/entities/chat";
 import { useGetProjectDetailsQuery, useProjectId } from "src/entities/project";
-import { GlassContainer, InputSelect, InputString } from "src/shared/ui";
+import { GlassButton, GlassContainer, InputSelect, InputString } from "src/shared/ui";
+
+import { useValidateTask } from "../lib/hooks/useValidateTask";
 
 import classes from "./TaskPage.module.scss";
 
@@ -26,41 +30,37 @@ const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const navigate = useNavigate();
   const { _id } = useParams();
   const projectId = useProjectId();
+  const validateTask = useValidateTask();
+  const [user] = useSavedState<UserState>(USER_PERSIST_KEY, {} as UserState);
+  const [newMessage, setNewMessage] = useState<string | null>(null);
 
   const { entity: task, setEntity: setTask, setEntityProperty: setTaskProperty } = useEditorStore<TaskState>(storeKey);
-  const { name, epicId, sprintId, stageId, status, executorId, authorId, description } = useMemo(() => task, [task]);
+  const { name, epicId, sprintId, stageId, status, executorId, authorId, description, messages } = useMemo(
+    () => task,
+    [task],
+  );
 
   const { data: project, isFetching } = useGetProjectDetailsQuery({ _id: projectId });
   const { data: users } = useGetUsersQuery({ usersIds: project?.users }, { skip: !project?.users });
-
-  const handlePropertyChange = <K extends keyof TaskState>(property: K) => {
-    return (value: TaskState[K]) => setTaskProperty(property, value);
-  };
 
   const [fetchDetails] = useLazyGetTaskQuery();
   const [fetchUpdate] = useUpdateTaskMutation();
   const [fetchCreate] = useAddTaskMutation();
 
-  const validateTask = () => {
-    const errors = [];
-    if (!name) errors.push(`${t("Field is not filled")}: ${t("Name")}`);
-    if (!description) errors.push(`${t("Field is not filled")}: ${t("Description")}`);
-    if (!epicId || !project?.epics?.find((e) => e._id === epicId))
-      errors.push(`${t("Field is not filled")}: ${t("Epic")}`);
-    if (!sprintId || !project?.sprints?.find((s) => s._id === sprintId))
-      errors.push(`${t("Field is not filled")}: ${t("Sprint")}`);
-    if (!stageId || !project?.stages?.find((s) => s._id === stageId))
-      errors.push(`${t("Field is not filled")}: ${t("Stage")}`);
-    if (!executorId || !users?.find((s) => s._id === executorId))
-      errors.push(`${t("Field is not filled")}: ${t("Executor")}`);
-    if (!authorId || !users?.find((s) => s._id === authorId))
-      errors.push(`${t("Field is not filled")}: ${t("Author")}`);
-    if (!status) errors.push(`${t("Field is not filled")}: ${t("Status")}`);
-    return errors;
+  const handlePropertyChange = <K extends keyof TaskState>(property: K) => {
+    return (value: TaskState[K]) => setTaskProperty(property, value);
+  };
+
+  const handleCommentCreate = () => {
+    newMessage &&
+      handlePropertyChange("messages")([
+        ...(messages ?? []),
+        { description: newMessage, date: Date.now(), userId: user._id, _id: uuid() },
+      ]);
   };
 
   const handleSave = () => {
-    const errors = validateTask();
+    const errors = validateTask(task, project ?? null);
     if (errors.length) {
       enqueueSnackbar(errors.join("\n"), { variant: "error" });
       return;
@@ -94,8 +94,14 @@ const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
 
   return (
     <GlassContainer className={classes.container}>
-      <Grid container>
-        <Grid container xs={7} spacing={4}>
+      <Grid container spacing={4}>
+        <Grid container item xs={8} spacing={4}>
+          <Grid item xs={12} className={classes.title}>
+            {t("Task card")}{" "}
+            <GlassButton variant="contained" onClick={handleSave} sx={{ height: "35px", ml: "20px" }}>
+              {mode === "edit" ? t("Save") : t("Create")}
+            </GlassButton>
+          </Grid>
           <Grid item xs={12}>
             <InputString value={name} onChange={handlePropertyChange("name")} label={t("Name")} fullWidth />
           </Grid>
@@ -104,15 +110,12 @@ const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
               value={description}
               onChange={handlePropertyChange("description")}
               label={t("Description")}
-              rows={10}
+              rows={20}
               multiline
               fullWidth
             />
           </Grid>
-        </Grid>
-        <Grid container xs={1}></Grid>
-        <Grid container xs>
-          <Grid item xs={12}>
+          <Grid item xs={4}>
             <InputSelect
               disableClearable
               required
@@ -122,17 +125,7 @@ const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
               onChange={(s) => handlePropertyChange("stageId")(s?._id ?? null)}
             />
           </Grid>
-          <Grid item xs={12}>
-            <InputSelect
-              disableClearable
-              required
-              label={t("Status")}
-              options={TaskStatusOptions}
-              value={status}
-              onChange={(s) => handlePropertyChange("status")((s?._id as TaskStatus) ?? null)}
-            />
-          </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={4}>
             <InputSelect
               disableClearable
               required
@@ -142,7 +135,25 @@ const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
               onChange={(e) => handlePropertyChange("executorId")(e?._id ?? null)}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={4}>
+            <InputSelect
+              label={t("Epic")}
+              options={project?.epics ?? []}
+              value={epicId}
+              onChange={(e) => handlePropertyChange("epicId")(e?._id ?? null)}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <InputSelect
+              disableClearable
+              required
+              label={t("Status")}
+              options={TaskStatusOptions}
+              value={status}
+              onChange={(s) => handlePropertyChange("status")((s?._id as TaskStatus) ?? null)}
+            />
+          </Grid>
+          <Grid item xs={4}>
             <InputSelect
               disableClearable
               required
@@ -152,15 +163,7 @@ const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
               onChange={(a) => handlePropertyChange("authorId")(a?._id ?? null)}
             />
           </Grid>
-          <Grid item xs={12}>
-            <InputSelect
-              label={t("Epic")}
-              options={project?.epics ?? []}
-              value={epicId}
-              onChange={(e) => handlePropertyChange("epicId")(e?._id ?? null)}
-            />
-          </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={4}>
             <InputSelect
               label={t("Sprint")}
               options={project?.sprints ?? []}
@@ -169,10 +172,28 @@ const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
             />
           </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <Button variant="contained" onClick={handleSave} sx={{ backgroundColor: "#fff", mt: "32px" }}>
-            {mode === "edit" ? t("Save") : t("Create")}
-          </Button>
+        <Grid container item xs={4} spacing={4} display="flex" flexDirection="column" justifyContent="flex-start">
+          <Grid item className={classes.title}>
+            {t("Comments")}{" "}
+            <GlassButton variant="contained" onClick={handleCommentCreate} sx={{ height: "35px", ml: "20px" }}>
+              {t("Add")}
+            </GlassButton>
+          </Grid>
+          <Grid container item>
+            <Grid item xs>
+              <InputString
+                value={newMessage}
+                onChange={(newMessage) => setNewMessage(newMessage)}
+                label={t("Comment")}
+                rows={3}
+                multiline
+                fullWidth
+              />
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Chat messages={messages ?? []} className={classes.commentsContainer} />
+          </Grid>
         </Grid>
       </Grid>
     </GlassContainer>

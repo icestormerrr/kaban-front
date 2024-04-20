@@ -24,12 +24,16 @@
     "Author": "Автор",
     "Create": "Создать",
     "Member": "Участник",
+    "Comment": "Комментарий",
+    "Comments": "Комментарии",
+    "Saved": "Сохранено",
+    "Add": "Добавить",
+    "Task card": "Карточка задачи",
     "Select a project to continue...": "Выберите проект, чтобы продолжить...",
     "Welcome back, please, login to your account": "Добро пожаловать обратно, пожалуйста, войдите в свой аккаунт",
     "Don’t have an account?": "Нет аккаунта?",
     "Field is not filled": "Не заполнено поле",
     "Add at least one": "Добавьте хотя бы один",
     "Saving error": "Ошибка сохранения",
-    "Server error": "Ошибка сервера",
-    "Saved": "Сохранено"
+    "Server error": "Ошибка сервера"
 }

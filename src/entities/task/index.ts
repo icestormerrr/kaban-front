@@ -8,7 +8,7 @@ import {
 } from "./api/taskApi";
 import { taskStoreKey, initialTaskState } from "./const/const";
 import { TaskStatus, TaskStatusOptions, TaskStatusColorMap } from "./model/enums";
-import { TaskState, Task, Comment, TasksFilter } from "./model/types";
+import { TaskState, Task, TasksFilter } from "./model/types";
 
 export {
   tasksApi,
@@ -24,4 +24,4 @@ export {
   initialTaskState,
 };
 
-export type { TaskState, Task, Comment, TasksFilter };
+export type { TaskState, Task, TasksFilter };

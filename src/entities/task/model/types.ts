@@ -1,3 +1,4 @@
+import { TMessage } from "src/entities/chat";
 import { TaskStatus } from "src/entities/task/model/enums";
 
 export type TaskState = NApp.Nullable<Task>;
@@ -11,13 +12,7 @@ export type Task = NApp.NamedEntity & {
   stageId: string;
   authorId: string;
   executorId: string;
-  comments: Comment[] | null;
-};
-
-export type Comment = NApp.Entity & {
-  value: string;
-  date: number;
-  authorId: string;
+  messages: TMessage[] | null;
 };
 
 export type TasksFilter = {

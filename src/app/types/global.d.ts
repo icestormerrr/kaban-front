@@ -7,6 +7,7 @@ declare namespace NApp {
     mode: Mode;
     storeKey: string;
   };
+  export type Date = number;
   export type NamedEntity = Entity & {
     name: string;
   };
