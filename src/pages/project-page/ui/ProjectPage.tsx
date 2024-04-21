@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Button, Grid } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 
-import { useEditorStore } from "src/shared/lib";
+import { useAppSelector, useEditorStore } from "src/shared/lib";
 import { useGetUsersQuery } from "src/entities/user";
 import {
   initialProjectState,
@@ -27,11 +27,12 @@ const ProjectPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const validateProject = useValidateProject();
 
   const {
-    entity: project,
+    entitySelector,
     setEntity: setProject,
     setEntityProperty: setProjectProperty,
   } = useEditorStore<ProjectState>(storeKey);
 
+  const project = useAppSelector(entitySelector) ?? {};
   const { name, description, epics, sprints, stages, users, authorId } = useMemo(() => project, [project]);
   const handlePropertyChange = <K extends keyof ProjectState>(property: K) => {
     return (value: ProjectState[K]) => setProjectProperty(property, value);

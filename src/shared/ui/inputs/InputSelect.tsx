@@ -30,7 +30,7 @@ const isOptionEqualToValue = (option: Option, selectedValue: Option) => option._
 
 type Option = NApp.NamedEntity & { [key: string]: any };
 
-type Props = {
+export type InputSelectProps = {
   value: string | null;
   options: Option[];
   onChange: (newOption: Option | null) => void;
@@ -45,7 +45,7 @@ type Props = {
   fullWidth?: boolean;
 };
 
-const InputSelect: FC<Props> = ({ value, onChange, options, label, size = "small", ...restProps }) => {
+const InputSelect: FC<InputSelectProps> = ({ value, onChange, options, label, size = "small", ...restProps }) => {
   const [selectedOption, setSelectedOption] = useState<Option | null>({ _id: value || "", name: "" });
 
   const handleChange = (e: SyntheticEvent, newOption: Option | null) => {

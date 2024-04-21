@@ -21,9 +21,14 @@ export const useEditorStore = <T>(storeKey: string, initialState?: T) => {
     [dispatch, storeKey],
   );
 
-  const getEntityPropertySelector = useCallback(<K extends keyof T>(property: K) => {
-    return (state: RootState): T[K] => state.editor[storeKey]?.[property];
-  }, []);
+  const getEntityPropertySelector = useCallback(
+    <K extends keyof T>(property: K) => {
+      return (state: RootState): T[K] => state.editor[storeKey]?.[property];
+    },
+    [storeKey],
+  );
+
+  const entitySelector = useCallback((state: RootState): T => state.editor[storeKey], [storeKey]);
 
   useEffect(() => {
     if (initialState) setE(initialState);
@@ -32,9 +37,9 @@ export const useEditorStore = <T>(storeKey: string, initialState?: T) => {
   return useMemo(
     () =>
       ({
-        entity: entity || initialState || ({} as T),
         setEntity: setE,
         setEntityProperty: setP,
+        entitySelector,
         getEntityPropertySelector,
       }) as const,
     [entity, initialState, setE, setP],

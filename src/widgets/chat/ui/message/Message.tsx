@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import { useGetUserQuery } from "src/entities/user";
 import { GlassContainer } from "src/shared/ui";
 
-import { Message as TMessage } from "../../model/types";
+import { Message as TMessage } from "src/entities/message";
 
 import classes from "./Message.module.scss";
 

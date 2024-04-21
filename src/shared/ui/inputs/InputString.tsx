@@ -8,13 +8,13 @@ const textFieldStyles = {
   },
 };
 
-type Props = Omit<TextFieldProps, "value" | "onChange" | "error" | "helperText"> & {
+export type InputStringProps = Omit<TextFieldProps, "value" | "onChange" | "error" | "helperText"> & {
   value: string | null;
   onChange: (newValue: string | null) => void;
   validate?: (value: string | null) => string | null;
 };
 
-const InputString: FC<Props> = ({ value, onChange, validate, disabled, sx, ...restProps }) => {
+const InputString: FC<InputStringProps> = ({ value, onChange, validate, disabled, sx, ...restProps }) => {
   const [errorText, setErrorText] = useState<string | null>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

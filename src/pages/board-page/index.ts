@@ -1,3 +1,3 @@
-import BoardPage from "./ui/board-page/BoardPage";
+import BoardPage from "./ui/BoardPage";
 
 export { BoardPage };
