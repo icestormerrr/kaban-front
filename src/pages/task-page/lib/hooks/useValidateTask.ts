@@ -7,8 +7,8 @@ import { ProjectState } from "src/entities/project";
 export const useValidateTask = () => {
   const { t } = useTranslation();
   return useCallback((task: TaskState, project: ProjectState | null) => {
-    if (!project) return [t("Server error")]
-    const errors = [];
+    if (!project) return [t("Server error")];
+    const errors: string[] = [];
     if (!task.name) errors.push(`${t("Field is not filled")}: ${t("Name")}`);
     if (!task.description) errors.push(`${t("Field is not filled")}: ${t("Description")}`);
     if (!task.epicId || !project.epics?.find((e) => e._id === task.epicId))
@@ -19,9 +19,9 @@ export const useValidateTask = () => {
       errors.push(`${t("Field is not filled")}: ${t("Stage")}`);
     if (!task.executorId || !project.users?.find((userId) => userId === task.executorId))
       errors.push(`${t("Field is not filled")}: ${t("Executor")}`);
-    if (!task.authorId || !project.users?.find((userId) =>userId === task.authorId))
+    if (!task.authorId || !project.users?.find((userId) => userId === task.authorId))
       errors.push(`${t("Field is not filled")}: ${t("Author")}`);
     if (!task.status) errors.push(`${t("Field is not filled")}: ${t("Status")}`);
     return errors;
-  }, [])
+  }, []);
 };

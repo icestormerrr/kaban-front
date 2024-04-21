@@ -17,12 +17,14 @@ import {
 } from "src/entities/project";
 import { GlassButton, GlassContainer, InputList, InputSelect, InputString } from "src/shared/ui";
 
+import { useValidateProject } from "../lib/hooks/useValidateProject";
 import classes from "./ProjectPage.module.scss";
 
 const ProjectPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
   const _id = useProjectId();
   const navigate = useNavigate();
+  const validateProject = useValidateProject();
 
   const {
     entity: project,
@@ -47,21 +49,10 @@ const ProjectPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const [fetchUpdate] = useUpdateProjectMutation();
   const [fetchCreate] = useAddProjectMutation();
 
-  const validateProject = () => {
-    const errors = [];
-    if (!name) errors.push(`${t("Field is not filled")}: ${t("Name")}`);
-    if (!description) errors.push(`${t("Field is not filled")}: ${t("Description")}`);
-    if (!epics?.length) errors.push(`${t("Add at least one")}: ${t("Epic")}`);
-    if (!sprints?.length) errors.push(`${t("Add at least one")}: ${t("Sprint")}`);
-    if (!stages?.length) errors.push(`${t("Add at least one")}: ${t("Stage")}`);
-    if (!users?.length) errors.push(`${t("Add at least one")}: ${t("Member")}`);
-    return errors;
-  };
-
   const handleSave = () => {
-    const errors = validateProject();
+    const errors = validateProject(project);
     if (errors.length) {
-      enqueueSnackbar(errors.join("\n"), { variant: "error" });
+      enqueueSnackbar(errors.join("\n"), { variant: "error", autoHideDuration: 30000 });
       return;
     }
     const queryMethod = mode === "edit" ? fetchUpdate : fetchCreate;
