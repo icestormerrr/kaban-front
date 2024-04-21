@@ -22,7 +22,6 @@ import { useGetProjectDetailsQuery, useProjectId } from "src/entities/project";
 import { GlassButton, GlassContainer, InputSelect, InputString } from "src/shared/ui";
 
 import { useValidateTask } from "../lib/hooks/useValidateTask";
-
 import classes from "./TaskPage.module.scss";
 
 const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
