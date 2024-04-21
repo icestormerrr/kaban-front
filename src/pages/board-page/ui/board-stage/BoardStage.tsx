@@ -1,5 +1,7 @@
 import React, { FC, memo } from "react";
 
+import { isEqual } from "lodash";
+
 import { Task } from "src/entities/task";
 
 import BoardTask from "../board-task/BoardTask";
@@ -21,4 +23,7 @@ const BoardStage: FC<Props> = ({ stage, tasks }) => {
   );
 };
 
-export default memo(BoardStage);
+export default memo(
+  BoardStage,
+  (prevProps, nextProps) => isEqual(prevProps.stage, nextProps.stage) && isEqual(nextProps.tasks, prevProps.tasks),
+);

@@ -16,6 +16,7 @@ export type Task = NApp.NamedEntity & {
 };
 
 export type TasksFilter = {
+  projectId?: string;
   epicId?: string;
   sprintId?: string;
   executorId?: string;

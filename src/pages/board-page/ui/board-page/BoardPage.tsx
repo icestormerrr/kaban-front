@@ -13,23 +13,12 @@ import classes from "./BoardPage.module.scss";
 const BoardPage: FC = () => {
   const navigate = useNavigate();
   const projectId = useProjectId();
+  const [filter, setFilter] = useState<TasksFilter>({ projectId });
 
   const { data: project } = useGetProjectDetailsQuery({ _id: projectId });
-  const { data: tasks, isFetching: isTasksFetching } = useGetTasksQuery(projectId ? { projectId } : skipToken);
-
-  const [filter, setFilter] = useState<TasksFilter>({});
-  // TODO: make it on server
-  const filteredTasks = useMemo(
-    () =>
-      tasks?.filter((task) => {
-        let res = true;
-        if (filter.epicId) res = res && filter.epicId === task.epicId;
-        if (filter.sprintId) res = res && filter.sprintId === task.sprintId;
-        if (filter.executorId) res = res && filter.executorId === task.executorId;
-        return res;
-      }) || [],
-    [filter, tasks],
-  );
+  const { data: tasks = [], isFetching: isTasksFetching } = useGetTasksQuery(filter, {
+    refetchOnMountOrArgChange: true,
+  });
 
   const handleFilterChange = useCallback(
     (newFilter: Partial<TasksFilter>) => {
@@ -48,11 +37,7 @@ const BoardPage: FC = () => {
       <GlassContainer className={classes.stageContainer}>
         {project &&
           project.stages.map((stage) => (
-            <BoardStage
-              stage={stage}
-              tasks={filteredTasks.filter((task) => task.stageId === stage._id)}
-              key={stage._id}
-            />
+            <BoardStage stage={stage} tasks={tasks.filter((task) => task.stageId === stage._id)} key={stage._id} />
           ))}
       </GlassContainer>
     </GlassContainer>

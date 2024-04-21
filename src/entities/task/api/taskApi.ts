@@ -3,14 +3,14 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 
 import { baseQueryWithReauth } from "../../../app/config/config";
 
-import { Task } from "../model/types";
+import { Task, TasksFilter } from "../model/types";
 
 export const tasksApi = createApi({
   reducerPath: "taskApi",
   baseQuery: baseQueryWithReauth,
   tagTypes: ["Task"],
   endpoints: (build) => ({
-    getTasks: build.query<Task[], { projectId?: string }>({
+    getTasks: build.query<Task[], TasksFilter>({
       query: (params) => ({
         url: `/tasks`,
         params,
