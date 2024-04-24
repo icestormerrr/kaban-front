@@ -14,6 +14,7 @@ import { useLoginMutation, useRegisterMutation } from "src/entities/user";
 import { ReactComponent as Logo } from "src/widgets/main-layout/assets/logo.svg";
 import classes from "./LoginPage.module.scss";
 
+// TODO: rewrite to editor slice store
 const LoginPage: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
