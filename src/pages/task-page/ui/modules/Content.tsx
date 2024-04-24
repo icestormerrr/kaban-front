@@ -31,16 +31,6 @@ const Content: FC<Props> = ({ storeKey }) => {
       <Grid item xs={12}>
         <InputString value={name} onChange={handlePropertyChange("name")} label={t("Name")} fullWidth />
       </Grid>
-      <Grid item xs={12}>
-        <InputString
-          value={description}
-          onChange={handlePropertyChange("description")}
-          label={t("Description")}
-          rows={20}
-          multiline
-          fullWidth
-        />
-      </Grid>
       <Grid item xs={4}>
         <InputSelect
           disableClearable
@@ -95,6 +85,16 @@ const Content: FC<Props> = ({ storeKey }) => {
           options={project?.sprints ?? []}
           value={sprintId}
           onChange={(s) => handlePropertyChange("sprintId")(s?._id ?? null)}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <InputString
+          value={description}
+          onChange={handlePropertyChange("description")}
+          label={t("Description")}
+          rows={20}
+          multiline
+          fullWidth
         />
       </Grid>
     </>
