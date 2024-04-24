@@ -1,6 +1,5 @@
 import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { skipToken } from "@reduxjs/toolkit/query";
 
 import { useGetProjectDetailsQuery, useProjectId } from "src/entities/project";
 import { TasksFilter, useGetTasksQuery } from "src/entities/task";

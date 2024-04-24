@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { IconButton, InputAdornment } from "@mui/material";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { enqueueSnackbar } from "notistack";
 
 import { ACCESS_TOKEN_PERSIST_KEY } from "src/shared/const";
 import { USER_PERSIST_KEY } from "src/entities/user";
@@ -35,6 +36,7 @@ const LoginPage: FC = () => {
         fetchLogin({ email, password })
           .unwrap()
           .then((data) => {
+            enqueueSnackbar(t("You successfully authorized"), { variant: "success" });
             localStorage.setItem(USER_PERSIST_KEY, JSON.stringify(data.user));
             localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, data.accessToken);
             navigate("/");
@@ -45,6 +47,7 @@ const LoginPage: FC = () => {
         fetchRegister({ email, password, name })
           .unwrap()
           .then((data) => {
+            enqueueSnackbar(t("You successfully registered"), { variant: "success" });
             localStorage.setItem(USER_PERSIST_KEY, JSON.stringify(data.user));
             localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, data.accessToken);
             navigate("/");
