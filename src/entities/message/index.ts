@@ -1,3 +1,5 @@
-import { Message } from "./model/types";
+import { Message as TMessage } from "./model/types";
+import Message from "./ui/message/Message";
 
-export type { Message };
+export { Message };
+export type { TMessage };

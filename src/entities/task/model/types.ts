@@ -1,5 +1,5 @@
 import { TaskStatus } from "./enums";
-import { Message } from "../../message";
+import { TMessage } from "../../message";
 
 export type TaskState = NApp.Nullable<Task>;
 
@@ -12,7 +12,7 @@ export type Task = NApp.NamedEntity & {
   stageId: string;
   authorId: string;
   executorId: string;
-  messages: Message[] | null;
+  messages: TMessage[] | null;
 };
 
 export type TasksFilter = {

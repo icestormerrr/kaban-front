@@ -1,4 +1,4 @@
 import Chat from "./ui/chat/Chat";
-import Message from "./ui/message/Message";
+import Message from "../../entities/message/ui/message/Message";
 
 export { Chat, Message };

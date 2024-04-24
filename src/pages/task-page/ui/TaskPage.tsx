@@ -14,7 +14,7 @@ import {
   useUpdateTaskMutation,
 } from "src/entities/task";
 import { Chat } from "src/widgets/chat";
-import { Message } from "src/entities/message";
+import { TMessage } from "src/entities/message";
 import { useGetProjectDetailsQuery, useProjectId } from "src/entities/project";
 import { GlassButton, GlassContainer } from "src/shared/ui";
 
@@ -44,7 +44,7 @@ const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const { data: project, isFetching } = useGetProjectDetailsQuery({ _id: projectId });
 
   const messages = useAppSelector(getTaskPropertySelector("messages"));
-  const handleCommentCreate = (newMessage: Message) => {
+  const handleCommentCreate = (newMessage: TMessage) => {
     setTaskProperty("messages", [...(messages ?? []), newMessage]);
   };
 

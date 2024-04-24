@@ -8,8 +8,7 @@ import { GlassButton, InputString } from "src/shared/ui";
 import { useSavedState } from "src/shared/lib";
 import { USER_PERSIST_KEY, UserState } from "src/entities/user";
 
-import { Message as TMessage } from "src/entities/message";
-import Message from "../message/Message";
+import { TMessage, Message } from "src/entities/message";
 import classes from "./Chat.module.scss";
 
 type Props = {
