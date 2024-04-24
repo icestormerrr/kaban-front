@@ -16,7 +16,7 @@ const ProjectPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const _id = useProjectId();
 
   const [fetchDetails] = useLazyGetProjectDetailsQuery();
-  const { entitySelector: projectSelector, setEntity: setProject } = useEditorStore<ProjectState>(storeKey);
+  const { setEntity: setProject } = useEditorStore<ProjectState>(storeKey);
 
   useEffect(() => {
     if (_id && mode === "edit") {

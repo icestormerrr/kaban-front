@@ -6,9 +6,9 @@ import { useTranslation } from "react-i18next";
 import { enqueueSnackbar } from "notistack";
 
 import { Project, ProjectState, useAddProjectMutation, useUpdateProjectMutation } from "src/entities/project";
-import { useValidateProject } from "../../lib/hooks/useValidateProject";
 import { useAppSelector, useEditorStore } from "src/shared/lib";
 
+import { useValidateProject } from "../../lib/hooks/useValidateProject";
 import classes from "../ProjectPage.module.scss";
 
 type Props = {
