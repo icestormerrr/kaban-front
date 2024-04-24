@@ -25,6 +25,7 @@ const Chat: FC<Props> = ({ messages, omMessageCreate, className }) => {
 
   const handleMessageCreate = () => {
     omMessageCreate({ description: newMessage!, date: Date.now(), userId: user._id, _id: uuid() });
+    setNewMessage("");
   };
 
   return (
