@@ -51,7 +51,7 @@ const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const handleSave = () => {
     const errors = validateTask(task, project ?? null);
     if (errors.length) {
-      enqueueSnackbar(errors.join("\n"), { variant: "error" });
+      enqueueSnackbar(errors.join("\n"), { variant: "error", autoHideDuration: 10000 });
       return;
     }
     const queryMethod = mode === "edit" ? fetchUpdate : fetchCreate;
