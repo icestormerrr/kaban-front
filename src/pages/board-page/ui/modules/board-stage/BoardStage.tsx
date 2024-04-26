@@ -2,14 +2,14 @@ import React, { FC, memo } from "react";
 
 import { isEqual } from "lodash";
 
-import { Task } from "src/entities/task";
+import { TasksGridItem } from "src/entities/task";
 
 import BoardTask from "../board-task/BoardTask";
 import classes from "./BoardStage.module.scss";
 
 type Props = {
   stage: NApp.NamedEntity;
-  tasks: Task[];
+  tasks: TasksGridItem[];
 };
 
 const BoardStage: FC<Props> = ({ stage, tasks }) => {
@@ -25,5 +25,6 @@ const BoardStage: FC<Props> = ({ stage, tasks }) => {
 
 export default memo(
   BoardStage,
-  (prevProps, nextProps) => isEqual(prevProps.stage, nextProps.stage) && isEqual(nextProps.tasks, prevProps.tasks),
+  (prevProps, nextProps) =>
+    isEqual(prevProps.stage._id, nextProps.stage._id) && isEqual(nextProps.tasks, prevProps.tasks),
 );

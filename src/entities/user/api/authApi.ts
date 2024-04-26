@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 
-import { baseQuery } from "../../../app/config/config";
+import { baseQuery } from "src/app/config/config";
 import { User, UserState } from "../model/types";
 
 type AuthResponse = {
@@ -27,7 +27,7 @@ export const authApi = createApi({
       }),
     }),
     logout: build.mutation<void, void>({
-      query: (user) => ({
+      query: () => ({
         url: "/auth/logout",
         method: "POST",
       }),

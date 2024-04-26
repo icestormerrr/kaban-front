@@ -4,7 +4,6 @@ export const taskStoreKey = "task";
 
 export const initialTaskState: TaskState = {
   _id: "",
-  id: null,
   name: "",
   description: "",
   status: null,

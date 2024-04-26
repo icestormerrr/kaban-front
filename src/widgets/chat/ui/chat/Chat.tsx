@@ -1,4 +1,4 @@
-import React, { FC, memo, useState } from "react";
+import React, { FC, useState } from "react";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { v4 as uuid } from "uuid";
@@ -64,4 +64,4 @@ const Chat: FC<Props> = ({ messages, omMessageCreate, className }) => {
   );
 };
 
-export default memo(Chat);
+export default Chat;

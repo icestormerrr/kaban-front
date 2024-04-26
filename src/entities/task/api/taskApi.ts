@@ -1,18 +1,18 @@
 /// <reference path="../../../app/types/global.d.ts" />
 import { createApi } from "@reduxjs/toolkit/query/react";
 
-import { baseQueryWithReauth } from "../../../app/config/config";
+import { baseQueryWithReauth } from "src/app/config/config";
 
-import { Task, TasksFilter } from "../model/types";
+import { Task, TasksGridItem, TasksFilter } from "../model/types";
 
 export const tasksApi = createApi({
   reducerPath: "taskApi",
   baseQuery: baseQueryWithReauth,
   tagTypes: ["Task"],
   endpoints: (build) => ({
-    getTasks: build.query<Task[], TasksFilter>({
+    getTasksGrid: build.query<TasksGridItem[], TasksFilter>({
       query: (params) => ({
-        url: `/tasks`,
+        url: `/tasks/grid`,
         params,
       }),
       providesTags: ["Task"],
@@ -52,11 +52,11 @@ export const tasksApi = createApi({
 });
 
 export const {
-  useGetTasksQuery,
   useLazyGetTaskQuery,
   useUpdateTaskMutation,
   useAddTaskMutation,
   useDeleteTaskMutation,
+  useGetTasksGridQuery,
 } = tasksApi;
 
 export default tasksApi;

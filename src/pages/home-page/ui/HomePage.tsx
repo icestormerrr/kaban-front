@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
 
 import { GlassContainer } from "src/shared/ui";
-import { useProjectId } from "src/entities/project";
 
 import classes from "./HomePage.module.scss";
 

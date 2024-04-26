@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Grid } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
@@ -16,7 +16,6 @@ import classes from "./TaskPage.module.scss";
 
 const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const { _id } = useParams();
   const projectId = useProjectId();
 
@@ -33,10 +32,6 @@ const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
       setTask(initialTaskState);
     }
   }, [_id, fetchDetails, mode, setTask, t]);
-
-  useEffect(() => {
-    if (!projectId) navigate("./home");
-  }, [navigate, projectId]);
 
   return (
     <GlassContainer className={classes.container}>
