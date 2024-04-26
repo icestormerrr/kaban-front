@@ -4,7 +4,6 @@ import { TMessage } from "../../message";
 export type TaskState = NApp.Nullable<Task>;
 
 export type Task = NApp.NamedEntity & {
-  id: string;
   description: string;
   status: TaskStatus;
   epicId: string;
@@ -21,6 +20,7 @@ export type TasksGridItem = NApp.NamedEntity & {
   status: TaskStatus;
   epicName: string;
   sprintName: string;
+  stageId: string;
   stageName: string;
   authorName: string;
   executorName: string;

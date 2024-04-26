@@ -1,14 +1,15 @@
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-
-import { useGetTasksGridQuery } from "../../../../entities/task/api/taskApi";
-import { useProjectId } from "../../../../entities/project";
-import { TasksGridItem } from "../../../../entities/task/model/types";
+import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
 import { useTranslation } from "react-i18next";
+
+import { useGetTasksGridQuery, TasksGridItem } from "src/entities/task";
+import { useProjectId } from "src/entities/project";
 
 const BacklogGrid = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const projectId = useProjectId();
   const { data = [] } = useGetTasksGridQuery({ projectId }, { skip: !projectId });
 
@@ -49,6 +50,10 @@ const BacklogGrid = () => {
     [],
   );
 
+  const handleCellDoubleClick = useCallback((params: GridCellParams<TasksGridItem>) => {
+    navigate(`/project/${projectId}/task/${params.row._id}`);
+  }, []);
+
   return (
     <Box sx={{ width: "100%", height: "75vh" }}>
       <DataGrid
@@ -62,7 +67,7 @@ const BacklogGrid = () => {
           },
         }}
         pageSizeOptions={[10]}
-        checkboxSelection
+        onCellDoubleClick={handleCellDoubleClick}
         disableRowSelectionOnClick
       />
     </Box>

@@ -10,13 +10,6 @@ export const tasksApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ["Task"],
   endpoints: (build) => ({
-    getTasks: build.query<Task[], TasksFilter>({
-      query: (params) => ({
-        url: `/tasks`,
-        params,
-      }),
-      providesTags: ["Task"],
-    }),
     getTasksGrid: build.query<TasksGridItem[], TasksFilter>({
       query: (params) => ({
         url: `/tasks/grid`,
@@ -59,7 +52,6 @@ export const tasksApi = createApi({
 });
 
 export const {
-  useGetTasksQuery,
   useLazyGetTaskQuery,
   useUpdateTaskMutation,
   useAddTaskMutation,

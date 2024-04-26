@@ -34,10 +34,6 @@ const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
     }
   }, [_id, fetchDetails, mode, setTask, t]);
 
-  useEffect(() => {
-    if (!projectId) navigate("./home");
-  }, [navigate, projectId]);
-
   return (
     <GlassContainer className={classes.container}>
       <Grid container spacing={4}>
