@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@mui/material";
 
-import { GlassContainer } from "../../../shared/ui";
+import { GlassContainer } from "src/shared/ui";
 
 import Operations from "./modules/Operations";
 import BacklogGrid from "./modules/BacklogGrid";

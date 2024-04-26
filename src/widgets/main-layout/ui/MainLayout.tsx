@@ -68,7 +68,7 @@ const MainLayout: FC = () => {
   };
 
   useEffect(() => {
-    !isAuth && navigate("/login");
+    !isAuth && handleLogout();
   }, [isAuth, navigate]);
 
   return (

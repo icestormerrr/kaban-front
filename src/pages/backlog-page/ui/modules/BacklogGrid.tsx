@@ -11,20 +11,20 @@ const BacklogGrid = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const projectId = useProjectId();
-  const { data = [] } = useGetTasksGridQuery({ projectId }, { skip: !projectId });
+  const { data: rows = [] } = useGetTasksGridQuery({ projectId }, { skip: !projectId });
 
-  const columnsDefs: GridColDef<TasksGridItem>[] = useMemo(
+  const columns: GridColDef<TasksGridItem>[] = useMemo(
     () => [
       { field: "_id", headerName: "ID", width: 90 },
       {
         field: "name",
         headerName: t("Name"),
-        width: 150,
+        width: 200,
       },
       {
         field: "description",
         headerName: t("Description"),
-        width: 150,
+        width: 200,
       },
       {
         field: "epicName",
@@ -39,12 +39,12 @@ const BacklogGrid = () => {
       {
         field: "authorName",
         headerName: t("Author"),
-        width: 150,
+        width: 200,
       },
       {
         field: "executorName",
         headerName: t("Executor"),
-        width: 150,
+        width: 200,
       },
     ],
     [],
@@ -57,8 +57,8 @@ const BacklogGrid = () => {
   return (
     <Box sx={{ width: "100%", height: "75vh" }}>
       <DataGrid
-        rows={data}
-        columns={columnsDefs}
+        rows={rows}
+        columns={columns}
         initialState={{
           pagination: {
             paginationModel: {
@@ -66,7 +66,7 @@ const BacklogGrid = () => {
             },
           },
         }}
-        pageSizeOptions={[10]}
+        pageSizeOptions={[13]}
         onCellDoubleClick={handleCellDoubleClick}
         disableRowSelectionOnClick
       />

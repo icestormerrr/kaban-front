@@ -16,11 +16,12 @@ const Operations = () => {
   const handleTaskCreate = () => {
     navigate(`/project/${projectId}/task`);
   };
+
   return (
     <Grid item xs={12} className={classes.title}>
       {t("Backlog")}{" "}
       <GlassButton variant="contained" onClick={handleTaskCreate} sx={{ height: "35px", ml: "20px" }}>
-        {t("Create")}
+        {t("Create task")}
       </GlassButton>
     </Grid>
   );

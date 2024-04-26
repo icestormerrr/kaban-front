@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { TasksFilter } from "src/entities/task";
@@ -48,4 +48,4 @@ const BoardPanel: FC<Props> = ({ filter, onChange }) => {
   );
 };
 
-export default BoardPanel;
+export default memo(BoardPanel);
