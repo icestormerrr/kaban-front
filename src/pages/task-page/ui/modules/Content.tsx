@@ -16,7 +16,7 @@ const Content: FC<Props> = ({ storeKey }) => {
   const { t } = useTranslation();
 
   const projectId = useProjectId();
-  const { data: project, isFetching } = useGetProjectDetailsQuery({ _id: projectId });
+  const { data: project, isFetching } = useGetProjectDetailsQuery({ _id: projectId! });
   const { data: users } = useGetUsersQuery({ usersIds: project?.users }, { skip: !project?.users });
 
   const { entitySelector: taskSelector, setEntityProperty: setTaskProperty } = useEditorStore<TaskState>(storeKey);

@@ -17,7 +17,7 @@ const BoardPanel: FC<Props> = ({ filter, onChange }) => {
   const { t } = useTranslation();
   const projectId = useProjectId();
 
-  const { data: project } = useGetProjectDetailsQuery({ _id: projectId });
+  const { data: project } = useGetProjectDetailsQuery({ _id: projectId! });
   const { data: executors } = useGetUsersQuery({ usersIds: project?.users! }, { skip: !project?.users });
 
   return (

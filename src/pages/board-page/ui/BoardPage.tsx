@@ -14,7 +14,7 @@ const BoardPage: FC = () => {
   const projectId = useProjectId();
   const [filter, setFilter] = useState<TasksFilter>({ projectId });
 
-  const { data: project } = useGetProjectDetailsQuery({ _id: projectId });
+  const { data: project } = useGetProjectDetailsQuery({ _id: projectId! });
   const { data: tasks = [], isFetching: isTasksFetching } = useGetTasksQuery(filter, {
     refetchOnMountOrArgChange: true,
   });

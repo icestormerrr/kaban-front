@@ -4,12 +4,13 @@ import { Navigate, RouteObject, useRoutes } from "react-router-dom";
 import { projectStoreKey } from "src/entities/project";
 import { taskStoreKey } from "src/entities/task";
 
+import { MainLayout } from "src/widgets/main-layout";
 import { ProjectPage } from "src/pages/project-page";
 import { BoardPage } from "src/pages/board-page";
 import { TaskPage } from "src/pages/task-page";
 import { LoginPage } from "src/pages/login-page";
 import { HomePage } from "src/pages/home-page";
-import { MainLayout } from "src/widgets/main-layout";
+import { BacklogPage } from "src/pages/backlog-page";
 
 export const routesTree: RouteObject[] = [
   {
@@ -37,6 +38,10 @@ export const routesTree: RouteObject[] = [
               {
                 path: "board",
                 element: <BoardPage />,
+              },
+              {
+                path: "backlog",
+                element: <BacklogPage />,
               },
               {
                 path: "task",

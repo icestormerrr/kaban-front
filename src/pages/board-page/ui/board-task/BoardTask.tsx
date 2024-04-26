@@ -13,7 +13,7 @@ const BoardTask: FC<Task> = ({ _id, id, name, epicId, sprintId, executorId, stag
   const navigate = useNavigate();
   const projectId = useProjectId();
 
-  const { data: project } = useGetProjectDetailsQuery({ _id: projectId });
+  const { data: project } = useGetProjectDetailsQuery({ _id: projectId! });
   const { data: user } = useGetUserQuery({ _id: executorId });
 
   const epicLabel = useMemo(() => project?.epics?.find((epic) => epic._id === epicId)?.name, [epicId, project?.epics]);

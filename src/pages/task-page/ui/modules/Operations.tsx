@@ -29,7 +29,7 @@ const Operations: FC<Props> = ({ storeKey, mode }) => {
   const { entitySelector: taskSelector, setEntity: setTask } = useEditorStore<TaskState>(storeKey);
 
   const task = useAppSelector(taskSelector) ?? {};
-  const { data: project, isFetching } = useGetProjectDetailsQuery({ _id: projectId });
+  const { data: project, isFetching } = useGetProjectDetailsQuery({ _id: projectId! });
 
   const handleSave = () => {
     const errors = validateTask(task, project ?? null);
