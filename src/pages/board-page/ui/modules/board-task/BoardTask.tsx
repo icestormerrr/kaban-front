@@ -1,4 +1,4 @@
-import React, { FC, memo, useMemo } from "react";
+import React, { FC, memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Avatar, Chip } from "@mui/material";
 
@@ -7,7 +7,7 @@ import { GlassContainer } from "src/shared/ui";
 
 import classes from "./BoardTask.module.scss";
 
-const BoardTask: FC<TasksGridItem> = ({ _id, id, name, epicName, sprintName, executorName, status }) => {
+const BoardTask: FC<TasksGridItem> = ({ _id, name, epicName, sprintName, executorName, status }) => {
   const navigate = useNavigate();
 
   const handleTaskClick = () => {

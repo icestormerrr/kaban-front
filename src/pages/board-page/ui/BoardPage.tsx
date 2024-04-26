@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
+import React, { FC, useCallback, useMemo, useState } from "react";
 import { groupBy } from "lodash";
 
 import { useGetProjectDetailsQuery, useProjectId } from "src/entities/project";
