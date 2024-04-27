@@ -6,10 +6,10 @@ import { enqueueSnackbar } from "notistack";
 import { useEditorStore } from "src/shared/lib";
 import { initialProjectState, ProjectState, useLazyGetProjectDetailsQuery, useProjectId } from "src/entities/project";
 import { GlassContainer } from "src/shared/ui";
+import { commonClasses } from "src/shared/styles";
 
 import Content from "./modules/Content";
 import Operations from "./modules/Operations";
-import classes from "./ProjectPage.module.scss";
 
 const ProjectPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
@@ -30,7 +30,7 @@ const ProjectPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   }, [_id, fetchDetails, mode, setProject, t]);
 
   return (
-    <GlassContainer className={classes.container}>
+    <GlassContainer className={commonClasses.container}>
       <Grid container direction="column" sx={{ gap: "32px" }}>
         <Operations storeKey={storeKey} mode={mode} />
         <Content storeKey={storeKey} />

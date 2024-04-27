@@ -15,3 +15,4 @@ declare namespace NApp {
     [key in keyof T]: T[key] | null;
   };
 }
+declare module "*.png";

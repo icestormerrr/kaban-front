@@ -7,9 +7,9 @@ import { enqueueSnackbar } from "notistack";
 
 import { Project, ProjectState, useAddProjectMutation, useUpdateProjectMutation } from "src/entities/project";
 import { useAppSelector, useEditorStore } from "src/shared/lib";
+import { commonClasses } from "src/shared/styles";
 
 import { useValidateProject } from "../../lib/hooks/useValidateProject";
-import classes from "../ProjectPage.module.scss";
 
 type Props = {
   storeKey: string;
@@ -46,7 +46,7 @@ const Operations: FC<Props> = ({ storeKey, mode }) => {
   };
 
   return (
-    <Grid item xs={12} className={classes.title}>
+    <Grid item xs={12} className={commonClasses.title}>
       {t("Project card")}{" "}
       <GlassButton variant="contained" onClick={handleSave} sx={{ height: "35px", ml: "20px" }}>
         {mode === "edit" ? t("Save") : t("Create")}

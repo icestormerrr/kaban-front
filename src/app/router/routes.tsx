@@ -3,6 +3,7 @@ import { Navigate, RouteObject, useRoutes } from "react-router-dom";
 
 import { projectStoreKey } from "src/entities/project";
 import { taskStoreKey } from "src/entities/task";
+import { settingsStoreKey } from "src/entities/settings";
 
 import { MainLayout } from "src/widgets/main-layout";
 import { ProjectPage } from "src/pages/project-page";
@@ -11,6 +12,7 @@ import { TaskPage } from "src/pages/task-page";
 import { LoginPage } from "src/pages/login-page";
 import { HomePage } from "src/pages/home-page";
 import { BacklogPage } from "src/pages/backlog-page";
+import { SettingsPage } from "src/pages/settings-page";
 
 export const routesTree: RouteObject[] = [
   {
@@ -20,6 +22,10 @@ export const routesTree: RouteObject[] = [
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: "/settings",
+        element: <SettingsPage storeKey={settingsStoreKey} />,
       },
       {
         path: "project",
@@ -74,5 +80,5 @@ export const routesTree: RouteObject[] = [
 
 export const RoutesComponent: FC = () => {
   const routes = useRoutes(routesTree);
-  return <div className="app">{routes}</div>;
+  return <>{routes}</>;
 };
