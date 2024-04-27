@@ -4,9 +4,8 @@ import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 import { GlassButton } from "src/shared/ui";
+import { commonClasses } from "src/shared/styles";
 import { useProjectId } from "src/entities/project";
-
-import classes from "../Backlog.module.scss";
 
 const Operations = () => {
   const { t } = useTranslation();
@@ -18,7 +17,7 @@ const Operations = () => {
   };
 
   return (
-    <Grid item xs={12} className={classes.title}>
+    <Grid item xs={12} className={commonClasses.title}>
       {t("Backlog")}{" "}
       <GlassButton variant="contained" onClick={handleTaskCreate} sx={{ height: "35px", ml: "20px" }}>
         {t("Create task")}

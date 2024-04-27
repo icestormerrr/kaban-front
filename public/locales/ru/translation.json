@@ -28,6 +28,7 @@
     "Comments": "Комментарии",
     "Saved": "Сохранено",
     "Add": "Добавить",
+    "Background": "Фон",
     "Task card": "Карточка задачи",
     "Create task": "Создать задачу",
     "Project card": "Карточка проекта",
@@ -42,5 +43,6 @@
     "Field is not filled": "Не заполнено поле",
     "Add at least one": "Добавьте хотя бы один",
     "Saving error": "Ошибка сохранения",
-    "Server error": "Ошибка сервера"
+    "Server error": "Ошибка сервера",
+    "A reboot is required to apply the changes": "Для применения изменений требуется перезагрузка"
 }
