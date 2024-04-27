@@ -8,6 +8,10 @@ import InputString from "./inputs/InputString";
 import AvatarMenu from "./menus/AvatarMenu";
 import ButtonMenu from "./menus/ButtonMenu";
 
+/**
+ * @module shared
+ */
+
 export {
   GlassContainer,
   GlassButton,
