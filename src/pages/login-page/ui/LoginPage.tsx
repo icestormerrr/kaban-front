@@ -7,7 +7,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { enqueueSnackbar } from "notistack";
 
 import { ACCESS_TOKEN_PERSIST_KEY } from "src/shared/const";
-import { USER_PERSIST_KEY } from "src/entities/user";
+import { AuthResponse, USER_PERSIST_KEY } from "src/entities/user";
 import { GlassButton, GlassContainer, InputString } from "src/shared/ui";
 import { useLoginMutation, useRegisterMutation } from "src/entities/user";
 
@@ -31,29 +31,21 @@ const LoginPage: FC = () => {
     setShowPassword((old) => !old);
   };
 
+  const handleSuccess = (data: AuthResponse) => {
+    enqueueSnackbar(t("You successfully authorized"), { variant: "success" });
+    localStorage.setItem(USER_PERSIST_KEY, JSON.stringify(data.user));
+    localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, data.accessToken);
+    navigate("/");
+  };
+
+  const handleError = () => enqueueSnackbar(t("Server error"), { variant: "error" });
+
   const handleSubmit = () => {
     if (email && password) {
-      mode === "login" &&
-        fetchLogin({ email, password })
-          .unwrap()
-          .then((data) => {
-            enqueueSnackbar(t("You successfully authorized"), { variant: "success" });
-            localStorage.setItem(USER_PERSIST_KEY, JSON.stringify(data.user));
-            localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, data.accessToken);
-            navigate("/");
-          })
-          .catch(console.error);
+      mode === "login" && fetchLogin({ email, password }).unwrap().then(handleSuccess).catch(handleError);
       mode === "register" &&
         name &&
-        fetchRegister({ email, password, name })
-          .unwrap()
-          .then((data) => {
-            enqueueSnackbar(t("You successfully registered"), { variant: "success" });
-            localStorage.setItem(USER_PERSIST_KEY, JSON.stringify(data.user));
-            localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, data.accessToken);
-            navigate("/");
-          })
-          .catch(console.error);
+        fetchRegister({ email, password, name }).unwrap().then(handleSuccess).catch(handleError);
     }
   };
 
