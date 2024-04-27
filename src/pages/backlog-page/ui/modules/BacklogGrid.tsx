@@ -11,7 +11,10 @@ const BacklogGrid = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const projectId = useProjectId();
-  const { data: rows = [] } = useGetTasksGridQuery({ projectId }, { skip: !projectId });
+  const { data: rows = [] } = useGetTasksGridQuery(
+    { projectId },
+    { skip: !projectId, refetchOnMountOrArgChange: true },
+  );
 
   const columns: GridColDef<TasksGridItem>[] = useMemo(
     () => [
