@@ -1,26 +1,24 @@
 # KABAN
+Kaban is a project management tool that helps the team get information about tasks, and allows the manager to track their completion.
 
-Kaban - это инструмент управления проектами, который помогает команде получать информацию о задачах, а менеджеру отслеживать их выполнение.
+# About the project 
+The project is built according to the "feature sliced design" architecture, make sure to read the documentation before starting work: https://feature-sliced.design/docs
 
-# О проекте
- - Проект построен в соответсвии с архитектурой "feature sliced design", перед работой обязательно ознакомиться с документацией: https://feature-sliced.design/docs
-
-# Деплой
-1. Склонируйте репозиторий:
-    - git clone
-2. Запустите docker build:
-    - docker build . -t frontend
-3. Запустите docker run, в команде укажите переменные окружения, пример:
+# Deployment
+1. Clone the repository:
+   - git clone
+2. Run docker build:
+   - docker build . -t frontend
+3. Run docker run, specify environment variables in the command, for example:
    - docker run -d -p 3000:3000 -e REACT_APP_PUBLIC_URL=url-of-backend-application frontend
-   
-# Локальная разработка
 
-1. Убедитесь, что на вашем компьютере установлен Node.js.
-2. Склонируйте репозиторий:
-    - git clone
-3. Создайте в корне .env файл, пример содержания:
-    - REACT_APP_PUBLIC_URL=url-of-backend-application
-4. Установите зависимости:
-    - npm install
-5. Запустите проект:
-    - npm start
+# Local development
+1. Make sure Node.js is installed on your computer.
+2. Clone the repository:
+   - git clone
+3. Create a .env file in the root directory, example content:
+   - REACT_APP_PUBLIC_URL=url-of-backend-application
+4. Install dependencies:
+   - npm install
+5. Start the project:
+   - npm start
