@@ -5,6 +5,9 @@ Kaban is a project management tool that helps the team get information about tas
 The project is built according to the "feature sliced design" architecture, make sure to read the documentation before starting work: https://feature-sliced.design/docs
 
 # Deployment
+
+### Production
+
 1. Clone the repository:
    - git clone
 2. Run docker build:
@@ -12,7 +15,8 @@ The project is built according to the "feature sliced design" architecture, make
 3. Run docker run, specify environment variables in the command, for example:
    - docker run -d -p 3000:3000 -e REACT_APP_PUBLIC_URL=url-of-backend-application frontend
 
-# Local development
+### Development
+
 1. Make sure Node.js is installed on your computer.
 2. Clone the repository:
    - git clone
