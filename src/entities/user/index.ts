@@ -1,19 +1,18 @@
 import usersApi from "./api/userApi";
-import { useGetUsersQuery, useGetUserQuery, useDeleteUserMutation } from "./api/userApi";
+import { useGetUsersQuery, useGetUserQuery, useDeleteUserMutation, useLazyGetCurrentUserQuery } from "./api/userApi";
 import authApi from "./api/authApi";
 import { useLoginMutation, useLogoutMutation, useRegisterMutation, AuthResponse } from "./api/authApi";
-import { USER_PERSIST_KEY } from "./const/const";
-import { User, UserState, UserResponse, UserFilter } from "./model/types";
+import { User, UserState, UserFilter, UserRegisterQuery, UserLoginQuery } from "./model/types";
 
 export {
   usersApi,
   useGetUsersQuery,
   useGetUserQuery,
   useDeleteUserMutation,
+  useLazyGetCurrentUserQuery,
   authApi,
   useLoginMutation,
   useLogoutMutation,
   useRegisterMutation,
-  USER_PERSIST_KEY,
 };
-export type { User, UserState, UserResponse, UserFilter, AuthResponse };
+export type { User, UserState, UserFilter, AuthResponse, UserRegisterQuery, UserLoginQuery };

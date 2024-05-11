@@ -14,6 +14,7 @@ const editorSlice = createSlice({
     },
     setEntityProperty: (state, action: PayloadAction<{ storeKey: string; property: any; value: any }>) => {
       const { storeKey, property, value } = action.payload;
+      if (!state[storeKey]) state[storeKey] = {};
       state[storeKey][property] = value;
     },
   },

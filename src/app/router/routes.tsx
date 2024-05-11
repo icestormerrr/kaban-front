@@ -70,7 +70,11 @@ export const routesTree: RouteObject[] = [
   },
   {
     path: "/login",
-    element: <LoginPage />,
+    element: <LoginPage storeKey={"user"} mode="login" />,
+  },
+  {
+    path: "/register",
+    element: <LoginPage storeKey={"user"} mode="register" />,
   },
   {
     path: "*",

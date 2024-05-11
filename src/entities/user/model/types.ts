@@ -1,10 +1,11 @@
 export type User = NApp.NamedEntity & {
   email: string;
-  password: string;
 };
 
-export type UserState = Omit<User, "password">;
+export type UserState = NApp.Nullable<User> & { password: string | null };
 
-export type UserResponse = UserState;
+export type UserLoginQuery = Pick<NonNullable<UserState>, "email" | "password">;
+
+export type UserRegisterQuery = Pick<NonNullable<UserState>, "email" | "password" | "name">;
 
 export type UserFilter = { usersIds?: string[] };

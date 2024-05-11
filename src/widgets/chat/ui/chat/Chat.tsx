@@ -5,8 +5,8 @@ import { v4 as uuid } from "uuid";
 import { Grid } from "@mui/material";
 
 import { GlassButton, InputString } from "src/shared/ui";
-import { useSavedState } from "src/shared/lib";
-import { USER_PERSIST_KEY, UserState } from "src/entities/user";
+import { useAppSelector, useEditorStore } from "src/shared/lib";
+import { User } from "src/entities/user";
 
 import { TMessage, Message } from "src/entities/message";
 import classes from "./Chat.module.scss";
@@ -20,7 +20,9 @@ type Props = {
 const Chat: FC<Props> = ({ messages, omMessageCreate, className }) => {
   const { t } = useTranslation();
 
-  const [user] = useSavedState<UserState>(USER_PERSIST_KEY, {} as UserState);
+  const { entitySelector: userSelector } = useEditorStore<User>("user");
+  const user = useAppSelector(userSelector) || {};
+
   const [newMessage, setNewMessage] = useState<string | null>(null);
 
   const handleMessageCreate = () => {

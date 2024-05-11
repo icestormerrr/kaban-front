@@ -2,12 +2,13 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ProjectState } from "src/entities/project";
-import { useSavedState } from "src/shared/lib";
-import { USER_PERSIST_KEY, UserState } from "src/entities/user";
+import { useAppSelector, useEditorStore } from "src/shared/lib";
+import { User } from "src/entities/user";
 
 export const useValidateProject = () => {
   const { t } = useTranslation();
-  const [user] = useSavedState<UserState>(USER_PERSIST_KEY, {} as UserState);
+  const { entitySelector: userSelector } = useEditorStore<User>("user");
+  const user = useAppSelector(userSelector) || {};
 
   return useCallback((project: ProjectState) => {
     const errors: string[] = [];

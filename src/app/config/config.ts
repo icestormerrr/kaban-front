@@ -5,8 +5,8 @@ import I18nextBrowserLanguageDetector from "i18next-browser-languagedetector";
 import I18NextHttpBackend from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
 import { Mutex } from "async-mutex";
-import { USER_PERSIST_KEY } from "src/entities/user/const/const";
 import { ACCESS_TOKEN_PERSIST_KEY } from "src/shared/const";
+import { setEntity } from "../../shared/lib/store/editorSlice";
 
 /*
   Конфиг локализации
@@ -67,7 +67,12 @@ export const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, Fetch
         const refreshResult = await baseQuery("/auth/refresh", api, extraOptions);
         if (refreshResult.data) {
           localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, (refreshResult.data as any).accessToken);
-          localStorage.setItem(USER_PERSIST_KEY, JSON.stringify((refreshResult.data as any).user));
+          api.dispatch(
+            setEntity({
+              storeKey: "user",
+              entity: { ...refreshResult.data, accessToken: undefined, refreshToken: undefined },
+            }),
+          );
           // retry the initial query
           result = await baseQuery(args, api, extraOptions);
         } else {

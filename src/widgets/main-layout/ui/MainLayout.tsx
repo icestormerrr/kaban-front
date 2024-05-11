@@ -4,33 +4,34 @@ import { ListItemIcon, MenuItem } from "@mui/material";
 import { Settings, Logout } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 
-import { ACCESS_TOKEN_PERSIST_KEY } from "src/shared/const";
-import { useSavedState } from "src/shared/lib";
-import { USER_PERSIST_KEY, UserState } from "src/entities/user";
+import { useAppSelector, useEditorStore, useSavedState } from "src/shared/lib";
 import { PROJECT_ID_PERSIST_KEY, useGetProjectsQuery } from "src/entities/project";
-import { useLogoutMutation } from "src/entities/user/api/authApi";
+import { useLazyGetCurrentUserQuery, useLogoutMutation, UserState } from "src/entities/user";
 import { AvatarMenu, ButtonMenu, GlassContainer, InputSelect } from "src/shared/ui";
+import { ACCESS_TOKEN_PERSIST_KEY } from "src/shared/const";
 
 import { menuRoteDisplayNameMap, menuRoutes } from "../const/const";
 import { ReactComponent as Logo } from "src/widgets/main-layout/assets/logo.svg";
-
 import classes from "./MainLayout.module.scss";
 
 const MainLayout: FC = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
+  const { entitySelector: userSelector, setEntity: setUser } = useEditorStore<UserState>("user");
+  const user = useAppSelector(userSelector) || {};
   const isAuth = localStorage.getItem(ACCESS_TOKEN_PERSIST_KEY);
-  const [user] = useSavedState<UserState>(USER_PERSIST_KEY, {} as UserState);
-  const [projectId, setProjectId] = useSavedState<string | null>(PROJECT_ID_PERSIST_KEY, "");
 
-  const { data: projects = [], isFetching: isProjectsFetching } = useGetProjectsQuery({ userId: user._id });
+  const [projectId, setProjectId] = useSavedState<string | null>(PROJECT_ID_PERSIST_KEY, "");
+  const { data: projects = [], isFetching: isProjectsFetching } = useGetProjectsQuery(
+    { userId: user._id ?? "" },
+    { skip: !user._id },
+  );
 
   const [fetchLogout] = useLogoutMutation();
   const handleLogout = () => {
     localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, "");
     localStorage.setItem(PROJECT_ID_PERSIST_KEY, "");
-    localStorage.setItem(USER_PERSIST_KEY, "");
     fetchLogout();
     navigate("/login");
   };
@@ -66,6 +67,14 @@ const MainLayout: FC = () => {
     setProjectId("");
     navigate("/project");
   };
+
+  const [fetchCurrentUser] = useLazyGetCurrentUserQuery();
+  useEffect(() => {
+    fetchCurrentUser()
+      .unwrap()
+      .then((data) => setUser(data as UserState))
+      .catch(console.error);
+  }, []);
 
   useEffect(() => {
     !isAuth && handleLogout();
@@ -103,7 +112,7 @@ const MainLayout: FC = () => {
           </ButtonMenu>
         </div>
 
-        <AvatarMenu label={user?.name?.[0]}>
+        <AvatarMenu label={user?.name?.[0] ?? ""}>
           <MenuItem onClick={handleSettingsNavigate}>
             <ListItemIcon>
               <Settings fontSize="small" />
