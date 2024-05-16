@@ -46,16 +46,16 @@ const Content: FC<Props> = ({ storeKey }) => {
         </Grid>
       </Grid>
       <Grid container xs={12} spacing={1}>
-        <Grid item lg={3} xs={6}>
+        <Grid item lg={3} md={6} xs={12}>
           <FieldList type="input" label={t("Epic")} storeKey={storeKey} property="epics" />
         </Grid>
-        <Grid item lg={3} xs={6}>
+        <Grid item lg={3} md={6} xs={12}>
           <FieldList type="input" label={t("Sprint")} storeKey={storeKey} property="sprints" />
         </Grid>
-        <Grid item lg={3} xs={6}>
+        <Grid item lg={3} md={6} xs={12}>
           <FieldList type="input" label={t("Stage")} storeKey={storeKey} property="stages" />
         </Grid>
-        <Grid item lg={3} xs={6}>
+        <Grid item lg={3} md={6} xs={12}>
           <InputList
             type="select"
             list={projectUsers ?? []}

@@ -14,7 +14,7 @@ export type InputStringProps = Omit<TextFieldProps, "value" | "onChange" | "erro
   validate?: (value: string | null) => string | null;
 };
 
-const InputString: FC<InputStringProps> = ({ value, onChange, validate, disabled, sx, ...restProps }) => {
+const InputString: FC<InputStringProps> = ({ value, onChange, validate, disabled, required, sx, ...restProps }) => {
   const [errorText, setErrorText] = useState<string | null>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +32,7 @@ const InputString: FC<InputStringProps> = ({ value, onChange, validate, disabled
     <TextField
       value={value ?? ""}
       onChange={handleChange}
-      error={!!errorText && !disabled}
+      error={!!errorText || (required && !value)}
       helperText={errorText}
       disabled={disabled}
       sx={{ ...sx, ...textFieldStyles }}

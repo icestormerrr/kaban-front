@@ -17,7 +17,6 @@ import classes from "./TaskPage.module.scss";
 const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
   const { _id } = useParams();
-  const projectId = useProjectId();
 
   const [fetchDetails] = useLazyGetTaskQuery();
   const { setEntity: setTask } = useEditorStore<TaskState>(storeKey);
@@ -36,11 +35,20 @@ const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   return (
     <GlassContainer className={classes.container}>
       <Grid container spacing={4}>
-        <Grid container item xs={8} spacing={4}>
+        <Grid container item md={8} xs={12} spacing={4}>
           <Operations storeKey={storeKey} mode={mode} />
           <Content storeKey={storeKey} />
         </Grid>
-        <Grid container item xs={4} spacing={4} display="flex" flexDirection="column" justifyContent="flex-start">
+        <Grid
+          container
+          item
+          md={4}
+          xs={12}
+          spacing={4}
+          display="flex"
+          flexDirection="column"
+          justifyContent="flex-start"
+        >
           <Comments storeKey={storeKey} />
         </Grid>
       </Grid>

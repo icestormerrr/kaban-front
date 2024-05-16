@@ -74,7 +74,7 @@ const InputSelect: FC<InputSelectProps> = ({
       options={options}
       isOptionEqualToValue={isOptionEqualToValue}
       getOptionLabel={getOptionLabel}
-      renderInput={(params) => <TextField {...params} label={label} />}
+      renderInput={(params) => <TextField {...params} label={label} error={required && !value} />}
     />
   );
 };
