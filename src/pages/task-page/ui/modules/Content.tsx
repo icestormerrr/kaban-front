@@ -2,10 +2,10 @@ import React, { FC } from "react";
 import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-import { FieldSelect, FieldString } from "src/shared/ui";
-import { TaskStatusOptions } from "src/entities/task";
-import { useGetProjectDetailsQuery, useProjectId } from "src/entities/project";
-import { useGetUsersQuery } from "src/entities/user";
+import { FieldSelect, FieldString } from "@/shared/ui";
+import { TaskStatusOptions } from "@/entities/task";
+import { useGetProjectDetailsQuery, useProjectId } from "@/entities/project";
+import { useGetUsersQuery } from "@/entities/user";
 
 type Props = {
   storeKey: string;

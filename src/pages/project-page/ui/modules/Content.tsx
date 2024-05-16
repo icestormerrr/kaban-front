@@ -2,11 +2,10 @@ import React, { FC, useMemo } from "react";
 import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-import { FieldSelect, FieldString, InputList } from "src/shared/ui";
-import { useAppSelector, useEditorStore } from "src/shared/lib";
-import { ProjectState } from "src/entities/project";
-import { useGetUsersQuery } from "src/entities/user";
-import FieldList from "../../../../shared/ui/form/fields/FieldList";
+import { FieldSelect, FieldString, FieldList, InputList } from "@/shared/ui";
+import { useAppSelector, useEditorStore } from "@/shared/lib";
+import { ProjectState } from "@/entities/project";
+import { useGetUsersQuery } from "@/entities/user";
 
 type Props = {
   storeKey: string;

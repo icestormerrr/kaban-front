@@ -2,8 +2,8 @@ import React, { FC, memo } from "react";
 
 import dayjs from "dayjs";
 
-import { useGetUserQuery } from "src/entities/user";
-import { GlassContainer } from "src/shared/ui";
+import { useGetUserQuery } from "@/entities/user";
+import { GlassContainer } from "@/shared/ui";
 
 import { Message as TMessage } from "../../model/types";
 

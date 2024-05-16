@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 
-import { Chat } from "src/widgets/chat";
-import { useAppSelector, useEditorStore } from "src/shared/lib";
-import { TMessage } from "src/entities/message";
-import { TaskState } from "src/entities/task";
+import { Chat } from "@/widgets/chat";
+import { useAppSelector, useEditorStore } from "@/shared/lib";
+import { TMessage } from "@/entities/message";
+import { TaskState } from "@/entities/task";
 
 import classes from "../TaskPage.module.scss";
 

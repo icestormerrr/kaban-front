@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { enqueueSnackbar } from "notistack";
 
-import { GlassButton } from "src/shared/ui";
-import { AuthResponse, useLoginMutation, useRegisterMutation, UserState } from "src/entities/user";
-import { ACCESS_TOKEN_PERSIST_KEY } from "src/shared/const";
-import { useAppSelector, useEditorStore } from "src/shared/lib";
+import { GlassButton } from "@/shared/ui";
+import { AuthResponse, useLoginMutation, useRegisterMutation, UserState } from "@/entities/user";
+import { ACCESS_TOKEN_PERSIST_KEY } from "@/shared/const";
+import { useAppSelector, useEditorStore } from "@/shared/lib";
 
 import classes from "../LoginPage.module.scss";
 

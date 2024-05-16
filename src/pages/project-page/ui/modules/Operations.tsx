@@ -1,13 +1,13 @@
 import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { GlassButton } from "src/shared/ui";
+import { GlassButton } from "@/shared/ui";
 import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { enqueueSnackbar } from "notistack";
 
-import { Project, ProjectState, useAddProjectMutation, useUpdateProjectMutation } from "src/entities/project";
-import { useAppSelector, useEditorStore } from "src/shared/lib";
-import { commonClasses } from "src/shared/styles";
+import { Project, ProjectState, useAddProjectMutation, useUpdateProjectMutation } from "@/entities/project";
+import { useAppSelector, useEditorStore } from "@/shared/lib";
+import { commonClasses } from "@/shared/styles";
 
 import { useValidateProject } from "../../lib/hooks/useValidateProject";
 

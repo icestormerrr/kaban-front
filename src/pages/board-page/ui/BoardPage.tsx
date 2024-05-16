@@ -1,9 +1,9 @@
 import React, { FC, useCallback, useMemo, useState } from "react";
 import { groupBy } from "lodash";
 
-import { useGetProjectDetailsQuery, useProjectId } from "src/entities/project";
-import { TasksFilter, useGetTasksGridQuery } from "src/entities/task";
-import { GlassContainer } from "src/shared/ui";
+import { useGetProjectDetailsQuery, useProjectId } from "@/entities/project";
+import { TasksFilter, useGetTasksGridQuery } from "@/entities/task";
+import { GlassContainer } from "@/shared/ui";
 
 import BoardPanel from "./modules/board-panel/BoardPanel";
 import BoardStage from "./modules/board-stage/BoardStage";

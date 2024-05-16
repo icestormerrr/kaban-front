@@ -2,11 +2,11 @@
 import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 
-import projectsApi from "src/entities/project/api/projectApi";
-import tasksApi from "src/entities/task/api/taskApi";
-import usersApi from "src/entities/user/api/userApi";
-import authApi from "src/entities/user/api/authApi";
-import editorSlice from "src/shared/lib/store/editorSlice";
+import projectsApi from "@/entities/project/api/projectApi";
+import tasksApi from "@/entities/task/api/taskApi";
+import usersApi from "@/entities/user/api/userApi";
+import authApi from "@/entities/user/api/authApi";
+import editorSlice from "@/shared/lib/store/editorSlice";
 
 export const rootReducer = combineReducers({
   [editorSlice.name]: editorSlice.reducer,

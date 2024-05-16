@@ -1,18 +1,18 @@
 import React, { FC } from "react";
 import { Navigate, RouteObject, useRoutes } from "react-router-dom";
 
-import { projectStoreKey } from "src/entities/project";
-import { taskStoreKey } from "src/entities/task";
-import { settingsStoreKey } from "src/entities/settings";
+import { projectStoreKey } from "@/entities/project";
+import { taskStoreKey } from "@/entities/task";
+import { settingsStoreKey } from "@/entities/settings";
 
-import { MainLayout } from "src/widgets/main-layout";
-import { ProjectPage } from "src/pages/project-page";
-import { BoardPage } from "src/pages/board-page";
-import { TaskPage } from "src/pages/task-page";
-import { LoginPage } from "src/pages/login-page";
-import { HomePage } from "src/pages/home-page";
-import { BacklogPage } from "src/pages/backlog-page";
-import { SettingsPage } from "src/pages/settings-page";
+import { MainLayout } from "@/widgets/main-layout";
+import { ProjectPage } from "@/pages/project-page";
+import { BoardPage } from "@/pages/board-page";
+import { TaskPage } from "@/pages/task-page";
+import { LoginPage } from "@/pages/login-page";
+import { HomePage } from "@/pages/home-page";
+import { BacklogPage } from "@/pages/backlog-page";
+import { SettingsPage } from "@/pages/settings-page";
 
 export const routesTree: RouteObject[] = [
   {

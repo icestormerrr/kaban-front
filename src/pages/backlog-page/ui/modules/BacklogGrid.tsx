@@ -4,8 +4,8 @@ import { Box } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
 import { useTranslation } from "react-i18next";
 
-import { useGetTasksGridQuery, TasksGridItem } from "src/entities/task";
-import { useProjectId } from "src/entities/project";
+import { useGetTasksGridQuery, TasksGridItem } from "@/entities/task";
+import { useProjectId } from "@/entities/project";
 
 const BacklogGrid = () => {
   const { t } = useTranslation();

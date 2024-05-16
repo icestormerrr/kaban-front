@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-import { GlassButton } from "src/shared/ui";
-import { commonClasses } from "src/shared/styles";
-import { useProjectId } from "src/entities/project";
+import { GlassButton } from "@/shared/ui";
+import { commonClasses } from "@/shared/styles";
+import { useProjectId } from "@/entities/project";
 
 const Operations = () => {
   const { t } = useTranslation();

@@ -4,9 +4,9 @@ import { IconButton, InputAdornment } from "@mui/material";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
-import { useAppSelector, useEditorStore } from "src/shared/lib";
-import { UserState } from "src/entities/user";
-import { InputString } from "src/shared/ui";
+import { useAppSelector, useEditorStore } from "@/shared/lib";
+import { UserState } from "@/entities/user";
+import { InputString } from "@/shared/ui";
 
 const LoginContent: FC<NApp.PageProps> = ({ storeKey }) => {
   const { t } = useTranslation();

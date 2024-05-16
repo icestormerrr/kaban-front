@@ -4,11 +4,11 @@ import { useTranslation } from "react-i18next";
 import { v4 as uuid } from "uuid";
 import { Grid } from "@mui/material";
 
-import { GlassButton, InputString } from "src/shared/ui";
-import { useAppSelector, useEditorStore } from "src/shared/lib";
-import { User } from "src/entities/user";
+import { GlassButton, InputString } from "@/shared/ui";
+import { useAppSelector, useEditorStore } from "@/shared/lib";
+import { User } from "@/entities/user";
 
-import { TMessage, Message } from "src/entities/message";
+import { TMessage, Message } from "@/entities/message";
 import classes from "./Chat.module.scss";
 
 type Props = {

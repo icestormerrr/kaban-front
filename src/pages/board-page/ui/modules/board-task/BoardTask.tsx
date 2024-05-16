@@ -2,8 +2,8 @@ import React, { FC, memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Avatar, Chip } from "@mui/material";
 
-import { TasksGridItem, TaskStatusColorMap } from "src/entities/task";
-import { GlassContainer } from "src/shared/ui";
+import { TasksGridItem, TaskStatusColorMap } from "@/entities/task";
+import { GlassContainer } from "@/shared/ui";
 
 import classes from "./BoardTask.module.scss";
 

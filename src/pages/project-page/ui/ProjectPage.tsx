@@ -3,10 +3,10 @@ import { useTranslation } from "react-i18next";
 import { Grid } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 
-import { useEditorStore } from "src/shared/lib";
-import { initialProjectState, ProjectState, useLazyGetProjectDetailsQuery, useProjectId } from "src/entities/project";
-import { GlassContainer } from "src/shared/ui";
-import { commonClasses } from "src/shared/styles";
+import { useEditorStore } from "@/shared/lib";
+import { initialProjectState, ProjectState, useLazyGetProjectDetailsQuery, useProjectId } from "@/entities/project";
+import { GlassContainer } from "@/shared/ui";
+import { commonClasses } from "@/shared/styles";
 
 import Content from "./modules/Content";
 import Operations from "./modules/Operations";

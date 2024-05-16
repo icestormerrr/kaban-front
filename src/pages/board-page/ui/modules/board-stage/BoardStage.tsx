@@ -2,7 +2,7 @@ import React, { FC, memo } from "react";
 
 import { isEqual } from "lodash";
 
-import { TasksGridItem } from "src/entities/task";
+import { TasksGridItem } from "@/entities/task";
 
 import BoardTask from "../board-task/BoardTask";
 import classes from "./BoardStage.module.scss";

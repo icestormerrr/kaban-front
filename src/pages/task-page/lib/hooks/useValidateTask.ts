@@ -1,8 +1,8 @@
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
-import { TaskState } from "src/entities/task";
-import { ProjectState } from "src/entities/project";
+import { TaskState } from "@/entities/task";
+import { ProjectState } from "@/entities/project";
 
 export const useValidateTask = () => {
   const { t } = useTranslation();

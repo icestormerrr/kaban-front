@@ -2,10 +2,10 @@ import React, { FC, useState } from "react";
 import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-import { GlassContainer, InputSelect } from "src/shared/ui";
-import { commonClasses } from "src/shared/styles";
-import { useSavedState } from "src/shared/lib";
-import { backgroundImagesOptions, Settings, SETTINGS_PERSIST_KEY } from "src/entities/settings";
+import { GlassContainer, InputSelect } from "@/shared/ui";
+import { commonClasses } from "@/shared/styles";
+import { useSavedState } from "@/shared/lib";
+import { backgroundImagesOptions, Settings, SETTINGS_PERSIST_KEY } from "@/entities/settings";
 
 type Props = {
   storeKey: string;

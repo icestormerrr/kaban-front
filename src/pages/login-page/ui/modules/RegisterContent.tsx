@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
 
-import { InputString } from "src/shared/ui";
-import { useAppSelector, useEditorStore } from "src/shared/lib";
-import { UserState } from "src/entities/user";
+import { InputString } from "@/shared/ui";
+import { useAppSelector, useEditorStore } from "@/shared/lib";
+import { UserState } from "@/entities/user";
 
 const RegisterContent: FC<NApp.PageProps> = ({ storeKey }) => {
   const { t } = useTranslation();

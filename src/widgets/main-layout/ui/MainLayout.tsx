@@ -4,14 +4,14 @@ import { ListItemIcon, MenuItem } from "@mui/material";
 import { Settings, Logout } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 
-import { useAppSelector, useEditorStore, useSavedState } from "src/shared/lib";
-import { PROJECT_ID_PERSIST_KEY, useGetProjectsQuery } from "src/entities/project";
-import { useLazyGetCurrentUserQuery, useLogoutMutation, UserState } from "src/entities/user";
-import { AvatarMenu, ButtonMenu, GlassContainer, InputSelect } from "src/shared/ui";
-import { ACCESS_TOKEN_PERSIST_KEY } from "src/shared/const";
+import { useAppSelector, useEditorStore, useSavedState } from "@/shared/lib";
+import { PROJECT_ID_PERSIST_KEY, useGetProjectsQuery } from "@/entities/project";
+import { useLazyGetCurrentUserQuery, useLogoutMutation, UserState } from "@/entities/user";
+import { AvatarMenu, ButtonMenu, GlassContainer, InputSelect } from "@/shared/ui";
+import { ACCESS_TOKEN_PERSIST_KEY } from "@/shared/const";
 
 import { menuRoteDisplayNameMap, menuRoutes } from "../const/const";
-import { ReactComponent as Logo } from "src/widgets/main-layout/assets/logo.svg";
+import { ReactComponent as Logo } from "@/widgets/main-layout/assets/logo.svg";
 import classes from "./MainLayout.module.scss";
 
 const MainLayout: FC = () => {

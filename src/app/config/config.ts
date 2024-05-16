@@ -5,7 +5,7 @@ import I18nextBrowserLanguageDetector from "i18next-browser-languagedetector";
 import I18NextHttpBackend from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
 import { Mutex } from "async-mutex";
-import { ACCESS_TOKEN_PERSIST_KEY } from "src/shared/const";
+import { ACCESS_TOKEN_PERSIST_KEY } from "@/shared/const";
 import { setEntity } from "../../shared/lib/store/editorSlice";
 
 /*

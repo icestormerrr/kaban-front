@@ -4,10 +4,10 @@ import { useTranslation } from "react-i18next";
 import { Grid } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 
-import { useEditorStore } from "src/shared/lib";
-import { initialTaskState, TaskState, useLazyGetTaskQuery } from "src/entities/task";
-import { useProjectId } from "src/entities/project";
-import { GlassContainer } from "src/shared/ui";
+import { useEditorStore } from "@/shared/lib";
+import { initialTaskState, TaskState, useLazyGetTaskQuery } from "@/entities/task";
+import { useProjectId } from "@/entities/project";
+import { GlassContainer } from "@/shared/ui";
 
 import Content from "./modules/Content";
 import Operations from "./modules/Operations";

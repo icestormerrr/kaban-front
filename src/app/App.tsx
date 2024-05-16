@@ -5,8 +5,8 @@ import { SnackbarProvider } from "notistack";
 import { ThemeProvider } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
 
-import { useSavedState } from "src/shared/lib";
-import { backgroundImagesOptions, Settings, SETTINGS_PERSIST_KEY } from "src/entities/settings";
+import { useSavedState } from "@/shared/lib";
+import { backgroundImagesOptions, Settings, SETTINGS_PERSIST_KEY } from "@/entities/settings";
 import { store } from "./store/store";
 import { darkTheme } from "./config/config";
 import { RoutesComponent } from "./router/routes";

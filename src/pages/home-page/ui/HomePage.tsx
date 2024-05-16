@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
 
-import { GlassContainer } from "src/shared/ui";
-import { commonClasses } from "src/shared/styles";
+import { GlassContainer } from "@/shared/ui";
+import { commonClasses } from "@/shared/styles";
 
 const HomePage: FC = () => {
   const { t } = useTranslation();

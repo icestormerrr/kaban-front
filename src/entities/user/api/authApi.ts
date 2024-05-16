@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 
-import { baseQuery } from "src/app/config/config";
+import { baseQuery } from "@/app/config/config";
 import { User, UserLoginQuery, UserRegisterQuery } from "../model/types";
 
 export type AuthResponse = {

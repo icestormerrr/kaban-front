@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
 
-import { GlassContainer } from "src/shared/ui";
+import { GlassContainer } from "@/shared/ui";
 
-import { ReactComponent as Logo } from "src/widgets/main-layout/assets/logo.svg";
+import { ReactComponent as Logo } from "@/widgets/main-layout/assets/logo.svg";
 import classes from "./LoginPage.module.scss";
 import RegisterContent from "./modules/RegisterContent";
 import LoginContent from "./modules/LoginContent";

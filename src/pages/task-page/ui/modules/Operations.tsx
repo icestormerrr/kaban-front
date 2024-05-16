@@ -4,10 +4,10 @@ import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { enqueueSnackbar } from "notistack";
 
-import { GlassButton } from "src/shared/ui";
-import { useGetProjectDetailsQuery, useProjectId } from "src/entities/project";
-import { Task, TaskState, useAddTaskMutation, useUpdateTaskMutation } from "src/entities/task";
-import { useAppSelector, useEditorStore } from "src/shared/lib";
+import { GlassButton } from "@/shared/ui";
+import { useGetProjectDetailsQuery, useProjectId } from "@/entities/project";
+import { Task, TaskState, useAddTaskMutation, useUpdateTaskMutation } from "@/entities/task";
+import { useAppSelector, useEditorStore } from "@/shared/lib";
 
 import { useValidateTask } from "../../lib/hooks/useValidateTask";
 import classes from "../TaskPage.module.scss";

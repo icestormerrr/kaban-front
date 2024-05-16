@@ -1,10 +1,10 @@
 import { FC, memo } from "react";
 import { useTranslation } from "react-i18next";
 
-import { TasksFilter } from "src/entities/task";
-import { useGetProjectDetailsQuery, useProjectId } from "src/entities/project";
-import { useGetUsersQuery } from "src/entities/user";
-import { GlassContainer, InputSelect } from "src/shared/ui";
+import { TasksFilter } from "@/entities/task";
+import { useGetProjectDetailsQuery, useProjectId } from "@/entities/project";
+import { useGetUsersQuery } from "@/entities/user";
+import { GlassContainer, InputSelect } from "@/shared/ui";
 
 import classes from "./BoardPanel.module.scss";
 

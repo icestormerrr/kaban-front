@@ -23,15 +23,9 @@
     "plugins": [{ "name": "typescript-plugin-css-modules"}],
     "downlevelIteration": true,
     "importHelpers": true,
-    // "paths": {
-    //   "@app/init": ["src/app/router"],
-    //   "@app/store": ["src/app/store"],
-    //   "@app/hooks": ["src/app/hooks"],
-    //   "@app/api/*": ["src/app/api/*"],
-    //   "@app/core/*": ["src/core/*"],
-    //   "@app/hooks": ["src/hooks"],
-    //   "@app/registry/*": ["src/modules/Registry/*"]
-    // }
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": [
     "src/index.tsx",
