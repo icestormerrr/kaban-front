@@ -21,7 +21,7 @@ const Content: FC<Props> = ({ storeKey }) => {
   return (
     <>
       <Grid item md={12} xs={12}>
-        <FieldString label={t("Name")} storeKey={storeKey} property="name" fullWidth />
+        <FieldString label={t("Name")} storeKey={storeKey} property="name" fullWidth required />
       </Grid>
       <Grid item md={4} xs={12}>
         <FieldSelect
@@ -55,6 +55,7 @@ const Content: FC<Props> = ({ storeKey }) => {
           rows={20}
           multiline
           fullWidth
+          required
         />
       </Grid>
     </>

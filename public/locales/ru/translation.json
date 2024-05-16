@@ -41,6 +41,7 @@
     "Author is not selected as member": "Автор не выбран как участник проекта",
     "Don’t have an account?": "Нет аккаунта?",
     "Field is not filled": "Не заполнено поле",
+    "Required field are not filled": "Не заполнены обязательные поля",
     "Add at least one": "Добавьте хотя бы один",
     "Saving error": "Ошибка сохранения",
     "Server error": "Ошибка сервера",

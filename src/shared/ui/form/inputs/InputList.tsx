@@ -15,10 +15,11 @@ export type InputListProps = {
   options?: NApp.NamedEntity[];
   label: string;
   variant?: "filled" | "outlined" | "standard";
+  required?: boolean;
 };
 
 // TODO: refactor to sOlid
-const InputList: FC<InputListProps> = ({ type, list, onListChange, options, label, variant }) => {
+const InputList: FC<InputListProps> = ({ type, list, onListChange, options, label, required, variant }) => {
   const [value, setValue] = useState<string | null>(null);
 
   const handleInputAdd = () => {
@@ -47,6 +48,7 @@ const InputList: FC<InputListProps> = ({ type, list, onListChange, options, labe
             label={label}
             variant={variant}
             fullWidth
+            required={required ? !list.length : false}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -64,6 +66,7 @@ const InputList: FC<InputListProps> = ({ type, list, onListChange, options, labe
             options={options ?? []}
             value={null}
             onChange={handleSelect}
+            required={required ? !list.length : false}
             size="large"
           />
         )}

@@ -32,7 +32,7 @@ const Content: FC<Props> = ({ storeKey }) => {
           <FieldSelect label={t("Author")} options={allUsers ?? []} storeKey={storeKey} property="authorId" required />
         </Grid>
         <Grid item xs={12}>
-          <FieldString label={t("Name")} storeKey={storeKey} property="name" fullWidth />
+          <FieldString label={t("Name")} storeKey={storeKey} property="name" fullWidth required />
         </Grid>
         <Grid item xs={12}>
           <FieldString
@@ -42,18 +42,19 @@ const Content: FC<Props> = ({ storeKey }) => {
             rows={6}
             multiline
             fullWidth
+            required
           />
         </Grid>
       </Grid>
       <Grid container xs={12} spacing={1}>
         <Grid item lg={3} md={6} xs={12}>
-          <FieldList type="input" label={t("Epic")} storeKey={storeKey} property="epics" />
+          <FieldList type="input" label={t("Epic")} storeKey={storeKey} property="epics" required />
         </Grid>
         <Grid item lg={3} md={6} xs={12}>
-          <FieldList type="input" label={t("Sprint")} storeKey={storeKey} property="sprints" />
+          <FieldList type="input" label={t("Sprint")} storeKey={storeKey} property="sprints" required />
         </Grid>
         <Grid item lg={3} md={6} xs={12}>
-          <FieldList type="input" label={t("Stage")} storeKey={storeKey} property="stages" />
+          <FieldList type="input" label={t("Stage")} storeKey={storeKey} property="stages" required />
         </Grid>
         <Grid item lg={3} md={6} xs={12}>
           <InputList
@@ -67,6 +68,7 @@ const Content: FC<Props> = ({ storeKey }) => {
               )
             }
             label={t("Member")}
+            required
           />
         </Grid>
       </Grid>

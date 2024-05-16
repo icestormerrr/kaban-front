@@ -1,15 +1,15 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { enqueueSnackbar } from "notistack";
+import { compact } from "lodash";
 
 import { GlassButton } from "@/shared/ui";
-import { useGetProjectDetailsQuery, useProjectId } from "@/entities/project";
+import { useProjectId } from "@/entities/project";
 import { Task, TaskState, useAddTaskMutation, useUpdateTaskMutation } from "@/entities/task";
 import { useAppSelector, useEditorStore } from "@/shared/lib";
 
-import { useValidateTask } from "../../lib/hooks/useValidateTask";
 import classes from "../TaskPage.module.scss";
 
 type Props = {
@@ -21,20 +21,32 @@ const Operations: FC<Props> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const projectId = useProjectId();
-  const validateTask = useValidateTask();
 
   const [fetchUpdate] = useUpdateTaskMutation();
   const [fetchCreate] = useAddTaskMutation();
 
   const { entitySelector: taskSelector, setEntity: setTask } = useEditorStore<TaskState>(storeKey);
-
   const task = useAppSelector(taskSelector) ?? {};
-  const { data: project, isFetching } = useGetProjectDetailsQuery({ _id: projectId! });
+
+  const validateTask = useCallback((task: TaskState) => {
+    const errors: string[] = compact([
+      (!task.name ||
+        !task.description ||
+        !task.epicId ||
+        !task.sprintId ||
+        !task.stageId ||
+        !task.executorId ||
+        !task.authorId ||
+        !task.status) &&
+        "Required field are not filled",
+    ]);
+    return errors;
+  }, []);
 
   const handleSave = () => {
-    const errors = validateTask(task, project ?? null);
+    const errors = validateTask(task);
     if (errors.length) {
-      enqueueSnackbar(errors.join("\n"), { variant: "error", autoHideDuration: 10000 });
+      enqueueSnackbar(errors.map((err) => t(err)).join(";   "), { variant: "error", autoHideDuration: 5000 });
       return;
     }
     const queryMethod = mode === "edit" ? fetchUpdate : fetchCreate;
