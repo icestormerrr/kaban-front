@@ -3,7 +3,7 @@
   flex-direction: column;
   align-content: center;
 
-  height: 88vh;
+  height: 87vh;
   margin-top: 10px;
   gap: 30px;
   overflow: hidden;
@@ -13,6 +13,7 @@
   flex: 1;
   display: flex;
   justify-content: space-between;
+  box-sizing: border-box;
 
   gap: 10px;
   padding: 0;
