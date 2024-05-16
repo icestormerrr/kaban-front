@@ -2,7 +2,7 @@ import React, { FC, useMemo } from "react";
 import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-import { InputList, InputSelect, InputString } from "src/shared/ui";
+import { FieldString, InputList, InputSelect, InputString } from "src/shared/ui";
 import { useAppSelector, useEditorStore } from "src/shared/lib";
 import { ProjectState } from "src/entities/project";
 import { useGetUsersQuery } from "src/entities/user";
@@ -47,9 +47,9 @@ const Content: FC<Props> = ({ storeKey }) => {
           <InputString value={name} onChange={handlePropertyChange("name")} label={t("Name")} fullWidth />
         </Grid>
         <Grid item xs={12}>
-          <InputString
-            value={description}
-            onChange={handlePropertyChange("description")}
+          <FieldString
+            storeKey={storeKey}
+            property="description"
             label={t("Description")}
             rows={6}
             multiline

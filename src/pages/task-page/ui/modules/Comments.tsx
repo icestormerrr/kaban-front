@@ -12,7 +12,7 @@ type Props = {
 };
 
 const Comments: FC<Props> = ({ storeKey }) => {
-  const { setEntityProperty: setTaskProperty, getEntityPropertySelector: getTaskPropertySelector } =
+  const { setEntityProperty: setTaskProperty, getPropertySelector: getTaskPropertySelector } =
     useEditorStore<TaskState>(storeKey);
 
   const messages = useAppSelector(getTaskPropertySelector("messages"));
