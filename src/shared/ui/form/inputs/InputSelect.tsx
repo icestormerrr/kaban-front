@@ -37,7 +37,6 @@ export type InputSelectProps = {
   size?: "small" | "large";
   label?: string;
   className?: string;
-  disableClearable?: boolean;
   disable?: boolean;
   loadingText?: string;
   loading?: boolean;
@@ -45,7 +44,15 @@ export type InputSelectProps = {
   fullWidth?: boolean;
 };
 
-const InputSelect: FC<InputSelectProps> = ({ value, onChange, options, label, size = "small", ...restProps }) => {
+const InputSelect: FC<InputSelectProps> = ({
+  value,
+  onChange,
+  options,
+  label,
+  size = "small",
+  required,
+  ...restProps
+}) => {
   const [selectedOption, setSelectedOption] = useState<Option | null>({ _id: value || "", name: "" });
 
   const handleChange = (e: SyntheticEvent, newOption: Option | null) => {
@@ -60,6 +67,7 @@ const InputSelect: FC<InputSelectProps> = ({ value, onChange, options, label, si
   return (
     <Autocomplete
       {...restProps}
+      disableClearable={required}
       sx={size === "small" ? autocompleteStyleSmall : autocompleteStyleLarge}
       value={selectedOption}
       onChange={handleChange}

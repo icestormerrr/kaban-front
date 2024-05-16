@@ -86,7 +86,6 @@ const MainLayout: FC = () => {
         <div className={classes.leftContainer}>
           <Logo onClick={handleHomeNavigate} style={{ cursor: "pointer" }} />
           <InputSelect
-            disableClearable
             className={classes.projectSelect}
             value={projectId}
             options={projects}
@@ -94,6 +93,7 @@ const MainLayout: FC = () => {
             label={t("Project")}
             loadingText={t("Loading")}
             loading={isProjectsFetching}
+            required
           />
 
           {menuRoutes.map((route) => (

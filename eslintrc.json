@@ -16,8 +16,7 @@
   },
   "plugins": [
     "@typescript-eslint",
-    "react",
-    "@grncdr/react-hooks"
+    "react"
   ],
   "settings": {
     "react": {
@@ -28,7 +27,7 @@
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/triple-slash-reference": "off",
-    "no-restricted-imports": ["error", { "patterns": ["src/*", "**/../*"] }],
+    "no-restricted-imports": ["error", { "patterns": [ "**/../*"] }],
     "react-hooks/exhaustive-deps": "off",
     "@grncdr/react-hooks/rules-of-hooks": "error",
     "@grncdr/react-hooks/exhaustive-deps": ["error", {

@@ -1,5 +1,6 @@
 import GlassContainer from "./containers/glass-container/GlassContainer";
 import GlassButton from "./buttons/GlassButton";
+import FieldList from "./form/fields/FieldList";
 import InputList from "./form/inputs/InputList";
 import FieldSelect from "./form/fields/FieldSelect";
 import InputSelect from "./form/inputs/InputSelect";
@@ -11,6 +12,7 @@ import ButtonMenu from "./menus/ButtonMenu";
 export {
   GlassContainer,
   GlassButton,
+  FieldList,
   InputList,
   FieldString,
   InputSelect,

@@ -8,7 +8,7 @@ import { v4 as uuid } from "uuid";
 import InputString from "./InputString";
 import InputSelect from "./InputSelect";
 
-type Props = {
+export type InputListProps = {
   type: "input" | "select";
   list: NApp.NamedEntity[];
   onListChange: (newList: NApp.NamedEntity[]) => void;
@@ -17,7 +17,8 @@ type Props = {
   variant?: "filled" | "outlined" | "standard";
 };
 
-const InputList: FC<Props> = ({ type, list, onListChange, options, label, variant }) => {
+// TODO: refactor to sOlid
+const InputList: FC<InputListProps> = ({ type, list, onListChange, options, label, variant }) => {
   const [value, setValue] = useState<string | null>(null);
 
   const handleInputAdd = () => {
@@ -59,7 +60,6 @@ const InputList: FC<Props> = ({ type, list, onListChange, options, label, varian
         ) : (
           <InputSelect
             fullWidth
-            disableClearable
             label={label}
             options={options ?? []}
             value={null}
