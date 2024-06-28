@@ -4,7 +4,12 @@ import { Grid } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 
 import { useEditorStore } from "@/shared/lib";
-import { initialProjectState, ProjectState, useLazyGetProjectDetailsQuery, useProjectId } from "@/entities/project";
+import {
+  initialProjectState,
+  ProjectState,
+  useLazyGetProjectDetailsQuery,
+  useProjectIdFromPath,
+} from "@/entities/project";
 import { GlassContainer } from "@/shared/ui";
 import { commonClasses } from "@/shared/styles";
 
@@ -13,7 +18,7 @@ import Operations from "./modules/Operations";
 
 const ProjectPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
-  const _id = useProjectId();
+  const _id = useProjectIdFromPath();
 
   const [fetchDetails] = useLazyGetProjectDetailsQuery();
   const { setEntity: setProject } = useEditorStore<ProjectState>(storeKey);

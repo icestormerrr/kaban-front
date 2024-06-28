@@ -1,4 +1,4 @@
-/// <reference path="../../../app/types/global.d.ts" />
+/// <reference path="../../../app/global/global.d.ts" />
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 import { Project, ProjectFilter } from "../model/types";

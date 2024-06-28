@@ -10,7 +10,7 @@ import { backgroundImagesOptions, Settings, SETTINGS_PERSIST_KEY } from "@/entit
 import { store } from "./store/store";
 import { darkTheme } from "./config/config";
 import { RoutesComponent } from "./router/routes";
-import "./styles/global.scss";
+import "@/app/global/global.scss";
 
 const App: FC = () => {
   const { i18n } = useTranslation();

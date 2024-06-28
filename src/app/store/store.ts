@@ -1,4 +1,4 @@
-/// <reference path="../types/global.d.ts" />
+/// <reference path="../global/global.d.ts" />
 import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 

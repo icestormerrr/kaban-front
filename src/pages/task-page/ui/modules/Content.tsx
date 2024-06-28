@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import { FieldSelect, FieldString } from "@/shared/ui";
 import { TaskStatusOptions } from "@/entities/task";
-import { useGetProjectDetailsQuery, useProjectId } from "@/entities/project";
+import { useGetProjectDetailsQuery, useProjectIdFromPath } from "@/entities/project";
 import { useGetUsersQuery } from "@/entities/user";
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
 const Content: FC<Props> = ({ storeKey }) => {
   const { t } = useTranslation();
 
-  const projectId = useProjectId();
+  const projectId = useProjectIdFromPath();
   const { data: project } = useGetProjectDetailsQuery({ _id: projectId! });
   const { data: users } = useGetUsersQuery({ usersIds: project?.users }, { skip: !project?.users });
 

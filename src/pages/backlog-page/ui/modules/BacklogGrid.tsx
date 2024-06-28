@@ -5,12 +5,12 @@ import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
 import { useTranslation } from "react-i18next";
 
 import { useGetTasksGridQuery, TasksGridItem } from "@/entities/task";
-import { useProjectId } from "@/entities/project";
+import { useProjectIdFromPath } from "@/entities/project";
 
 const BacklogGrid = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const projectId = useProjectId();
+  const projectId = useProjectIdFromPath();
   const { data: rows = [] } = useGetTasksGridQuery(
     { projectId },
     { skip: !projectId, refetchOnMountOrArgChange: true },

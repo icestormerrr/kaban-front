@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useMemo, useState } from "react";
 import { groupBy } from "lodash";
 
-import { useGetProjectDetailsQuery, useProjectId } from "@/entities/project";
+import { useGetProjectDetailsQuery, useProjectIdFromPath } from "@/entities/project";
 import { TasksFilter, useGetTasksGridQuery } from "@/entities/task";
 import { GlassContainer } from "@/shared/ui";
 
@@ -10,7 +10,7 @@ import BoardStage from "./modules/board-stage/BoardStage";
 import classes from "./BoardPage.module.scss";
 
 const BoardPage: FC = () => {
-  const projectId = useProjectId();
+  const projectId = useProjectIdFromPath();
 
   const [filter, setFilter] = useState<TasksFilter>({ projectId });
   const handleFilterChange = useCallback(

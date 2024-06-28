@@ -29,6 +29,6 @@
   },
   "include": [
     "src/index.tsx",
-    "global.d.ts"
+    "src/app/global/global.d.ts"
   ]
 }

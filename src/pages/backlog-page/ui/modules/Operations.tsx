@@ -5,12 +5,12 @@ import { useTranslation } from "react-i18next";
 
 import { GlassButton } from "@/shared/ui";
 import { commonClasses } from "@/shared/styles";
-import { useProjectId } from "@/entities/project";
+import { useProjectIdFromPath } from "@/entities/project";
 
 const Operations = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const projectId = useProjectId();
+  const projectId = useProjectIdFromPath();
 
   const handleTaskCreate = () => {
     navigate(`/project/${projectId}/task`);

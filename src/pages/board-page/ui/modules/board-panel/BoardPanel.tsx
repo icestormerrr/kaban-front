@@ -1,8 +1,8 @@
-import { FC, memo } from "react";
+import React, { FC, memo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { TasksFilter } from "@/entities/task";
-import { useGetProjectDetailsQuery, useProjectId } from "@/entities/project";
+import { useGetProjectDetailsQuery, useProjectIdFromPath } from "@/entities/project";
 import { useGetUsersQuery } from "@/entities/user";
 import { GlassContainer, InputSelect } from "@/shared/ui";
 
@@ -15,7 +15,7 @@ type Props = {
 
 const BoardPanel: FC<Props> = ({ filter, onChange }) => {
   const { t } = useTranslation();
-  const projectId = useProjectId();
+  const projectId = useProjectIdFromPath();
 
   const { data: project } = useGetProjectDetailsQuery({ _id: projectId! });
   const { data: executors } = useGetUsersQuery({ usersIds: project?.users! }, { skip: !project?.users });

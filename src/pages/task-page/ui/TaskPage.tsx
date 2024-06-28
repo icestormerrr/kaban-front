@@ -6,7 +6,6 @@ import { enqueueSnackbar } from "notistack";
 
 import { useEditorStore } from "@/shared/lib";
 import { initialTaskState, TaskState, useLazyGetTaskQuery } from "@/entities/task";
-import { useProjectId } from "@/entities/project";
 import { GlassContainer } from "@/shared/ui";
 
 import Content from "./modules/Content";

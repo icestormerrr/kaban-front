@@ -6,7 +6,7 @@ import { enqueueSnackbar } from "notistack";
 import { compact } from "lodash";
 
 import { GlassButton } from "@/shared/ui";
-import { useProjectId } from "@/entities/project";
+import { useProjectIdFromPath } from "@/entities/project";
 import { Task, TaskState, useAddTaskMutation, useUpdateTaskMutation } from "@/entities/task";
 import { useAppSelector, useEditorStore } from "@/shared/lib";
 
@@ -20,7 +20,7 @@ type Props = {
 const Operations: FC<Props> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const projectId = useProjectId();
+  const projectId = useProjectIdFromPath();
 
   const [fetchUpdate] = useUpdateTaskMutation();
   const [fetchCreate] = useAddTaskMutation();
@@ -46,7 +46,10 @@ const Operations: FC<Props> = ({ storeKey, mode }) => {
   const handleSave = () => {
     const errors = validateTask(task);
     if (errors.length) {
-      enqueueSnackbar(errors.map((err) => t(err)).join(";   "), { variant: "error", autoHideDuration: 5000 });
+      enqueueSnackbar(errors.map((err) => t(err)).join(";   "), {
+        variant: "error",
+        autoHideDuration: 5000,
+      });
       return;
     }
     const queryMethod = mode === "edit" ? fetchUpdate : fetchCreate;
