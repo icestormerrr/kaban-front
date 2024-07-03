@@ -6,13 +6,13 @@ import { taskStoreKey } from "@/entities/task";
 import { settingsStoreKey } from "@/entities/settings";
 
 import { MainLayout } from "@/widgets/main-layout";
-import { ProjectPage } from "@/pages/project-page";
-import { BoardPage } from "@/pages/board-page";
-import { TaskPage } from "@/pages/task-page";
-import { LoginPage } from "@/pages/login-page";
-import { HomePage } from "@/pages/home-page";
-import { BacklogPage } from "@/pages/backlog-page";
-import { SettingsPage } from "@/pages/settings-page";
+import { ProjectPage } from "@/pages/project";
+import { BoardPage } from "@/pages/board";
+import { TaskPage } from "@/pages/task";
+import { LoginPage } from "@/pages/login";
+import { HomePage } from "@/pages/home";
+import { BacklogPage } from "@/pages/backlog";
+import { SettingsPage } from "@/pages/settings";
 
 export const routesTree: RouteObject[] = [
   {
