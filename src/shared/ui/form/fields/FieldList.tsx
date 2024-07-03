@@ -1,7 +1,7 @@
 import React, { FC, useCallback } from "react";
 
 import InputList, { InputListProps } from "../inputs/InputList";
-import { useAppSelector, useEditorStore } from "../../../lib";
+import { useAppSelector, useEditorStore } from "../../../store";
 
 type Props = Omit<InputListProps, "list" | "onListChange"> & {
   storeKey: string;

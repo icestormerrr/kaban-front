@@ -8,7 +8,7 @@ import { compact } from "lodash";
 import { GlassButton } from "@/shared/ui";
 import { useProjectIdFromPath } from "@/entities/project";
 import { Task, TaskState, useAddTaskMutation, useUpdateTaskMutation } from "@/entities/task";
-import { useAppSelector, useEditorStore } from "@/shared/lib";
+import { useAppSelector, useEditorStore } from "@/shared/store";
 
 import classes from "../TaskPage.module.scss";
 

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Grid } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 
-import { useEditorStore } from "@/shared/lib";
+import { useEditorStore } from "@/shared/store";
 import {
   initialProjectState,
   ProjectState,

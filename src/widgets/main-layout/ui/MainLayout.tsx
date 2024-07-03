@@ -4,7 +4,7 @@ import { ListItemIcon, MenuItem } from "@mui/material";
 import { Settings, Logout } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 
-import { useAppSelector, useEditorStore, useSavedState } from "@/shared/lib";
+import { useAppSelector, useEditorStore, useSavedState } from "@/shared/store";
 import { PROJECT_ID_PERSIST_KEY, useGetProjectsQuery } from "@/entities/project";
 import { useLazyGetCurrentUserQuery, useLogoutMutation, UserState } from "@/entities/user";
 import { AvatarMenu, ButtonMenu, GlassContainer, InputSelect } from "@/shared/ui";

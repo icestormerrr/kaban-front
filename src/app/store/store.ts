@@ -6,7 +6,7 @@ import projectsApi from "@/entities/project/api/projectApi";
 import tasksApi from "@/entities/task/api/taskApi";
 import usersApi from "@/entities/user/api/userApi";
 import authApi from "@/entities/user/api/authApi";
-import editorSlice from "@/shared/lib/store/editorSlice";
+import editorSlice from "@/shared/store/slices/editorSlice";
 
 export const rootReducer = combineReducers({
   [editorSlice.name]: editorSlice.reducer,

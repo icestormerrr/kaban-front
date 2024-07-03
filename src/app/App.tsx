@@ -5,7 +5,7 @@ import { SnackbarProvider } from "notistack";
 import { ThemeProvider } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
 
-import { useSavedState } from "@/shared/lib";
+import { useSavedState } from "@/shared/store";
 import { backgroundImagesOptions, Settings, SETTINGS_PERSIST_KEY } from "@/entities/settings";
 import { store } from "./store/store";
 import { darkTheme } from "./config/config";

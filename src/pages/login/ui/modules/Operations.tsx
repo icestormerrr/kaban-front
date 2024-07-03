@@ -6,7 +6,7 @@ import { enqueueSnackbar } from "notistack";
 import { GlassButton } from "@/shared/ui";
 import { AuthResponse, useLoginMutation, useRegisterMutation, UserState } from "@/entities/user";
 import { ACCESS_TOKEN_PERSIST_KEY } from "@/shared/const";
-import { useAppSelector, useEditorStore } from "@/shared/lib";
+import { useAppSelector, useEditorStore } from "@/shared/store";
 
 import classes from "../LoginPage.module.scss";
 

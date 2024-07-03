@@ -7,7 +7,7 @@ import { enqueueSnackbar } from "notistack";
 import { compact } from "lodash";
 
 import { Project, ProjectState, useAddProjectMutation, useUpdateProjectMutation } from "@/entities/project";
-import { useAppSelector, useEditorStore } from "@/shared/lib";
+import { useAppSelector, useEditorStore } from "@/shared/store";
 import { commonClasses } from "@/shared/styles";
 
 type Props = {

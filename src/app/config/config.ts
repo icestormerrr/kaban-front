@@ -6,7 +6,7 @@ import I18NextHttpBackend from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
 import { Mutex } from "async-mutex";
 import { ACCESS_TOKEN_PERSIST_KEY } from "@/shared/const";
-import { setEntity } from "../../shared/lib/store/editorSlice";
+import { setEntity } from "@/shared/store/slices/editorSlice";
 
 /*
   Конфиг локализации

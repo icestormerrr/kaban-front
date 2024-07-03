@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
 
 import { InputString } from "@/shared/ui";
-import { useAppSelector, useEditorStore } from "@/shared/lib";
+import { useAppSelector, useEditorStore } from "@/shared/store";
 import { UserState } from "@/entities/user";
 
 const RegisterContent: FC<NApp.PageProps> = ({ storeKey }) => {

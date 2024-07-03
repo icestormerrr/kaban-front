@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 import { Chat } from "@/widgets/chat";
-import { useAppSelector, useEditorStore } from "@/shared/lib";
+import { useAppSelector, useEditorStore } from "@/shared/store";
 import { TMessage } from "@/entities/message";
 import { TaskState } from "@/entities/task";
 

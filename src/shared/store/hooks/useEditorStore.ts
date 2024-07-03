@@ -2,8 +2,8 @@ import { useCallback, useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
 
 import { useAppSelector } from "./useAppSelector";
-import { setEntity, setEntityProperty } from "../store/editorSlice";
-import { RootState } from "../../../app/store/store";
+import { setEntity, setEntityProperty } from "@/shared/store/slices/editorSlice";
+import { RootState } from "@/app/store/store";
 
 export const useEditorStore = <T>(storeKey: string, initialState?: T) => {
   const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import React, { FC, memo, useCallback } from "react";
 import InputSelect, { InputSelectProps } from "../inputs/InputSelect";
-import { useAppSelector, useEditorStore } from "../../../lib";
+import { useAppSelector, useEditorStore } from "../../../store";
 
 type Props = Omit<InputSelectProps, "value" | "onChange"> & {
   storeKey: string;

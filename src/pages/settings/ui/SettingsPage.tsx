@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import { GlassContainer, InputSelect } from "@/shared/ui";
 import { commonClasses } from "@/shared/styles";
-import { useSavedState } from "@/shared/lib";
+import { useSavedState } from "@/shared/store";
 import { backgroundImagesOptions, Settings, SETTINGS_PERSIST_KEY } from "@/entities/settings";
 
 type Props = {

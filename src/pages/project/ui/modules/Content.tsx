@@ -3,7 +3,7 @@ import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 import { FieldSelect, FieldString, FieldList, InputList } from "@/shared/ui";
-import { useAppSelector, useEditorStore } from "@/shared/lib";
+import { useAppSelector, useEditorStore } from "@/shared/store";
 import { ProjectState } from "@/entities/project";
 import { useGetUsersQuery } from "@/entities/user";
 
