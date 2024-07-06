@@ -41,8 +41,8 @@ const Operations: FC<NApp.PageProps & { mode: "login" | "register" }> = ({ store
   };
 
   const handleSubmit = () => {
-    if (mode == "login") handleLogin();
-    if (mode == "register") handleRegister();
+    if (mode === "login") handleLogin();
+    if (mode === "register") handleRegister();
   };
 
   return (

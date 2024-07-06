@@ -2,6 +2,7 @@ import React, { FC, useCallback, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { ListItemIcon, MenuItem } from "@mui/material";
 import { Settings, Logout } from "@mui/icons-material";
+import EditIcon from "@mui/icons-material/Edit";
 import { useTranslation } from "react-i18next";
 
 import { useAppSelector, useEditorStore, useSavedState } from "@/shared/store";
@@ -10,7 +11,6 @@ import { useLazyGetCurrentUserQuery, useLogoutMutation, UserState } from "@/enti
 import { AvatarMenu, ButtonMenu, GlassContainer, InputSelect } from "@/shared/ui";
 import { ACCESS_TOKEN_PERSIST_KEY } from "@/shared/const";
 
-import { menuRoteDisplayNameMap, menuRoutes } from "../const/const";
 import { ReactComponent as Logo } from "@/widgets/main-layout/assets/logo.svg";
 import classes from "./MainLayout.module.scss";
 
@@ -29,12 +29,12 @@ const MainLayout: FC = () => {
   );
 
   const [fetchLogout] = useLogoutMutation();
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, "");
     localStorage.setItem(PROJECT_ID_PERSIST_KEY, "");
     fetchLogout();
     navigate("/login");
-  };
+  }, [fetchLogout, navigate]);
 
   const handleProjectChange = (newOption: NApp.NamedEntity | null) => {
     setProjectId(newOption?._id ?? null);
@@ -78,30 +78,35 @@ const MainLayout: FC = () => {
 
   useEffect(() => {
     !isAuth && handleLogout();
-  }, [isAuth, navigate]);
+  }, [handleLogout, isAuth, navigate]);
 
   return (
     <>
       <GlassContainer className={classes.headerContainer}>
         <div className={classes.leftContainer}>
           <Logo onClick={handleHomeNavigate} style={{ cursor: "pointer" }} />
-          <InputSelect
-            className={classes.projectSelect}
-            value={projectId}
-            options={projects}
-            onChange={handleProjectChange}
-            label={t("Project")}
-            loadingText={t("Loading")}
-            loading={isProjectsFetching}
-            required
-          />
-
-          {menuRoutes.map((route) => (
-            <div className={classes.route} onClick={handleRouteNavigate(route)} key={route}>
-              {t(menuRoteDisplayNameMap[route])}
+          <div className={classes.projectSelectContainer}>
+            <InputSelect
+              className={classes.projectSelect}
+              value={projectId}
+              options={projects}
+              onChange={handleProjectChange}
+              label={t("Project")}
+              loadingText={t("Loading")}
+              loading={isProjectsFetching}
+              required
+            />
+            <div className={classes.route} onClick={handleRouteNavigate("project")}>
+              <EditIcon />
             </div>
-          ))}
+          </div>
 
+          <div className={classes.route} onClick={handleRouteNavigate("board")}>
+            {t("Board")}
+          </div>
+          <div className={classes.route} onClick={handleRouteNavigate("backlog")}>
+            {t("Backlog")}
+          </div>
           <ButtonMenu label={t("Create")}>
             <MenuItem onClick={handleTaskCreate} disableRipple>
               {t("Task")}
