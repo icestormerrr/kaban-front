@@ -1,7 +1,7 @@
 /// <reference path="../../../app/global/global.d.ts" />
 import { createApi } from "@reduxjs/toolkit/query/react";
 
-import { baseQueryWithReauth } from "@/app/config/config";
+import { baseQueryWithReauth } from "@/app/config/baseQuery";
 
 import { User, UserFilter } from "../model/types";
 

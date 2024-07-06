@@ -8,14 +8,14 @@ import { useTranslation } from "react-i18next";
 import { useSavedState } from "@/shared/store";
 import { backgroundImagesOptions, Settings, SETTINGS_PERSIST_KEY } from "@/entities/settings";
 import { store } from "./store/store";
-import { darkTheme } from "./config/config";
+import { darkTheme } from "./config/theme";
+import "./config/i18next";
 import { RoutesComponent } from "./router/routes";
 import "@/app/global/global.scss";
 
 const App: FC = () => {
   const { i18n } = useTranslation();
   const [settings] = useSavedState<Settings>(SETTINGS_PERSIST_KEY, { backgroundImage: backgroundImagesOptions[0]._id });
-
   useEffect(() => {
     i18n.changeLanguage && i18n.changeLanguage("ru");
   }, [i18n]);

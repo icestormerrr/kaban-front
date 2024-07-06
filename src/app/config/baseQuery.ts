@@ -1,42 +1,8 @@
-import { createTheme } from "@mui/material";
 import { BaseQueryFn, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/query";
-import i18next from "i18next";
-import I18nextBrowserLanguageDetector from "i18next-browser-languagedetector";
-import I18NextHttpBackend from "i18next-http-backend";
-import { initReactI18next } from "react-i18next";
 import { Mutex } from "async-mutex";
 import { ACCESS_TOKEN_PERSIST_KEY } from "@/shared/const";
 import { setEntity } from "@/shared/store/slices/editorSlice";
 
-/*
-  Конфиг локализации
-*/
-i18next
-  .use(I18NextHttpBackend)
-  .use(I18nextBrowserLanguageDetector)
-  .use(initReactI18next)
-  .init({
-    fallbackLng: "ru",
-    debug: true,
-    detection: { order: ["queryString", "cookie"], caches: ["cookie"] },
-    interpolation: { escapeValue: false },
-  });
-
-/*
-  Конфиг темы
-*/
-export const darkTheme = createTheme({
-  typography: {
-    fontFamily: "Montserrat, sans-serif",
-  },
-  palette: {
-    mode: "dark",
-  },
-});
-
-/*
-  Конфиг базового запроса
- */
 const mutex = new Mutex();
 export const baseQuery = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_PUBLIC_URL,

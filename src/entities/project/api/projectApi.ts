@@ -2,7 +2,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 import { Project, ProjectFilter } from "../model/types";
-import { baseQueryWithReauth } from "@/app/config/config";
+import { baseQueryWithReauth } from "@/app/config/baseQuery";
 
 export const projectsApi = createApi({
   reducerPath: "projectApi",
