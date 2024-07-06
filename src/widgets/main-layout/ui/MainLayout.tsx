@@ -30,8 +30,6 @@ const MainLayout: FC = () => {
 
   const [fetchLogout] = useLogoutMutation();
   const handleLogout = useCallback(() => {
-    localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, "");
-    localStorage.setItem(PROJECT_ID_PERSIST_KEY, "");
     fetchLogout();
     navigate("/login");
   }, [fetchLogout, navigate]);

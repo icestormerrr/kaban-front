@@ -64,13 +64,13 @@ export const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, Fetch
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();
       try {
-        const refreshResult = await baseQuery("/auth/refresh", api, extraOptions);
+        const refreshResult: any = await baseQuery("/auth/refresh", api, extraOptions);
         if (refreshResult.data) {
-          localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, (refreshResult.data as any).accessToken);
+          localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, refreshResult.data.accessToken);
           api.dispatch(
             setEntity({
               storeKey: "user",
-              entity: { ...refreshResult.data, accessToken: undefined, refreshToken: undefined },
+              entity: { ...refreshResult.data.user },
             }),
           );
           // retry the initial query

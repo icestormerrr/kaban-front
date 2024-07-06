@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 import { enqueueSnackbar } from "notistack";
 
 import { GlassButton } from "@/shared/ui";
-import { AuthResponse, useLoginMutation, useRegisterMutation, UserState } from "@/entities/user";
-import { ACCESS_TOKEN_PERSIST_KEY } from "@/shared/const";
+import { useLoginMutation, useRegisterMutation, UserState } from "@/entities/user";
+
 import { useAppSelector, useEditorStore } from "@/shared/store";
 
 import classes from "../LoginPage.module.scss";
@@ -14,30 +14,35 @@ const Operations: FC<NApp.PageProps & { mode: "login" | "register" }> = ({ store
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const { entitySelector: userSelector, setEntity: setUser } = useEditorStore<UserState>(storeKey);
+  const { entitySelector: userSelector } = useEditorStore<UserState>(storeKey);
   const user = useAppSelector(userSelector);
 
-  const handleSuccess = (data: AuthResponse) => {
+  const handleSuccess = () => {
     enqueueSnackbar(t("You successfully authorized"), { variant: "success" });
-    setUser({ ...data.user, password: null });
-    localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, data.accessToken);
     navigate("/");
   };
   const handleError = () => enqueueSnackbar(t("Server error"), { variant: "error" });
 
   const [fetchLogin] = useLoginMutation();
-  const handleLogin = () => {
-    if (user.email && user.password)
-      fetchLogin({ email: user.email, password: user.password }).unwrap().then(handleSuccess).catch(handleError);
+  const handleLogin = async () => {
+    if (user.email && user.password) {
+      const response = await fetchLogin({ email: user.email, password: user.password });
+      if ("data" in response) handleSuccess();
+      else handleError();
+    } else {
+      enqueueSnackbar(t("Required field are not filled"), { variant: "success" });
+    }
   };
 
   const [fetchRegister] = useRegisterMutation();
-  const handleRegister = () => {
-    if (user.email && user.password && user.name)
-      fetchRegister({ email: user.email, password: user.password, name: user.name })
-        .unwrap()
-        .then(handleSuccess)
-        .catch(handleError);
+  const handleRegister = async () => {
+    if (user.email && user.password && user.name) {
+      const response = await fetchRegister({ email: user.email, password: user.password, name: user.name });
+      if ("data" in response) handleSuccess();
+      else handleError();
+    } else {
+      enqueueSnackbar(t("Required field are not filled"), { variant: "success" });
+    }
   };
 
   const handleSubmit = () => {
@@ -48,9 +53,9 @@ const Operations: FC<NApp.PageProps & { mode: "login" | "register" }> = ({ store
   return (
     <>
       <GlassButton variant="contained" onClick={handleSubmit} className={classes.button}>
-        {mode == "login" ? t("Enter") : t("Sing up")}
+        {mode === "login" ? t("Enter") : t("Sing up")}
       </GlassButton>
-      {mode == "login" && (
+      {mode === "login" && (
         <div className={classes.description}>
           {t("Don’t have an account?")}{" "}
           <span className={classes.link} onClick={() => navigate("/register")}>
