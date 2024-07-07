@@ -15,6 +15,7 @@ import { commonClasses } from "@/shared/styles";
 
 import Content from "./modules/Content";
 import Operations from "./modules/Operations";
+import CustomFieldsGrid from "@/pages/project/ui/modules/CustomFieldsGrid";
 
 const ProjectPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
@@ -39,6 +40,7 @@ const ProjectPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
       <Grid container direction="column" sx={{ gap: "32px" }}>
         <Operations storeKey={storeKey} mode={mode} />
         <Content storeKey={storeKey} />
+        <CustomFieldsGrid storeKey={storeKey} />
       </Grid>
     </GlassContainer>
   );

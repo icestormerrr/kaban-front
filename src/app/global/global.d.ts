@@ -25,6 +25,19 @@ declare namespace NApp {
   };
 
   export type PageWithModeProps = PageProps & { mode: Mode };
+
+  export type ControlledInputProps<T> = {
+    value: T | null;
+    onChange?: (newValue: T | null) => void;
+  };
+
+  export type UncontrolledInputProps<T> = {
+    label?: string;
+    validate?: (value: T | null) => string | undefined;
+    required?: boolean;
+    disabled?: boolean;
+    fullWidth?: boolean;
+  };
 }
 
 declare module "*.scss" {

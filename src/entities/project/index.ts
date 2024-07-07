@@ -7,9 +7,9 @@ import {
   useUpdateProjectMutation,
   useDeleteProjectMutation,
 } from "./api/projectApi";
-import { projectStoreKey, PROJECT_ID_PERSIST_KEY, initialProjectState } from "./const/const";
+import { projectStoreKey, PROJECT_ID_PERSIST_KEY, initialProjectState } from "./const/initialProjectState";
 import { useProjectIdFromPath } from "./lib/hooks/useProjectIdFromPath";
-import { ProjectState, Project, ProjectFilter } from "./model/types";
+import { ProjectState, Project, ProjectFilter, ProjectCustomField } from "./model/types";
 
 export {
   projectsApi,
@@ -25,4 +25,4 @@ export {
   initialProjectState,
 };
 
-export type { ProjectState, Project, ProjectFilter };
+export type { ProjectState, Project, ProjectFilter, ProjectCustomField };

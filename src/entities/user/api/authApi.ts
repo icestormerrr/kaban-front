@@ -3,7 +3,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { User, UserLoginQuery, UserRegisterQuery } from "../model/types";
 import { setEntity } from "@/shared/store/slices/editorSlice";
 import { ACCESS_TOKEN_PERSIST_KEY } from "@/shared/const";
-import { PROJECT_ID_PERSIST_KEY } from "@/entities/project/const/const";
+import { PROJECT_ID_PERSIST_KEY } from "@/entities/project";
 import { initialUserState } from "@/entities/user/const/const";
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 

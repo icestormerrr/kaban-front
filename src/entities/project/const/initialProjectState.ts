@@ -13,4 +13,5 @@ export const initialProjectState: ProjectState = {
   stages: [],
   users: [],
   authorId: "",
+  customFields: [],
 };

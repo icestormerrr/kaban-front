@@ -11,7 +11,7 @@ import { store } from "./store/store";
 import { darkTheme } from "./config/theme";
 import "./config/i18next";
 import { RoutesComponent } from "./router/routes";
-import "@/app/global/global.scss";
+import "./global/global.scss";
 
 const App: FC = () => {
   const { i18n } = useTranslation();

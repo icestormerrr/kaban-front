@@ -15,7 +15,6 @@ export type Task = NApp.NamedEntity & {
 };
 
 export type TasksGridItem = NApp.NamedEntity & {
-  id: string;
   description: string;
   status: TaskStatus;
   epicName: string;

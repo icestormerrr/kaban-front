@@ -48,15 +48,7 @@ const Content: FC<Props> = ({ storeKey }) => {
         <FieldSelect label={t("Sprint")} storeKey={storeKey} property="sprintId" options={project?.sprints ?? []} />
       </Grid>
       <Grid item md={12} xs={12}>
-        <FieldString
-          label={t("Description")}
-          storeKey={storeKey}
-          property="description"
-          rows={20}
-          multiline
-          fullWidth
-          required
-        />
+        <FieldString label={t("Description")} storeKey={storeKey} property="description" multiline fullWidth required />
       </Grid>
     </>
   );

@@ -11,6 +11,7 @@ import { GlassContainer } from "@/shared/ui";
 import Content from "./modules/Content";
 import Operations from "./modules/Operations";
 import Comments from "./modules/Comments";
+import CustomFieldsContent from "./modules/CustomFieldsContent";
 import classes from "./TaskPage.module.scss";
 
 const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
@@ -37,6 +38,7 @@ const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
         <Grid container item md={8} xs={12} spacing={4}>
           <Operations storeKey={storeKey} mode={mode} />
           <Content storeKey={storeKey} />
+          <CustomFieldsContent storeKey={storeKey} />
         </Grid>
         <Grid
           container

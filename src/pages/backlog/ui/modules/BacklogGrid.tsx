@@ -18,7 +18,7 @@ const BacklogGrid = () => {
 
   const columns: GridColDef<TasksGridItem>[] = useMemo(
     () => [
-      { field: "_id", headerName: "ID", width: 90 },
+      { field: "_id", headerName: "_id", width: 90 },
       {
         field: "name",
         headerName: t("Name"),
@@ -72,6 +72,7 @@ const BacklogGrid = () => {
         pageSizeOptions={[13]}
         onCellDoubleClick={handleCellDoubleClick}
         disableRowSelectionOnClick
+        getRowId={(row) => row._id}
       />
     </Box>
   );

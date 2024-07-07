@@ -1,13 +1,13 @@
-import React, { FC, memo, useCallback } from "react";
+import React, { memo, useCallback } from "react";
 import InputString, { InputStringProps } from "../inputs/InputString";
-import { useAppSelector, useEditorStore } from "../../../store";
+import { useAppSelector, useEditorStore } from "@/shared/store";
 
-type Props = Omit<InputStringProps, "value" | "onChange"> & {
+export type FieldStringProps = Omit<InputStringProps, "value" | "onChange"> & {
   storeKey: string;
   property: string;
 };
 // TODO: find out how to type this component
-const FieldString = ({ storeKey, property, ...restProps }: Props) => {
+const FieldString = ({ storeKey, property, ...restProps }: FieldStringProps) => {
   const { getPropertySelector, setEntityProperty } = useEditorStore<any>(storeKey);
   const value = useAppSelector(getPropertySelector(property));
   const handleChange = useCallback((value: string | null) => setEntityProperty(property, value), [property]);

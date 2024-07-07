@@ -7,4 +7,15 @@ export const darkTheme = createTheme({
   palette: {
     mode: "dark",
   },
+  components: {
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          "& .MuiInputBase-root": {
+            borderRadius: "10px",
+          },
+        },
+      },
+    },
+  },
 });

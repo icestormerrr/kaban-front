@@ -39,7 +39,6 @@ const Content: FC<Props> = ({ storeKey }) => {
             label={t("Description")}
             storeKey={storeKey}
             property="description"
-            rows={6}
             multiline
             fullWidth
             required

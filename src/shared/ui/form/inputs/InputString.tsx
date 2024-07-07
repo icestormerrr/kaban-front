@@ -1,12 +1,6 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, memo, useEffect, useState } from "react";
 
 import { TextField, TextFieldProps } from "@mui/material";
-
-const textFieldStyles = {
-  "& .MuiInputBase-root": {
-    borderRadius: "10px",
-  },
-};
 
 export type InputStringProps = Omit<TextFieldProps, "value" | "onChange" | "error" | "helperText"> & {
   value: string | null;
@@ -35,10 +29,10 @@ const InputString: FC<InputStringProps> = ({ value, onChange, validate, disabled
       error={!!errorText || (required && !value)}
       helperText={errorText}
       disabled={disabled}
-      sx={{ ...sx, ...textFieldStyles }}
+      sx={sx}
       {...restProps}
     />
   );
 };
 
-export default InputString;
+export default memo(InputString);
