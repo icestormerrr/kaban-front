@@ -7,7 +7,8 @@ import {
   useUpdateProjectMutation,
   useDeleteProjectMutation,
 } from "./api/projectApi";
-import { projectStoreKey, PROJECT_ID_PERSIST_KEY, initialProjectState } from "./const/initialProjectState";
+import { initialProjectState } from "./const/initialProjectState";
+import { projectStoreKey, PROJECT_ID_PERSIST_KEY } from "./const/storeKeys";
 import { useProjectIdFromPath } from "./lib/hooks/useProjectIdFromPath";
 import { ProjectState, Project, ProjectFilter, ProjectCustomField } from "./model/types";
 

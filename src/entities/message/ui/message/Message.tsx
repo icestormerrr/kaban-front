@@ -6,7 +6,6 @@ import { useGetUserQuery } from "@/entities/user";
 import { GlassContainer } from "@/shared/ui";
 
 import { Message as TMessage } from "../../model/types";
-
 import classes from "./Message.module.scss";
 
 type Props = TMessage;
