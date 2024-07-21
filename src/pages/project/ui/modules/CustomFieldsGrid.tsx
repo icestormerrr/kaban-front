@@ -2,6 +2,7 @@ import React, { FC, useMemo } from "react";
 import { Box } from "@mui/material";
 import { DataGrid, GridColDef, useGridApiRef } from "@mui/x-data-grid";
 import { useTranslation } from "react-i18next";
+import { first } from "lodash";
 
 import { useAppSelector, useEditorStore } from "@/shared/store";
 import { ProjectCustomField, ProjectState } from "@/entities/project";
@@ -11,10 +12,26 @@ import { FieldType } from "@/shared/const";
 const CustomFieldsGrid: FC<NApp.PageProps> = ({ storeKey }) => {
   const { t } = useTranslation();
 
-  const { getPropertySelector, setEntityProperty } = useEditorStore<ProjectState>(storeKey);
+  const { getPropertySelector, setEntityProperty, addElementToProperty, removeElementFromProperty } = useEditorStore<ProjectState>(storeKey);
   const customFields = useAppSelector(getPropertySelector("customFields")) ?? [];
-  const gridRef = useGridApiRef();
 
+  const handleCustomFieldCreate = () => {
+    addElementToProperty("customFields", { _id: "property" + (Math.random() % 1000), name: "", type: FieldType.string, required: false })
+  }
+
+  const handleCustomFieldDelete = () => {
+    const _id = first(Array.from(gridRef.current.getSelectedRows().keys()))
+    removeElementFromProperty("customFields", {_id})
+  }
+
+  const handleFieldUpdate = (updatedRow: ProjectCustomField, originalRow: ProjectCustomField) => {
+    const index = customFields.findIndex((customField) => customField._id === originalRow._id)
+    // @ts-ignore
+    setEntityProperty(`customFields[${index}]`, updatedRow)
+    return updatedRow;
+  }
+
+  const gridRef = useGridApiRef();
   const columns: GridColDef<ProjectCustomField>[] = useMemo(
     () => [
       {
@@ -45,31 +62,19 @@ const CustomFieldsGrid: FC<NApp.PageProps> = ({ storeKey }) => {
         editable: true,
       },
     ],
-    [],
+    [t],
   );
 
   return (
     <Box sx={{ width: "100%" }}>
       <div style={{ display: "flex", marginBottom: 10, gap: 10 }}>
         <GlassButton
-          onClick={() =>
-            setEntityProperty("customFields", [
-              ...customFields,
-              { _id: "property" + (Math.random() % 1000), name: "", type: FieldType.string, required: false },
-            ])
-          }
+          onClick={handleCustomFieldCreate}
         >
           {t("Add")}
         </GlassButton>
         <GlassButton
-          onClick={() =>
-            setEntityProperty(
-              "customFields",
-              customFields.filter(({ _id }) => {
-                return !gridRef.current.getSelectedRows().get(_id);
-              }),
-            )
-          }
+          onClick={handleCustomFieldDelete}
         >
           {t("Delete")}
         </GlassButton>
@@ -78,18 +83,7 @@ const CustomFieldsGrid: FC<NApp.PageProps> = ({ storeKey }) => {
       <DataGrid
         rows={customFields ?? []}
         columns={columns}
-        processRowUpdate={(updatedRow, originalRow) => {
-          setEntityProperty(
-            "customFields",
-            customFields.map((customField) => {
-              if (customField._id === originalRow._id) {
-                return updatedRow;
-              }
-              return customField;
-            }),
-          );
-          return updatedRow;
-        }}
+        processRowUpdate={handleFieldUpdate}
         pageSizeOptions={[5]}
         getRowId={(row) => row._id}
         apiRef={gridRef}

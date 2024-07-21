@@ -1,6 +1,6 @@
 import React, { FC, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { GlassButton } from "@/shared/ui";
+import { GlassButton } from "../../../../shared/ui";
 import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { enqueueSnackbar } from "notistack";

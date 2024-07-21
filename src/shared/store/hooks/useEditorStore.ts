@@ -1,25 +1,31 @@
 import { useCallback, useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
 
-import { useAppSelector } from "./useAppSelector";
-import { setEntity, setEntityProperty } from "@/shared/store/slices/editorSlice";
+import { addElementToProperty, setEntity, setEntityProperty, removeElementFromProperty } from "@/shared/store/slices/editorSlice";
 import { RootState } from "@/app/store/store";
 
 export const useEditorStore = <T>(storeKey: string, initialState?: T) => {
   const dispatch = useDispatch();
-  const entity = useAppSelector((state) => state.editor[storeKey] as T);
-  const setE = useCallback(
+  const setEnt = useCallback(
     (entity: T) => {
       dispatch(setEntity({ storeKey, entity }));
     },
     [dispatch, storeKey],
   );
-  const setP = useCallback(
+  const setProp = useCallback(
     <K extends keyof T>(property: K, value: T[K]) => {
       dispatch(setEntityProperty({ storeKey, property, value }));
     },
     [dispatch, storeKey],
   );
+  
+  const addElement = useCallback(<K extends keyof T>(property: K, value: T[K] extends Array<infer I> | null ? I : never) => {
+    dispatch(addElementToProperty({ storeKey, property, value }));
+  }, [dispatch, storeKey])
+
+  const removeElement = useCallback(<K extends keyof T>(property: K, searchPayload: number | string | {[key: string]: any}) => {
+    dispatch(removeElementFromProperty({storeKey, property,searchPayload}))
+  }, [dispatch, storeKey])
 
   const getPropertySelector = useCallback(
     <K extends keyof T>(property: K) => {
@@ -31,17 +37,19 @@ export const useEditorStore = <T>(storeKey: string, initialState?: T) => {
   const entitySelector = useCallback((state: RootState): T => state.editor[storeKey], [storeKey]);
 
   useEffect(() => {
-    if (initialState) setE(initialState);
+    if (initialState) setEnt(initialState);
   }, []);
 
   return useMemo(
     () =>
       ({
-        setEntity: setE,
-        setEntityProperty: setP,
+        setEntity: setEnt,
+        setEntityProperty: setProp,
+        addElementToProperty: addElement,
+        removeElementFromProperty: removeElement,
         entitySelector,
         getPropertySelector,
       }) as const,
-    [entity, initialState, setE, setP],
+    [addElement, entitySelector, getPropertySelector, removeElement, setEnt, setProp],
   );
 };
