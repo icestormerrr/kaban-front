@@ -10,8 +10,6 @@ import { useProjectIdFromPath } from "@/entities/project";
 import { Task, TaskState, useAddTaskMutation, useUpdateTaskMutation } from "@/entities/task";
 import { useAppSelector, useEditorSlice } from "@/shared/store";
 
-import classes from "../TaskPage.module.scss";
-
 type Props = {
   storeKey: string;
   mode: NApp.Mode;
@@ -65,8 +63,8 @@ const Operations: FC<Props> = ({ storeKey, mode }) => {
   };
 
   return (
-    <Grid item xs={12} className={classes.title}>
-      {t("Task card")}{" "}
+    <Grid item xs={12}>
+      <h1>{t("Task card")}</h1>
       <GlassButton variant="contained" onClick={handleSave} sx={{ height: "35px", ml: "20px" }}>
         {mode === "edit" ? t("Save") : t("Create")}
       </GlassButton>

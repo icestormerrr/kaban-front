@@ -29,6 +29,13 @@ body {
   min-height: 100vh;
 }
 
+h1 {
+  font-family: "Benzin", sans-serif;
+  font-weight: normal;
+  font-size: 30px;
+  margin: 0;
+  display: inline-block;
+}
 
 ::-webkit-scrollbar {
   width: 10px;

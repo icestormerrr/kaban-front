@@ -10,7 +10,10 @@ export type FieldStringProps = Omit<InputStringProps, "value" | "onChange"> & {
 const FieldString = ({ storeKey, property, ...restProps }: FieldStringProps) => {
   const { getPropertySelector, setEntityProperty } = useEditorSlice<any>(storeKey);
   const value = useAppSelector(getPropertySelector(property));
-  const handleChange = useCallback((value: string | null) => setEntityProperty(property, value), [property, setEntityProperty]);
+  const handleChange = useCallback(
+    (value: string | null) => setEntityProperty(property, value),
+    [property, setEntityProperty],
+  );
 
   return <InputString value={value} onChange={handleChange} {...restProps} />;
 };

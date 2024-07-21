@@ -29,6 +29,7 @@ const ButtonMenu: FC<Props> = ({ label, children }) => {
           sx={{
             color: "#fff",
             fontWeight: "normal",
+            fontFamily: "'Benzin', sans-serif",
             border: "1px solid rgba(255, 255, 255, 0.5)",
             borderRadius: "10px",
           }}
@@ -70,6 +71,7 @@ const StyledMenu = styled((props: MenuProps) => (
 ))(({ theme }) => ({
   "& .MuiPaper-root": {
     borderRadius: 6,
+    fontFamily: "'Benzin', sans-serif",
     marginTop: theme.spacing(1),
     color: theme.palette.mode === "light" ? "rgb(55, 65, 81)" : theme.palette.grey[300],
     boxShadow:

@@ -23,7 +23,6 @@ const BoardPanel: FC<Props> = ({ filter, onFilterChange }) => {
 
   return (
     <GlassContainer className={classes.panel}>
-      <div className={classes.title}>{project?.name}</div>
       <InputSelect
         label={t("Epic")}
         options={project?.epics ?? []}
