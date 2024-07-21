@@ -5,7 +5,7 @@ import { Settings, Logout } from "@mui/icons-material";
 import EditIcon from "@mui/icons-material/Edit";
 import { useTranslation } from "react-i18next";
 
-import { useAppSelector, useEditorStore, useSavedState } from "@/shared/store";
+import { useAppSelector, useEditorSlice, useSavedState } from "@/shared/store";
 import { PROJECT_ID_PERSIST_KEY, useGetProjectsQuery } from "@/entities/project";
 import { useLazyGetCurrentUserQuery, useLogoutMutation, UserState } from "@/entities/user";
 import { AvatarMenu, ButtonMenu, GlassContainer, InputSelect } from "@/shared/ui";
@@ -18,7 +18,7 @@ const MainLayout: FC = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const { entitySelector: userSelector, setEntity: setUser } = useEditorStore<UserState>("user");
+  const { entitySelector: userSelector, setEntity: setUser } = useEditorSlice<UserState>("user");
   const user = useAppSelector(userSelector) || {};
   const isAuth = localStorage.getItem(ACCESS_TOKEN_PERSIST_KEY);
 
@@ -72,7 +72,7 @@ const MainLayout: FC = () => {
       .unwrap()
       .then((data) => setUser(data as UserState))
       .catch(console.error);
-  }, []);
+  }, [fetchCurrentUser, setUser]);
 
   useEffect(() => {
     !isAuth && handleLogout();

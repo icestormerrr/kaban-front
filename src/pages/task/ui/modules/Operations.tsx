@@ -8,7 +8,7 @@ import { compact } from "lodash";
 import { GlassButton } from "@/shared/ui";
 import { useProjectIdFromPath } from "@/entities/project";
 import { Task, TaskState, useAddTaskMutation, useUpdateTaskMutation } from "@/entities/task";
-import { useAppSelector, useEditorStore } from "@/shared/store";
+import { useAppSelector, useEditorSlice } from "@/shared/store";
 
 import classes from "../TaskPage.module.scss";
 
@@ -25,7 +25,7 @@ const Operations: FC<Props> = ({ storeKey, mode }) => {
   const [fetchUpdate] = useUpdateTaskMutation();
   const [fetchCreate] = useAddTaskMutation();
 
-  const { entitySelector: taskSelector, setEntity: setTask } = useEditorStore<TaskState>(storeKey);
+  const { entitySelector: taskSelector, setEntity: setTask } = useEditorSlice<TaskState>(storeKey);
   const task = useAppSelector(taskSelector) ?? {};
 
   const validateTask = useCallback((task: TaskState) => {

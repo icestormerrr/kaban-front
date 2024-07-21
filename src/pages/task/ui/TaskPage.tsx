@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Grid } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 
-import { useEditorStore } from "@/shared/store";
+import { useEditorSlice } from "@/shared/store";
 import { initialTaskState, TaskState, useLazyGetTaskQuery } from "@/entities/task";
 import { GlassContainer } from "@/shared/ui";
 
@@ -19,7 +19,7 @@ const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const { _id } = useParams();
 
   const [fetchDetails] = useLazyGetTaskQuery();
-  const { setEntity: setTask } = useEditorStore<TaskState>(storeKey);
+  const { setEntity: setTask } = useEditorSlice<TaskState>(storeKey);
 
   useEffect(() => {
     if (_id && mode === "edit") {

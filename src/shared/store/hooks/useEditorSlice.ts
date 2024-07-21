@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { addElementToProperty, setEntity, setEntityProperty, removeElementFromProperty } from "@/shared/store/slices/editorSlice";
 import { RootState } from "@/app/store/store";
 
-export const useEditorStore = <T>(storeKey: string, initialState?: T) => {
+export const useEditorSlice = <T>(storeKey: string, initialState?: T) => {
   const dispatch = useDispatch();
   const setEnt = useCallback(
     (entity: T) => {
@@ -38,6 +38,7 @@ export const useEditorStore = <T>(storeKey: string, initialState?: T) => {
 
   useEffect(() => {
     if (initialState) setEnt(initialState);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return useMemo(

@@ -3,7 +3,7 @@ import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 import { FieldSelect, FieldString, FieldList, InputList } from "@/shared/ui";
-import { useAppSelector, useEditorStore } from "@/shared/store";
+import { useAppSelector, useEditorSlice } from "@/shared/store";
 import { ProjectState } from "@/entities/project";
 import { useGetUsersQuery } from "@/entities/user";
 
@@ -14,7 +14,7 @@ type Props = {
 const Content: FC<Props> = ({ storeKey }) => {
   const { t } = useTranslation();
 
-  const { getPropertySelector, setEntityProperty } = useEditorStore<ProjectState>(storeKey);
+  const { getPropertySelector, setEntityProperty } = useEditorSlice<ProjectState>(storeKey);
   const users = useAppSelector(getPropertySelector("users"));
 
   // TODO: rewrite to server search, cause there may be a lot of users

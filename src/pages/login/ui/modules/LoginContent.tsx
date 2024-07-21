@@ -4,7 +4,7 @@ import { IconButton, InputAdornment } from "@mui/material";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
-import { useAppSelector, useEditorStore } from "@/shared/store";
+import { useAppSelector, useEditorSlice } from "@/shared/store";
 import { UserState } from "@/entities/user";
 import { InputString } from "@/shared/ui";
 
@@ -12,7 +12,7 @@ const LoginContent: FC<NApp.PageProps> = ({ storeKey }) => {
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
 
-  const { entitySelector: userSelector, setEntityProperty: setUserProperty } = useEditorStore<UserState>(storeKey);
+  const { entitySelector: userSelector, setEntityProperty: setUserProperty } = useEditorSlice<UserState>(storeKey);
   const { email, password } = useAppSelector(userSelector) || {};
 
   return (

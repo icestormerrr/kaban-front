@@ -7,7 +7,7 @@ import { enqueueSnackbar } from "notistack";
 import { compact } from "lodash";
 
 import { Project, ProjectState, useAddProjectMutation, useUpdateProjectMutation } from "@/entities/project";
-import { useAppSelector, useEditorStore } from "@/shared/store";
+import { useAppSelector, useEditorSlice } from "@/shared/store";
 import { commonClasses } from "@/shared/styles";
 
 type Props = {
@@ -22,7 +22,7 @@ const Operations: FC<Props> = ({ storeKey, mode }) => {
   const [fetchUpdate] = useUpdateProjectMutation();
   const [fetchCreate] = useAddProjectMutation();
 
-  const { entitySelector: projectSelector, setEntity: setProject } = useEditorStore<ProjectState>(storeKey);
+  const { entitySelector: projectSelector, setEntity: setProject } = useEditorSlice<ProjectState>(storeKey);
   const project = useAppSelector(projectSelector) ?? {};
 
   const validateProject = useCallback((project: ProjectState) => {

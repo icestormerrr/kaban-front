@@ -1,7 +1,7 @@
 import React, { FC, useCallback } from "react";
 
 import InputList, { InputListProps } from "../inputs/InputList";
-import { useAppSelector, useEditorStore } from "../../../store";
+import { useAppSelector, useEditorSlice } from "../../../store";
 
 type Props = Omit<InputListProps, "list" | "onListChange"> & {
   storeKey: string;
@@ -9,11 +9,11 @@ type Props = Omit<InputListProps, "list" | "onListChange"> & {
 };
 
 const FieldList: FC<Props> = ({ storeKey, property, ...restProps }) => {
-  const { getPropertySelector, setEntityProperty } = useEditorStore<any>(storeKey);
+  const { getPropertySelector, setEntityProperty } = useEditorSlice<any>(storeKey);
   const value = useAppSelector(getPropertySelector(property));
   const handleChange = useCallback(
     (value: NApp.NamedEntity[] | null) => setEntityProperty(property, value),
-    [property],
+    [property, setEntityProperty],
   );
 
   return <InputList list={value ?? []} onListChange={handleChange} {...restProps} />;

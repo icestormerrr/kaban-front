@@ -5,7 +5,7 @@ import { v4 as uuid } from "uuid";
 import { Grid } from "@mui/material";
 
 import { GlassButton, InputString } from "@/shared/ui";
-import { useAppSelector, useEditorStore } from "@/shared/store";
+import { useAppSelector, useEditorSlice } from "@/shared/store";
 import { User } from "@/entities/user";
 
 import { TMessage, Message } from "@/entities/message";
@@ -20,7 +20,7 @@ type Props = {
 const Chat: FC<Props> = ({ messages, omMessageCreate, className }) => {
   const { t } = useTranslation();
 
-  const { entitySelector: userSelector } = useEditorStore<User>("user");
+  const { entitySelector: userSelector } = useEditorSlice<User>("user");
   const user = useAppSelector(userSelector) || {};
 
   const [newMessage, setNewMessage] = useState<string | null>(null);

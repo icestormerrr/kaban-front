@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Grid } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 
-import { useEditorStore } from "@/shared/store";
+import { useEditorSlice } from "@/shared/store";
 import {
   initialProjectState,
   ProjectState,
@@ -22,7 +22,7 @@ const ProjectPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   const _id = useProjectIdFromPath();
 
   const [fetchDetails] = useLazyGetProjectDetailsQuery();
-  const { setEntity: setProject } = useEditorStore<ProjectState>(storeKey);
+  const { setEntity: setProject } = useEditorSlice<ProjectState>(storeKey);
 
   useEffect(() => {
     if (_id && mode === "edit") {

@@ -4,7 +4,7 @@ import { DataGrid, GridColDef, useGridApiRef } from "@mui/x-data-grid";
 import { useTranslation } from "react-i18next";
 import { first } from "lodash";
 
-import { useAppSelector, useEditorStore } from "@/shared/store";
+import { useAppSelector, useEditorSlice } from "@/shared/store";
 import { ProjectCustomField, ProjectState } from "@/entities/project";
 import { GlassButton } from "@/shared/ui";
 import { FieldType } from "@/shared/const";
@@ -12,7 +12,7 @@ import { FieldType } from "@/shared/const";
 const CustomFieldsGrid: FC<NApp.PageProps> = ({ storeKey }) => {
   const { t } = useTranslation();
 
-  const { getPropertySelector, setEntityProperty, addElementToProperty, removeElementFromProperty } = useEditorStore<ProjectState>(storeKey);
+  const { getPropertySelector, setEntityProperty, addElementToProperty, removeElementFromProperty } = useEditorSlice<ProjectState>(storeKey);
   const customFields = useAppSelector(getPropertySelector("customFields")) ?? [];
 
   const handleCustomFieldCreate = () => {

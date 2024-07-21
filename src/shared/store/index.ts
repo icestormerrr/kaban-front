@@ -1,6 +1,6 @@
 import { useAppDispatch } from "./hooks/useAppDispatch";
 import { useAppSelector } from "./hooks/useAppSelector";
-import { useEditorStore } from "./hooks/useEditorStore";
+import { useEditorSlice } from "./hooks/useEditorSlice";
 import { useSavedState } from "./hooks/useSavedState";
 
-export { useAppDispatch, useAppSelector, useEditorStore, useSavedState };
+export { useAppDispatch, useAppSelector, useEditorSlice, useSavedState };

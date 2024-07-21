@@ -6,7 +6,7 @@ import { enqueueSnackbar } from "notistack";
 import { GlassButton } from "@/shared/ui";
 import { useLoginMutation, useRegisterMutation, UserState } from "@/entities/user";
 
-import { useAppSelector, useEditorStore } from "@/shared/store";
+import { useAppSelector, useEditorSlice } from "@/shared/store";
 
 import classes from "../LoginPage.module.scss";
 
@@ -14,7 +14,7 @@ const Operations: FC<NApp.PageProps & { mode: "login" | "register" }> = ({ store
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const { entitySelector: userSelector } = useEditorStore<UserState>(storeKey);
+  const { entitySelector: userSelector } = useEditorSlice<UserState>(storeKey);
   const user = useAppSelector(userSelector);
 
   const handleSuccess = () => {
