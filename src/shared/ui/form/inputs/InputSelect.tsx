@@ -28,7 +28,7 @@ const autocompleteStyleLarge = {
 const getOptionLabel = (option: Option) => option.name;
 const isOptionEqualToValue = (option: Option, selectedValue: Option) => option._id === selectedValue._id;
 
-type Option = NApp.NamedEntity & { [key: string]: any };
+export type Option = NApp.NamedEntity & { [key: string]: any };
 
 export type InputSelectProps = {
   value: string | null;

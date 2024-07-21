@@ -1,19 +1,20 @@
 import React, { FC, memo } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import { TasksFilter } from "@/entities/task";
 import { useGetProjectDetailsQuery, useProjectIdFromPath } from "@/entities/project";
 import { useGetUsersQuery } from "@/entities/user";
+import { TasksFilter } from "@/entities/task";
 import { GlassContainer, InputSelect } from "@/shared/ui";
 
 import classes from "./BoardPanel.module.scss";
 
 type Props = {
   filter: TasksFilter;
-  onChange: (newFilter: Partial<TasksFilter>) => void;
+  onFilterChange(prop: string, newVal?: string): void;
 };
 
-const BoardPanel: FC<Props> = ({ filter, onChange }) => {
+const BoardPanel: FC<Props> = ({ filter, onFilterChange }) => {
   const { t } = useTranslation();
   const projectId = useProjectIdFromPath();
 
@@ -28,21 +29,21 @@ const BoardPanel: FC<Props> = ({ filter, onChange }) => {
         options={project?.epics ?? []}
         value={filter.epicId ?? null}
         className={classes.filter}
-        onChange={(epic) => onChange({ epicId: epic?._id })}
+        onChange={(epic) => onFilterChange("epicId", epic?._id)}
       />
       <InputSelect
         label={t("Sprint")}
         options={project?.sprints ?? []}
         value={filter.sprintId ?? null}
         className={classes.filter}
-        onChange={(sprint) => onChange({ sprintId: sprint?._id })}
+        onChange={(sprint) => onFilterChange("sprintId", sprint?._id)}
       />
       <InputSelect
         label={t("Executor")}
         options={executors ?? []}
         value={filter.executorId ?? null}
         className={classes.filter}
-        onChange={(executor) => onChange({ executorId: executor?._id })}
+        onChange={(executor) => onFilterChange("executorId", executor?._id)}
       />
     </GlassContainer>
   );
