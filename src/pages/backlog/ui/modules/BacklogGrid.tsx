@@ -12,7 +12,7 @@ const BacklogGrid = () => {
   const navigate = useNavigate();
   const projectId = useProjectIdFromPath();
   const { data: rows = [] } = useGetTasksGridQuery(
-    { projectId },
+    { projectId: projectId! },
     { skip: !projectId, refetchOnMountOrArgChange: true },
   );
 

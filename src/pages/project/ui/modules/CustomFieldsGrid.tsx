@@ -12,24 +12,30 @@ import { FieldType } from "@/shared/const";
 const CustomFieldsGrid: FC<NApp.PageProps> = ({ storeKey }) => {
   const { t } = useTranslation();
 
-  const { getPropertySelector, setEntityProperty, addElementToProperty, removeElementFromProperty } = useEditorSlice<ProjectState>(storeKey);
+  const { getPropertySelector, setEntityProperty, addElementToProperty, removeElementFromProperty } =
+    useEditorSlice<ProjectState>(storeKey);
   const customFields = useAppSelector(getPropertySelector("customFields")) ?? [];
 
   const handleCustomFieldCreate = () => {
-    addElementToProperty("customFields", { _id: "property" + (Math.random() % 1000), name: "", type: FieldType.string, required: false })
-  }
+    addElementToProperty("customFields", {
+      _id: "property" + (Math.random() % 1000),
+      name: "",
+      type: FieldType.string,
+      required: false,
+    });
+  };
 
   const handleCustomFieldDelete = () => {
-    const _id = first(Array.from(gridRef.current.getSelectedRows().keys()))
-    removeElementFromProperty("customFields", {_id})
-  }
+    const _id = first(Array.from(gridRef.current.getSelectedRows().keys()));
+    removeElementFromProperty("customFields", { _id });
+  };
 
   const handleFieldUpdate = (updatedRow: ProjectCustomField, originalRow: ProjectCustomField) => {
-    const index = customFields.findIndex((customField) => customField._id === originalRow._id)
+    const index = customFields.findIndex((customField) => customField._id === originalRow._id);
     // @ts-ignore
-    setEntityProperty(`customFields[${index}]`, updatedRow)
+    setEntityProperty(`customFields[${index}]`, updatedRow);
     return updatedRow;
-  }
+  };
 
   const gridRef = useGridApiRef();
   const columns: GridColDef<ProjectCustomField>[] = useMemo(
@@ -50,7 +56,7 @@ const CustomFieldsGrid: FC<NApp.PageProps> = ({ storeKey }) => {
         field: "type",
         headerName: t("Type"),
         type: "singleSelect",
-        valueOptions: [FieldType.string, FieldType.select, FieldType.number, FieldType.boolean],
+        valueOptions: [FieldType.string, FieldType.number, FieldType.boolean],
         width: 300,
         editable: true,
       },
@@ -68,16 +74,8 @@ const CustomFieldsGrid: FC<NApp.PageProps> = ({ storeKey }) => {
   return (
     <Box sx={{ width: "100%" }}>
       <div style={{ display: "flex", marginBottom: 10, gap: 10 }}>
-        <GlassButton
-          onClick={handleCustomFieldCreate}
-        >
-          {t("Add")}
-        </GlassButton>
-        <GlassButton
-          onClick={handleCustomFieldDelete}
-        >
-          {t("Delete")}
-        </GlassButton>
+        <GlassButton onClick={handleCustomFieldCreate}>{t("Add")}</GlassButton>
+        <GlassButton onClick={handleCustomFieldDelete}>{t("Delete")}</GlassButton>
       </div>
 
       <DataGrid

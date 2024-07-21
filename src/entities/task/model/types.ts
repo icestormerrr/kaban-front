@@ -30,4 +30,4 @@ export type TasksFilter = {
   epicId?: string;
   sprintId?: string;
   executorId?: string;
-};
+} & { [key: string]: any };

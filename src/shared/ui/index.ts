@@ -3,7 +3,7 @@ import GlassButton from "./buttons/GlassButton";
 import FieldList from "./form/fields/FieldList";
 import InputList from "./form/inputs/InputList";
 import FieldSelect from "./form/fields/FieldSelect";
-import InputSelect, {Option} from "./form/inputs/InputSelect";
+import InputSelect, { Option } from "./form/inputs/InputSelect";
 import FieldString from "./form/fields/FieldString";
 import InputString from "./form/inputs/InputString";
 import FieldNumber from "./form/fields/FieldNumber";
@@ -11,6 +11,7 @@ import InputNumber from "./form/inputs/InputNumber";
 import StoreField from "./form/fields/StoreField";
 import AvatarMenu from "./menus/AvatarMenu";
 import ButtonMenu from "./menus/ButtonMenu";
+import ConfirmModal from "./modals/ConfirmModal";
 
 export {
   GlassContainer,
@@ -26,8 +27,7 @@ export {
   StoreField,
   AvatarMenu,
   ButtonMenu,
+  ConfirmModal,
 };
 
-export type {
-  Option
-}
+export type { Option };

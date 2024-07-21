@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
+import React, { FC, useMemo } from "react";
 import { groupBy } from "lodash";
 
 import { useGetProjectDetailsQuery, useProjectIdFromPath } from "@/entities/project";
@@ -15,13 +15,10 @@ const BoardPage: FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filter = useMemo(() => {
-    const newFilter: TasksFilter = {};
+    const newFilter: TasksFilter = { projectId: projectId! };
     searchParams.forEach((value, key) => {
-      if (key === "epicId" || key === "sprintId" || key === "executorId") {
-        newFilter[key] = value;
-      }
+      newFilter[key] = value;
     });
-    newFilter["projectId"] = projectId;
     return newFilter;
   }, [projectId, searchParams]);
 

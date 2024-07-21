@@ -88,10 +88,11 @@ const MainLayout: FC = () => {
         <div className={classes.logoContainer}>
           <Logo onClick={handleHomeNavigate} style={{ cursor: "pointer" }} />
           <Button
-            startIcon={<ArrowForwardIcon />}
             onClick={toggleLayoutDetails}
             style={{ transform: `rotate(${showLayoutDetails ? 0 : 180}deg)`, transition: "all .5s" }}
-          />
+          >
+            <ArrowForwardIcon />
+          </Button>
         </div>
 
         <nav className={classes.navContainer} style={{ display: showLayoutDetails ? "flex" : "none" }}>
