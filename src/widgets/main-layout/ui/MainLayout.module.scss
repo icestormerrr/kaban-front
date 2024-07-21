@@ -10,20 +10,27 @@
   background-color: rgba(0, 0, 0, 0.25);
 }
 
-.placeholderContainer {
-  height: calc(100vh - 110px);
-  margin-top: 4px;
+.logoContainer {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.25);
+  gap: 30px;
 }
 
-.leftContainer {
+.navContainer {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
+}
+
+@media (max-width: 600px) {
+  .headerContainer {
+    gap: 15px
+  }
+  .navContainer {
+    gap: 15px
+  }
 }
 
 .projectSelectContainer {

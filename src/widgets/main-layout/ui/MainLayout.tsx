@@ -1,8 +1,9 @@
-import React, { FC, useCallback, useEffect } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { ListItemIcon, MenuItem } from "@mui/material";
+import { Button, ListItemIcon, MenuItem } from "@mui/material";
 import { Settings, Logout } from "@mui/icons-material";
 import EditIcon from "@mui/icons-material/Edit";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useTranslation } from "react-i18next";
 
 import { useAppSelector, useEditorSlice, useSavedState } from "@/shared/store";
@@ -17,6 +18,7 @@ import classes from "./MainLayout.module.scss";
 const MainLayout: FC = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [showLayoutDetails, setShowLayoutDetails] = useState(true);
 
   const { entitySelector: userSelector, setEntity: setUser } = useEditorSlice<UserState>("user");
   const user = useAppSelector(userSelector) || {};
@@ -66,6 +68,8 @@ const MainLayout: FC = () => {
     navigate("/project");
   };
 
+  const toggleLayoutDetails = () => setShowLayoutDetails((old) => !old);
+
   const [fetchCurrentUser] = useLazyGetCurrentUserQuery();
   useEffect(() => {
     fetchCurrentUser()
@@ -81,8 +85,16 @@ const MainLayout: FC = () => {
   return (
     <>
       <GlassContainer className={classes.headerContainer}>
-        <div className={classes.leftContainer}>
+        <div className={classes.logoContainer}>
           <Logo onClick={handleHomeNavigate} style={{ cursor: "pointer" }} />
+          <Button
+            startIcon={<ArrowForwardIcon />}
+            onClick={toggleLayoutDetails}
+            style={{ transform: `rotate(${showLayoutDetails ? 0 : 180}deg)`, transition: "all .5s" }}
+          />
+        </div>
+
+        <nav className={classes.navContainer} style={{ display: showLayoutDetails ? "flex" : "none" }}>
           <div className={classes.projectSelectContainer}>
             <InputSelect
               className={classes.projectSelect}
@@ -113,7 +125,7 @@ const MainLayout: FC = () => {
               {t("Project")}
             </MenuItem>
           </ButtonMenu>
-        </div>
+        </nav>
 
         <AvatarMenu label={user?.name?.[0] ?? ""}>
           <MenuItem onClick={handleSettingsNavigate}>
