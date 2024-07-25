@@ -58,14 +58,14 @@ const BacklogGrid = () => {
   }, []);
 
   return (
-    <Box sx={{ width: "100%", height: "75vh" }}>
+    <Box sx={{ width: "100%", height: "73vh" }}>
       <DataGrid
         rows={rows}
         columns={columns}
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 13,
+              pageSize: 10,
             },
           },
         }}

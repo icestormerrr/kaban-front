@@ -1,7 +1,7 @@
 import React, { FC, memo, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 import { ProjectCustomField, useGetProjectDetailsQuery, useProjectIdFromPath } from "@/entities/project";
@@ -11,7 +11,6 @@ import { ConfirmModal, GlassContainer, InputSelect, InputString } from "@/shared
 import { useSavedState } from "@/shared/store";
 
 import classes from "./BoardPanel.module.scss";
-import { DataGrid } from "@mui/x-data-grid";
 
 type Props = {
   filter: TasksFilter;
@@ -24,6 +23,7 @@ const BoardPanel: FC<Props> = ({ filter, onFilterChange }) => {
 
   const [showAddFilterDialog, setShowAddFilterDialog] = useState(false);
   const [customFilters, setCustomFilters] = useSavedState<ProjectCustomField[]>("customFilters", []);
+
   const handleAddCustomFilter = (newFilter: ProjectCustomField) => {
     setCustomFilters([...(customFilters ?? []), newFilter]);
     setShowAddFilterDialog(false);
@@ -39,45 +39,59 @@ const BoardPanel: FC<Props> = ({ filter, onFilterChange }) => {
 
   return (
     <GlassContainer className={classes.panel}>
-      <InputSelect
-        label={t("Epic")}
-        options={project?.epics ?? []}
-        value={filter.epicId ?? null}
-        className={classes.filter}
-        onChange={(epic) => onFilterChange("epicId", epic?._id)}
-      />
-      <InputSelect
-        label={t("Sprint")}
-        options={project?.sprints ?? []}
-        value={filter.sprintId ?? null}
-        className={classes.filter}
-        onChange={(sprint) => onFilterChange("sprintId", sprint?._id)}
-      />
-      <InputSelect
-        label={t("Executor")}
-        options={executors ?? []}
-        value={filter.executorId ?? null}
-        className={classes.filter}
-        onChange={(executor) => onFilterChange("executorId", executor?._id)}
-      />
-
-      {customFilters.length > 0 &&
-        customFilters.map((field) => (
-          <InputString
-            label={field.name}
+      <Grid container spacing={2}>
+        <Grid item xs={6} md={2}>
+          <InputSelect
+            label={t("Epic")}
+            options={project?.epics ?? []}
+            value={filter.epicId ?? null}
             className={classes.filter}
-            value={filter[field._id]}
-            size={"small"}
-            onChange={(value) => onFilterChange(field._id, value ?? undefined)}
+            onChange={(epic) => onFilterChange("epicId", epic?._id)}
           />
-        ))}
+        </Grid>
+        <Grid item xs={6} md={2}>
+          <InputSelect
+            label={t("Sprint")}
+            options={project?.sprints ?? []}
+            value={filter.sprintId ?? null}
+            className={classes.filter}
+            onChange={(sprint) => onFilterChange("sprintId", sprint?._id)}
+          />
+        </Grid>
+        <Grid item xs={6} md={2}>
+          <InputSelect
+            label={t("Executor")}
+            options={executors ?? []}
+            value={filter.executorId ?? null}
+            className={classes.filter}
+            onChange={(executor) => onFilterChange("executorId", executor?._id)}
+          />
+        </Grid>
 
-      <Button onClick={() => setShowAddFilterDialog(true)}>
-        <AddIcon />
-      </Button>
-      <Button onClick={handleClearAllCustomFilters}>
-        <ClearIcon />
-      </Button>
+        {customFilters.length > 0 &&
+          customFilters.map((field) => (
+            <Grid item key={field._id} xs={6} md={2}>
+              <InputString
+                label={field.name}
+                className={classes.filter}
+                value={filter[field._id]}
+                size={"small"}
+                fullWidth
+                onChange={(value) => onFilterChange(field._id, value ?? undefined)}
+              />
+            </Grid>
+          ))}
+
+        <Grid item className={classes.operations} xs={1}>
+          <Button onClick={() => setShowAddFilterDialog(true)}>
+            <AddIcon />
+          </Button>
+          <Button onClick={handleClearAllCustomFilters}>
+            <ClearIcon />
+          </Button>
+        </Grid>
+      </Grid>
+
       <ConfirmModal
         title={t("Add new filter")}
         show={showAddFilterDialog}

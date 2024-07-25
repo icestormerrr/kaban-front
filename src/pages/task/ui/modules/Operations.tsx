@@ -64,7 +64,7 @@ const Operations: FC<Props> = ({ storeKey, mode }) => {
 
   return (
     <Grid item xs={12}>
-      <h1>{t("Task card")}</h1>
+      <h2>{t("Task card")}</h2>
       <GlassButton variant="contained" onClick={handleSave} sx={{ height: "35px", ml: "20px" }}>
         {mode === "edit" ? t("Save") : t("Create")}
       </GlassButton>

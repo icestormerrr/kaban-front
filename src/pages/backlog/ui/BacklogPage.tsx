@@ -9,8 +9,8 @@ import BacklogGrid from "./modules/BacklogGrid";
 
 const BacklogPage = () => {
   return (
-    <GlassContainer className={commonClasses.container}>
-      <Grid container direction="column" sx={{ gap: "32px" }}>
+    <GlassContainer className={commonClasses.pageContainer}>
+      <Grid container direction="column" sx={{ gap: "30px" }}>
         <Operations />
         <BacklogGrid />
       </Grid>

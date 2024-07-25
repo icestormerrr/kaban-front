@@ -18,7 +18,7 @@ const CustomFieldsGrid: FC<NApp.PageProps> = ({ storeKey }) => {
 
   const handleCustomFieldCreate = () => {
     addElementToProperty("customFields", {
-      _id: "property" + (Math.random() % 1000),
+      _id: "property" + Math.round(Math.random() * 1000),
       name: "",
       type: FieldType.string,
       required: false,
@@ -72,21 +72,22 @@ const CustomFieldsGrid: FC<NApp.PageProps> = ({ storeKey }) => {
   );
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <>
       <div style={{ display: "flex", marginBottom: 10, gap: 10 }}>
         <GlassButton onClick={handleCustomFieldCreate}>{t("Add")}</GlassButton>
         <GlassButton onClick={handleCustomFieldDelete}>{t("Delete")}</GlassButton>
       </div>
-
-      <DataGrid
-        rows={customFields ?? []}
-        columns={columns}
-        processRowUpdate={handleFieldUpdate}
-        pageSizeOptions={[5]}
-        getRowId={(row) => row._id}
-        apiRef={gridRef}
-      />
-    </Box>
+      <Box sx={{ width: "100%", height: "400px" }}>
+        <DataGrid
+          rows={customFields ?? []}
+          columns={columns}
+          processRowUpdate={handleFieldUpdate}
+          pageSizeOptions={[5]}
+          getRowId={(row) => row._id}
+          apiRef={gridRef}
+        />
+      </Box>
+    </>
   );
 };
 

@@ -59,8 +59,8 @@ const Operations: FC<Props> = ({ storeKey, mode }) => {
   };
 
   return (
-    <Grid item xs={12} className={commonClasses.title}>
-      {t("Project card")}{" "}
+    <Grid item xs={12}>
+      <h2>{t("Project card")}</h2>
       <GlassButton variant="contained" onClick={handleSave} sx={{ height: "35px", ml: "20px" }}>
         {mode === "edit" ? t("Save") : t("Create")}
       </GlassButton>

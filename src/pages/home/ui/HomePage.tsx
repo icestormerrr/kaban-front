@@ -8,7 +8,7 @@ const HomePage: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <GlassContainer className={commonClasses.container}>
+    <GlassContainer className={commonClasses.pageContainer}>
       <h3 className={commonClasses.title}>{t("Welcome to KaBan, have a nice work :3")}</h3>
     </GlassContainer>
   );

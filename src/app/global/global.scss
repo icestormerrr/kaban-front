@@ -13,6 +13,8 @@
 }
 
 body {
+  min-height: 100vh;
+  height: 100%;
   margin: 0;
   font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -25,20 +27,39 @@ body {
   box-sizing: border-box;
 }
 
-.app {
+#root {
   min-height: 100vh;
+  height: 100%;
 }
 
-h1 {
+.app {
+  min-height: 100vh;
+  height: 100%;
+  border: 1px solid transparent;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+h1, h2 {
   font-family: "Benzin", sans-serif;
   font-weight: normal;
   font-size: 30px;
   margin: 0;
   display: inline-block;
 }
+h1 {
+  font-size: 30px;
+}
+h2 {
+  font-size: 25px;
+}
 
 ::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
   backdrop-filter: blur(100px);
   background-color: rgba(255, 255, 255, 0.15);
   border-radius: 10px;

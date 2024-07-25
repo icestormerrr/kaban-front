@@ -44,7 +44,7 @@ const BoardPage: FC = () => {
   const tasksGroupedByStageId = useMemo(() => groupBy(tasks ?? [], (task) => task.stageId), [tasks]);
 
   return (
-    <GlassContainer className={classes.container}>
+    <div className={classes.container}>
       <BoardPanel filter={filter} onFilterChange={handleFilterChange} />
       <GlassContainer className={classes.stageContainer}>
         {project &&
@@ -52,7 +52,7 @@ const BoardPage: FC = () => {
             <BoardStage stage={stage} tasks={tasksGroupedByStageId[stage._id] ?? []} key={stage._id} />
           ))}
       </GlassContainer>
-    </GlassContainer>
+    </div>
   );
 };
 

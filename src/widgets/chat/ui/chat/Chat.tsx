@@ -33,7 +33,7 @@ const Chat: FC<Props> = ({ messages, omMessageCreate, className }) => {
   return (
     <>
       <Grid item>
-        <h1>{t("Comments")}</h1>
+        <h2>{t("Comments")}</h2>
         <GlassButton
           variant="contained"
           onClick={handleMessageCreate}

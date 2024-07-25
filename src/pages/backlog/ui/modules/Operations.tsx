@@ -18,7 +18,7 @@ const Operations = () => {
 
   return (
     <Grid item xs={12} className={commonClasses.title}>
-      {t("Backlog")}{" "}
+      <h2>{t("Backlog")}</h2>
       <GlassButton variant="contained" onClick={handleTaskCreate} sx={{ height: "35px", ml: "20px" }}>
         {t("Create task")}
       </GlassButton>

@@ -36,8 +36,8 @@ const ProjectPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   }, [_id, fetchDetails, mode, setProject, t]);
 
   return (
-    <GlassContainer className={commonClasses.container}>
-      <Grid container direction="column" sx={{ gap: "32px" }}>
+    <GlassContainer className={commonClasses.pageContainer}>
+      <Grid container direction="column" sx={{ gap: "30px" }}>
         <Operations storeKey={storeKey} mode={mode} />
         <Content storeKey={storeKey} />
         <CustomFieldsGrid storeKey={storeKey} />

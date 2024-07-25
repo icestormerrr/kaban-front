@@ -1,11 +1,12 @@
 .panel {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 30px;
   background-color: rgba(255, 255, 255, 0.15);
 }
 
+.operations {
+  display: flex;
+  align-items: center;
+}
+
 .filter {
-  max-width: 300px !important;
+
 }

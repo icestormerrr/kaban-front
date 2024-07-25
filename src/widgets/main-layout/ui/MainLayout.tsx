@@ -86,10 +86,13 @@ const MainLayout: FC = () => {
     <>
       <GlassContainer className={classes.headerContainer}>
         <div className={classes.logoContainer}>
-          <Logo onClick={handleHomeNavigate} style={{ cursor: "pointer" }} />
+          <Logo onClick={handleHomeNavigate} style={{ cursor: "pointer", height: 38 }} />
           <Button
             onClick={toggleLayoutDetails}
-            style={{ transform: `rotate(${showLayoutDetails ? 0 : 180}deg)`, transition: "all .5s" }}
+            style={{
+              transform: `rotate(${showLayoutDetails ? 0 : 180}deg)`,
+              transition: "transform .5s",
+            }}
           >
             <ArrowForwardIcon />
           </Button>
@@ -106,18 +109,19 @@ const MainLayout: FC = () => {
               loadingText={t("Loading")}
               loading={isProjectsFetching}
               required
+              fullWidth
             />
-            <div className={classes.route} onClick={handleRouteNavigate("project")}>
+            <Button onClick={handleRouteNavigate("project")}>
               <EditIcon />
-            </div>
+            </Button>
           </div>
 
-          <div className={classes.route} onClick={handleRouteNavigate("board")}>
+          <Button className={classes.route} onClick={handleRouteNavigate("board")}>
             {t("Board")}
-          </div>
-          <div className={classes.route} onClick={handleRouteNavigate("backlog")}>
+          </Button>
+          <Button className={classes.route} onClick={handleRouteNavigate("backlog")}>
             {t("Backlog")}
-          </div>
+          </Button>
           <ButtonMenu label={t("Create")}>
             <MenuItem onClick={handleTaskCreate} disableRipple>
               {t("Task")}
@@ -143,7 +147,9 @@ const MainLayout: FC = () => {
           </MenuItem>
         </AvatarMenu>
       </GlassContainer>
-      <Outlet />
+      <div className={classes.outletContainer}>
+        <Outlet />
+      </div>
     </>
   );
 };
