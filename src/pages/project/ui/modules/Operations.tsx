@@ -8,7 +8,6 @@ import { compact } from "lodash";
 
 import { Project, ProjectState, useAddProjectMutation, useUpdateProjectMutation } from "@/entities/project";
 import { useAppSelector, useEditorSlice } from "@/shared/store";
-import { commonClasses } from "@/shared/styles";
 
 type Props = {
   storeKey: string;

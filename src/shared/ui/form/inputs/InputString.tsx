@@ -2,6 +2,21 @@ import React, { FC, memo, useEffect, useState } from "react";
 
 import { TextField, TextFieldProps } from "@mui/material";
 
+const InputStringStyles = {
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      border: `1px solid rgba(255,255,255,0.05)`,
+      transition: "border .2s",
+    },
+    "&:hover fieldset": {
+      border: `1px solid rgba(255,255,255,0.4)`,
+    },
+    "&.Mui-focused fieldset": {
+      border: `1px solid rgba(255,255,255,0.4)`,
+    },
+  },
+};
+
 export type InputStringProps = Omit<TextFieldProps, "value" | "onChange" | "error" | "helperText"> & {
   value: string | null;
   onChange: (newValue: string | null) => void;
@@ -29,7 +44,7 @@ const InputString: FC<InputStringProps> = ({ value, onChange, validate, disabled
       error={!!errorText || (required && !value)}
       helperText={errorText}
       disabled={disabled}
-      sx={sx}
+      sx={{ ...sx, ...InputStringStyles }}
       {...restProps}
     />
   );

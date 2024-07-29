@@ -3,7 +3,6 @@ import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 import { GlassContainer, InputSelect } from "@/shared/ui";
-import { commonClasses } from "@/shared/styles";
 import { useSavedState } from "@/shared/store";
 import { backgroundImagesOptions, Settings, SETTINGS_PERSIST_KEY } from "@/entities/settings";
 
@@ -23,10 +22,10 @@ const SettingsPage: FC<Props> = ({ storeKey }) => {
   };
 
   return (
-    <GlassContainer className={commonClasses.container}>
+    <GlassContainer className="pageContainer">
       <Grid container direction="column" sx={{ gap: "32px" }}>
-        <Grid item xs={12} className={commonClasses.title}>
-          {t("Settings")}
+        <Grid item xs={12}>
+          <h2>{t("Settings")}</h2>
         </Grid>
         {needReload && (
           <Grid item xs={12} style={{ fontSize: "20px" }}>

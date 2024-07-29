@@ -2,19 +2,8 @@
   position: relative;
   border-radius: 10px;
   padding: 15px;
-  backdrop-filter: blur(50px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   overflow: visible;
 }
-
-//.containers:before {
-//    position: absolute;
-//    modules: '';
-//    left: 0;
-//    top: 0;
-//    width: 100%;
-//    height: 100%;
-//    background-color: rgba(40, 40, 40, 0.65);
-//    filter: blur(2px);
-//    border-radius: 10px;
-//    z-index: -1;
-//}

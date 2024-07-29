@@ -11,7 +11,6 @@ import {
   useProjectIdFromPath,
 } from "@/entities/project";
 import { GlassContainer } from "@/shared/ui";
-import { commonClasses } from "@/shared/styles";
 
 import Content from "./modules/Content";
 import Operations from "./modules/Operations";
@@ -36,7 +35,7 @@ const ProjectPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
   }, [_id, fetchDetails, mode, setProject, t]);
 
   return (
-    <GlassContainer className={commonClasses.pageContainer}>
+    <GlassContainer className="pageContainer">
       <Grid container direction="column" sx={{ gap: "30px" }}>
         <Operations storeKey={storeKey} mode={mode} />
         <Content storeKey={storeKey} />
