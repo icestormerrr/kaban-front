@@ -53,7 +53,7 @@ const Content: FC<Props> = ({ storeKey }) => {
           <FieldList type="input" label={t("Sprint")} storeKey={storeKey} property="sprints" required />
         </Grid>
         <Grid item lg={3} md={6} xs={12}>
-          <FieldList type="input" label={t("Stage")} storeKey={storeKey} property="stages" required />
+          <FieldList type="input" label={t("Stage")} storeKey={storeKey} property="stages" required useMovingElements />
         </Grid>
         <Grid item lg={3} md={6} xs={12}>
           <InputList

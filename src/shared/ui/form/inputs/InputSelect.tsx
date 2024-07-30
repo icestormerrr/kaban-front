@@ -2,26 +2,14 @@ import React, { FC, SyntheticEvent, useEffect, useState } from "react";
 
 import { Autocomplete, TextField } from "@mui/material";
 
-const autocompleteStyleSmall = {
-  maxWidth: 400,
-  minWidth: 100,
+const autocompleteSmallStyles = {
   width: "100%",
   "& .MuiInputBase-root": {
     padding: "0 0 0 5px",
-    borderRadius: "10px",
   },
   "& .MuiInputLabel-root": {
     fontSize: 14,
     marginTop: -0.75,
-  },
-};
-
-const autocompleteStyleLarge = {
-  maxWidth: 1000,
-  minWidth: 100,
-  width: "100%",
-  "& .MuiInputBase-root": {
-    borderRadius: "10px",
   },
 };
 
@@ -42,6 +30,7 @@ export type InputSelectProps = {
   loading?: boolean;
   required?: boolean;
   fullWidth?: boolean;
+  placeholder?: string;
 };
 
 const InputSelect: FC<InputSelectProps> = ({
@@ -68,7 +57,7 @@ const InputSelect: FC<InputSelectProps> = ({
     <Autocomplete
       {...restProps}
       disableClearable={required}
-      sx={size === "small" ? autocompleteStyleSmall : autocompleteStyleLarge}
+      sx={size === "small" ? autocompleteSmallStyles : {}}
       value={selectedOption}
       onChange={handleChange}
       options={options}
