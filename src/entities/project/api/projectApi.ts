@@ -18,8 +18,7 @@ export const projectsApi = createApi({
     }),
     getProjectDetails: build.query<Project, NApp.Entity>({
       query: (params) => ({
-        url: "/projects",
-        params,
+        url: `/projects/${params._id}`,
       }),
       providesTags: ["Project"],
     }),

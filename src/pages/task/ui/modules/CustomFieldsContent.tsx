@@ -16,10 +16,9 @@ const CustomFieldsContent: FC<NApp.PageProps> = ({ storeKey }) => {
             <Grid item md={4} xs={12} key={customField.name}>
               <StoreField
                 type={customField.type}
-                property={`custom.${customField._id}`}
+                property={`${customField._id}`}
                 label={customField.name}
                 storeKey={storeKey}
-                mode={"slider"}
               />
             </Grid>
           );

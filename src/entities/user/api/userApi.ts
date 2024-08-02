@@ -19,7 +19,7 @@ export const usersApi = createApi({
     }),
     getUser: build.query<User, NApp.Entity>({
       query: (params) => ({
-        url: `/users`,
+        url: `/users/${params._id}`,
         params,
       }),
       providesTags: ["User"],

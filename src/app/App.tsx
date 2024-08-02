@@ -15,7 +15,7 @@ import "./global/global.scss";
 
 const App: FC = () => {
   const { i18n } = useTranslation();
-  const [settings] = useSavedState<Settings>(SETTINGS_PERSIST_KEY, { backgroundImage: backgroundImagesOptions[0]._id });
+  const [settings] = useSavedState<Settings>(SETTINGS_PERSIST_KEY, { backgroundImage: backgroundImagesOptions[1]._id });
   useEffect(() => {
     i18n.changeLanguage && i18n.changeLanguage("ru");
   }, [i18n]);

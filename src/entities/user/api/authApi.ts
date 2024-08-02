@@ -22,7 +22,7 @@ export const authApi = createApi({
   endpoints: (build) => ({
     register: build.mutation<AuthResponse, UserRegisterQuery>({
       query: (newUser) => ({
-        url: "/auth/register",
+        url: "/users/register",
         method: "POST",
         body: newUser,
       }),
@@ -30,7 +30,7 @@ export const authApi = createApi({
     }),
     login: build.mutation<AuthResponse, UserLoginQuery>({
       query: (user) => ({
-        url: "/auth/login",
+        url: "/users/login",
         method: "POST",
         body: user,
       }),
@@ -38,7 +38,7 @@ export const authApi = createApi({
     }),
     logout: build.mutation<void, void>({
       query: () => ({
-        url: "/auth/logout",
+        url: "/users/logout",
         method: "POST",
       }),
       async onQueryStarted(_, { dispatch }) {

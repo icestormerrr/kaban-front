@@ -16,7 +16,7 @@ const StoreField: FC<StoreFieldProps> = ({ type, ...restProps }) => {
     case "number":
       return <FieldNumber {...(restProps as FieldNumberProps)} />;
     case "boolean":
-      return <FieldBoolean {...(restProps as FieldBooleanProps)} />;
+      return <FieldBoolean {...(restProps as FieldBooleanProps)} mode={"slider"} />;
     case "select":
       return <FieldSelect {...(restProps as FieldSelectProps)} />;
     default:

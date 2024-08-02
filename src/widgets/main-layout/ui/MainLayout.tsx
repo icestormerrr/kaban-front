@@ -6,8 +6,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useTranslation } from "react-i18next";
 
-import { useAppSelector, useEditorSlice, useSavedState } from "@/shared/store";
-import { PROJECT_ID_PERSIST_KEY, useGetProjectsQuery } from "@/entities/project";
+import { useAppSelector, useEditorSlice } from "@/shared/store";
+import { useGetProjectsQuery, useProjectIdFromPath } from "@/entities/project";
 import { useLazyGetCurrentUserQuery, useLogoutMutation, UserState } from "@/entities/user";
 import { AvatarMenu, ButtonMenu, GlassContainer, InputSelect } from "@/shared/ui";
 import { ACCESS_TOKEN_PERSIST_KEY } from "@/shared/const";
@@ -24,7 +24,7 @@ const MainLayout: FC = () => {
   const user = useAppSelector(userSelector) || {};
   const isAuth = localStorage.getItem(ACCESS_TOKEN_PERSIST_KEY);
 
-  const [projectId, setProjectId] = useSavedState<string | null>(PROJECT_ID_PERSIST_KEY, "");
+  const projectId = useProjectIdFromPath();
   const { data: projects = [], isFetching: isProjectsFetching } = useGetProjectsQuery(
     { userId: user._id ?? "" },
     { skip: !user._id },
@@ -37,7 +37,6 @@ const MainLayout: FC = () => {
   }, [fetchLogout, navigate]);
 
   const handleProjectChange = (newOption: NApp.NamedEntity | null) => {
-    setProjectId(newOption?._id ?? null);
     navigate(`/project/${newOption?._id}`);
   };
 
@@ -64,7 +63,6 @@ const MainLayout: FC = () => {
   };
 
   const handleProjectCreate = () => {
-    setProjectId("");
     navigate("/project");
   };
 
@@ -102,7 +100,7 @@ const MainLayout: FC = () => {
           <div className={classes.projectSelectContainer}>
             <InputSelect
               className={classes.projectSelect}
-              value={projectId}
+              value={projectId ?? null}
               options={projects}
               onChange={handleProjectChange}
               label={t("Project")}

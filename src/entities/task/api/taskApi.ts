@@ -19,7 +19,7 @@ export const tasksApi = createApi({
     }),
     getTask: build.query<Task, NApp.Entity>({
       query: (params) => ({
-        url: `/tasks`,
+        url: `/tasks/${params._id}`,
         params,
       }),
       providesTags: ["Task"],

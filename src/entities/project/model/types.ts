@@ -17,4 +17,4 @@ export type ProjectCustomField = NApp.NamedEntity & {
   required: boolean;
 };
 
-export type ProjectFilter = { userId?: string };
+export type ProjectFilter = { userId: string };
