@@ -11,7 +11,7 @@ type Props = {
   storeKey: string;
 };
 
-const Content: FC<Props> = ({ storeKey }) => {
+const TaskFields: FC<Props> = ({ storeKey }) => {
   const { t } = useTranslation();
 
   const projectId = useProjectIdFromPath();
@@ -20,10 +20,7 @@ const Content: FC<Props> = ({ storeKey }) => {
 
   return (
     <>
-      <Grid item md={12} xs={12}>
-        <FieldString label={t("Name")} storeKey={storeKey} property="name" fullWidth required />
-      </Grid>
-      <Grid item md={4} xs={12}>
+      <Grid item md={3} xs={12}>
         <FieldSelect
           label={t("Stage")}
           storeKey={storeKey}
@@ -32,26 +29,26 @@ const Content: FC<Props> = ({ storeKey }) => {
           required
         />
       </Grid>
-      <Grid item md={4} xs={12}>
+      <Grid item md={3} xs={12}>
         <FieldSelect label={t("Executor")} storeKey={storeKey} property="executorId" options={users ?? []} required />
       </Grid>
-      <Grid item md={4} xs={12}>
+      <Grid item md={3} xs={12}>
         <FieldSelect label={t("Epic")} options={project?.epics ?? []} storeKey={storeKey} property="epicId" />
       </Grid>
-      <Grid item md={4} xs={12}>
+      <Grid item md={3} xs={12}>
         <FieldSelect label={t("Status")} storeKey={storeKey} property="status" options={TaskStatusOptions} required />
       </Grid>
-      <Grid item md={4} xs={12}>
+      <Grid item md={3} xs={12}>
         <FieldSelect label={t("Author")} storeKey={storeKey} property="authorId" options={users ?? []} required />
       </Grid>
-      <Grid item md={4} xs={12}>
+      <Grid item md={3} xs={12}>
         <FieldSelect label={t("Sprint")} storeKey={storeKey} property="sprintId" options={project?.sprints ?? []} />
       </Grid>
-      <Grid item md={12} xs={12}>
+      <Grid item xs={12}>
         <FieldString label={t("Description")} storeKey={storeKey} property="description" multiline fullWidth required />
       </Grid>
     </>
   );
 };
 
-export default Content;
+export default TaskFields;

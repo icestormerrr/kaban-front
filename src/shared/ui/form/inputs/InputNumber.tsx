@@ -6,6 +6,7 @@ export type InputNumberProps = NApp.ControlledInputProps<number> &
     min?: number;
     max?: number;
     mode?: "int" | "float";
+    size?: "small" | "medium";
   };
 
 const InputNumber: FC<InputNumberProps> = ({
@@ -18,7 +19,7 @@ const InputNumber: FC<InputNumberProps> = ({
   min,
   max,
   mode = "int",
-
+  size = "small",
   fullWidth = true,
 }) => {
   const [errorText, setErrorText] = useState<string>();
@@ -45,6 +46,7 @@ const InputNumber: FC<InputNumberProps> = ({
       error={!!errorText || (required && !value)}
       helperText={errorText}
       fullWidth={fullWidth}
+      size={size}
       InputProps={{
         inputProps: {
           min,

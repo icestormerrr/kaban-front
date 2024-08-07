@@ -2,17 +2,6 @@ import React, { FC, SyntheticEvent, useEffect, useState } from "react";
 
 import { Autocomplete, TextField } from "@mui/material";
 
-const autocompleteSmallStyles = {
-  width: "100%",
-  "& .MuiInputBase-root": {
-    padding: "0 0 0 5px",
-  },
-  "& .MuiInputLabel-root": {
-    fontSize: 14,
-    marginTop: -0.75,
-  },
-};
-
 const getOptionLabel = (option: Option) => option.name;
 const isOptionEqualToValue = (option: Option, selectedValue: Option) => option._id === selectedValue._id;
 
@@ -22,7 +11,7 @@ export type InputSelectProps = {
   value: string | null;
   options: Option[];
   onChange: (newOption: Option | null) => void;
-  size?: "small" | "large";
+  size?: "small" | "medium";
   label?: string;
   className?: string;
   disable?: boolean;
@@ -55,15 +44,15 @@ const InputSelect: FC<InputSelectProps> = ({
 
   return (
     <Autocomplete
-      {...restProps}
       disableClearable={required}
-      sx={size === "small" ? autocompleteSmallStyles : {}}
       value={selectedOption}
       onChange={handleChange}
       options={options}
       isOptionEqualToValue={isOptionEqualToValue}
       getOptionLabel={getOptionLabel}
       renderInput={(params) => <TextField {...params} label={label} error={required && !value} />}
+      size={size}
+      {...restProps}
     />
   );
 };

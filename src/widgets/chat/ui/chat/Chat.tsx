@@ -12,12 +12,13 @@ import { TMessage, Message } from "@/entities/message";
 import classes from "./Chat.module.scss";
 
 type Props = {
+  title: string;
   messages: TMessage[];
   omMessageCreate: (message: TMessage) => void;
   className?: string;
 };
 
-const Chat: FC<Props> = ({ messages, omMessageCreate, className }) => {
+const Chat: FC<Props> = ({ title, messages, omMessageCreate, className }) => {
   const { t } = useTranslation();
 
   const { entitySelector: userSelector } = useEditorSlice<User>("user");
@@ -33,7 +34,7 @@ const Chat: FC<Props> = ({ messages, omMessageCreate, className }) => {
   return (
     <>
       <Grid item>
-        <h2>{t("Comments")}</h2>
+        <h2>{title}</h2>
         <GlassButton
           variant="contained"
           onClick={handleMessageCreate}
@@ -49,7 +50,6 @@ const Chat: FC<Props> = ({ messages, omMessageCreate, className }) => {
             value={newMessage}
             onChange={(newMessage) => setNewMessage(newMessage)}
             label={t("Comment")}
-            rows={3}
             multiline
             fullWidth
           />

@@ -3,4 +3,7 @@
   flex-direction: column;
   gap: 20px;
   overflow-y: auto;
+  div {
+    width: fit-content;
+  }
 }

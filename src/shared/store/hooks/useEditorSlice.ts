@@ -20,7 +20,6 @@ export const useEditorSlice = <T>(storeKey: string, initialState?: T) => {
   );
   const setProp = useCallback(
     <K extends keyof T>(property: K, value: T[K]) => {
-      console.log(property, value);
       dispatch(setEntityProperty({ storeKey, property, value }));
     },
     [dispatch, storeKey],

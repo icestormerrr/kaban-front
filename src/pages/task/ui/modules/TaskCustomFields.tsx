@@ -4,7 +4,7 @@ import { useGetProjectDetailsQuery, useProjectIdFromPath } from "@/entities/proj
 import { StoreField } from "@/shared/ui";
 import { Grid } from "@mui/material";
 
-const CustomFieldsContent: FC<NApp.PageProps> = ({ storeKey }) => {
+const TaskCustomFields: FC<NApp.PageProps> = ({ storeKey }) => {
   const projectId = useProjectIdFromPath();
   const { data: project } = useGetProjectDetailsQuery({ _id: projectId! });
 
@@ -13,12 +13,13 @@ const CustomFieldsContent: FC<NApp.PageProps> = ({ storeKey }) => {
       {project &&
         project.customFields.map((customField) => {
           return (
-            <Grid item md={4} xs={12} key={customField.name}>
+            <Grid item md={3} xs={12} key={customField.name}>
               <StoreField
                 type={customField.type}
                 property={`${customField._id}`}
                 label={customField.name}
                 storeKey={storeKey}
+                fullWidth
               />
             </Grid>
           );
@@ -27,4 +28,4 @@ const CustomFieldsContent: FC<NApp.PageProps> = ({ storeKey }) => {
   );
 };
 
-export default CustomFieldsContent;
+export default TaskCustomFields;

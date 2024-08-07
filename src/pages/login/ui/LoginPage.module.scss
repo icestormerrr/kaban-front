@@ -4,6 +4,7 @@
   justify-content: center;
   padding-top: 50px;
   box-sizing: border-box;
+  height: 100vh;
 }
 
 .form {
@@ -16,8 +17,6 @@
   padding: 84px 64px 32px 64px;
   max-width: 700px;
   max-height: 615px;
-  height: 100%;
-  width: 100%;
   background-color: rgba(255, 255, 255, 0.1);
 }
 .logo {
@@ -52,12 +51,13 @@
   cursor: pointer;
 }
 
-@media (max-width: 600px)  {
+@media (max-width: 600px) {
   .form {
     width: 90%;
     height: 90%;
+    padding: 10px 15px;
   }
   .button {
-    width: auto;
+    width: 100%;
   }
 }

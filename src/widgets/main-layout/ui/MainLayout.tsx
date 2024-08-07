@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { Button, ListItemIcon, MenuItem } from "@mui/material";
+import { Button, IconButton, ListItemIcon, MenuItem } from "@mui/material";
 import { Settings, Logout } from "@mui/icons-material";
 import EditIcon from "@mui/icons-material/Edit";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -85,7 +85,7 @@ const MainLayout: FC = () => {
       <GlassContainer className={classes.headerContainer}>
         <div className={classes.logoContainer}>
           <Logo onClick={handleHomeNavigate} style={{ cursor: "pointer", height: 38 }} />
-          <Button
+          <IconButton
             onClick={toggleLayoutDetails}
             style={{
               transform: `rotate(${showLayoutDetails ? 0 : 180}deg)`,
@@ -93,7 +93,7 @@ const MainLayout: FC = () => {
             }}
           >
             <ArrowForwardIcon />
-          </Button>
+          </IconButton>
         </div>
 
         <nav className={classes.navContainer} style={{ display: showLayoutDetails ? "flex" : "none" }}>
@@ -109,9 +109,9 @@ const MainLayout: FC = () => {
               required
               fullWidth
             />
-            <Button onClick={handleRouteNavigate("project")}>
+            <IconButton onClick={handleRouteNavigate("project")}>
               <EditIcon />
-            </Button>
+            </IconButton>
           </div>
 
           <Button className={classes.route} onClick={handleRouteNavigate("board")}>

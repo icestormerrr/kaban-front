@@ -16,21 +16,11 @@ export type InputListProps = {
   onListChange: (newList: NApp.NamedEntity[]) => void;
   options?: NApp.NamedEntity[];
   label: string;
-  variant?: "filled" | "outlined" | "standard";
   required?: boolean;
   useMovingElements?: boolean;
 };
 
-const InputList: FC<InputListProps> = ({
-  type,
-  list,
-  onListChange,
-  options,
-  label,
-  required,
-  variant,
-  useMovingElements,
-}) => {
+const InputList: FC<InputListProps> = ({ type, list, onListChange, options, label, required, useMovingElements }) => {
   const [value, setValue] = useState<string | null>(null);
 
   const handleInputAdd = () => {
@@ -70,7 +60,6 @@ const InputList: FC<InputListProps> = ({
             value={value}
             onChange={(v) => setValue(v)}
             label={label}
-            variant={variant}
             fullWidth
             required={required ? !list.length : false}
             InputProps={{
@@ -91,7 +80,6 @@ const InputList: FC<InputListProps> = ({
             value={null}
             onChange={handleSelect}
             required={required ? !list.length : false}
-            size="large"
           />
         )}
       </div>

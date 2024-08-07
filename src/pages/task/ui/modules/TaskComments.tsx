@@ -1,4 +1,6 @@
 import React, { FC } from "react";
+import { useTranslation } from "react-i18next";
+import { Grid } from "@mui/material";
 
 import { Chat } from "@/widgets/chat";
 import { useAppSelector, useEditorSlice } from "@/shared/store";
@@ -11,7 +13,8 @@ type Props = {
   storeKey: string;
 };
 
-const Comments: FC<Props> = ({ storeKey }) => {
+const TaskComments: FC<Props> = ({ storeKey }) => {
+  const { t } = useTranslation();
   const { setEntityProperty: setTaskProperty, getPropertySelector: getTaskPropertySelector } =
     useEditorSlice<TaskState>(storeKey);
 
@@ -20,7 +23,16 @@ const Comments: FC<Props> = ({ storeKey }) => {
     setTaskProperty("messages", [...(messages ?? []), newMessage]);
   };
 
-  return <Chat messages={messages ?? []} omMessageCreate={handleCommentCreate} className={classes.commentsContainer} />;
+  return (
+    <Grid container item xs={12} spacing={4} display="flex" flexDirection="column" justifyContent="flex-start">
+      <Chat
+        title={t("Comments")}
+        messages={messages ?? []}
+        omMessageCreate={handleCommentCreate}
+        className={classes.commentsContainer}
+      />
+    </Grid>
+  );
 };
 
-export default Comments;
+export default TaskComments;

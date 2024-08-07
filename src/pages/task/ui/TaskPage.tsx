@@ -8,10 +8,10 @@ import { useEditorSlice } from "@/shared/store";
 import { initialTaskState, TaskState, useLazyGetTaskQuery } from "@/entities/task";
 import { GlassContainer } from "@/shared/ui";
 
-import Content from "./modules/Content";
-import Operations from "./modules/Operations";
-import Comments from "./modules/Comments";
-import CustomFieldsContent from "./modules/CustomFieldsContent";
+import TaskFields from "./modules/TaskFields";
+import TaskOperations from "./modules/TaskOperations";
+import TaskComments from "./modules/TaskComments";
+import TaskCustomFields from "./modules/TaskCustomFields";
 import classes from "./TaskPage.module.scss";
 
 const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
@@ -34,23 +34,12 @@ const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
 
   return (
     <GlassContainer className={classes.container}>
-      <Grid container spacing={4}>
-        <Grid container item md={8} xs={12} spacing={4}>
-          <Operations storeKey={storeKey} mode={mode} />
-          <Content storeKey={storeKey} />
-          <CustomFieldsContent storeKey={storeKey} />
-        </Grid>
-        <Grid
-          container
-          item
-          md={4}
-          xs={12}
-          spacing={4}
-          display="flex"
-          flexDirection="column"
-          justifyContent="flex-start"
-        >
-          <Comments storeKey={storeKey} />
+      <Grid container spacing={4} direction="column" justifyContent="flex-start" alignItems="center">
+        <Grid container item xs={12} spacing={2}>
+          <TaskOperations storeKey={storeKey} mode={mode} />
+          <TaskFields storeKey={storeKey} />
+          <TaskCustomFields storeKey={storeKey} />
+          <TaskComments storeKey={storeKey} />
         </Grid>
       </Grid>
     </GlassContainer>
