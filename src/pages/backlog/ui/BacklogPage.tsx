@@ -4,14 +4,14 @@ import { Grid } from "@mui/material";
 import { GlassContainer } from "@/shared/ui";
 
 import Operations from "./modules/Operations";
-import BacklogGrid from "./modules/BacklogGrid";
+import TaskGrid from "./modules/TaskGrid";
 
 const BacklogPage = () => {
   return (
     <GlassContainer className="pageContainer">
       <Grid container direction="column" sx={{ gap: "30px" }}>
         <Operations />
-        <BacklogGrid />
+        <TaskGrid />
       </Grid>
     </GlassContainer>
   );

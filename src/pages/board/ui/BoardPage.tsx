@@ -5,8 +5,8 @@ import { useGetProjectDetailsQuery, useProjectIdFromPath } from "@/entities/proj
 import { TasksFilter, useGetTasksGridQuery } from "@/entities/task";
 import { GlassContainer } from "@/shared/ui";
 
-import BoardPanel from "./modules/board-panel/BoardPanel";
-import BoardStage from "./modules/board-stage/BoardStage";
+import FilterPanel from "./modules/filter-panel/FilterPanel";
+import Stage from "./modules/stage/Stage";
 import classes from "./BoardPage.module.scss";
 import { useSearchParams } from "react-router-dom";
 
@@ -45,11 +45,11 @@ const BoardPage: FC = () => {
 
   return (
     <div className={classes.container}>
-      <BoardPanel filter={filter} onFilterChange={handleFilterChange} />
+      <FilterPanel filter={filter} onFilterChange={handleFilterChange} />
       <GlassContainer className={classes.stageContainer}>
         {project &&
           project.stages.map((stage) => (
-            <BoardStage stage={stage} tasks={tasksGroupedByStageId[stage._id] ?? []} key={stage._id} />
+            <Stage stage={stage} tasks={tasksGroupedByStageId[stage._id] ?? []} key={stage._id} />
           ))}
       </GlassContainer>
     </div>

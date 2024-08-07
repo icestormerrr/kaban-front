@@ -4,7 +4,6 @@ import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { enqueueSnackbar } from "notistack";
 import { compact } from "lodash";
-import SaveIcon from "@mui/icons-material/Save";
 
 import { FieldString, GlassButton } from "@/shared/ui";
 import { useProjectIdFromPath } from "@/entities/project";
@@ -16,7 +15,7 @@ type Props = {
   mode: NApp.Mode;
 };
 
-const TaskOperations: FC<Props> = ({ storeKey, mode }) => {
+const Operations: FC<Props> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const projectId = useProjectIdFromPath();
@@ -77,4 +76,4 @@ const TaskOperations: FC<Props> = ({ storeKey, mode }) => {
   );
 };
 
-export default TaskOperations;
+export default Operations;

@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useGetTasksGridQuery, TasksGridItem } from "@/entities/task";
 import { useProjectIdFromPath } from "@/entities/project";
 
-const BacklogGrid = () => {
+const TaskGrid = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const projectId = useProjectIdFromPath();
@@ -53,9 +53,12 @@ const BacklogGrid = () => {
     [],
   );
 
-  const handleCellDoubleClick = useCallback((params: GridCellParams<TasksGridItem>) => {
-    navigate(`/project/${projectId}/task/${params.row._id}`);
-  }, []);
+  const handleCellDoubleClick = useCallback(
+    (params: GridCellParams<TasksGridItem>) => {
+      navigate(`/project/${projectId}/task/${params.row._id}`);
+    },
+    [navigate, projectId],
+  );
 
   return (
     <Box sx={{ width: "100%", height: "73vh" }}>
@@ -78,4 +81,4 @@ const BacklogGrid = () => {
   );
 };
 
-export default BacklogGrid;
+export default TaskGrid;

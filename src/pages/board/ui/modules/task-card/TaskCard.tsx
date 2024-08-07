@@ -5,9 +5,9 @@ import { Avatar, Chip } from "@mui/material";
 import { TasksGridItem, TaskStatusColorMap } from "@/entities/task";
 import { GlassContainer } from "@/shared/ui";
 
-import classes from "./BoardTask.module.scss";
+import classes from "./TaskCard.module.scss";
 
-const BoardTask: FC<TasksGridItem> = ({ _id, name, epicName, sprintName, executorName, status }) => {
+const TaskCard: FC<TasksGridItem> = ({ _id, name, epicName, sprintName, executorName, status }) => {
   const navigate = useNavigate();
 
   const handleTaskClick = () => {
@@ -27,4 +27,4 @@ const BoardTask: FC<TasksGridItem> = ({ _id, name, epicName, sprintName, executo
   );
 };
 
-export default memo(BoardTask);
+export default memo(TaskCard);

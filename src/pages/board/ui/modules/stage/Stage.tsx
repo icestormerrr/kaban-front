@@ -4,27 +4,27 @@ import { isEqual } from "lodash";
 
 import { TasksGridItem } from "@/entities/task";
 
-import BoardTask from "../board-task/BoardTask";
-import classes from "./BoardStage.module.scss";
+import TaskCard from "../task-card/TaskCard";
+import classes from "./Stage.module.scss";
 
 type Props = {
   stage: NApp.NamedEntity;
   tasks: TasksGridItem[];
 };
 
-const BoardStage: FC<Props> = ({ stage, tasks }) => {
+const Stage: FC<Props> = ({ stage, tasks }) => {
   return (
     <div className={classes.stage}>
       <div className={classes.stageTitle}>{stage.name.slice(0, 16)}</div>
       {tasks.map((task) => (
-        <BoardTask {...task} key={task._id} />
+        <TaskCard {...task} key={task._id} />
       ))}
     </div>
   );
 };
 
 export default memo(
-  BoardStage,
+  Stage,
   (prevProps, nextProps) =>
     isEqual(prevProps.stage._id, nextProps.stage._id) && isEqual(nextProps.tasks, prevProps.tasks),
 );

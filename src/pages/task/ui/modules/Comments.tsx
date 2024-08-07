@@ -13,7 +13,7 @@ type Props = {
   storeKey: string;
 };
 
-const TaskComments: FC<Props> = ({ storeKey }) => {
+const Comments: FC<Props> = ({ storeKey }) => {
   const { t } = useTranslation();
   const { setEntityProperty: setTaskProperty, getPropertySelector: getTaskPropertySelector } =
     useEditorSlice<TaskState>(storeKey);
@@ -35,4 +35,4 @@ const TaskComments: FC<Props> = ({ storeKey }) => {
   );
 };
 
-export default TaskComments;
+export default Comments;

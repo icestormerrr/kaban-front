@@ -10,14 +10,14 @@ import { TasksFilter } from "@/entities/task";
 import { ConfirmModal, GlassContainer, InputSelect, InputString } from "@/shared/ui";
 import { useSavedState } from "@/shared/store";
 
-import classes from "./BoardPanel.module.scss";
+import classes from "./FilterPanel.module.scss";
 
 type Props = {
   filter: TasksFilter;
   onFilterChange(prop: string, newVal?: string): void;
 };
 
-const BoardPanel: FC<Props> = ({ filter, onFilterChange }) => {
+const FilterPanel: FC<Props> = ({ filter, onFilterChange }) => {
   const { t } = useTranslation();
   const projectId = useProjectIdFromPath();
 
@@ -110,4 +110,4 @@ const BoardPanel: FC<Props> = ({ filter, onFilterChange }) => {
   );
 };
 
-export default memo(BoardPanel);
+export default memo(FilterPanel);

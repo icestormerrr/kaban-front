@@ -8,10 +8,10 @@ import { useEditorSlice } from "@/shared/store";
 import { initialTaskState, TaskState, useLazyGetTaskQuery } from "@/entities/task";
 import { GlassContainer } from "@/shared/ui";
 
-import TaskFields from "./modules/TaskFields";
-import TaskOperations from "./modules/TaskOperations";
-import TaskComments from "./modules/TaskComments";
-import TaskCustomFields from "./modules/TaskCustomFields";
+import Fields from "./modules/Fields";
+import Operations from "./modules/Operations";
+import Comments from "./modules/Comments";
+import CustomFields from "./modules/CustomFields";
 import classes from "./TaskPage.module.scss";
 
 const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
@@ -36,10 +36,10 @@ const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
     <GlassContainer className={classes.container}>
       <Grid container spacing={4} direction="column" justifyContent="flex-start" alignItems="center">
         <Grid container item xs={12} spacing={2}>
-          <TaskOperations storeKey={storeKey} mode={mode} />
-          <TaskFields storeKey={storeKey} />
-          <TaskCustomFields storeKey={storeKey} />
-          <TaskComments storeKey={storeKey} />
+          <Operations storeKey={storeKey} mode={mode} />
+          <Fields storeKey={storeKey} />
+          <CustomFields storeKey={storeKey} />
+          <Comments storeKey={storeKey} />
         </Grid>
       </Grid>
     </GlassContainer>

@@ -1,5 +1,6 @@
 import React, { FC } from "react";
-import { Grid } from "@mui/material";
+import { Grid, InputAdornment } from "@mui/material";
+import { AccountCircle } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 
 import { FieldSelect, FieldString } from "@/shared/ui";
@@ -11,7 +12,7 @@ type Props = {
   storeKey: string;
 };
 
-const TaskFields: FC<Props> = ({ storeKey }) => {
+const Fields: FC<Props> = ({ storeKey }) => {
   const { t } = useTranslation();
 
   const projectId = useProjectIdFromPath();
@@ -51,4 +52,4 @@ const TaskFields: FC<Props> = ({ storeKey }) => {
   );
 };
 
-export default TaskFields;
+export default Fields;

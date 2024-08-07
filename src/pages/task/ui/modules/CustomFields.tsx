@@ -4,7 +4,7 @@ import { useGetProjectDetailsQuery, useProjectIdFromPath } from "@/entities/proj
 import { StoreField } from "@/shared/ui";
 import { Grid } from "@mui/material";
 
-const TaskCustomFields: FC<NApp.PageProps> = ({ storeKey }) => {
+const CustomFields: FC<NApp.PageProps> = ({ storeKey }) => {
   const projectId = useProjectIdFromPath();
   const { data: project } = useGetProjectDetailsQuery({ _id: projectId! });
 
@@ -28,4 +28,4 @@ const TaskCustomFields: FC<NApp.PageProps> = ({ storeKey }) => {
   );
 };
 
-export default TaskCustomFields;
+export default CustomFields;
