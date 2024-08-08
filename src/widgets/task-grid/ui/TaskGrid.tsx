@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { FC, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
@@ -7,7 +7,11 @@ import { useTranslation } from "react-i18next";
 import { useGetTasksGridQuery, TasksGridItem } from "@/entities/task";
 import { useProjectIdFromPath } from "@/entities/project";
 
-const TaskGrid = () => {
+type Props = {
+  height: string;
+};
+
+const TaskGrid: FC<Props> = ({ height }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const projectId = useProjectIdFromPath();
@@ -61,7 +65,7 @@ const TaskGrid = () => {
   );
 
   return (
-    <Box sx={{ width: "100%", height: "73vh" }}>
+    <Box sx={{ width: "100%", height }}>
       <DataGrid
         rows={rows}
         columns={columns}

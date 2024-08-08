@@ -5,8 +5,8 @@ import { GlassContainer } from "@/shared/ui";
 
 import { ReactComponent as Logo } from "@/widgets/main-layout/assets/logo.svg";
 import classes from "./LoginPage.module.scss";
-import RegisterContent from "./modules/RegisterContent";
-import LoginContent from "./modules/LoginContent";
+import RegisterFields from "./modules/RegisterFields";
+import LoginFields from "./modules/LoginFields";
 import Operations from "./modules/Operations";
 
 const LoginPage: FC<NApp.PageProps & { mode: "login" | "register" }> = ({ storeKey, mode }) => {
@@ -20,8 +20,8 @@ const LoginPage: FC<NApp.PageProps & { mode: "login" | "register" }> = ({ storeK
           <div className={classes.title}>{mode === "login" ? t("Login") : t("Register")}</div>
           <div className={classes.description}>{t("Welcome back, please, login to your account")}</div>
         </div>
-        {mode === "register" && <RegisterContent storeKey={storeKey} />}
-        <LoginContent storeKey={storeKey} />
+        {mode === "register" && <RegisterFields storeKey={storeKey} />}
+        <LoginFields storeKey={storeKey} />
         <Operations storeKey={storeKey} mode={mode} />
       </GlassContainer>
     </div>

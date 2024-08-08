@@ -11,7 +11,7 @@ type Props = {
   storeKey: string;
 };
 
-const Content: FC<Props> = ({ storeKey }) => {
+const Fields: FC<Props> = ({ storeKey }) => {
   const { t } = useTranslation();
 
   const { getPropertySelector, setEntityProperty } = useEditorSlice<ProjectState>(storeKey);
@@ -75,4 +75,4 @@ const Content: FC<Props> = ({ storeKey }) => {
   );
 };
 
-export default Content;
+export default Fields;

@@ -14,6 +14,7 @@ import { ACCESS_TOKEN_PERSIST_KEY } from "@/shared/const";
 
 import { ReactComponent as Logo } from "@/widgets/main-layout/assets/logo.svg";
 import classes from "./MainLayout.module.scss";
+import { enqueueSnackbar } from "notistack";
 
 const MainLayout: FC = () => {
   const navigate = useNavigate();

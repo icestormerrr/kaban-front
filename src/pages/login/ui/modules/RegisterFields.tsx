@@ -5,7 +5,7 @@ import { InputString } from "@/shared/ui";
 import { useAppSelector, useEditorSlice } from "@/shared/store";
 import { UserState } from "@/entities/user";
 
-const RegisterContent: FC<NApp.PageProps> = ({ storeKey }) => {
+const RegisterFields: FC<NApp.PageProps> = ({ storeKey }) => {
   const { t } = useTranslation();
   const { entitySelector: userSelector, setEntityProperty: setUserProperty } = useEditorSlice<UserState>(storeKey);
   const { name } = useAppSelector(userSelector) || {};
@@ -17,4 +17,4 @@ const RegisterContent: FC<NApp.PageProps> = ({ storeKey }) => {
   );
 };
 
-export default RegisterContent;
+export default RegisterFields;

@@ -52,5 +52,6 @@
     "Add at least one": "Добавьте хотя бы один",
     "Saving error": "Ошибка сохранения",
     "Server error": "Ошибка сервера",
-    "A reboot is required to apply the changes": "Для применения изменений требуется перезагрузка"
+    "A reboot is required to apply the changes": "Для применения изменений требуется перезагрузка",
+    "Please select a project": "Пожалуйста выберите проект"
 }
