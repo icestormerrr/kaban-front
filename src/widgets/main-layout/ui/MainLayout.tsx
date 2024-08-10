@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Button, IconButton, ListItemIcon, MenuItem } from "@mui/material";
 import { Settings, Logout } from "@mui/icons-material";
 import EditIcon from "@mui/icons-material/Edit";
@@ -10,7 +10,6 @@ import { useAppSelector, useEditorSlice } from "@/shared/store";
 import { useGetProjectsQuery, useProjectIdFromPath } from "@/entities/project";
 import { useLazyGetCurrentUserQuery, useLogoutMutation, UserState } from "@/entities/user";
 import { AvatarMenu, ButtonMenu, GlassContainer, InputSelect } from "@/shared/ui";
-import { ACCESS_TOKEN_PERSIST_KEY } from "@/shared/const";
 
 import Logo from "@/widgets/main-layout/assets/logo.svg?react";
 import classes from "./MainLayout.module.scss";
@@ -18,11 +17,12 @@ import classes from "./MainLayout.module.scss";
 const MainLayout: FC = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { pathname } = useLocation();
   const [showLayoutDetails, setShowLayoutDetails] = useState(true);
 
   const { entitySelector: userSelector, setEntity: setUser } = useEditorSlice<UserState>("user");
   const user = useAppSelector(userSelector) || {};
-  const isAuth = localStorage.getItem(ACCESS_TOKEN_PERSIST_KEY);
+  const isAuth = !!user.name;
 
   const projectId = useProjectIdFromPath();
   const { data: projects = [], isFetching: isProjectsFetching } = useGetProjectsQuery(
@@ -37,10 +37,12 @@ const MainLayout: FC = () => {
   }, [fetchLogout, navigate]);
 
   const handleProjectChange = (newOption: NApp.NamedEntity | null) => {
-    navigate(`/project/${newOption?._id}`);
+    const pathArray = pathname.split("/");
+    pathArray[2] = newOption?._id ?? "";
+    navigate(pathArray.join("/"));
   };
 
-  const handleRouteNavigate = useCallback(
+  const handleProjectRouteNavigate = useCallback(
     (route: string) => {
       if (route === "project") {
         return () => navigate(`/project/${projectId}`);
@@ -103,21 +105,21 @@ const MainLayout: FC = () => {
               value={projectId ?? null}
               options={projects}
               onChange={handleProjectChange}
-              label={t("Project")}
+              placeholder={t("Project")}
               loadingText={t("Loading")}
               loading={isProjectsFetching}
               required
               fullWidth
             />
-            <IconButton onClick={handleRouteNavigate("project")}>
+            <IconButton onClick={handleProjectRouteNavigate("project")}>
               <EditIcon />
             </IconButton>
           </div>
 
-          <Button className={classes.route} onClick={handleRouteNavigate("board")}>
+          <Button className={classes.route} onClick={handleProjectRouteNavigate("board")}>
             {t("Board")}
           </Button>
-          <Button className={classes.route} onClick={handleRouteNavigate("backlog")}>
+          <Button className={classes.route} onClick={handleProjectRouteNavigate("backlog")}>
             {t("Backlog")}
           </Button>
           <ButtonMenu label={t("Create")}>

@@ -24,6 +24,7 @@ const InputSelect: FC<InputSelectProps> = ({
   label,
   size = "small",
   required,
+  placeholder,
   showBorder = false,
   ...restProps
 }) => {
@@ -55,7 +56,9 @@ const InputSelect: FC<InputSelectProps> = ({
       isOptionEqualToValue={isOptionEqualToValue}
       getOptionLabel={getOptionLabel}
       sx={styles}
-      renderInput={(params) => <TextField {...params} label={label} error={required && !value} />}
+      renderInput={(params) => (
+        <TextField {...params} label={label} placeholder={placeholder} error={required && !value} />
+      )}
       size={size}
       {...restProps}
     />
