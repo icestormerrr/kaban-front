@@ -1,6 +1,5 @@
 import React, { FC } from "react";
-import { Grid, InputAdornment } from "@mui/material";
-import { AccountCircle } from "@mui/icons-material";
+import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 import { FieldSelect, FieldString } from "@/shared/ui";
@@ -20,35 +19,57 @@ const Fields: FC<Props> = ({ storeKey }) => {
   const { data: users } = useGetUsersQuery({ usersIds: project?.users }, { skip: !project?.users });
 
   return (
-    <>
-      <Grid item md={3} xs={12}>
-        <FieldSelect
-          label={t("Stage")}
-          storeKey={storeKey}
-          property="stageId"
-          options={project?.stages ?? []}
-          required
-        />
+    <Grid container item xs={12}>
+      <Grid container item md={9} xs={12}>
+        <Grid item xs={12}>
+          <FieldString
+            label={t("Description")}
+            storeKey={storeKey}
+            property="description"
+            multiline
+            fullWidth
+            showBorder
+            required
+          />
+        </Grid>
       </Grid>
-      <Grid item md={3} xs={12}>
-        <FieldSelect label={t("Executor")} storeKey={storeKey} property="executorId" options={users ?? []} required />
+      <Grid
+        container
+        item
+        md={3}
+        xs={12}
+        rowSpacing={2}
+        display="flex"
+        flexDirection="column"
+        justifyContent="flex-start"
+      >
+        <Grid item>
+          <FieldSelect
+            label={t("Stage")}
+            storeKey={storeKey}
+            property="stageId"
+            options={project?.stages ?? []}
+            required
+          />
+        </Grid>
+        <Grid item>
+          <FieldSelect label={t("Status")} storeKey={storeKey} property="status" options={TaskStatusOptions} required />
+        </Grid>
+        <Grid item>
+          <FieldSelect label={t("Executor")} storeKey={storeKey} property="executorId" options={users ?? []} required />
+        </Grid>
+
+        <Grid item>
+          <FieldSelect label={t("Author")} storeKey={storeKey} property="authorId" options={users ?? []} required />
+        </Grid>
+        <Grid item>
+          <FieldSelect label={t("Epic")} options={project?.epics ?? []} storeKey={storeKey} property="epicId" />
+        </Grid>
+        <Grid item>
+          <FieldSelect label={t("Sprint")} storeKey={storeKey} property="sprintId" options={project?.sprints ?? []} />
+        </Grid>
       </Grid>
-      <Grid item md={3} xs={12}>
-        <FieldSelect label={t("Epic")} options={project?.epics ?? []} storeKey={storeKey} property="epicId" />
-      </Grid>
-      <Grid item md={3} xs={12}>
-        <FieldSelect label={t("Status")} storeKey={storeKey} property="status" options={TaskStatusOptions} required />
-      </Grid>
-      <Grid item md={3} xs={12}>
-        <FieldSelect label={t("Author")} storeKey={storeKey} property="authorId" options={users ?? []} required />
-      </Grid>
-      <Grid item md={3} xs={12}>
-        <FieldSelect label={t("Sprint")} storeKey={storeKey} property="sprintId" options={project?.sprints ?? []} />
-      </Grid>
-      <Grid item xs={12}>
-        <FieldString label={t("Description")} storeKey={storeKey} property="description" multiline fullWidth required />
-      </Grid>
-    </>
+    </Grid>
   );
 };
 

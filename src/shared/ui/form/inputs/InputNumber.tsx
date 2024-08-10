@@ -1,5 +1,5 @@
 import React, { FC, memo, useEffect, useState } from "react";
-import { TextField } from "@mui/material";
+import { SxProps, TextField } from "@mui/material";
 
 export type InputNumberProps = NApp.ControlledInputProps<number> &
   NApp.UncontrolledInputProps<number> & {
@@ -16,17 +16,35 @@ const InputNumber: FC<InputNumberProps> = ({
   validate,
   required,
   disabled,
+  showBorder = false,
   min,
   max,
   mode = "int",
   size = "small",
   fullWidth = true,
 }) => {
-  const [errorText, setErrorText] = useState<string>();
+  const [errorText, setErrorText] = useState<string | null>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange && onChange(Number(event.target.value));
+    if (onChange) {
+      onChange(Number(event.target.value));
+    }
   };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const invalidKeys = ["+", "-"].concat(mode == "int" ? [",", "."] : []);
+    if (invalidKeys.includes(event.key)) {
+      event.preventDefault();
+    }
+  };
+
+  const styles: SxProps = showBorder
+    ? {
+        "& .MuiInputBase-root": {
+          border: `1px solid rgba(255,255,255,0.2)`,
+        },
+      }
+    : {};
 
   useEffect(() => {
     if (validate) {
@@ -47,17 +65,13 @@ const InputNumber: FC<InputNumberProps> = ({
       helperText={errorText}
       fullWidth={fullWidth}
       size={size}
+      sx={styles}
       InputProps={{
         inputProps: {
           min,
           max,
           step: mode == "int" ? 1 : 0.1,
-          onKeyDown: (event) => {
-            const invalidKeys = ["+", "-"].concat(mode == "int" ? [",", "."] : []);
-            if (invalidKeys.includes(event.key)) {
-              event.preventDefault();
-            }
-          },
+          onKeyDown: handleKeyDown,
         },
       }}
     />

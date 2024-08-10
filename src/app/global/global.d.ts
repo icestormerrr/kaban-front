@@ -33,10 +33,14 @@ declare namespace NApp {
 
   export type UncontrolledInputProps<T> = {
     label?: string;
-    validate?: (value: T | null) => string | undefined;
+    validate?: (value: T | null) => string | null;
     required?: boolean;
     disabled?: boolean;
     fullWidth?: boolean;
+    showBorder?: boolean;
+    className?: string;
+    placeholder?: string;
+    autoFocus?: boolean;
   };
 }
 

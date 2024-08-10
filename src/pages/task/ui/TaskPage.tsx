@@ -34,13 +34,11 @@ const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
 
   return (
     <GlassContainer className={classes.container}>
-      <Grid container spacing={4} direction="column" justifyContent="flex-start" alignItems="center">
-        <Grid container item xs={12} spacing={2}>
-          <Operations storeKey={storeKey} mode={mode} />
-          <Fields storeKey={storeKey} />
-          <CustomFields storeKey={storeKey} />
-          <Comments storeKey={storeKey} />
-        </Grid>
+      <Grid container item xs={12} rowSpacing={3}>
+        <Operations storeKey={storeKey} mode={mode} />
+        <Fields storeKey={storeKey} />
+        <CustomFields storeKey={storeKey} />
+        <Comments storeKey={storeKey} />
       </Grid>
     </GlassContainer>
   );
