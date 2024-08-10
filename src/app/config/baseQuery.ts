@@ -1,11 +1,16 @@
-import { BaseQueryFn, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import {
+  BaseQueryFn,
+  FetchArgs,
+  fetchBaseQuery,
+  FetchBaseQueryError,
+} from "@reduxjs/toolkit/query";
 import { Mutex } from "async-mutex";
 import { ACCESS_TOKEN_PERSIST_KEY } from "@/shared/const";
 import { setEntity } from "@/shared/store/slices/editorSlice";
 
 const mutex = new Mutex();
 export const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.REACT_APP_PUBLIC_URL,
+  baseUrl: import.meta.env.VITE_PUBLIC_URL,
   credentials: "include",
   mode: "cors",
   prepareHeaders: (headers, { getState }) => {
@@ -17,11 +22,11 @@ export const baseQuery = fetchBaseQuery({
   },
 });
 
-export const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
-  args,
-  api,
-  extraOptions,
-) => {
+export const baseQueryWithReauth: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError
+> = async (args, api, extraOptions) => {
   // wait until the mutex is available without locking it
   await mutex.waitForUnlock();
   let result = await baseQuery(args, api, extraOptions);
@@ -30,9 +35,16 @@ export const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, Fetch
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();
       try {
-        const refreshResult: any = await baseQuery("/users/refresh", api, extraOptions);
+        const refreshResult: any = await baseQuery(
+          "/users/refresh",
+          api,
+          extraOptions,
+        );
         if (refreshResult.data) {
-          localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, refreshResult.data.accessToken);
+          localStorage.setItem(
+            ACCESS_TOKEN_PERSIST_KEY,
+            refreshResult.data.accessToken,
+          );
           api.dispatch(
             setEntity({
               storeKey: "user",

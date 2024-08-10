@@ -2,13 +2,13 @@
 
 @font-face {
   font-family: "Benzin";
-  src: url("../../../public/fonts/Benzin/Benzin-Medium.woff") format("woff");
+  src: url("/fonts/Benzin/Benzin-Medium.woff") format("woff");
   font-weight: normal;
 }
 
 @font-face {
   font-family: "Benzin";
-  src: url("../../../public/fonts/Benzin/Benzin-Semibold.woff") format("woff");
+  src: url("/fonts/Benzin/Benzin-Semibold.woff") format("woff");
   font-weight: bold;
 }
 
@@ -43,7 +43,9 @@ body {
   background-size: cover;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: "Benzin", sans-serif;
   font-weight: normal;
   font-size: 30px;

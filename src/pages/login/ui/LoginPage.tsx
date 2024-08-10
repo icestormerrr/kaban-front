@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { GlassContainer } from "@/shared/ui";
 
-import { ReactComponent as Logo } from "@/widgets/main-layout/assets/logo.svg";
+import Logo from "@/widgets/main-layout/assets/logo.svg?react";
 import classes from "./LoginPage.module.scss";
 import RegisterFields from "./modules/RegisterFields";
 import LoginFields from "./modules/LoginFields";

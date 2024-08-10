@@ -1,15 +1,21 @@
 {
-  "name": "kaban",
-  "version": "1.0.0",
+  "name": "kaban-front",
   "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.14",
     "@mui/material": "^5.15.14",
     "@mui/x-data-grid": "^7.3.1",
-    "@reduxjs/toolkit": "^1.9.7",
-    "@types/lodash": "^4.17.0",
+    "@reduxjs/toolkit": "^2.2.7",
     "async-mutex": "^0.5.0",
     "clsx": "^2.0.0",
     "dayjs": "^1.11.10",
@@ -17,58 +23,36 @@
     "i18next-browser-languagedetector": "^7.2.0",
     "i18next-http-backend": "^2.5.0",
     "lodash": "^4.17.21",
+    "node": "^22.6.0",
     "notistack": "^3.0.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-i18next": "^14.1.0",
     "react-redux": "^8.1.3",
     "react-router-dom": "^6.19.0",
-    "react-scripts": "5.0.1",
-    "uuid": "^9.0.1",
-    "web-vitals": "^2.1.4"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@eslint/js": "^9.8.0",
     "@mui/types": "^7.2.14",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.61",
-    "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15",
+    "@types/lodash": "^4.17.0",
+    "@types/node": "^22.2.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "@types/react-redux": "^7.1.30",
     "@types/react-router-dom": "^5.3.3",
     "@types/redux": "^3.6.0",
-    "@types/redux-persist": "^4.3.1",
     "@types/uuid": "^9.0.8",
-    "eslint-import-resolver-typescript": "^3.6.1",
+    "@vitejs/plugin-react": "^4.3.1",
+    "eslint": "^9.8.0",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-refresh": "^0.4.9",
+    "globals": "^15.9.0",
     "prettier": "^3.1.0",
-    "react-app-rewired": "^2.2.1",
     "sass": "^1.69.5",
-    "typescript": "^4.9.5"
-  },
-  "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^8.0.0",
+    "vite": "^5.4.0",
+    "vite-plugin-svgr": "^4.2.0"
   }
 }

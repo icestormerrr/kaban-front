@@ -12,9 +12,8 @@ import { useLazyGetCurrentUserQuery, useLogoutMutation, UserState } from "@/enti
 import { AvatarMenu, ButtonMenu, GlassContainer, InputSelect } from "@/shared/ui";
 import { ACCESS_TOKEN_PERSIST_KEY } from "@/shared/const";
 
-import { ReactComponent as Logo } from "@/widgets/main-layout/assets/logo.svg";
+import Logo from "@/widgets/main-layout/assets/logo.svg?react";
 import classes from "./MainLayout.module.scss";
-import { enqueueSnackbar } from "notistack";
 
 const MainLayout: FC = () => {
   const navigate = useNavigate();
@@ -78,7 +77,7 @@ const MainLayout: FC = () => {
   }, [fetchCurrentUser, setUser]);
 
   useEffect(() => {
-    !isAuth && handleLogout();
+    if (!isAuth) handleLogout();
   }, [handleLogout, isAuth, navigate]);
 
   return (
