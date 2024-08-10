@@ -3,9 +3,9 @@ import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 import { FieldSelect, FieldString } from "@/shared/ui";
-import { TaskStatusOptions } from "@/entities/task";
 import { useGetProjectDetailsQuery, useProjectIdFromPath } from "@/entities/project";
 import { useGetUsersQuery } from "@/entities/user";
+import TaskColorStatusField from "./TaskColorStatusField";
 
 type Props = {
   storeKey: string;
@@ -20,7 +20,7 @@ const Fields: FC<Props> = ({ storeKey }) => {
 
   return (
     <Grid container item xs={12}>
-      <Grid container item md={9} xs={12}>
+      <Grid container item md={9} xs={12} spacing={2}>
         <Grid item xs={12}>
           <FieldString
             label={t("Description")}
@@ -53,7 +53,7 @@ const Fields: FC<Props> = ({ storeKey }) => {
           />
         </Grid>
         <Grid item>
-          <FieldSelect label={t("Status")} storeKey={storeKey} property="status" options={TaskStatusOptions} required />
+          <TaskColorStatusField label={t("Status")} storeKey={storeKey} required />
         </Grid>
         <Grid item>
           <FieldSelect label={t("Executor")} storeKey={storeKey} property="executorId" options={users ?? []} required />

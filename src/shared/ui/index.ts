@@ -3,7 +3,7 @@ import GlassButton from "./buttons/GlassButton";
 import FieldList from "./form/fields/FieldList";
 import InputList from "./form/inputs/InputList";
 import FieldSelect from "./form/fields/FieldSelect";
-import InputSelect, { Option } from "./form/inputs/InputSelect";
+import InputSelect, { Option, InputSelectProps } from "./form/inputs/InputSelect";
 import FieldString from "./form/fields/FieldString";
 import InputString from "./form/inputs/InputString";
 import FieldNumber from "./form/fields/FieldNumber";
@@ -30,4 +30,4 @@ export {
   ConfirmModal,
 };
 
-export type { Option };
+export type { Option, InputSelectProps };

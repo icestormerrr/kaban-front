@@ -15,6 +15,7 @@ export type InputSelectProps = {
     size?: "small" | "medium";
     loadingText?: string;
     loading?: boolean;
+    style?: SxProps;
   };
 
 const InputSelect: FC<InputSelectProps> = ({
@@ -26,6 +27,7 @@ const InputSelect: FC<InputSelectProps> = ({
   required,
   placeholder,
   showBorder = false,
+  style,
   ...restProps
 }) => {
   const [selectedOption, setSelectedOption] = useState<Option | null>({ _id: value || "", name: "" });
@@ -40,8 +42,9 @@ const InputSelect: FC<InputSelectProps> = ({
         "& .MuiInputBase-root": {
           border: `1px solid rgba(255,255,255,0.2)`,
         },
+        ...(style ?? {}),
       }
-    : {};
+    : style;
 
   useEffect(() => {
     setSelectedOption(options.find((option) => option._id === value) ?? null);

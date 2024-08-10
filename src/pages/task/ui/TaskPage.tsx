@@ -8,7 +8,7 @@ import { useEditorSlice } from "@/shared/store";
 import { initialTaskState, TaskState, useLazyGetTaskQuery } from "@/entities/task";
 import { GlassContainer } from "@/shared/ui";
 
-import Fields from "./modules/Fields";
+import Fields from "./modules/fields/Fields";
 import Operations from "./modules/Operations";
 import Comments from "./modules/Comments";
 import CustomFields from "./modules/CustomFields";

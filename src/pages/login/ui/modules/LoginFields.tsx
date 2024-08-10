@@ -21,6 +21,7 @@ const LoginFields: FC<NApp.PageProps> = ({ storeKey }) => {
         label={t("Login")}
         value={email}
         onChange={(newLogin) => setUserProperty("email", newLogin)}
+        showBorder
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -34,6 +35,7 @@ const LoginFields: FC<NApp.PageProps> = ({ storeKey }) => {
         label={t("Password")}
         value={password}
         onChange={(newPassword) => setUserProperty("password", newPassword)}
+        showBorder
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">

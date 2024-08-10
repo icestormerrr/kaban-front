@@ -10,6 +10,7 @@ import { useAppSelector, useEditorSlice } from "@/shared/store";
 import { useGetProjectsQuery, useProjectIdFromPath } from "@/entities/project";
 import { useLazyGetCurrentUserQuery, useLogoutMutation, UserState } from "@/entities/user";
 import { AvatarMenu, ButtonMenu, GlassContainer, InputSelect } from "@/shared/ui";
+import { ACCESS_TOKEN_PERSIST_KEY } from "@/shared/const";
 
 import Logo from "@/widgets/main-layout/assets/logo.svg?react";
 import classes from "./MainLayout.module.scss";
@@ -22,7 +23,7 @@ const MainLayout: FC = () => {
 
   const { entitySelector: userSelector, setEntity: setUser } = useEditorSlice<UserState>("user");
   const user = useAppSelector(userSelector) || {};
-  const isAuth = !!user.name;
+  const isAuth = localStorage.getItem(ACCESS_TOKEN_PERSIST_KEY);
 
   const projectId = useProjectIdFromPath();
   const { data: projects = [], isFetching: isProjectsFetching } = useGetProjectsQuery(
@@ -38,8 +39,13 @@ const MainLayout: FC = () => {
 
   const handleProjectChange = (newOption: NApp.NamedEntity | null) => {
     const pathArray = pathname.split("/");
-    pathArray[2] = newOption?._id ?? "";
-    navigate(pathArray.join("/"));
+    const newProjectId = newOption?._id ?? "";
+    if (pathArray[2]?.length) {
+      pathArray[2] = newProjectId;
+      navigate(pathArray.join("/"));
+    } else {
+      navigate(`/project/${newProjectId}`);
+    }
   };
 
   const handleProjectRouteNavigate = useCallback(

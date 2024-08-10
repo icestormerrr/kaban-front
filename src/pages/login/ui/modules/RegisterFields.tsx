@@ -12,7 +12,7 @@ const RegisterFields: FC<NApp.PageProps> = ({ storeKey }) => {
 
   return (
     <>
-      <InputString label={t("Name")} value={name} onChange={(newName) => setUserProperty("name", newName)} />
+      <InputString label={t("Name")} value={name} onChange={(newName) => setUserProperty("name", newName)} showBorder />
     </>
   );
 };
