@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from "react";
+import React, { FC, useState } from "react";
 
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -12,24 +12,38 @@ import InputSelect from "./InputSelect";
 
 export type InputListProps = {
   type: "input" | "select";
-  list: NApp.NamedEntity[];
-  onListChange: (newList: NApp.NamedEntity[]) => void;
-  options?: NApp.NamedEntity[];
+  list: Shared.NamedEntity[];
+  onListChange: (newList: Shared.NamedEntity[]) => void;
+  options?: Shared.NamedEntity[];
   label: string;
   required?: boolean;
   useMovingElements?: boolean;
+  showBorder?: boolean;
 };
 
-const InputList: FC<InputListProps> = ({ type, list, onListChange, options, label, required, useMovingElements }) => {
+const InputList: FC<InputListProps> = ({
+  type,
+  list,
+  onListChange,
+  options,
+  label,
+  required,
+  useMovingElements,
+  showBorder = true,
+}) => {
   const [value, setValue] = useState<string | null>(null);
 
   const handleInputAdd = () => {
-    value && onListChange([...list, { _id: uuid(), name: value }]);
+    if (value) {
+      onListChange([...list, { _id: uuid(), name: value }]);
+    }
     setValue("");
   };
 
-  const handleSelect = (newOption: NApp.NamedEntity | null) => {
-    newOption && onListChange([...list, newOption]);
+  const handleSelect = (newOption: Shared.NamedEntity | null) => {
+    if (newOption) {
+      onListChange([...list, newOption]);
+    }
   };
 
   const handleDelete = (_id: string) => {
@@ -62,6 +76,7 @@ const InputList: FC<InputListProps> = ({ type, list, onListChange, options, labe
             label={label}
             fullWidth
             required={required ? !list.length : false}
+            showBorder={showBorder}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -80,6 +95,7 @@ const InputList: FC<InputListProps> = ({ type, list, onListChange, options, labe
             value={null}
             onChange={handleSelect}
             required={required ? !list.length : false}
+            showBorder={showBorder}
           />
         )}
       </div>
@@ -100,7 +116,8 @@ const InputList: FC<InputListProps> = ({ type, list, onListChange, options, labe
                   <ArrowDropDownIcon onClick={() => handleMoveItem(index, 1)} />
                 </ListItemIcon>
               )}
-              <ListItemText primary={item.name} />
+
+              <ListItemText primary={item.name} sx={{ textOverflow: "ellipsis", overflow: "hidden" }} />
             </ListItem>
           ))}
         </List>

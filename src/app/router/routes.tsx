@@ -14,7 +14,7 @@ import { HomePage } from "@/pages/home";
 import { BacklogPage } from "@/pages/backlog";
 import { SettingsPage } from "@/pages/settings";
 
-export const routesTree: RouteObject[] = [
+const routesTree: RouteObject[] = [
   {
     path: "/",
     element: <MainLayout />,
@@ -44,6 +44,10 @@ export const routesTree: RouteObject[] = [
               {
                 path: "board",
                 element: <BoardPage />,
+              },
+              {
+                path: "home",
+                element: <HomePage />,
               },
               {
                 path: "backlog",

@@ -1,6 +1,7 @@
 import React, { FC, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
+import SaveIcon from "@mui/icons-material/Save";
 import { useTranslation } from "react-i18next";
 import { enqueueSnackbar } from "notistack";
 import { compact } from "lodash";
@@ -9,10 +10,11 @@ import { FieldString, GlassButton } from "@/shared/ui";
 import { useProjectIdFromPath } from "@/entities/project";
 import { Task, TaskState, useAddTaskMutation, useUpdateTaskMutation } from "@/entities/task";
 import { useAppSelector, useEditorSlice } from "@/shared/store";
+import classes from "../TaskPage.module.scss";
 
 type Props = {
   storeKey: string;
-  mode: NApp.Mode;
+  mode: Shared.Mode;
 };
 
 const Operations: FC<Props> = ({ storeKey, mode }) => {
@@ -56,7 +58,7 @@ const Operations: FC<Props> = ({ storeKey, mode }) => {
       .unwrap()
       .then((details) => {
         setTask(details);
-        mode === "create" && navigate(details._id);
+        if (mode === "create") navigate(details._id);
         enqueueSnackbar(t("Saved"), { variant: "success" });
       })
       .catch(() => enqueueSnackbar(t("Saving error"), { variant: "error" }));
@@ -64,14 +66,25 @@ const Operations: FC<Props> = ({ storeKey, mode }) => {
 
   return (
     <Grid container item xs={12}>
-      <Grid item xs={12}>
-        <FieldString storeKey={storeKey} property="name" fullWidth required asEditableTitle />
-      </Grid>
-      <Grid item xs={12}>
-        <GlassButton variant="contained" onClick={handleSave} sx={{ height: "35px" }}>
-          {mode === "edit" ? t("Save") : t("Create")}
-        </GlassButton>
-      </Grid>
+      <FieldString
+        storeKey={storeKey}
+        property="name"
+        className={classes.nameField}
+        required
+        style={{
+          width: "94%",
+          "& .MuiInputBase-input": {
+            padding: 0,
+          },
+          "& .MuiInputBase-root": {
+            fontFamily: "Benzin",
+            fontSize: "25px",
+          },
+        }}
+      />
+      <GlassButton variant="contained" onClick={handleSave} sx={{ height: "35px" }}>
+        <SaveIcon />
+      </GlassButton>
     </Grid>
   );
 };

@@ -1,26 +1,22 @@
 import React, { FC, SyntheticEvent, useEffect, useState } from "react";
 
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, SxProps, TextField } from "@mui/material";
 
 const getOptionLabel = (option: Option) => option.name;
 const isOptionEqualToValue = (option: Option, selectedValue: Option) => option._id === selectedValue._id;
 
-export type Option = NApp.NamedEntity & { [key: string]: any };
+export type Option = Shared.NamedEntity & { [key: string]: unknown };
 
 export type InputSelectProps = {
   value: string | null;
   options: Option[];
   onChange: (newOption: Option | null) => void;
-  size?: "small" | "medium";
-  label?: string;
-  className?: string;
-  disable?: boolean;
-  loadingText?: string;
-  loading?: boolean;
-  required?: boolean;
-  fullWidth?: boolean;
-  placeholder?: string;
-};
+} & Shared.UncontrolledInputProps<Option> & {
+    size?: "small" | "medium";
+    loadingText?: string;
+    loading?: boolean;
+    style?: SxProps;
+  };
 
 const InputSelect: FC<InputSelectProps> = ({
   value,
@@ -29,14 +25,26 @@ const InputSelect: FC<InputSelectProps> = ({
   label,
   size = "small",
   required,
+  placeholder,
+  showBorder = false,
+  style,
   ...restProps
 }) => {
   const [selectedOption, setSelectedOption] = useState<Option | null>({ _id: value || "", name: "" });
 
-  const handleChange = (e: SyntheticEvent, newOption: Option | null) => {
+  const handleChange = (_: SyntheticEvent, newOption: Option | null) => {
     setSelectedOption(newOption);
     onChange(newOption);
   };
+
+  const styles: SxProps = showBorder
+    ? {
+        "& .MuiInputBase-root": {
+          border: `1px solid rgba(255,255,255,0.2)`,
+        },
+        ...(style ?? {}),
+      }
+    : (style ?? {});
 
   useEffect(() => {
     setSelectedOption(options.find((option) => option._id === value) ?? null);
@@ -50,7 +58,10 @@ const InputSelect: FC<InputSelectProps> = ({
       options={options}
       isOptionEqualToValue={isOptionEqualToValue}
       getOptionLabel={getOptionLabel}
-      renderInput={(params) => <TextField {...params} label={label} error={required && !value} />}
+      sx={styles}
+      renderInput={(params) => (
+        <TextField {...params} label={label} placeholder={placeholder} error={required && !value} />
+      )}
       size={size}
       {...restProps}
     />

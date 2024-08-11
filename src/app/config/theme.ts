@@ -15,7 +15,7 @@ export const darkTheme = createTheme({
             borderRadius: "10px",
             width: "100%",
             "& fieldset": {
-              border: `1px solid rgba(255,255,255,0.1)`,
+              border: `1px solid rgba(255,255,255,0)`,
               transition: "border .15s",
             },
             "&:hover fieldset": {

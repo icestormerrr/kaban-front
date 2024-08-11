@@ -5,7 +5,7 @@ import { setEntity } from "@/shared/store/slices/editorSlice";
 
 const mutex = new Mutex();
 export const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.REACT_APP_PUBLIC_URL,
+  baseUrl: import.meta.env.VITE_PUBLIC_URL,
   credentials: "include",
   mode: "cors",
   prepareHeaders: (headers, { getState }) => {
@@ -43,6 +43,12 @@ export const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, Fetch
           result = await baseQuery(args, api, extraOptions);
         } else {
           localStorage.setItem(ACCESS_TOKEN_PERSIST_KEY, "");
+          api.dispatch(
+            setEntity({
+              storeKey: "user",
+              entity: {},
+            }),
+          );
         }
       } finally {
         // release must be called once the mutex should be released again.

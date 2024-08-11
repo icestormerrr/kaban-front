@@ -10,14 +10,14 @@ type Props = {
   storeKey: string;
 };
 
-const SettingsPage: FC<Props> = ({ storeKey }) => {
+const SettingsPage: FC<Props> = () => {
   const { t } = useTranslation();
 
   const [needReload, setNeedReload] = useState(false);
   const [settings, setSettings] = useSavedState<Settings>(SETTINGS_PERSIST_KEY, {});
 
-  const handleBackgroundChange = (newBackground: NApp.NamedEntity | null) => {
-    newBackground && setSettings({ ...settings, backgroundImage: newBackground._id });
+  const handleBackgroundChange = (newBackground: Shared.NamedEntity | null) => {
+    if (newBackground) setSettings({ ...settings, backgroundImage: newBackground._id });
     setNeedReload(true);
   };
 

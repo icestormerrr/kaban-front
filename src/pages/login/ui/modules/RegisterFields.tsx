@@ -5,16 +5,16 @@ import { InputString } from "@/shared/ui";
 import { useAppSelector, useEditorSlice } from "@/shared/store";
 import { UserState } from "@/entities/user";
 
-const RegisterContent: FC<NApp.PageProps> = ({ storeKey }) => {
+const RegisterFields: FC<Shared.PageProps> = ({ storeKey }) => {
   const { t } = useTranslation();
   const { entitySelector: userSelector, setEntityProperty: setUserProperty } = useEditorSlice<UserState>(storeKey);
   const { name } = useAppSelector(userSelector) || {};
 
   return (
     <>
-      <InputString label={t("Name")} value={name} onChange={(newName) => setUserProperty("name", newName)} />
+      <InputString label={t("Name")} value={name} onChange={(newName) => setUserProperty("name", newName)} showBorder />
     </>
   );
 };
 
-export default RegisterContent;
+export default RegisterFields;

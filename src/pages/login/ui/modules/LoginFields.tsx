@@ -8,7 +8,7 @@ import { useAppSelector, useEditorSlice } from "@/shared/store";
 import { UserState } from "@/entities/user";
 import { InputString } from "@/shared/ui";
 
-const LoginContent: FC<NApp.PageProps> = ({ storeKey }) => {
+const LoginFields: FC<Shared.PageProps> = ({ storeKey }) => {
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -21,6 +21,7 @@ const LoginContent: FC<NApp.PageProps> = ({ storeKey }) => {
         label={t("Login")}
         value={email}
         onChange={(newLogin) => setUserProperty("email", newLogin)}
+        showBorder
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -34,6 +35,7 @@ const LoginContent: FC<NApp.PageProps> = ({ storeKey }) => {
         label={t("Password")}
         value={password}
         onChange={(newPassword) => setUserProperty("password", newPassword)}
+        showBorder
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -48,4 +50,4 @@ const LoginContent: FC<NApp.PageProps> = ({ storeKey }) => {
   );
 };
 
-export default LoginContent;
+export default LoginFields;

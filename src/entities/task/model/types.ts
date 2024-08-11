@@ -1,9 +1,8 @@
-import { TaskStatus } from "./enums";
 import { TMessage } from "../../message";
 
-export type TaskState = NApp.Nullable<Task>;
+export type TaskState = Shared.Nullable<Task>;
 
-export type Task = NApp.NamedEntity & {
+export type Task = Shared.NamedEntity & {
   description: string;
   status: TaskStatus;
   epicId: string;
@@ -14,7 +13,7 @@ export type Task = NApp.NamedEntity & {
   messages: TMessage[] | null;
 };
 
-export type TasksGridItem = NApp.NamedEntity & {
+export type TasksGridItem = Shared.NamedEntity & {
   description: string;
   status: TaskStatus;
   epicName: string;
@@ -30,4 +29,12 @@ export type TasksFilter = {
   epicId?: string;
   sprintId?: string;
   executorId?: string;
-} & { [key: string]: any };
+} & { [key: string]: unknown };
+
+export enum TaskStatus {
+  NotImportant = "0",
+  Desirable = "1",
+  Important = "2",
+  VeryImportant = "3",
+  Critical = "4",
+}

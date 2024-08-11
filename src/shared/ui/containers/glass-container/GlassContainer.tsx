@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC } from "react";
 
 import classes from "./GlassContainer.module.scss";
 import clsx from "clsx";

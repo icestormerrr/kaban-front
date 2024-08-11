@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Button, IconButton, ListItemIcon, MenuItem } from "@mui/material";
 import { Settings, Logout } from "@mui/icons-material";
 import EditIcon from "@mui/icons-material/Edit";
@@ -9,15 +9,16 @@ import { useTranslation } from "react-i18next";
 import { useAppSelector, useEditorSlice } from "@/shared/store";
 import { useGetProjectsQuery, useProjectIdFromPath } from "@/entities/project";
 import { useLazyGetCurrentUserQuery, useLogoutMutation, UserState } from "@/entities/user";
-import { AvatarMenu, ButtonMenu, GlassContainer, InputSelect } from "@/shared/ui";
+import { AvatarMenu, ButtonMenu, InputSelect } from "@/shared/ui";
 import { ACCESS_TOKEN_PERSIST_KEY } from "@/shared/const";
 
-import { ReactComponent as Logo } from "@/widgets/main-layout/assets/logo.svg";
+import Logo from "@/widgets/main-layout/assets/logo.svg?react";
 import classes from "./MainLayout.module.scss";
 
 const MainLayout: FC = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { pathname } = useLocation();
   const [showLayoutDetails, setShowLayoutDetails] = useState(true);
 
   const { entitySelector: userSelector, setEntity: setUser } = useEditorSlice<UserState>("user");
@@ -36,11 +37,18 @@ const MainLayout: FC = () => {
     navigate("/login");
   }, [fetchLogout, navigate]);
 
-  const handleProjectChange = (newOption: NApp.NamedEntity | null) => {
-    navigate(`/project/${newOption?._id}`);
+  const handleProjectChange = (newOption: Shared.NamedEntity | null) => {
+    const pathArray = pathname.split("/");
+    const newProjectId = newOption?._id ?? "";
+    if (pathArray[2]?.length) {
+      pathArray[2] = newProjectId;
+      navigate(pathArray.join("/"));
+    } else {
+      navigate(`/project/${newProjectId}`);
+    }
   };
 
-  const handleRouteNavigate = useCallback(
+  const handleProjectRouteNavigate = useCallback(
     (route: string) => {
       if (route === "project") {
         return () => navigate(`/project/${projectId}`);
@@ -51,7 +59,11 @@ const MainLayout: FC = () => {
   );
 
   const handleHomeNavigate = () => {
-    navigate("/");
+    if (projectId) {
+      navigate(`/project/${projectId}/home`);
+    } else {
+      navigate("/");
+    }
   };
 
   const handleSettingsNavigate = () => {
@@ -77,12 +89,12 @@ const MainLayout: FC = () => {
   }, [fetchCurrentUser, setUser]);
 
   useEffect(() => {
-    !isAuth && handleLogout();
+    if (!isAuth) handleLogout();
   }, [handleLogout, isAuth, navigate]);
 
   return (
     <>
-      <GlassContainer className={classes.headerContainer}>
+      <header className={classes.headerContainer}>
         <div className={classes.logoContainer}>
           <Logo onClick={handleHomeNavigate} style={{ cursor: "pointer", height: 38 }} />
           <IconButton
@@ -103,21 +115,21 @@ const MainLayout: FC = () => {
               value={projectId ?? null}
               options={projects}
               onChange={handleProjectChange}
-              label={t("Project")}
+              placeholder={t("Project")}
               loadingText={t("Loading")}
               loading={isProjectsFetching}
               required
               fullWidth
             />
-            <IconButton onClick={handleRouteNavigate("project")}>
+            <IconButton onClick={handleProjectRouteNavigate("project")}>
               <EditIcon />
             </IconButton>
           </div>
 
-          <Button className={classes.route} onClick={handleRouteNavigate("board")}>
+          <Button className={classes.route} onClick={handleProjectRouteNavigate("board")}>
             {t("Board")}
           </Button>
-          <Button className={classes.route} onClick={handleRouteNavigate("backlog")}>
+          <Button className={classes.route} onClick={handleProjectRouteNavigate("backlog")}>
             {t("Backlog")}
           </Button>
           <ButtonMenu label={t("Create")}>
@@ -144,10 +156,10 @@ const MainLayout: FC = () => {
             {t("Logout")}
           </MenuItem>
         </AvatarMenu>
-      </GlassContainer>
-      <div className={classes.outletContainer}>
+      </header>
+      <main className={classes.mainContainer}>
         <Outlet />
-      </div>
+      </main>
     </>
   );
 };

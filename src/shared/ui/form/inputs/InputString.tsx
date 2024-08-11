@@ -1,39 +1,16 @@
 import React, { FC, memo, useEffect, useState } from "react";
 
-import { TextField, TextFieldProps } from "@mui/material";
+import { SxProps, TextField, TextFieldProps } from "@mui/material";
 
-const inputTitleStyles = {
-  "& .MuiInputBase-input": {
-    padding: 0,
-  },
-  "& .MuiInputBase-root": {
-    fontFamily: "Benzin",
-    fontSize: "25px",
-    "& fieldset": {
-      border: `1px solid rgba(255,255,255,0)`,
-      transition: "border .15s",
-    },
-  },
-};
-export type InputStringProps = {
-  value: string | null;
-  onChange: (newValue: string | null) => void;
-  validate?: (value: string | null) => string | null;
-  label?: string;
-  className?: string;
-
+export type InputStringProps = Shared.ControlledInputProps<string> & {
   size?: "small" | "medium";
   type?: string;
   rows?: string | number;
   InputProps?: TextFieldProps["InputProps"];
-
-  fullWidth?: boolean;
   multiline?: boolean;
-  required?: boolean;
-  disabled?: boolean;
-  autoFocus?: boolean;
   asEditableTitle?: boolean;
-};
+  style?: SxProps;
+} & Shared.UncontrolledInputProps<string>;
 
 const InputString: FC<InputStringProps> = ({
   value,
@@ -43,13 +20,17 @@ const InputString: FC<InputStringProps> = ({
   required,
   label,
   asEditableTitle,
+  style,
+  showBorder = false,
   size = "small",
   ...restProps
 }) => {
   const [errorText, setErrorText] = useState<string | null>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.value);
+    if (onChange) {
+      onChange(event.target.value);
+    }
   };
 
   useEffect(() => {
@@ -58,6 +39,15 @@ const InputString: FC<InputStringProps> = ({
       setErrorText(errorMessage);
     }
   }, [validate, value]);
+
+  const styles: SxProps = showBorder
+    ? {
+        "& .MuiInputBase-root": {
+          border: `1px solid rgba(255,255,255,0.2)`,
+        },
+        ...(style ?? {}),
+      }
+    : (style ?? {});
 
   return (
     <TextField
@@ -68,7 +58,7 @@ const InputString: FC<InputStringProps> = ({
       disabled={disabled}
       size={size}
       label={asEditableTitle ? null : label}
-      sx={asEditableTitle ? inputTitleStyles : null}
+      sx={styles}
       {...restProps}
     />
   );

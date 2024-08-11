@@ -10,7 +10,7 @@ import { useAppSelector, useEditorSlice } from "@/shared/store";
 
 import classes from "../LoginPage.module.scss";
 
-const Operations: FC<NApp.PageProps & { mode: "login" | "register" }> = ({ storeKey, mode }) => {
+const Operations: FC<Shared.PageProps & { mode: "login" | "register" }> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 

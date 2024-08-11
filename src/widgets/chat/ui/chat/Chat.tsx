@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { v4 as uuid } from "uuid";
 import { Grid } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 
 import { GlassButton, InputString } from "@/shared/ui";
 import { useAppSelector, useEditorSlice } from "@/shared/store";
@@ -41,7 +42,7 @@ const Chat: FC<Props> = ({ title, messages, omMessageCreate, className }) => {
           sx={{ height: "35px", ml: "20px" }}
           disabled={!newMessage}
         >
-          {t("Add")}
+          <AddIcon />
         </GlassButton>
       </Grid>
       <Grid container item>
@@ -51,6 +52,7 @@ const Chat: FC<Props> = ({ title, messages, omMessageCreate, className }) => {
             onChange={(newMessage) => setNewMessage(newMessage)}
             label={t("Comment")}
             multiline
+            showBorder
             fullWidth
           />
         </Grid>

@@ -1,18 +1,18 @@
 import { FieldType } from "@/shared/const";
 
-export type ProjectState = NApp.Nullable<Project>;
+export type ProjectState = Shared.Nullable<Project>;
 
-export type Project = NApp.NamedEntity & {
+export type Project = Shared.NamedEntity & {
   description: string;
-  epics: NApp.NamedEntity[];
-  sprints: NApp.NamedEntity[];
-  stages: NApp.NamedEntity[];
+  epics: Shared.NamedEntity[];
+  sprints: Shared.NamedEntity[];
+  stages: Shared.NamedEntity[];
   users: string[];
   authorId: string;
   customFields: ProjectCustomField[];
 };
 
-export type ProjectCustomField = NApp.NamedEntity & {
+export type ProjectCustomField = Shared.NamedEntity & {
   type: FieldType;
   required: boolean;
 };

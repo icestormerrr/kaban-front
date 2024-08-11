@@ -15,7 +15,7 @@ export type AuthResponse = {
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_PUBLIC_URL,
+    baseUrl: import.meta.env.VITE_PUBLIC_URL,
     credentials: "include",
     mode: "cors",
   }),
@@ -74,6 +74,7 @@ const handleClearAllUserData = (dispatch: any) => {
   );
 };
 
-export const { useLoginMutation, useLogoutMutation, useRegisterMutation } = authApi;
+export const { useLoginMutation, useLogoutMutation, useRegisterMutation } =
+  authApi;
 
 export default authApi;

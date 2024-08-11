@@ -1,4 +1,5 @@
-/// <reference path="../../../app/global/global.d.ts" />
+import "@/app/global/global.d.ts";
+
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 import { baseQueryWithReauth } from "@/app/config/baseQuery";
@@ -17,7 +18,7 @@ export const usersApi = createApi({
       }),
       providesTags: ["User"],
     }),
-    getUser: build.query<User, NApp.Entity>({
+    getUser: build.query<User, Shared.Entity>({
       query: (params) => ({
         url: `/users/${params._id}`,
         params,
@@ -30,7 +31,7 @@ export const usersApi = createApi({
       }),
       providesTags: ["User"],
     }),
-    deleteUser: build.mutation<void, NApp.Entity>({
+    deleteUser: build.mutation<void, Shared.Entity>({
       query: (params) => ({
         url: `/users`,
         method: "DELETE",

@@ -9,7 +9,7 @@ import { ProjectCustomField, ProjectState } from "@/entities/project";
 import { GlassButton } from "@/shared/ui";
 import { FieldType } from "@/shared/const";
 
-const CustomFieldsGrid: FC<NApp.PageProps> = ({ storeKey }) => {
+const CustomFieldsGrid: FC<Shared.PageProps> = ({ storeKey }) => {
   const { t } = useTranslation();
 
   const { getPropertySelector, setEntityProperty, addElementToProperty, removeElementFromProperty } =
@@ -32,7 +32,6 @@ const CustomFieldsGrid: FC<NApp.PageProps> = ({ storeKey }) => {
 
   const handleFieldUpdate = (updatedRow: ProjectCustomField, originalRow: ProjectCustomField) => {
     const index = customFields.findIndex((customField) => customField._id === originalRow._id);
-    // @ts-ignore
     setEntityProperty(`customFields[${index}]`, updatedRow);
     return updatedRow;
   };

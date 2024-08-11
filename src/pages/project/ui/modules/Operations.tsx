@@ -11,7 +11,7 @@ import { useAppSelector, useEditorSlice } from "@/shared/store";
 
 type Props = {
   storeKey: string;
-  mode: NApp.Mode;
+  mode: Shared.Mode;
 };
 
 const Operations: FC<Props> = ({ storeKey, mode }) => {
@@ -51,7 +51,7 @@ const Operations: FC<Props> = ({ storeKey, mode }) => {
       .unwrap()
       .then((details) => {
         setProject(details);
-        mode === "create" && navigate(details._id);
+        if (mode === "create") navigate(details._id);
         enqueueSnackbar(t("Saved"), { variant: "success" });
       })
       .catch(() => enqueueSnackbar(t("Saving error"), { variant: "error" }));

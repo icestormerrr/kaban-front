@@ -1,4 +1,5 @@
 import React, { FC, useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
 import { groupBy } from "lodash";
 
 import { useGetProjectDetailsQuery, useProjectIdFromPath } from "@/entities/project";
@@ -8,7 +9,6 @@ import { GlassContainer } from "@/shared/ui";
 import FilterPanel from "./modules/filter-panel/FilterPanel";
 import Stage from "./modules/stage/Stage";
 import classes from "./BoardPage.module.scss";
-import { useSearchParams } from "react-router-dom";
 
 const BoardPage: FC = () => {
   const projectId = useProjectIdFromPath();
@@ -35,11 +35,11 @@ const BoardPage: FC = () => {
       });
     }
   };
-
-  const { data: project } = useGetProjectDetailsQuery({ _id: projectId! });
+  const { data: project } = useGetProjectDetailsQuery({ _id: projectId! }, { skip: !projectId });
 
   const { data: tasks = [] } = useGetTasksGridQuery(filter, {
     refetchOnMountOrArgChange: true,
+    skip: !projectId,
   });
   const tasksGroupedByStageId = useMemo(() => groupBy(tasks ?? [], (task) => task.stageId), [tasks]);
 

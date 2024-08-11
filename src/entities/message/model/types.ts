@@ -1,5 +1,5 @@
-export type Message = NApp.Entity & {
+export type Message = Shared.Entity & {
   description: string;
-  date: NApp.Date;
+  date: Shared.Date;
   userId: string;
 };

@@ -11,6 +11,7 @@ import { ConfirmModal, GlassContainer, InputSelect, InputString } from "@/shared
 import { useSavedState } from "@/shared/store";
 
 import classes from "./FilterPanel.module.scss";
+import { skipToken } from "@reduxjs/toolkit/query";
 
 type Props = {
   filter: TasksFilter;
@@ -35,7 +36,7 @@ const FilterPanel: FC<Props> = ({ filter, onFilterChange }) => {
   };
 
   const { data: project } = useGetProjectDetailsQuery({ _id: projectId! });
-  const { data: executors } = useGetUsersQuery({ usersIds: project?.users! }, { skip: !project?.users });
+  const { data: executors } = useGetUsersQuery(project?.users ? { usersIds: project.users } : skipToken);
 
   return (
     <GlassContainer className={classes.panel}>
@@ -47,6 +48,7 @@ const FilterPanel: FC<Props> = ({ filter, onFilterChange }) => {
             value={filter.epicId ?? null}
             className={classes.filter}
             onChange={(epic) => onFilterChange("epicId", epic?._id)}
+            showBorder
           />
         </Grid>
         <Grid item xs={6} md={2}>
@@ -56,6 +58,7 @@ const FilterPanel: FC<Props> = ({ filter, onFilterChange }) => {
             value={filter.sprintId ?? null}
             className={classes.filter}
             onChange={(sprint) => onFilterChange("sprintId", sprint?._id)}
+            showBorder
           />
         </Grid>
         <Grid item xs={6} md={2}>
@@ -65,6 +68,7 @@ const FilterPanel: FC<Props> = ({ filter, onFilterChange }) => {
             value={filter.executorId ?? null}
             className={classes.filter}
             onChange={(executor) => onFilterChange("executorId", executor?._id)}
+            showBorder
           />
         </Grid>
 

@@ -12,11 +12,11 @@ import {
 } from "@/entities/project";
 import { GlassContainer } from "@/shared/ui";
 
-import Content from "./modules/Content";
+import Fields from "./modules/Fields";
 import Operations from "./modules/Operations";
 import CustomFieldsGrid from "@/pages/project/ui/modules/CustomFieldsGrid";
 
-const ProjectPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
+const ProjectPage: FC<Shared.EntityComponent> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
   const _id = useProjectIdFromPath();
 
@@ -38,7 +38,7 @@ const ProjectPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
     <GlassContainer className="pageContainer">
       <Grid container direction="column" sx={{ gap: "30px" }}>
         <Operations storeKey={storeKey} mode={mode} />
-        <Content storeKey={storeKey} />
+        <Fields storeKey={storeKey} />
         <CustomFieldsGrid storeKey={storeKey} />
       </Grid>
     </GlassContainer>

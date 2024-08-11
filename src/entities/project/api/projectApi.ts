@@ -1,4 +1,5 @@
-/// <reference path="../../../app/global/global.d.ts" />
+import "@/app/global/global.d.ts";
+
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 import { Project, ProjectFilter } from "../model/types";
@@ -9,14 +10,14 @@ export const projectsApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ["Project"],
   endpoints: (build) => ({
-    getProjects: build.query<NApp.NamedEntity[], ProjectFilter>({
+    getProjects: build.query<Shared.NamedEntity[], ProjectFilter>({
       query: (params) => ({
         url: "/projects",
         params,
       }),
       providesTags: ["Project"],
     }),
-    getProjectDetails: build.query<Project, NApp.Entity>({
+    getProjectDetails: build.query<Project, Shared.Entity>({
       query: (params) => ({
         url: `/projects/${params._id}`,
       }),
@@ -38,7 +39,7 @@ export const projectsApi = createApi({
       }),
       invalidatesTags: ["Project"],
     }),
-    deleteProject: build.mutation<void, NApp.NamedEntity>({
+    deleteProject: build.mutation<void, Shared.NamedEntity>({
       query: (params) => ({
         url: `/projects`,
         method: "DELETE",
