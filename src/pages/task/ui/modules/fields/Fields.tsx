@@ -19,8 +19,8 @@ const Fields: FC<Props> = ({ storeKey }) => {
   const { data: users } = useGetUsersQuery({ usersIds: project?.users }, { skip: !project?.users });
 
   return (
-    <Grid container item xs={12}>
-      <Grid container item md={9} xs={12} spacing={2}>
+    <Grid container item xs={12} spacing={2}>
+      <Grid container item md={9} xs={12}>
         <Grid item xs={12}>
           <FieldString
             label={t("Description")}

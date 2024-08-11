@@ -8,7 +8,7 @@ import FieldString from "./form/fields/FieldString";
 import InputString from "./form/inputs/InputString";
 import FieldNumber from "./form/fields/FieldNumber";
 import InputNumber from "./form/inputs/InputNumber";
-import StoreField from "./form/fields/StoreField";
+import StoreField from "./form/StoreField";
 import AvatarMenu from "./menus/AvatarMenu";
 import ButtonMenu from "./menus/ButtonMenu";
 import ConfirmModal from "./modals/ConfirmModal";

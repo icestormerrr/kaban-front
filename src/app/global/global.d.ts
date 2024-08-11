@@ -10,7 +10,8 @@ declare namespace Shared {
     storeKey: string;
   };
 
-  export type Date = number;
+  export type UTCDate = number;
+  export type LibDate = import("dayjs").Dayjs;
 
   export type NamedEntity = Entity & {
     name: string;

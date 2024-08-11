@@ -55,7 +55,7 @@ const CustomFieldsGrid: FC<Shared.PageProps> = ({ storeKey }) => {
         field: "type",
         headerName: t("Type"),
         type: "singleSelect",
-        valueOptions: [FieldType.string, FieldType.number, FieldType.boolean],
+        valueOptions: [FieldType.string, FieldType.number, FieldType.boolean, FieldType.date],
         width: 300,
         editable: true,
       },

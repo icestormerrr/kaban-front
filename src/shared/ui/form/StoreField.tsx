@@ -1,12 +1,14 @@
 import React, { FC, memo } from "react";
 
-import FieldBoolean, { FieldBooleanProps } from "./FieldBoolean";
-import FieldNumber, { FieldNumberProps } from "./FieldNumber";
-import FieldSelect, { FieldSelectProps } from "./FieldSelect";
-import FieldString, { FieldStringProps } from "./FieldString";
+import FieldBoolean, { FieldBooleanProps } from "./fields/FieldBoolean";
+import FieldNumber, { FieldNumberProps } from "./fields/FieldNumber";
+import FieldSelect, { FieldSelectProps } from "./fields/FieldSelect";
+import FieldString, { FieldStringProps } from "./fields/FieldString";
+import FieldDate, { FieldDateProps } from "./fields/FieldDate";
+import { FieldType } from "@/shared/const";
 
 type StoreFieldProps = (FieldBooleanProps | FieldNumberProps | FieldSelectProps | FieldStringProps) & {
-  type: "string" | "number" | "boolean" | "select";
+  type: FieldType;
 };
 
 const StoreField: FC<StoreFieldProps> = ({ type, ...restProps }) => {
@@ -19,6 +21,8 @@ const StoreField: FC<StoreFieldProps> = ({ type, ...restProps }) => {
       return <FieldBoolean {...(restProps as FieldBooleanProps)} mode={"slider"} />;
     case "select":
       return <FieldSelect {...(restProps as FieldSelectProps)} />;
+    case "date":
+      return <FieldDate {...(restProps as FieldDateProps)} />;
     default:
       return <div></div>;
   }

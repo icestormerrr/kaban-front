@@ -9,7 +9,7 @@ const CustomFields: FC<Shared.PageProps> = ({ storeKey }) => {
   const { data: project } = useGetProjectDetailsQuery({ _id: projectId! });
 
   return (
-    <Grid container item xs={12}>
+    <Grid container item xs={12} spacing={2}>
       {project &&
         project.customFields.map((customField) => {
           return (

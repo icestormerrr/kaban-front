@@ -1,5 +1,5 @@
 export type Message = Shared.Entity & {
   description: string;
-  date: Shared.Date;
+  date: Shared.LibDate;
   userId: string;
 };
