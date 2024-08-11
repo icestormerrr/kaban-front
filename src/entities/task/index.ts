@@ -7,8 +7,9 @@ import {
   useGetTasksGridQuery,
 } from "./api/taskApi";
 import { taskStoreKey, initialTaskState } from "./const/const";
-import { TaskStatus, TaskStatusOptions, TaskStatusColorMap } from "./model/enums";
-import { TaskState, Task, TasksFilter, TasksGridItem } from "./model/types";
+import { TaskStatusOptions, TaskStatusColorMap } from "./const/const";
+import { TaskState, Task, TasksFilter, TasksGridItem, TaskStatus } from "./model/types";
+import TaskCard from "./ui/task-card/TaskCard";
 
 export {
   tasksApi,
@@ -22,6 +23,7 @@ export {
   TaskStatusOptions,
   TaskStatusColorMap,
   initialTaskState,
+  TaskCard,
 };
 
 export type { TaskState, Task, TasksFilter, TasksGridItem };

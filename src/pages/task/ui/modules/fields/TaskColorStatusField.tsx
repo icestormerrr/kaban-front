@@ -21,8 +21,10 @@ const TaskColorStatusField = ({ storeKey, ...restProps }: TaskColorStatusFieldPr
       value={value}
       onChange={handleChange}
       options={TaskStatusOptions}
+      showBorder
       style={{
         "& .MuiInputBase-root": {
+          border: `1px solid rgba(255,255,255,0.2)`,
           backgroundColor: value ? TaskStatusColorMap[value] : "rgba(0,0,0,0)",
           color: `rgba(0,0,0,1)`,
         },

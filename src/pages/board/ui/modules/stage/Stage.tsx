@@ -4,7 +4,7 @@ import { isEqual } from "lodash";
 
 import { TasksGridItem } from "@/entities/task";
 
-import TaskCard from "../task-card/TaskCard";
+import { TaskCard } from "@/entities/task";
 import classes from "./Stage.module.scss";
 
 type Props = {

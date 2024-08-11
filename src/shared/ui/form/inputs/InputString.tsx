@@ -42,10 +42,10 @@ const InputString: FC<InputStringProps> = ({
 
   const styles: SxProps = showBorder
     ? {
-        ...(style ?? {}),
         "& .MuiInputBase-root": {
           border: `1px solid rgba(255,255,255,0.2)`,
         },
+        ...(style ?? {}),
       }
     : style;
 

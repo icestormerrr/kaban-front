@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import { useAppSelector, useEditorSlice } from "@/shared/store";
 import { useGetProjectsQuery, useProjectIdFromPath } from "@/entities/project";
 import { useLazyGetCurrentUserQuery, useLogoutMutation, UserState } from "@/entities/user";
-import { AvatarMenu, ButtonMenu, GlassContainer, InputSelect } from "@/shared/ui";
+import { AvatarMenu, ButtonMenu, InputSelect } from "@/shared/ui";
 import { ACCESS_TOKEN_PERSIST_KEY } from "@/shared/const";
 
 import Logo from "@/widgets/main-layout/assets/logo.svg?react";
@@ -59,7 +59,11 @@ const MainLayout: FC = () => {
   );
 
   const handleHomeNavigate = () => {
-    navigate("/");
+    if (projectId) {
+      navigate(`/project/${projectId}/home`);
+    } else {
+      navigate("/");
+    }
   };
 
   const handleSettingsNavigate = () => {
@@ -90,7 +94,7 @@ const MainLayout: FC = () => {
 
   return (
     <>
-      <GlassContainer className={classes.headerContainer}>
+      <header className={classes.headerContainer}>
         <div className={classes.logoContainer}>
           <Logo onClick={handleHomeNavigate} style={{ cursor: "pointer", height: 38 }} />
           <IconButton
@@ -152,10 +156,10 @@ const MainLayout: FC = () => {
             {t("Logout")}
           </MenuItem>
         </AvatarMenu>
-      </GlassContainer>
-      <div className={classes.outletContainer}>
+      </header>
+      <main className={classes.mainContainer}>
         <Outlet />
-      </div>
+      </main>
     </>
   );
 };

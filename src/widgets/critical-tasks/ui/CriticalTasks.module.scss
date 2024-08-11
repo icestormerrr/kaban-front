@@ -1,0 +1,11 @@
+.tasksContainer {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.task {
+  min-width: 200px;
+  max-width: 200px;
+}
