@@ -49,6 +49,8 @@
   justify-content: center;
   flex-wrap: wrap;
   align-content: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
 
   width: 100px;
   height: 20px;

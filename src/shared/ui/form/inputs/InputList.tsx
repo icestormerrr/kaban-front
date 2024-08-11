@@ -12,9 +12,9 @@ import InputSelect from "./InputSelect";
 
 export type InputListProps = {
   type: "input" | "select";
-  list: NApp.NamedEntity[];
-  onListChange: (newList: NApp.NamedEntity[]) => void;
-  options?: NApp.NamedEntity[];
+  list: Shared.NamedEntity[];
+  onListChange: (newList: Shared.NamedEntity[]) => void;
+  options?: Shared.NamedEntity[];
   label: string;
   required?: boolean;
   useMovingElements?: boolean;
@@ -40,7 +40,7 @@ const InputList: FC<InputListProps> = ({
     setValue("");
   };
 
-  const handleSelect = (newOption: NApp.NamedEntity | null) => {
+  const handleSelect = (newOption: Shared.NamedEntity | null) => {
     if (newOption) {
       onListChange([...list, newOption]);
     }
@@ -116,7 +116,8 @@ const InputList: FC<InputListProps> = ({
                   <ArrowDropDownIcon onClick={() => handleMoveItem(index, 1)} />
                 </ListItemIcon>
               )}
-              <ListItemText primary={item.name} />
+
+              <ListItemText primary={item.name} sx={{ textOverflow: "ellipsis", overflow: "hidden" }} />
             </ListItem>
           ))}
         </List>

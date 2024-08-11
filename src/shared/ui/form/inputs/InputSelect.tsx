@@ -5,13 +5,13 @@ import { Autocomplete, SxProps, TextField } from "@mui/material";
 const getOptionLabel = (option: Option) => option.name;
 const isOptionEqualToValue = (option: Option, selectedValue: Option) => option._id === selectedValue._id;
 
-export type Option = NApp.NamedEntity & { [key: string]: unknown };
+export type Option = Shared.NamedEntity & { [key: string]: unknown };
 
 export type InputSelectProps = {
   value: string | null;
   options: Option[];
   onChange: (newOption: Option | null) => void;
-} & NApp.UncontrolledInputProps<Option> & {
+} & Shared.UncontrolledInputProps<Option> & {
     size?: "small" | "medium";
     loadingText?: string;
     loading?: boolean;
@@ -44,7 +44,7 @@ const InputSelect: FC<InputSelectProps> = ({
         },
         ...(style ?? {}),
       }
-    : style;
+    : (style ?? {});
 
   useEffect(() => {
     setSelectedOption(options.find((option) => option._id === value) ?? null);

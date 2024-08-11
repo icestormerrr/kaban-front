@@ -12,7 +12,7 @@ const FieldList: FC<Props> = ({ storeKey, property, ...restProps }) => {
   const { getPropertySelector, setEntityProperty } = useEditorSlice<any>(storeKey);
   const value = useAppSelector(getPropertySelector(property));
   const handleChange = useCallback(
-    (value: NApp.NamedEntity[] | null) => setEntityProperty(property, value),
+    (value: Shared.NamedEntity[] | null) => setEntityProperty(property, value),
     [property, setEntityProperty],
   );
 

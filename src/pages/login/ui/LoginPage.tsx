@@ -9,7 +9,7 @@ import RegisterFields from "./modules/RegisterFields";
 import LoginFields from "./modules/LoginFields";
 import Operations from "./modules/Operations";
 
-const LoginPage: FC<NApp.PageProps & { mode: "login" | "register" }> = ({ storeKey, mode }) => {
+const LoginPage: FC<Shared.PageProps & { mode: "login" | "register" }> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
 
   return (

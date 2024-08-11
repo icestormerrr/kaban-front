@@ -1,15 +1,15 @@
 import React, { FC, memo } from "react";
 import { Checkbox, FormControlLabel, Switch } from "@mui/material";
 
-export type InputBooleanProps = NApp.ControlledInputProps<boolean> &
-  Omit<NApp.UncontrolledInputProps<boolean>, "validate" | "required" | "fullWidth"> & {
+export type InputBooleanProps = Shared.ControlledInputProps<boolean> &
+  Omit<Shared.UncontrolledInputProps<boolean>, "validate" | "required" | "fullWidth"> & {
     mode?: "checkbox" | "slider";
     labelPlacement?: "end" | "start" | "top" | "bottom";
   };
 
 const InputBoolean: FC<InputBooleanProps> = ({ value, onChange, mode, labelPlacement, label, disabled }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange && onChange(event.target.checked);
+    if (onChange) onChange(event.target.checked);
   };
   return (
     <div>

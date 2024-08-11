@@ -14,7 +14,7 @@ import Comments from "./modules/Comments";
 import CustomFields from "./modules/CustomFields";
 import classes from "./TaskPage.module.scss";
 
-const TaskPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
+const TaskPage: FC<Shared.EntityComponent> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
   const { _id } = useParams();
 

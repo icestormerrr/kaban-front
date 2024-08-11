@@ -1,4 +1,4 @@
-declare namespace NApp {
+declare namespace Shared {
   export type Entity = {
     _id: string;
   };

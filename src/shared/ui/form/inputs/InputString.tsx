@@ -2,7 +2,7 @@ import React, { FC, memo, useEffect, useState } from "react";
 
 import { SxProps, TextField, TextFieldProps } from "@mui/material";
 
-export type InputStringProps = NApp.ControlledInputProps<string> & {
+export type InputStringProps = Shared.ControlledInputProps<string> & {
   size?: "small" | "medium";
   type?: string;
   rows?: string | number;
@@ -10,7 +10,7 @@ export type InputStringProps = NApp.ControlledInputProps<string> & {
   multiline?: boolean;
   asEditableTitle?: boolean;
   style?: SxProps;
-} & NApp.UncontrolledInputProps<string>;
+} & Shared.UncontrolledInputProps<string>;
 
 const InputString: FC<InputStringProps> = ({
   value,
@@ -47,7 +47,7 @@ const InputString: FC<InputStringProps> = ({
         },
         ...(style ?? {}),
       }
-    : style;
+    : (style ?? {});
 
   return (
     <TextField

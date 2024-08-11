@@ -16,7 +16,7 @@ import Fields from "./modules/Fields";
 import Operations from "./modules/Operations";
 import CustomFieldsGrid from "@/pages/project/ui/modules/CustomFieldsGrid";
 
-const ProjectPage: FC<NApp.EntityComponent> = ({ storeKey, mode }) => {
+const ProjectPage: FC<Shared.EntityComponent> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
   const _id = useProjectIdFromPath();
 

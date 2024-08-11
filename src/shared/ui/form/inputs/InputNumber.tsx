@@ -1,8 +1,8 @@
 import React, { FC, memo, useEffect, useState } from "react";
 import { SxProps, TextField } from "@mui/material";
 
-export type InputNumberProps = NApp.ControlledInputProps<number> &
-  NApp.UncontrolledInputProps<number> & {
+export type InputNumberProps = Shared.ControlledInputProps<number> &
+  Shared.UncontrolledInputProps<number> & {
     min?: number;
     max?: number;
     mode?: "int" | "float";

@@ -1,5 +1,4 @@
-import { settingsStoreKey, SETTINGS_PERSIST_KEY } from "./const/const";
-import { backgroundImagesOptions } from "./model/enums";
+import { settingsStoreKey, SETTINGS_PERSIST_KEY, backgroundImagesOptions } from "./const/const";
 import { Settings } from "./model/types";
 
 export { settingsStoreKey, SETTINGS_PERSIST_KEY, backgroundImagesOptions };

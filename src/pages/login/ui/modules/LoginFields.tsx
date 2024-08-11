@@ -8,7 +8,7 @@ import { useAppSelector, useEditorSlice } from "@/shared/store";
 import { UserState } from "@/entities/user";
 import { InputString } from "@/shared/ui";
 
-const LoginFields: FC<NApp.PageProps> = ({ storeKey }) => {
+const LoginFields: FC<Shared.PageProps> = ({ storeKey }) => {
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
 

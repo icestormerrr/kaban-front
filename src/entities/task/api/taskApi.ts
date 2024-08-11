@@ -1,4 +1,5 @@
-/// <reference path="../../../app/global/global.d.ts" />
+import "@/app/global/global.d.ts";
+
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 import { baseQueryWithReauth } from "@/app/config/baseQuery";
@@ -17,7 +18,7 @@ export const tasksApi = createApi({
       }),
       providesTags: ["Task"],
     }),
-    getTask: build.query<Task, NApp.Entity>({
+    getTask: build.query<Task, Shared.Entity>({
       query: (params) => ({
         url: `/tasks/${params._id}`,
         params,
@@ -40,7 +41,7 @@ export const tasksApi = createApi({
       }),
       invalidatesTags: ["Task"],
     }),
-    deleteTask: build.mutation<void, NApp.Entity>({
+    deleteTask: build.mutation<void, Shared.Entity>({
       query: (params) => ({
         url: `/tasks`,
         method: "DELETE",

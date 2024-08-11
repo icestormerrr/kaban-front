@@ -1,8 +1,8 @@
-export type User = NApp.NamedEntity & {
+export type User = Shared.NamedEntity & {
   email: string;
 };
 
-export type UserState = NApp.Nullable<User> & { password: string | null };
+export type UserState = Shared.Nullable<User> & { password: string | null };
 
 export type UserLoginQuery = Pick<NonNullable<UserState>, "email" | "password">;
 

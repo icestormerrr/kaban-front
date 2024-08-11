@@ -8,7 +8,7 @@ import { TaskCard } from "@/entities/task";
 import classes from "./Stage.module.scss";
 
 type Props = {
-  stage: NApp.NamedEntity;
+  stage: Shared.NamedEntity;
   tasks: TasksGridItem[];
 };
 

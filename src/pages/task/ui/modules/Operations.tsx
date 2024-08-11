@@ -14,7 +14,7 @@ import classes from "../TaskPage.module.scss";
 
 type Props = {
   storeKey: string;
-  mode: NApp.Mode;
+  mode: Shared.Mode;
 };
 
 const Operations: FC<Props> = ({ storeKey, mode }) => {

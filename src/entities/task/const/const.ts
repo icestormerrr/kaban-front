@@ -15,7 +15,7 @@ export const initialTaskState: TaskState = {
   messages: null,
 };
 
-export const TaskStatusOptions: NApp.NamedEntity[] = [
+export const TaskStatusOptions: Shared.NamedEntity[] = [
   {
     _id: TaskStatus.NotImportant,
     name: "Не важная",

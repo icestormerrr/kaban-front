@@ -37,7 +37,7 @@ const MainLayout: FC = () => {
     navigate("/login");
   }, [fetchLogout, navigate]);
 
-  const handleProjectChange = (newOption: NApp.NamedEntity | null) => {
+  const handleProjectChange = (newOption: Shared.NamedEntity | null) => {
     const pathArray = pathname.split("/");
     const newProjectId = newOption?._id ?? "";
     if (pathArray[2]?.length) {
