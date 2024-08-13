@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 import { useGetProjectDetailsQuery, useProjectIdFromPath } from "@/entities/project";
-import { StoreField } from "@/shared/ui";
+import { Field } from "@/shared/ui";
 import { Grid } from "@mui/material";
 
 const CustomFields: FC<Shared.PageProps> = ({ storeKey }) => {
@@ -14,7 +14,7 @@ const CustomFields: FC<Shared.PageProps> = ({ storeKey }) => {
         project.customFields.map((customField) => {
           return (
             <Grid item md={3} xs={12} key={customField.name}>
-              <StoreField
+              <Field
                 type={customField.type}
                 property={`${customField._id}`}
                 label={customField.name}

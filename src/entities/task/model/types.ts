@@ -32,7 +32,7 @@ export type TasksFilter = {
   epicId?: string;
   sprintId?: string;
   executorId?: string;
-} & { [key: string]: unknown };
+} & { [key: string]: string };
 
 export enum TaskStatus {
   NotImportant = "0",

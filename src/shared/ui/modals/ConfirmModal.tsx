@@ -17,8 +17,11 @@ const ConfirmModal: FC<ConfirmModalProps> = ({ children, show, title, onOk, onCl
     <Modal
       open={show}
       onClose={onClose}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
+      sx={{
+        backdropFilter: "blur(5px)",
+        backgroundColor: "rgba(255, 255, 255, 0.1)",
+        transition: "all .3s ease-in-out",
+      }}
     >
       <Box
         sx={{
@@ -28,15 +31,14 @@ const ConfirmModal: FC<ConfirmModalProps> = ({ children, show, title, onOk, onCl
           transform: "translate(-50%, -50%)",
           width: size === "medium" ? 800 : size === "large" ? 1200 : 400,
           bgcolor: "background.paper",
-          border: "2px solid #000",
+          border: "1px solid rgba(255, 255, 255, 0.3)",
+          borderRadius: "10px",
           boxShadow: 24,
         }}
       >
-        <DialogTitle id="alert-dialog-title" sx={{ fontFamily: '"Benzin", sans-serif' }}>
-          {title}
-        </DialogTitle>
+        <DialogTitle sx={{ fontFamily: '"Benzin", sans-serif' }}>{title}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">{children}</DialogContentText>
+          <DialogContentText>{children}</DialogContentText>
         </DialogContent>
         <DialogActions>
           {onOk && <Button onClick={onOk}>{t("Ok")}</Button>}

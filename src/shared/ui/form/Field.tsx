@@ -7,11 +7,11 @@ import FieldString, { FieldStringProps } from "./fields/FieldString";
 import FieldDate, { FieldDateProps } from "./fields/FieldDate";
 import { FieldType } from "@/shared/const";
 
-type StoreFieldProps = (FieldBooleanProps | FieldNumberProps | FieldSelectProps | FieldStringProps) & {
+type FieldProps = (FieldBooleanProps | FieldNumberProps | FieldSelectProps | FieldStringProps) & {
   type: FieldType;
 };
 
-const StoreField: FC<StoreFieldProps> = ({ type, ...restProps }) => {
+const Field: FC<FieldProps> = ({ type, ...restProps }) => {
   switch (type) {
     case "string":
       return <FieldString {...(restProps as FieldStringProps)} />;
@@ -28,4 +28,4 @@ const StoreField: FC<StoreFieldProps> = ({ type, ...restProps }) => {
   }
 };
 
-export default memo(StoreField);
+export default memo(Field);

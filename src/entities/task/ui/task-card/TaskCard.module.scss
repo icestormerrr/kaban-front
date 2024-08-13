@@ -23,9 +23,8 @@
 
 .title {
   font-size: 14px;
-  height: 33px;
+  height: 35px;
   margin-bottom: 11px;
-  //word-break: break-all;
   text-overflow: ellipsis;
   overflow: hidden;
 }
@@ -36,6 +35,8 @@
   font-weight: 400;
   margin-bottom: 15px;
   border-radius: 5px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .bottomContainer {
@@ -51,7 +52,7 @@
   align-content: center;
   text-overflow: ellipsis;
   overflow: hidden;
-
+  text-overflow: ellipsis;
   width: 100px;
   height: 20px;
   font-size: 10px;

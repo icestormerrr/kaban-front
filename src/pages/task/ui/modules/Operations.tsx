@@ -72,7 +72,7 @@ const Operations: FC<Props> = ({ storeKey, mode }) => {
         className={classes.nameField}
         required
         style={{
-          width: "94%",
+          flex: "1",
           "& .MuiInputBase-input": {
             padding: 0,
           },

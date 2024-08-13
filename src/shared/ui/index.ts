@@ -12,7 +12,8 @@ import FieldDate from "./form/fields/FieldDate";
 import InputDate from "./form/inputs/InputDate";
 import FieldBoolean from "./form/fields/FieldBoolean";
 import InputBoolean from "./form/inputs/InputBoolean";
-import StoreField from "./form/StoreField";
+import Field from "./form/Field";
+import Input from "./form/Input";
 import AvatarMenu from "./menus/AvatarMenu";
 import ButtonMenu from "./menus/ButtonMenu";
 import ConfirmModal from "./modals/ConfirmModal";
@@ -32,7 +33,8 @@ export {
   InputDate,
   FieldBoolean,
   InputBoolean,
-  StoreField,
+  Field,
+  Input,
   AvatarMenu,
   ButtonMenu,
   ConfirmModal,
