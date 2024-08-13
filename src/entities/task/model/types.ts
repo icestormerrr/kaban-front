@@ -10,6 +10,8 @@ export type Task = Shared.NamedEntity & {
   stageId: string;
   authorId: string;
   executorId: string;
+  creationDatetime: number;
+  planEndDatetime?: number;
   messages: TMessage[] | null;
 };
 
@@ -22,6 +24,7 @@ export type TasksGridItem = Shared.NamedEntity & {
   stageName: string;
   authorName: string;
   executorName: string;
+  creationDatetime: number;
 };
 
 export type TasksFilter = {

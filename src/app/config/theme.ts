@@ -36,6 +36,10 @@ export const darkTheme = createTheme({
               border: `1px solid rgba(255,255,255,0)`,
               transition: "border .15s",
             },
+            "&.Mui-disabled fieldset": {
+              border: `1px solid rgba(255,255,255,0)`,
+              transition: "border .15s",
+            },
             "&:hover fieldset": {
               border: `1px solid rgba(255,255,255,0.4)`,
             },

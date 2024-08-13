@@ -3,6 +3,7 @@ import { FC, memo, useCallback, useEffect, useMemo, useState } from "react";
 import { utcToLibDate } from "@/shared/lib";
 import { DATE_FORMAT, DATE_TIME_FORMAT } from "@/shared/const";
 import dayjs from "dayjs";
+import { SxProps } from "@mui/material";
 
 export type InputDateProps = Shared.ControlledInputProps<Shared.UTCDate> &
   Shared.UncontrolledInputProps<Shared.UTCDate> & {
@@ -21,8 +22,9 @@ const InputDate: FC<InputDateProps> = ({
   maxDate,
   format = DATE_TIME_FORMAT,
   fullWidth = true,
+  showBorder = false,
 }) => {
-  const date = useMemo<Shared.LibDate | null>(() => utcToLibDate(value), [value]);
+  const date = useMemo<Shared.LibDate | null>(() => (value ? utcToLibDate(value) : null), [value]);
   const [errorText, setErrorText] = useState<string | null>();
 
   const handleChange = useCallback(
@@ -31,6 +33,14 @@ const InputDate: FC<InputDateProps> = ({
     },
     [onChange],
   );
+
+  const styles: SxProps = showBorder
+    ? {
+        "& .MuiInputBase-root": {
+          border: `1px solid rgba(255,255,255,0.2)`,
+        },
+      }
+    : {};
 
   useEffect(() => {
     if (validate) {
@@ -44,7 +54,6 @@ const InputDate: FC<InputDateProps> = ({
       label={label}
       value={date}
       onChange={handleChange}
-      defaultValue={dayjs()}
       minDate={minDate ? utcToLibDate(minDate) : undefined}
       maxDate={maxDate ? utcToLibDate(maxDate) : undefined}
       format={format}
@@ -58,6 +67,7 @@ const InputDate: FC<InputDateProps> = ({
           fullWidth,
           size: "small",
           autoComplete: "off",
+          sx: styles,
         },
       }}
     />

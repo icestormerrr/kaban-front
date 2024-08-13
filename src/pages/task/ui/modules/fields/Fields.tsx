@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-import { FieldSelect, FieldString } from "@/shared/ui";
+import { FieldDate, FieldSelect, FieldString } from "@/shared/ui";
 import { useGetProjectDetailsQuery, useProjectIdFromPath } from "@/entities/project";
 import { useGetUsersQuery } from "@/entities/user";
 import TaskColorStatusField from "./TaskColorStatusField";
@@ -67,6 +67,12 @@ const Fields: FC<Props> = ({ storeKey }) => {
         </Grid>
         <Grid item>
           <FieldSelect label={t("Sprint")} storeKey={storeKey} property="sprintId" options={project?.sprints ?? []} />
+        </Grid>
+        <Grid item>
+          <FieldDate label={t("Creation date")} storeKey={storeKey} property="creationDatetime" disabled />
+        </Grid>
+        <Grid item>
+          <FieldDate label={t("Plan end date")} storeKey={storeKey} property="planEndDatetime" />
         </Grid>
       </Grid>
     </Grid>
