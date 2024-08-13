@@ -23,6 +23,7 @@ const InputString: FC<InputStringProps> = ({
   style,
   showBorder = false,
   size = "small",
+  fullWidth = true,
   ...restProps
 }) => {
   const [errorText, setErrorText] = useState<string | null>(null);
@@ -59,6 +60,7 @@ const InputString: FC<InputStringProps> = ({
       size={size}
       label={asEditableTitle ? null : label}
       sx={styles}
+      fullWidth={fullWidth}
       {...restProps}
     />
   );

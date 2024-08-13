@@ -142,20 +142,22 @@ const MainLayout: FC = () => {
           </ButtonMenu>
         </nav>
 
-        <AvatarMenu label={user?.name?.[0] ?? ""}>
-          <MenuItem onClick={handleSettingsNavigate}>
-            <ListItemIcon>
-              <Settings fontSize="small" />
-            </ListItemIcon>
-            {t("Settings")}
-          </MenuItem>
-          <MenuItem onClick={handleLogout}>
-            <ListItemIcon>
-              <Logout fontSize="small" />
-            </ListItemIcon>
-            {t("Logout")}
-          </MenuItem>
-        </AvatarMenu>
+        {showLayoutDetails && (
+          <AvatarMenu label={user?.name?.[0] ?? ""}>
+            <MenuItem onClick={handleSettingsNavigate}>
+              <ListItemIcon>
+                <Settings fontSize="small" />
+              </ListItemIcon>
+              {t("Settings")}
+            </MenuItem>
+            <MenuItem onClick={handleLogout}>
+              <ListItemIcon>
+                <Logout fontSize="small" />
+              </ListItemIcon>
+              {t("Logout")}
+            </MenuItem>
+          </AvatarMenu>
+        )}
       </header>
       <main className={classes.mainContainer}>
         <Outlet />
