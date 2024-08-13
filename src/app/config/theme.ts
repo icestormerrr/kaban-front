@@ -8,6 +8,24 @@ export const darkTheme = createTheme({
     mode: "dark",
   },
   components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backdropFilter: "blur(10px)",
+          backgroundColor: "rgba(0, 0, 0, 0.1)",
+          borderRadius: "10px",
+        },
+      },
+    },
+    MuiList: {
+      styleOverrides: {
+        root: {
+          backdropFilter: "blur(10px)",
+          backgroundColor: "rgba(0, 0, 0, 0.1)",
+          borderRadius: "10px",
+        },
+      },
+    },
     MuiTextField: {
       styleOverrides: {
         root: {
