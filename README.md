@@ -13,7 +13,7 @@ The project is built according to the "feature sliced design" architecture, make
 2. Run docker build:
    - docker build . -t frontend
 3. Run docker run, specify environment variables in the command, for example:
-   - docker run -d -p 3000:3000 -e REACT_APP_PUBLIC_URL=url-of-backend-application frontend
+   - docker run -d -p 5173:5173 -e VITE_PUBLIC_URL=url-of-backend-application frontend
 
 ### Development
 
@@ -21,8 +21,8 @@ The project is built according to the "feature sliced design" architecture, make
 2. Clone the repository:
    - git clone
 3. Create a .env file in the root directory, example content:
-   - REACT_APP_PUBLIC_URL=url-of-backend-application
+   - VITE_PUBLIC_URL=url-of-backend-application
 4. Install dependencies:
    - npm install
 5. Start the project:
-   - npm start
+   - npm run dev
