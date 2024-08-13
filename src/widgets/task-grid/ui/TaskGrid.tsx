@@ -1,11 +1,12 @@
 import React, { FC, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
-import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridCellParams, GridColDef, GridColType } from "@mui/x-data-grid";
 import { useTranslation } from "react-i18next";
 
-import { useGetTasksGridQuery, TasksGridItem } from "@/entities/task";
-import { useProjectIdFromPath } from "@/entities/project";
+import { useGetTasksGridQuery, TasksGridItem, TaskStatusColorMap } from "@/entities/task";
+import { useGetProjectDetailsQuery, useProjectIdFromPath } from "@/entities/project";
+import { skipToken } from "@reduxjs/toolkit/query";
 
 type Props = {
   height: string;
@@ -14,15 +15,17 @@ type Props = {
 const TaskGrid: FC<Props> = ({ height }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+
   const projectId = useProjectIdFromPath();
-  const { data: rows = [] } = useGetTasksGridQuery(
+  const { data: project } = useGetProjectDetailsQuery(projectId ? { _id: projectId } : skipToken);
+
+  const { data: tasks = [] } = useGetTasksGridQuery(
     { projectId: projectId! },
     { skip: !projectId, refetchOnMountOrArgChange: true },
   );
 
   const columns: GridColDef<TasksGridItem>[] = useMemo(
     () => [
-      { field: "_id", headerName: "_id", width: 90 },
       {
         field: "name",
         headerName: t("Name"),
@@ -34,27 +37,40 @@ const TaskGrid: FC<Props> = ({ height }) => {
         width: 200,
       },
       {
+        field: "status",
+        headerName: t("Status"),
+        renderCell({ row }) {
+          return <div style={{ backgroundColor: TaskStatusColorMap[row.status], width: "100%", height: "100%" }}></div>;
+        },
+        filterable: false,
+      },
+      {
+        field: "stageName",
+        headerName: t("Stage"),
+      },
+      {
         field: "epicName",
         headerName: t("Epic"),
-        width: 150,
       },
       {
         field: "sprintName",
         headerName: t("Sprint"),
-        width: 150,
       },
       {
         field: "authorName",
         headerName: t("Author"),
-        width: 200,
       },
       {
         field: "executorName",
         headerName: t("Executor"),
-        width: 200,
       },
+      ...(project?.customFields || []).map((field) => ({
+        field: field._id,
+        headerName: field.name,
+        type: field.type as GridColType,
+      })),
     ],
-    [],
+    [project?.customFields, t],
   );
 
   const handleCellDoubleClick = useCallback(
@@ -67,7 +83,7 @@ const TaskGrid: FC<Props> = ({ height }) => {
   return (
     <Box sx={{ width: "100%", height }}>
       <DataGrid
-        rows={rows}
+        rows={tasks}
         columns={columns}
         initialState={{
           pagination: {
@@ -76,7 +92,7 @@ const TaskGrid: FC<Props> = ({ height }) => {
             },
           },
         }}
-        pageSizeOptions={[13]}
+        pageSizeOptions={[10, 15, 25, 50]}
         onCellDoubleClick={handleCellDoubleClick}
         disableRowSelectionOnClick
         getRowId={(row) => row._id}

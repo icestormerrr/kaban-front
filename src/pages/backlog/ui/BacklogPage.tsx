@@ -8,9 +8,9 @@ import Operations from "./modules/Operations";
 const BacklogPage = () => {
   return (
     <GlassContainer className="pageContainer">
-      <Grid container direction="column" sx={{ gap: "30px" }}>
+      <Grid container direction="column" sx={{ gap: "20px" }}>
         <Operations />
-        <TaskGrid height="73vh" />
+        <TaskGrid height="80vh" />
       </Grid>
     </GlassContainer>
   );

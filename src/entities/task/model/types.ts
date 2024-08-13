@@ -13,6 +13,7 @@ export type Task = Shared.NamedEntity & {
   creationDatetime: number;
   planEndDatetime?: number;
   messages: TMessage[] | null;
+  [key: string]: unknown;
 };
 
 export type TasksGridItem = Shared.NamedEntity & {
@@ -25,6 +26,7 @@ export type TasksGridItem = Shared.NamedEntity & {
   authorName: string;
   executorName: string;
   creationDatetime: number;
+  [key: string]: unknown;
 };
 
 export type TasksFilter = {
