@@ -17,7 +17,7 @@ const TaskGrid: FC<Props> = ({ height }) => {
   const navigate = useNavigate();
 
   const projectId = useProjectIdFromPath();
-  const { data: project } = useGetProjectDetailsQuery(projectId ? { _id: projectId } : skipToken);
+  const { data: project } = useGetProjectDetailsQuery(projectId ? { id: projectId } : skipToken);
 
   const { data: tasks = [] } = useGetTasksGridQuery(
     { projectId: projectId! },
@@ -65,7 +65,7 @@ const TaskGrid: FC<Props> = ({ height }) => {
         headerName: t("Executor"),
       },
       ...(project?.customFields || []).map((field) => ({
-        field: field._id,
+        field: field.id,
         headerName: field.name,
         type: field.type as GridColType,
       })),
@@ -75,7 +75,7 @@ const TaskGrid: FC<Props> = ({ height }) => {
 
   const handleCellDoubleClick = useCallback(
     (params: GridCellParams<TasksGridItem>) => {
-      navigate(`/project/${projectId}/task/${params.row._id}`);
+      navigate(`/project/${projectId}/task/${params.row.id}`);
     },
     [navigate, projectId],
   );
@@ -95,7 +95,7 @@ const TaskGrid: FC<Props> = ({ height }) => {
         pageSizeOptions={[10, 15, 25, 50]}
         onCellDoubleClick={handleCellDoubleClick}
         disableRowSelectionOnClick
-        getRowId={(row) => row._id}
+        getRowId={(row) => row.id}
       />
     </Box>
   );

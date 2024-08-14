@@ -1,9 +1,9 @@
 import React, { FC, SyntheticEvent, useEffect, useState } from "react";
-
+import { useTranslation } from "react-i18next";
 import { Autocomplete, SxProps, TextField } from "@mui/material";
 
 const getOptionLabel = (option: Option) => option.name;
-const isOptionEqualToValue = (option: Option, selectedValue: Option) => option._id === selectedValue._id;
+const isOptionEqualToValue = (option: Option, selectedValue: Option) => option.id === selectedValue.id;
 
 export type Option = Shared.NamedEntity & { [key: string]: unknown };
 
@@ -16,6 +16,7 @@ export type InputSelectProps = {
     loadingText?: string;
     loading?: boolean;
     style?: SxProps;
+    noOptionMessage?: string;
   };
 
 const InputSelect: FC<InputSelectProps> = ({
@@ -28,9 +29,12 @@ const InputSelect: FC<InputSelectProps> = ({
   placeholder,
   showBorder = false,
   style,
+  noOptionMessage,
   ...restProps
 }) => {
-  const [selectedOption, setSelectedOption] = useState<Option | null>({ _id: value || "", name: "" });
+  const { t } = useTranslation();
+
+  const [selectedOption, setSelectedOption] = useState<Option | null>({ id: value || "", name: "" });
 
   const handleChange = (_: SyntheticEvent, newOption: Option | null) => {
     setSelectedOption(newOption);
@@ -47,7 +51,7 @@ const InputSelect: FC<InputSelectProps> = ({
     : (style ?? {});
 
   useEffect(() => {
-    setSelectedOption(options.find((option) => option._id === value) ?? null);
+    setSelectedOption(options.find((option) => option.id === value) ?? null);
   }, [options, value]);
 
   return (
@@ -59,6 +63,7 @@ const InputSelect: FC<InputSelectProps> = ({
       isOptionEqualToValue={isOptionEqualToValue}
       getOptionLabel={getOptionLabel}
       sx={styles}
+      noOptionsText={noOptionMessage || t("No options")}
       renderInput={(params) => (
         <TextField {...params} label={label} placeholder={placeholder} error={required && !value} />
       )}

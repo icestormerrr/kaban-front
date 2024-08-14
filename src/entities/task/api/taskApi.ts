@@ -20,7 +20,7 @@ export const tasksApi = createApi({
     }),
     getTask: build.query<Task, Shared.Entity>({
       query: (params) => ({
-        url: `/tasks/${params._id}`,
+        url: `/tasks/${params.id}`,
         params,
       }),
       providesTags: ["Task"],

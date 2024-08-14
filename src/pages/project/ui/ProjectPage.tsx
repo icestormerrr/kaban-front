@@ -18,21 +18,21 @@ import CustomFieldsGrid from "@/pages/project/ui/modules/CustomFieldsGrid";
 
 const ProjectPage: FC<Shared.EntityComponent> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
-  const _id = useProjectIdFromPath();
+  const id = useProjectIdFromPath();
 
   const [fetchDetails] = useLazyGetProjectDetailsQuery();
   const { setEntity: setProject } = useEditorSlice<ProjectState>(storeKey);
 
   useEffect(() => {
-    if (_id && mode === "edit") {
-      fetchDetails({ _id })
+    if (id && mode === "edit") {
+      fetchDetails({ id })
         .unwrap()
         .then((details) => setProject(details))
         .catch(() => enqueueSnackbar(t("Server error"), { variant: "error" }));
     } else {
       setProject(initialProjectState);
     }
-  }, [_id, fetchDetails, mode, setProject, t]);
+  }, [id, fetchDetails, mode, setProject, t]);
 
   return (
     <GlassContainer className="pageContainer">

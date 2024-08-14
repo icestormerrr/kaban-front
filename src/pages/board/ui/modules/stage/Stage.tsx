@@ -17,7 +17,7 @@ const Stage: FC<Props> = ({ stage, tasks }) => {
     <div className={classes.stage}>
       <div className={classes.stageTitle}>{stage.name.slice(0, 16)}</div>
       {tasks.map((task) => (
-        <TaskCard {...task} key={task._id} />
+        <TaskCard {...task} key={task.id} />
       ))}
     </div>
   );
@@ -26,5 +26,5 @@ const Stage: FC<Props> = ({ stage, tasks }) => {
 export default memo(
   Stage,
   (prevProps, nextProps) =>
-    isEqual(prevProps.stage._id, nextProps.stage._id) && isEqual(nextProps.tasks, prevProps.tasks),
+    isEqual(prevProps.stage.id, nextProps.stage.id) && isEqual(nextProps.tasks, prevProps.tasks),
 );

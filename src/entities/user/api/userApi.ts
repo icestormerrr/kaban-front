@@ -20,7 +20,7 @@ export const usersApi = createApi({
     }),
     getUser: build.query<User, Shared.Entity>({
       query: (params) => ({
-        url: `/users/${params._id}`,
+        url: `/users/${params.id}`,
         params,
       }),
       providesTags: ["User"],

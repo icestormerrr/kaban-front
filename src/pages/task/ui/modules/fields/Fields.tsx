@@ -15,7 +15,7 @@ const Fields: FC<Props> = ({ storeKey }) => {
   const { t } = useTranslation();
 
   const projectId = useProjectIdFromPath();
-  const { data: project } = useGetProjectDetailsQuery({ _id: projectId! });
+  const { data: project } = useGetProjectDetailsQuery({ id: projectId! });
   const { data: users } = useGetUsersQuery({ usersIds: project?.users }, { skip: !project?.users });
 
   return (

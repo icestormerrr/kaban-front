@@ -1,6 +1,6 @@
 declare namespace Shared {
   export type Entity = {
-    _id: string;
+    id: string;
   };
 
   export type Mode = "create" | "edit";

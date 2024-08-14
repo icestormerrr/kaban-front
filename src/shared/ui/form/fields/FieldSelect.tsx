@@ -11,7 +11,7 @@ const FieldSelect = ({ storeKey, property, ...restProps }: FieldSelectProps) => 
   const { getPropertySelector, setEntityProperty } = useEditorSlice<any>(storeKey);
   const value = useAppSelector(getPropertySelector(property));
   const handleChange = useCallback(
-    (value: Option | null) => setEntityProperty(property, value?._id ?? null),
+    (value: Option | null) => setEntityProperty(property, value?.id ?? null),
     [property, setEntityProperty],
   );
 

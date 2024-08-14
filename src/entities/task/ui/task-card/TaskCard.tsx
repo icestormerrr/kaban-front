@@ -10,7 +10,7 @@ import classes from "./TaskCard.module.scss";
 import { useProjectIdFromPath } from "@/entities/project";
 
 const TaskCard: FC<TasksGridItem & { className?: string }> = ({
-  _id,
+  id,
   name,
   epicName,
   sprintName,
@@ -22,7 +22,7 @@ const TaskCard: FC<TasksGridItem & { className?: string }> = ({
   const projectId = useProjectIdFromPath();
 
   const handleTaskClick = () => {
-    navigate(`/project/${projectId}/task/${_id}`);
+    navigate(`/project/${projectId}/task/${id}`);
   };
 
   return (

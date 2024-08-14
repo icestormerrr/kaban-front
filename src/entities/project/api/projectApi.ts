@@ -19,7 +19,7 @@ export const projectsApi = createApi({
     }),
     getProjectDetails: build.query<Project, Shared.Entity>({
       query: (params) => ({
-        url: `/projects/${params._id}`,
+        url: `/projects/${params.id}`,
       }),
       providesTags: ["Project"],
     }),

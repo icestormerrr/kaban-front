@@ -10,7 +10,6 @@ import { FieldString, GlassButton } from "@/shared/ui";
 import { useProjectIdFromPath } from "@/entities/project";
 import { Task, TaskState, useAddTaskMutation, useUpdateTaskMutation } from "@/entities/task";
 import { useAppSelector, useEditorSlice } from "@/shared/store";
-import classes from "../TaskPage.module.scss";
 
 type Props = {
   storeKey: string;
@@ -53,12 +52,12 @@ const Operations: FC<Props> = ({ storeKey, mode }) => {
       return;
     }
     const queryMethod = mode === "edit" ? fetchUpdate : fetchCreate;
-    const queryArg = mode === "edit" ? { ...task, projectId } : { ...task, projectId, _id: undefined };
+    const queryArg = mode === "edit" ? { ...task, projectId } : { ...task, projectId, id: undefined };
     queryMethod(queryArg as Task)
       .unwrap()
       .then((details) => {
         setTask(details);
-        if (mode === "create") navigate(details._id);
+        if (mode === "create") navigate(details.id);
         enqueueSnackbar(t("Saved"), { variant: "success" });
       })
       .catch(() => enqueueSnackbar(t("Saving error"), { variant: "error" }));
@@ -69,7 +68,6 @@ const Operations: FC<Props> = ({ storeKey, mode }) => {
       <FieldString
         storeKey={storeKey}
         property="name"
-        className={classes.nameField}
         required
         style={{
           flex: "1",

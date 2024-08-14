@@ -28,7 +28,7 @@ const Chat: FC<Props> = ({ title, messages, omMessageCreate, className }) => {
   const [newMessage, setNewMessage] = useState<string | null>(null);
 
   const handleMessageCreate = () => {
-    omMessageCreate({ description: newMessage!, date: Date.now(), userId: user._id, _id: uuid() });
+    omMessageCreate({ description: newMessage!, date: Date.now(), userId: user.id, id: uuid() });
     setNewMessage("");
   };
 
@@ -60,7 +60,7 @@ const Chat: FC<Props> = ({ title, messages, omMessageCreate, className }) => {
       <Grid item>
         <div className={clsx(classes.container, className)}>
           {messages.map((msg) => (
-            <Message {...msg} key={msg._id} />
+            <Message {...msg} key={msg.id} />
           ))}
         </div>
       </Grid>

@@ -19,9 +19,9 @@ const Fields: FC<Props> = ({ storeKey }) => {
 
   // TODO: rewrite to server search, cause there may be a lot of users
   const { data: allUsers } = useGetUsersQuery({});
-  const projectUsers = useMemo(() => allUsers?.filter((user) => users?.includes(user._id)), [allUsers, users]);
+  const projectUsers = useMemo(() => allUsers?.filter((user) => users?.includes(user.id)), [allUsers, users]);
   const usersAvailableToAdd = useMemo(
-    () => allUsers?.filter((user) => !projectUsers?.find((u) => u._id === user._id)),
+    () => allUsers?.filter((user) => !projectUsers?.find((u) => u.id === user.id)),
     [allUsers, projectUsers],
   );
 
@@ -30,9 +30,6 @@ const Fields: FC<Props> = ({ storeKey }) => {
       <Grid container xs spacing={4}>
         <Grid item xs={12}>
           <FieldSelect label={t("Author")} options={allUsers ?? []} storeKey={storeKey} property="authorId" required />
-        </Grid>
-        <Grid item xs={12}>
-          <FieldString label={t("Name")} storeKey={storeKey} property="name" fullWidth required />
         </Grid>
         <Grid item xs={12}>
           <FieldString
@@ -63,7 +60,7 @@ const Fields: FC<Props> = ({ storeKey }) => {
             onListChange={(users) =>
               setEntityProperty(
                 "users",
-                users.map((user) => user._id),
+                users.map((user) => user.id),
               )
             }
             label={t("Member")}

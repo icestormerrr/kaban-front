@@ -35,7 +35,7 @@ const routesTree: RouteObject[] = [
             element: <ProjectPage mode="create" storeKey={projectStoreKey} />,
           },
           {
-            path: ":_id",
+            path: ":id",
             children: [
               {
                 index: true,
@@ -61,7 +61,7 @@ const routesTree: RouteObject[] = [
                     element: <TaskPage mode="create" storeKey={taskStoreKey} />,
                   },
                   {
-                    path: ":_id",
+                    path: ":id",
                     element: <TaskPage mode="edit" storeKey={taskStoreKey} />,
                   },
                 ],

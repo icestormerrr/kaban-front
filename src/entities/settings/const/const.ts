@@ -6,7 +6,7 @@ export const settingsStoreKey = "settings";
 export const SETTINGS_PERSIST_KEY = "settings";
 
 export const backgroundImagesOptions: Shared.NamedEntity[] = [
-  { _id: background1, name: "Blue" },
-  { _id: background2, name: "Green" },
-  { _id: background3, name: "Violet" },
+  { id: background1, name: "Blue" },
+  { id: background2, name: "Green" },
+  { id: background3, name: "Violet" },
 ];

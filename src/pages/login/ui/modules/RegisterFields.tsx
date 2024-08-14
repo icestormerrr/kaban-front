@@ -12,7 +12,12 @@ const RegisterFields: FC<Shared.PageProps> = ({ storeKey }) => {
 
   return (
     <>
-      <InputString label={t("Name")} value={name} onChange={(newName) => setUserProperty("name", newName)} showBorder />
+      <InputString
+        label={t("PersonName")}
+        value={name}
+        onChange={(newName) => setUserProperty("name", newName)}
+        showBorder
+      />
     </>
   );
 };

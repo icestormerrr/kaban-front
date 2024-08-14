@@ -1,11 +1,12 @@
 import React, { FC, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { GlassButton } from "../../../../shared/ui";
 import { Grid } from "@mui/material";
+import SaveIcon from "@mui/icons-material/Save";
 import { useTranslation } from "react-i18next";
 import { enqueueSnackbar } from "notistack";
 import { compact } from "lodash";
 
+import { FieldString, GlassButton } from "@/shared/ui";
 import { Project, ProjectState, useAddProjectMutation, useUpdateProjectMutation } from "@/entities/project";
 import { useAppSelector, useEditorSlice } from "@/shared/store";
 
@@ -46,22 +47,36 @@ const Operations: FC<Props> = ({ storeKey, mode }) => {
       return;
     }
     const queryMethod = mode === "edit" ? fetchUpdate : fetchCreate;
-    const queryArg = mode === "edit" ? project : { ...project, _id: undefined };
+    const queryArg = mode === "edit" ? project : { ...project, id: undefined };
     queryMethod(queryArg as Project)
       .unwrap()
       .then((details) => {
         setProject(details);
-        if (mode === "create") navigate(details._id);
+        if (mode === "create") navigate(details.id);
         enqueueSnackbar(t("Saved"), { variant: "success" });
       })
       .catch(() => enqueueSnackbar(t("Saving error"), { variant: "error" }));
   };
 
   return (
-    <Grid item xs={12}>
-      <h2>{t("Project card")}</h2>
-      <GlassButton variant="contained" onClick={handleSave} sx={{ height: "35px", ml: "20px" }}>
-        {mode === "edit" ? t("Save") : t("Create")}
+    <Grid container item xs={12}>
+      <FieldString
+        storeKey={storeKey}
+        property="name"
+        required
+        style={{
+          flex: "1",
+          "& .MuiInputBase-input": {
+            padding: 0,
+          },
+          "& .MuiInputBase-root": {
+            fontFamily: "Benzin",
+            fontSize: "25px",
+          },
+        }}
+      />
+      <GlassButton variant="contained" onClick={handleSave} sx={{ height: "35px" }}>
+        <SaveIcon />
       </GlassButton>
     </Grid>
   );

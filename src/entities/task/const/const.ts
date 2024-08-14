@@ -3,7 +3,7 @@ import { TaskState, TaskStatus } from "../model/types";
 export const taskStoreKey = "task";
 
 export const initialTaskState: TaskState = {
-  _id: "",
+  id: "",
   name: "",
   description: "",
   status: null,
@@ -17,23 +17,23 @@ export const initialTaskState: TaskState = {
 
 export const TaskStatusOptions: Shared.NamedEntity[] = [
   {
-    _id: TaskStatus.NotImportant,
+    id: TaskStatus.NotImportant,
     name: "Не важная",
   },
   {
-    _id: TaskStatus.Desirable,
+    id: TaskStatus.Desirable,
     name: "Желательная",
   },
   {
-    _id: TaskStatus.Important,
+    id: TaskStatus.Important,
     name: "Важная",
   },
   {
-    _id: TaskStatus.VeryImportant,
+    id: TaskStatus.VeryImportant,
     name: "Очень важная",
   },
   {
-    _id: TaskStatus.Critical,
+    id: TaskStatus.Critical,
     name: "Критическая",
   },
 ];

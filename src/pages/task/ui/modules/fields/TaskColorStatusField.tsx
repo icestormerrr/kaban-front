@@ -12,7 +12,7 @@ const TaskColorStatusField = ({ storeKey, ...restProps }: TaskColorStatusFieldPr
   const { getPropertySelector, setEntityProperty } = useEditorSlice<TaskState>(storeKey);
   const value = useAppSelector(getPropertySelector("status"));
   const handleChange = useCallback(
-    (value: Option | null) => setEntityProperty("status", (value?._id as TaskStatus) ?? null),
+    (value: Option | null) => setEntityProperty("status", (value?.id as TaskStatus) ?? null),
     [setEntityProperty],
   );
 

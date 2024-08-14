@@ -15,7 +15,7 @@ const CriticalTasks = () => {
     <div>
       <h2>{t("Critical tasks")}</h2>
       <div className={classes.tasksContainer}>
-        {tasks && tasks.map((task) => <TaskCard key={task._id} {...task} className={classes.task} />)}
+        {tasks && tasks.map((task) => <TaskCard key={task.id} {...task} className={classes.task} />)}
       </div>
     </div>
   );

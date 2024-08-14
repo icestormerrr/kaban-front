@@ -27,8 +27,8 @@ const MainLayout: FC = () => {
 
   const projectId = useProjectIdFromPath();
   const { data: projects = [], isFetching: isProjectsFetching } = useGetProjectsQuery(
-    { userId: user._id ?? "" },
-    { skip: !user._id },
+    { userId: user.id ?? "" },
+    { skip: !user.id },
   );
 
   const [fetchLogout] = useLogoutMutation();
@@ -39,7 +39,7 @@ const MainLayout: FC = () => {
 
   const handleProjectChange = (newOption: Shared.NamedEntity | null) => {
     const pathArray = pathname.split("/");
-    const newProjectId = newOption?._id ?? "";
+    const newProjectId = newOption?.id ?? "";
     if (pathArray[2]?.length) {
       pathArray[2] = newProjectId;
       navigate(pathArray.join("/"));
@@ -118,6 +118,7 @@ const MainLayout: FC = () => {
               placeholder={t("Project")}
               loadingText={t("Loading")}
               loading={isProjectsFetching}
+              noOptionMessage={t("You have not been added to any project yet")}
               required
               fullWidth
             />

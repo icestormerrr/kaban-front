@@ -16,21 +16,21 @@ import classes from "./TaskPage.module.scss";
 
 const TaskPage: FC<Shared.EntityComponent> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
-  const { _id } = useParams();
+  const { id } = useParams();
 
   const [fetchDetails] = useLazyGetTaskQuery();
   const { setEntity: setTask } = useEditorSlice<TaskState>(storeKey);
 
   useEffect(() => {
-    if (_id && mode === "edit") {
-      fetchDetails({ _id })
+    if (id && mode === "edit") {
+      fetchDetails({ id })
         .unwrap()
         .then((details) => setTask(details))
         .catch(() => enqueueSnackbar(t("Server error"), { variant: "error" }));
     } else {
       setTask(initialTaskState);
     }
-  }, [_id, fetchDetails, mode, setTask, t]);
+  }, [id, fetchDetails, mode, setTask, t]);
 
   return (
     <GlassContainer className={classes.container}>

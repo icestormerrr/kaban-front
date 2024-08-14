@@ -17,7 +17,7 @@ const SettingsPage: FC<Props> = () => {
   const [settings, setSettings] = useSavedState<Settings>(SETTINGS_PERSIST_KEY, {});
 
   const handleBackgroundChange = (newBackground: Shared.NamedEntity | null) => {
-    if (newBackground) setSettings({ ...settings, backgroundImage: newBackground._id });
+    if (newBackground) setSettings({ ...settings, backgroundImage: newBackground.id });
     setNeedReload(true);
   };
 

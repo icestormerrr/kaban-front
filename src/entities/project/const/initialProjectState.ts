@@ -1,7 +1,7 @@
 import { ProjectState } from "../model/types";
 
 export const initialProjectState: ProjectState = {
-  _id: "",
+  id: "",
   name: "",
   description: "",
   epics: [],

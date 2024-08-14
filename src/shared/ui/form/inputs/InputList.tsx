@@ -35,7 +35,7 @@ const InputList: FC<InputListProps> = ({
 
   const handleInputAdd = () => {
     if (value) {
-      onListChange([...list, { _id: uuid(), name: value }]);
+      onListChange([...list, { id: uuid(), name: value }]);
     }
     setValue("");
   };
@@ -46,8 +46,8 @@ const InputList: FC<InputListProps> = ({
     }
   };
 
-  const handleDelete = (_id: string) => {
-    onListChange([...list.filter((item) => item._id !== _id)]);
+  const handleDelete = (id: string) => {
+    onListChange([...list.filter((item) => item.id !== id)]);
   };
 
   const handleMoveItem = (index: number, direction: number) => {
@@ -103,9 +103,9 @@ const InputList: FC<InputListProps> = ({
         <List>
           {list.map((item, index) => (
             <ListItem
-              key={item._id}
+              key={item.id}
               secondaryAction={
-                <IconButton edge="end" aria-label="delete" onClick={() => handleDelete(item._id)}>
+                <IconButton edge="end" aria-label="delete" onClick={() => handleDelete(item.id)}>
                   <CloseIcon />
                 </IconButton>
               }

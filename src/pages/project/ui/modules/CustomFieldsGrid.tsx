@@ -18,7 +18,7 @@ const CustomFieldsGrid: FC<Shared.PageProps> = ({ storeKey }) => {
 
   const handleCustomFieldCreate = () => {
     addElementToProperty("customFields", {
-      _id: "property" + Math.round(Math.random() * 1000),
+      id: "property" + Math.round(Math.random() * 1000),
       name: "",
       type: FieldType.string,
       required: false,
@@ -26,12 +26,12 @@ const CustomFieldsGrid: FC<Shared.PageProps> = ({ storeKey }) => {
   };
 
   const handleCustomFieldDelete = () => {
-    const _id = first(Array.from(gridRef.current.getSelectedRows().keys()));
-    removeElementFromProperty("customFields", { _id });
+    const id = first(Array.from(gridRef.current.getSelectedRows().keys()));
+    removeElementFromProperty("customFields", { id });
   };
 
   const handleFieldUpdate = (updatedRow: ProjectCustomField, originalRow: ProjectCustomField) => {
-    const index = customFields.findIndex((customField) => customField._id === originalRow._id);
+    const index = customFields.findIndex((customField) => customField.id === originalRow.id);
     setEntityProperty(`customFields[${index}]`, updatedRow);
     return updatedRow;
   };
@@ -40,8 +40,8 @@ const CustomFieldsGrid: FC<Shared.PageProps> = ({ storeKey }) => {
   const columns: GridColDef<ProjectCustomField>[] = useMemo(
     () => [
       {
-        field: "_id",
-        headerName: "_id",
+        field: "id",
+        headerName: "id",
         width: 300,
         editable: true,
       },
@@ -82,7 +82,7 @@ const CustomFieldsGrid: FC<Shared.PageProps> = ({ storeKey }) => {
           columns={columns}
           processRowUpdate={handleFieldUpdate}
           pageSizeOptions={[5]}
-          getRowId={(row) => row._id}
+          getRowId={(row) => row.id}
           apiRef={gridRef}
         />
       </Box>

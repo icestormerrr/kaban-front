@@ -11,7 +11,7 @@ import classes from "./Message.module.scss";
 type Props = TMessage;
 
 const Message: FC<Props> = ({ description, date, userId }) => {
-  const { data: user } = useGetUserQuery({ _id: userId });
+  const { data: user } = useGetUserQuery({ id: userId });
 
   return (
     <GlassContainer className={classes.container}>

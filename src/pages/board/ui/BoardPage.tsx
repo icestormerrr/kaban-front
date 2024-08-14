@@ -35,7 +35,7 @@ const BoardPage: FC = () => {
       });
     }
   };
-  const { data: project } = useGetProjectDetailsQuery({ _id: projectId! }, { skip: !projectId });
+  const { data: project } = useGetProjectDetailsQuery({ id: projectId! }, { skip: !projectId });
 
   const { data: tasks = [] } = useGetTasksGridQuery(filter, {
     refetchOnMountOrArgChange: true,
@@ -49,7 +49,7 @@ const BoardPage: FC = () => {
       <GlassContainer className={classes.stageContainer}>
         {project &&
           project.stages.map((stage) => (
-            <Stage stage={stage} tasks={tasksGroupedByStageId[stage._id] ?? []} key={stage._id} />
+            <Stage stage={stage} tasks={tasksGroupedByStageId[stage.id] ?? []} key={stage.id} />
           ))}
       </GlassContainer>
     </div>
