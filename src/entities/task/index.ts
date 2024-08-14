@@ -5,6 +5,7 @@ import {
   useAddTaskMutation,
   useDeleteTaskMutation,
   useGetTasksGridQuery,
+  useGetCriticalTasksGridQuery,
 } from "./api/taskApi";
 import { taskStoreKey, initialTaskState } from "./const/const";
 import { TaskStatusOptions, TaskStatusColorMap } from "./const/const";
@@ -18,6 +19,7 @@ export {
   useAddTaskMutation,
   useDeleteTaskMutation,
   useGetTasksGridQuery,
+  useGetCriticalTasksGridQuery,
   taskStoreKey,
   TaskStatus,
   TaskStatusOptions,

@@ -2,7 +2,7 @@ import { skipToken } from "@reduxjs/toolkit/query";
 import { useTranslation } from "react-i18next";
 
 import { useProjectIdFromPath } from "@/entities/project";
-import { TaskCard, TaskStatus, useGetTasksGridQuery } from "@/entities/task";
+import { TaskCard, useGetCriticalTasksGridQuery } from "@/entities/task";
 
 import classes from "./CriticalTasks.module.scss";
 
@@ -10,7 +10,7 @@ const CriticalTasks = () => {
   const { t } = useTranslation();
 
   const projectId = useProjectIdFromPath();
-  const { data: tasks } = useGetTasksGridQuery(projectId ? { projectId, status: TaskStatus.Critical } : skipToken);
+  const { data: tasks } = useGetCriticalTasksGridQuery(projectId ? { projectId } : skipToken);
   return (
     <div>
       <h2>{t("Critical tasks")}</h2>

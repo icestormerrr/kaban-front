@@ -18,6 +18,13 @@ export const tasksApi = createApi({
       }),
       providesTags: ["Task"],
     }),
+    getCriticalTasksGrid: build.query<TasksGridItem[], { projectId: string }>({
+      query: (params) => ({
+        url: `/tasks/critical`,
+        params,
+      }),
+      providesTags: ["Task"],
+    }),
     getTask: build.query<Task, Shared.Entity>({
       query: (params) => ({
         url: `/tasks/${params.id}`,
@@ -58,6 +65,7 @@ export const {
   useAddTaskMutation,
   useDeleteTaskMutation,
   useGetTasksGridQuery,
+  useGetCriticalTasksGridQuery,
 } = tasksApi;
 
 export default tasksApi;
