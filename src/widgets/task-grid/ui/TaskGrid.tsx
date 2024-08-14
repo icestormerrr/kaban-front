@@ -34,7 +34,6 @@ const TaskGrid: FC<Props> = ({ height }) => {
       {
         field: "description",
         headerName: t("Description"),
-        width: 200,
       },
       {
         field: "status",
@@ -95,7 +94,6 @@ const TaskGrid: FC<Props> = ({ height }) => {
         pageSizeOptions={[10, 15, 25, 50]}
         onCellDoubleClick={handleCellDoubleClick}
         disableRowSelectionOnClick
-        getRowId={(row) => row.id}
       />
     </Box>
   );

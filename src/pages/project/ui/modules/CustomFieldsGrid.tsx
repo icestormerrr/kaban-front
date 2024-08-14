@@ -77,14 +77,7 @@ const CustomFieldsGrid: FC<Shared.PageProps> = ({ storeKey }) => {
         <GlassButton onClick={handleCustomFieldDelete}>{t("Delete")}</GlassButton>
       </div>
       <Box sx={{ width: "100%", height: "400px" }}>
-        <DataGrid
-          rows={customFields ?? []}
-          columns={columns}
-          processRowUpdate={handleFieldUpdate}
-          pageSizeOptions={[5]}
-          getRowId={(row) => row.id}
-          apiRef={gridRef}
-        />
+        <DataGrid rows={customFields ?? []} columns={columns} processRowUpdate={handleFieldUpdate} apiRef={gridRef} />
       </Box>
     </>
   );

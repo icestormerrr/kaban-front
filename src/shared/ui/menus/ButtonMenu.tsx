@@ -1,7 +1,6 @@
 import React, { FC, ReactNode } from "react";
-import { Menu, Tooltip, Button, MenuProps } from "@mui/material";
+import { Menu, Tooltip, Button } from "@mui/material";
 import { KeyboardArrowDown } from "@mui/icons-material";
-import { styled, alpha } from "@mui/material/styles";
 
 type Props = {
   label: string;
@@ -30,6 +29,8 @@ const ButtonMenu: FC<Props> = ({ label, children }) => {
             color: "#fff",
             fontWeight: "normal",
             fontFamily: "'Benzin', sans-serif",
+            backdropFilter: "blur(100px)",
+            backgroundColor: "rgba(255, 255, 255, 0.1)",
             border: "1px solid rgba(255, 255, 255, 0.5)",
             borderRadius: "10px",
           }}

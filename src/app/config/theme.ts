@@ -7,7 +7,18 @@ export const darkTheme = createTheme({
   palette: {
     mode: "dark",
   },
+
   components: {
+    //@ts-expect-error mui type problems, but works
+    MuiDataGrid: {
+      styleOverrides: {
+        root: {
+          borderRadius: "10px",
+          backgroundColor: "rgba(0, 0, 0, 0.1)",
+          backdropFilter: "blur(100px)",
+        },
+      },
+    },
     MuiPaper: {
       styleOverrides: {
         root: {

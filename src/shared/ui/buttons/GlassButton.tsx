@@ -2,12 +2,12 @@ import { styled } from "@mui/material/styles";
 import { Button } from "@mui/material";
 
 const GlassButton = styled(Button)(
-  ({ theme }) => `
+  () => `
   font-family: "Benzin", sans-serif;
   font-weight: normal;
   font-size: 0.875rem;
   backdrop-filter: blur(100px);
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: rgba(255, 255, 255, 0.1);
   padding: 8px 16px;
   border-radius: 9px;
   color: white;
