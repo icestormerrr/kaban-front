@@ -20,7 +20,14 @@ export const tasksApi = createApi({
     }),
     getCriticalTasksGrid: build.query<TasksGridItem[], { projectId: string }>({
       query: (params) => ({
-        url: `/tasks/critical`,
+        url: `/tasks/grid/critical`,
+        params,
+      }),
+      providesTags: ["Task"],
+    }),
+    getTodayCreatedTasksGrid: build.query<TasksGridItem[], { projectId: string }>({
+      query: (params) => ({
+        url: `/tasks/grid/today`,
         params,
       }),
       providesTags: ["Task"],
@@ -66,6 +73,7 @@ export const {
   useDeleteTaskMutation,
   useGetTasksGridQuery,
   useGetCriticalTasksGridQuery,
+  useGetTodayCreatedTasksGridQuery,
 } = tasksApi;
 
 export default tasksApi;
