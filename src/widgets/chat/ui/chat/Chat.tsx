@@ -15,11 +15,13 @@ import classes from "./Chat.module.scss";
 type Props = {
   title: string;
   messages: TMessage[];
-  omMessageCreate: (message: TMessage) => void;
+  onMessageCreate: (message: TMessage) => void;
+  onMessageDelete?: (message: TMessage) => void;
+  canDeleteMessage?: (message: TMessage) => boolean;
   className?: string;
 };
 
-const Chat: FC<Props> = ({ title, messages, omMessageCreate, className }) => {
+const Chat: FC<Props> = ({ title, messages, onMessageCreate, onMessageDelete, canDeleteMessage, className }) => {
   const { t } = useTranslation();
 
   const { entitySelector: userSelector } = useEditorSlice<User>("user");
@@ -28,8 +30,13 @@ const Chat: FC<Props> = ({ title, messages, omMessageCreate, className }) => {
   const [newMessage, setNewMessage] = useState<string | null>(null);
 
   const handleMessageCreate = () => {
-    omMessageCreate({ description: newMessage!, date: Date.now(), userId: user.id, id: uuid() });
+    onMessageCreate({ description: newMessage!, date: Date.now(), userId: user.id, id: uuid() });
     setNewMessage("");
+  };
+  const handleMessageDelete = (message: TMessage) => {
+    if (onMessageDelete) {
+      onMessageDelete(message);
+    }
   };
 
   return (
@@ -60,7 +67,13 @@ const Chat: FC<Props> = ({ title, messages, omMessageCreate, className }) => {
       <Grid item>
         <div className={clsx(classes.container, className)}>
           {messages.map((msg) => (
-            <Message {...msg} key={msg.id} />
+            <Message
+              {...msg}
+              key={msg.id}
+              onDelete={
+                canDeleteMessage ? (canDeleteMessage(msg) ? handleMessageDelete : undefined) : handleMessageDelete
+              }
+            />
           ))}
         </div>
       </Grid>
