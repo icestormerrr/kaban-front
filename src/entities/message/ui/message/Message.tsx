@@ -26,8 +26,8 @@ const Message: FC<Props> = ({ id, description, date, userId, onDelete }) => {
         </div>
 
         {onDelete && (
-          <IconButton>
-            <DeleteIcon onClick={() => onDelete({ id, description, date, userId })} />
+          <IconButton onClick={() => onDelete({ id, description, date, userId })}>
+            <DeleteIcon />
           </IconButton>
         )}
       </div>

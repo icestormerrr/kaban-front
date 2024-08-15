@@ -35,7 +35,7 @@ const Comments: FC<Props> = ({ storeKey }) => {
     );
   };
 
-  const canDeleteMessage = ({ userId, date }: TMessage) => user.id === userId && date == messages?.[0].date;
+  const canDeleteMessage = ({ userId, date }: TMessage) => user?.id === userId && date == messages?.[0].date;
 
   return (
     <Grid container item xs={12} spacing={4} display="flex" flexDirection="column" justifyContent="flex-start">
