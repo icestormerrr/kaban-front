@@ -1,8 +1,15 @@
 .section {
   background-color: rgba(255, 255, 255, 0.1);
-  margin-bottom: 20px;
 }
 
 .helloContainer {
-  margin-bottom: 20px;
+}
+
+.taskChip {
+  margin: 5px;
+  overflow: hidden;
+  word-wrap: break-word;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 25vw !important;
 }

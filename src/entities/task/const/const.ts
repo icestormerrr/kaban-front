@@ -2,6 +2,9 @@ import { TaskState, TaskStatus } from "../model/types";
 
 export const taskStoreKey = "task";
 
+export const LAST_VISITED_TASKS_PERSIST_KEY = "lastVisitedTasks";
+export const MAX_NUMBER_OF_LAST_VISITED_TASKS = 15;
+
 export const initialTaskState: TaskState = {
   id: "",
   name: "",
@@ -13,6 +16,7 @@ export const initialTaskState: TaskState = {
   executorId: null,
   authorId: null,
   messages: null,
+  creationDatetime: null,
 };
 
 export const TaskStatusOptions: Shared.NamedEntity[] = [

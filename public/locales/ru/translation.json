@@ -65,5 +65,6 @@
     "A reboot is required to apply the changes": "Для применения изменений требуется перезагрузка",
     "Please select a project": "Пожалуйста выберите проект",
     "Critical tasks": "Критические задачи",
-    "Recent tasks": "Недавние задачи"
+    "Recently created tasks": "Недавно созданные задачи",
+    "Recently visited tasks": "Недавно посещённые задачи"
 }

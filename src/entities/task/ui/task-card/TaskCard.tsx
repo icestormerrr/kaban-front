@@ -1,4 +1,4 @@
-import React, { FC, memo } from "react";
+import { FC, memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Avatar, Chip } from "@mui/material";
 import clsx from "clsx";
