@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useGetTasksGridQuery, TasksGridItem, TaskStatusColorMap } from "@/entities/task";
 import { useGetProjectDetailsQuery, useProjectIdFromPath } from "@/entities/project";
 import { skipToken } from "@reduxjs/toolkit/query";
+import { FieldType } from "@/shared/const";
 
 type Props = {
   height: string;
@@ -23,6 +24,13 @@ const TaskGrid: FC<Props> = ({ height }) => {
     { projectId: projectId! },
     { skip: !projectId, refetchOnMountOrArgChange: true },
   );
+
+  const getCustomFieldValue = (fieldType: FieldType) => {
+    if (fieldType === FieldType.date) {
+      return (params) => (params ? new Date(params) : null);
+    }
+    return undefined;
+  };
 
   const columns: GridColDef<TasksGridItem>[] = useMemo(
     () => [
@@ -67,6 +75,7 @@ const TaskGrid: FC<Props> = ({ height }) => {
         field: field.id,
         headerName: field.name,
         type: field.type as GridColType,
+        valueGetter: getCustomFieldValue(field.type),
       })),
     ],
     [project?.customFields, t],
