@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, MenuItem } from "@mui/material";
 import TableChartIcon from "@mui/icons-material/TableChart";
 import TableRowsIcon from "@mui/icons-material/TableRows";
+import QueryStatsIcon from "@mui/icons-material/QueryStats";
 import { t } from "i18next";
 
 import { ButtonMenu } from "@/shared/ui";
@@ -30,6 +31,9 @@ const ProjectRoutes = () => {
       </Button>
       <Button className={classes.route} onClick={handleProjectRouteNavigate("backlog")}>
         <TableRowsIcon />
+      </Button>
+      <Button className={classes.route} onClick={handleProjectRouteNavigate("analytics")}>
+        <QueryStatsIcon />
       </Button>
       <ButtonMenu label={t("Create")}>
         <MenuItem onClick={handleTaskCreate} disableRipple>
