@@ -69,6 +69,7 @@ const Operations: FC<Props> = ({ storeKey, mode }) => {
         storeKey={storeKey}
         property="name"
         required
+        multiline
         style={{
           flex: "1",
           "& .MuiInputBase-input": {
@@ -77,6 +78,7 @@ const Operations: FC<Props> = ({ storeKey, mode }) => {
           "& .MuiInputBase-root": {
             fontFamily: "Benzin",
             fontSize: "25px",
+            padding: 0,
           },
         }}
       />
