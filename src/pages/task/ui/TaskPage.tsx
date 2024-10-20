@@ -10,10 +10,10 @@ import { GlassContainer } from "@/shared/ui";
 import { LAST_VISITED_TASKS_PERSIST_KEY } from "@/entities/task/const/const";
 import { useProjectIdFromPath } from "@/entities/project";
 
-import Fields from "./modules/fields/Fields";
-import Operations from "./modules/Operations";
-import Comments from "./modules/Comments";
-import CustomFields from "./modules/CustomFields";
+import MainFields from "@/pages/task/ui/components/MainFields.tsx";
+import Operations from "@/pages/task/ui/components/Operations";
+import Comments from "@/pages/task/ui/components/Comments";
+import CustomFields from "@/pages/task/ui/components/CustomFields";
 import classes from "./TaskPage.module.scss";
 
 const TaskPage: FC<Shared.EntityComponent> = ({ storeKey, mode }) => {
@@ -58,7 +58,7 @@ const TaskPage: FC<Shared.EntityComponent> = ({ storeKey, mode }) => {
     <GlassContainer className={classes.container}>
       <Grid container item xs={12} rowSpacing={3}>
         <Operations storeKey={storeKey} mode={mode} />
-        <Fields storeKey={storeKey} />
+        <MainFields storeKey={storeKey} />
         <CustomFields storeKey={storeKey} />
         <Comments storeKey={storeKey} />
       </Grid>

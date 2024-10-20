@@ -12,9 +12,9 @@ import {
 } from "@/entities/project";
 import { GlassContainer } from "@/shared/ui";
 
-import Fields from "./modules/Fields";
-import Operations from "./modules/Operations";
-import CustomFieldsGrid from "@/pages/project/ui/modules/CustomFieldsGrid";
+import Fields from "@/pages/project/ui/components/Fields";
+import Operations from "@/pages/project/ui/components/Operations";
+import CustomFieldsGrid from "@/pages/project/ui/components/CustomFieldsGrid";
 
 const ProjectPage: FC<Shared.EntityComponent> = ({ storeKey, mode }) => {
   const { t } = useTranslation();

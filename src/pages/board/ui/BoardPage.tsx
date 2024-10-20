@@ -6,8 +6,8 @@ import { useGetProjectDetailsQuery, useProjectIdFromPath } from "@/entities/proj
 import { TasksFilter, useGetTasksGridQuery } from "@/entities/task";
 import { GlassContainer } from "@/shared/ui";
 
-import FilterPanel from "./modules/filter-panel/FilterPanel";
-import Stage from "./modules/stage/Stage";
+import FilterPanel from "@/pages/board/ui/components/filter-panel/FilterPanel";
+import Stage from "@/pages/board/ui/components/stage/Stage";
 import classes from "./BoardPage.module.scss";
 
 const BoardPage: FC = () => {

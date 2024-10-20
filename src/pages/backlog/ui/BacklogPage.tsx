@@ -3,7 +3,7 @@ import { Grid } from "@mui/material";
 
 import { GlassContainer } from "@/shared/ui";
 import TaskGrid from "@/widgets/task-grid/ui/TaskGrid";
-import Operations from "./modules/Operations";
+import Operations from "@/pages/backlog/ui/components/Operations";
 
 const BacklogPage = () => {
   return (

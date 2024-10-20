@@ -1,17 +1,17 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 import { FieldDate, FieldSelect, FieldString } from "@/shared/ui";
 import { useGetProjectDetailsQuery, useProjectIdFromPath } from "@/entities/project";
 import { useGetUsersQuery } from "@/entities/user";
-import TaskColorStatusField from "./TaskColorStatusField";
+import TaskColorStatusField from "./TaskColorStatusField.tsx";
 
 type Props = {
   storeKey: string;
 };
 
-const Fields: FC<Props> = ({ storeKey }) => {
+const MainFields: FC<Props> = ({ storeKey }) => {
   const { t } = useTranslation();
 
   const projectId = useProjectIdFromPath();
@@ -79,4 +79,4 @@ const Fields: FC<Props> = ({ storeKey }) => {
   );
 };
 
-export default Fields;
+export default MainFields;

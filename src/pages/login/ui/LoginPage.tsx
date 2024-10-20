@@ -5,9 +5,9 @@ import { GlassContainer } from "@/shared/ui";
 
 import Logo from "@/widgets/main-layout/assets/logo.svg?react";
 import classes from "./LoginPage.module.scss";
-import RegisterFields from "./modules/RegisterFields";
-import LoginFields from "./modules/LoginFields";
-import Operations from "./modules/Operations";
+import RegisterFields from "@/pages/login/ui/components/RegisterFields";
+import LoginFields from "@/pages/login/ui/components/LoginFields";
+import Operations from "@/pages/login/ui/components/Operations";
 
 const LoginPage: FC<Shared.PageProps & { mode: "login" | "register" }> = ({ storeKey, mode }) => {
   const { t } = useTranslation();
