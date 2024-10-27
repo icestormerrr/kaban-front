@@ -2,7 +2,6 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { FC, memo, useCallback, useEffect, useMemo, useState } from "react";
 import { utcToLibDate } from "@/shared/lib";
 import { DATE_FORMAT, DATE_TIME_FORMAT } from "@/shared/const";
-import dayjs from "dayjs";
 import { SxProps } from "@mui/material";
 
 export type InputDateProps = Shared.ControlledInputProps<Shared.UTCDate> &

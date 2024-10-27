@@ -8,7 +8,7 @@ export const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_PUBLIC_URL,
   credentials: "include",
   mode: "cors",
-  prepareHeaders: (headers, { getState }) => {
+  prepareHeaders: (headers) => {
     const token = localStorage.getItem(ACCESS_TOKEN_PERSIST_KEY);
     if (token) {
       headers.set("authorization", `Bearer ${token}`);

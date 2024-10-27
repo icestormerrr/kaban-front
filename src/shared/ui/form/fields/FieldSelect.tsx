@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from "react";
+import { memo, useCallback } from "react";
 import InputSelect, { InputSelectProps, Option } from "../inputs/InputSelect";
 import { useAppSelector, useEditorSlice } from "@/shared/store";
 

@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import { FC, ReactNode } from "react";
 import { Box, Button, DialogActions, DialogContent, DialogContentText, DialogTitle, Modal } from "@mui/material";
 import { useTranslation } from "react-i18next";
 

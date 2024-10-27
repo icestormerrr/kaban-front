@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useMemo } from "react";
+import { FC, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef, GridColType } from "@mui/x-data-grid";
@@ -27,7 +27,7 @@ const TaskGrid: FC<Props> = ({ height }) => {
 
   const getCustomFieldValue = (fieldType: FieldType) => {
     if (fieldType === FieldType.date) {
-      return (params) => (params ? new Date(params) : null);
+      return (params: Date | null) => (params ? new Date(params) : null);
     }
     return undefined;
   };

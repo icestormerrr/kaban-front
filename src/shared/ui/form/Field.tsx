@@ -1,4 +1,4 @@
-import React, { FC, memo } from "react";
+import { FC, memo } from "react";
 
 import FieldBoolean, { FieldBooleanProps } from "./fields/FieldBoolean";
 import FieldNumber, { FieldNumberProps } from "./fields/FieldNumber";

@@ -1,4 +1,4 @@
-import React, { FC, memo } from "react";
+import { FC, memo } from "react";
 
 import InputBoolean, { InputBooleanProps } from "./inputs/InputBoolean";
 import InputNumber, { InputNumberProps } from "./inputs/InputNumber";

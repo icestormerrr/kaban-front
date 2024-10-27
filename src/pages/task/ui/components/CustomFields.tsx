@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 
 import { useGetProjectDetailsQuery, useProjectIdFromPath } from "@/entities/project";
 import { Field } from "@/shared/ui";

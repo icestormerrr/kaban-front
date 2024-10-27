@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from "react";
+import { FC, useMemo } from "react";
 import { Box } from "@mui/material";
 import { DataGrid, GridColDef, useGridApiRef } from "@mui/x-data-grid";
 import { useTranslation } from "react-i18next";
@@ -32,6 +32,8 @@ const CustomFieldsGrid: FC<Shared.PageProps> = ({ storeKey }) => {
 
   const handleFieldUpdate = (updatedRow: ProjectCustomField, originalRow: ProjectCustomField) => {
     const index = customFields.findIndex((customField) => customField.id === originalRow.id);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     setEntityProperty(`customFields[${index}]`, updatedRow);
     return updatedRow;
   };

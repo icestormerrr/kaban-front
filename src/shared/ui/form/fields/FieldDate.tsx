@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback } from "react";
+import { FC, memo, useCallback } from "react";
 import InputDate, { InputDateProps } from "../inputs/InputDate";
 import { useAppSelector, useEditorSlice } from "@/shared/store";
 

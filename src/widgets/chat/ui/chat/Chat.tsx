@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { v4 as uuid } from "uuid";
