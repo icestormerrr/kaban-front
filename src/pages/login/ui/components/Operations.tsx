@@ -41,7 +41,7 @@ const Operations: FC<Shared.PageProps & { mode: "login" | "register" }> = ({ sto
       if ("data" in response) handleSuccess();
       else handleError();
     } else {
-      enqueueSnackbar(t("Required field are not filled"), { variant: "success" });
+      enqueueSnackbar(t("Required field are not filled"), { variant: "error" });
     }
   };
 
