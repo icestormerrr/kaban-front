@@ -127,6 +127,14 @@ const routesTree = [
     ),
   },
   {
+    path: "/register",
+    element: (
+      <Suspense fallback={<Backdrop open />}>
+        <LoginPage storeKey={"user"} mode="register" />
+      </Suspense>
+    ),
+  },
+  {
     path: "*",
     element: <Navigate to="/" />,
   },
