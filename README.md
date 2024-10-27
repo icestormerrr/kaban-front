@@ -13,7 +13,7 @@ The project is built according to the "feature sliced design" architecture, make
 2. Run docker build:
    - docker build . -t frontend
 3. Run docker run, specify environment variables in the command, for example:
-   - docker run -d -p 5173:5173 -e VITE_PUBLIC_URL=url-of-backend-application frontend
+   - docker run -d -p 3000:3000 -e VITE_PUBLIC_URL=url-of-backend-application frontend
 
 ### Development
 
